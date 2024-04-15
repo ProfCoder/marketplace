@@ -1,0 +1,53 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    height: 10ex
+}
+
+.menu {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr
+}
+
+/*
+Set a max width on wide screens.
+For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
+*/
+@media (min-width: 72rem) {
+    .menu {
+        width: var(--max-width)
+    }
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    color: none;
+}
+
+#title {
+    font-size: 1.4rem;
+    color: black;
+    font-weight: 500;
+}
+
+#logo-img {
+    width: 7ex;
+}
+
+.menu-entries {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+}
+
+/*
+Use the combination of :host and ::ng-deep to adapt PrimeNG styles
+See https://primeng.org/theming#scopedcss and https://angular.io/guide/component-styles#special-selectors for more info
+*/
+:host ::ng-deep .menu-entries .p-button-label {
+    font-weight: normal;
+}
