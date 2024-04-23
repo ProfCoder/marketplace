@@ -1,65 +1,93 @@
 # Interactive Systems - Tutorial
 
-## Assignment 1: Setup Development Environment
+## Assignment 2: Log In and Registration Form
 
 **Achieved Points: [__/10]**  
-**Deadline: 23.04.2024 13:30**  
+**Deadline: 30.04.2024 13:30**  
 
-<img src="images/assignment1_teaser.png"  width="600">
+Log In Form:
+
+<img src="images/assignment2_teaser_1.png"  width="600">
+
+Register Form:
+
+<img src="images/assignment2_teaser_2.png"  width="600">
 
 ### Design Patterns
 
 The following Design Patterns are applied in this assignment.
 
-- [ ] [Layout](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=247) (Page 227)
-- [ ] [Visual Framework](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=248) (Page 228)
+- [ ] [Structured Format](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=502) (Page 482)
+- [ ] [Input Hints](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=509) (Page 489)
+- [ ] [Input Prompt](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=514) (Page 494)
 
 You can find all design patterns in the book [Designing Interfaces: Patterns for Effective Interaction Design](https://ebookcentral.proquest.com/lib/uni-konstanz/detail.action?docID=5996435)
 
 ### Tasks
 
-In this assignment, you will setup the development environment for the tutorial and familiarize yourself with the web framework Angular. 
+In this assignment, you will design and implement the forms for the Log In and Registration page. 
 
-- [ ] [Clone Git Repository](#clone-git-repository)
-- [ ] [Setup Development Environment](#setup-development-environment)
-- [ ] [Add Register Button (and Page) to the Header](#add-register-button-and-page-to-the-header) (10 Points)
+- [ ] [Implement Log In Form](#implement-log-in-form) (3 Points)
+- [ ] [Implement Register Form](#implement-register-form) (4 Points)
+- [ ] [Add Input Hints to Register Form](#add-input-hints-to-register-form) (1 Points)
+- [ ] [Add Input Validation to Log In and Register Form](#add-input-validation-to-log-in-and-register-form) (2 Points)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
 
 ### Instructions
 
-#### Clone Git Repository
+#### Implement Log In Form
 
-For the submission of the assignments is Git required. You can find a Git installation guide for all operating systems [here](https://git-scm.com/downloads). On MacOS, Git is automatically installed when Xcode is installed.
+- Implement the Log In form in the Login component. The Log In form should provide the following input fields:
+    - E-mail address
+    - Password
+- The input fields should have labels
+- Below the input fields add a "Log In" button
+- Apply the design patterns [Structured Format](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=502) and [Input Prompt](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=514)
 
-- Clone this Git repository to your computer.
+> 💡 Remember: You can use PrimeNG components to implement the user interface. See the form components of PrimeNG (e.g., [FloatLabel](https://primeng.org/floatlabel)).
 
-#### Setup Development Environment
+#### Implement Register Form
 
-For front-end development with Angular, we need to install NodeJs, Angular, and a code editor of choice (we recommend Visual Studio Code).
+- Implement the Register form in the Register component (you added in the last assignment). The Register form should provide the following input fields:
+    - Gender or salutation (Mr., Mrs., ...) (Radio Buttons)
+    - First name
+    - Last name
+    - E-mail address
+    - Password
+    - Date of birth (optional: Use [Calendar](https://primeng.org/calendar) input)
+    - Street
+    - Street number
+    - Postal code
+    - City
+    - Country (Dropdown, at least 3 options)
+- The input fields should have labels
+- Below the input fields add a "Submit" button
+- Apply the design patterns [Structured Format](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=502) and [Input Prompt](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=514)
 
-- Install [NodeJS](https://nodejs.org/en) (LTS)
-- Open the terminal and change the directory to the GIT repository folder (`cd <directory>`) 
-- Install the Angular CLI (command-line interface) with the command  
-  `npm install -g @angular/cli`
-- Install all NodeJS packages of the project with the command  
-  `npm install`
-- Start the development server with the command  
-  `npm run start`
-- The web page should now be accessible through the following link: http://localhost:4200
-- We recommend using [Visual Studio Code](https://code.visualstudio.com/) as code editor. For development, you just need to open the GIT repository folder in Visual Studio Code. While the development server is running, the web page updates automatically when you edit and save a file.
-- When you are done with development, stop the development server by typing `CTRL + C` twice in the terminal.
+#### Add Input Hints to Register Form
 
-> 💡 To start the development server again, open the terminal, change the directory to the GIT repository folder, and run the command `npm run start`
+- Apply the design pattern [Input Hints](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=509) to at least **2 input fields** of the register form
 
-#### Add Register Button (and Page) to the Header
+#### Add Input Validation to Log In and Register Form
 
-- Add a register button to the header (menubar).
-  > 💡 The template uses PrimeIcons of PrimeNG. A list of all supported icons can be found [here](https://primeng.org/icons#list).
-- When the register button is clicked, a register page should open below the header with the text "Register page placeholder". Also, the route in the web browser should change to http://localhost:4200/register
-  > 💡 You can add new components to the project in the terminal with the command `ng generate component component-name`. Routes and their corresponding components can be defined in the `app.routes.ts` file.
+- Give the user feedback (provide error message) when the input of a field is not correct
+- The error messages should appear near the affected input fields
+- The error messages should be highlighted by color (e.g., red)
+- The input fields should be validated as follows:
+    - First name: Not empty
+    - Last name: Not empty
+    - E-mail address: E-Mail format
+    - Password: Minimum length 8 characters
+    - Date of birth: Valid date format (Hint: Use [Calendar](https://primeng.org/calendar) input)
+    - Street: Not empty
+    - Street number: Number
+      > 💡 For number validation you can use the pattern `/\d+/`. The pattern can be added to the Angular form as validator using `Validators.pattern(/\d+/)`
+    - Postal code: Number
+    - City: Not empty
+    - Country: Selected an option
 
 #### Tag the Final Commit
 
-- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment1`.
+- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment2`.
 
-> 💡 You can tag a commit in the terminal with the command `git tag -a assignment1` or in GitLab (Code -> Tags -> New tag).
+> 💡 You can tag a commit in the terminal with the command `git tag -a assignment2` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
