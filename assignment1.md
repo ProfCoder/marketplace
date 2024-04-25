@@ -2,7 +2,7 @@
 
 ## Assignment 1: Setup Development Environment
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [10/10]** ✅ 
 **Deadline: 23.04.2024 13:30**  
 
 <img src="images/assignment1_teaser.png"  width="600">
