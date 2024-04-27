@@ -1,1 +1,19 @@
-<p>This will contain the login form. (Assignment 2)</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <h2>Log in</h2>
+
+  <!-- Error message if email is invalid -->
+  <div class="error-message">
+    <small *ngIf="email!.dirty && email!.invalid">Sorry, you must enter a valid email address!</small>
+  </div>
+
+  <!-- Input fields -->
+  <input pInputText formControlName="email" id="email" type="email" placeholder="Email"/>
+  <label for="email"></label>
+
+  <input pInputText formControlName="password" id="password" type="password" placeholder="Password" />
+  <label for="password"></label>
+
+  <!-- Submit button -->
+  <p-button type="submit" label="Log-in" id="login-button" severity="success"></p-button>
+</form>

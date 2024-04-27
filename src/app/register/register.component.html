@@ -1,1 +1,43 @@
-<p>Register page placeholder</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <h2>Register</h2>
+
+  <h3>Name</h3>
+  
+  <div class="flex align-items-center">
+    <p-radioButton name="title" value="Mr." formControlName="title" inputId="option1"></p-radioButton>
+    <label for="option2" class="ml-2">Mr.</label>
+
+    <p-radioButton name="title" value="Mrs." formControlName="title" inputId="option2"></p-radioButton>
+    <label for="option2" class="ml-2">Mrs.</label>
+
+    <p-radioButton name="title" value="Other" formControlName="title" inputId="option3"></p-radioButton>
+    <label for="option3" class="ml-2">Custom</label>
+
+    <input pInputText placeholder="Enter custom title"  (click)="selectOtherOption()"/>
+  </div>
+
+
+  <div>
+    <input pInputText formControlName="firstName" id="first-name" type="text" placeholder="First name"/>
+    <label for="firstName"></label>
+  
+    <input pInputText formControlName="lastName" id="last-name" type="text" placeholder="Last name" />
+    <label for="lastName"></label>
+  </div>
+
+  <div>
+    <input pInputText formControlName="email" id="email" type="email" placeholder="Email"/>
+    <label for="email"></label>
+
+    <input pInputText formControlName="password" id="password" type="password" placeholder="Password" />
+    <label for="password"></label>
+  </div>
+
+
+  <!-- Input fields -->
+  
+
+  <!-- Submit button -->
+  <p-button type="submit" label="Log-in" id="login-button" severity="success"></p-button>
+</form>

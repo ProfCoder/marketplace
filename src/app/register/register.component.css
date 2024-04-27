@@ -1,0 +1,32 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  padding: 12px 20px;
+  margin: 8px 0 20px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Make input boxes round */
+}
+
+input:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow effect when hovering over input fields */
+}
+
+p-button {
+  margin-top: 10px;
+}
+
+.error-message { 
+  height: 10px; /* Reserve space for error message */
+  margin-bottom: 10px; 
+  color: red;
+}
+
+p-radiobutton {
+  margin-left: 10px;
+}
