@@ -16,10 +16,16 @@ export class LoginComponent {
         email: new FormControl('', [
             // input validation
             Validators.required,
-            Validators.email
+            Validators.email,
         ]),
         password: new FormControl('', [
             Validators.required,
+
+            // In my opinion it doesn't make sense to validate password when the user is logging in, so I am commenting out how it would be done.
+            // The password would instead get validated upon register, and then checked against the password stored in the database as to
+            // whether it's correct or not.
+            
+            //Validators.minLength(8),
         ])
     });
     onSubmit(){ // what happens when button is pressed
@@ -30,5 +36,8 @@ export class LoginComponent {
     }
     get email(){
         return this.loginForm.get("email");
+    }
+    get password(){
+        return this.loginForm.get("password");
     }
 }

@@ -2,18 +2,28 @@
 
   <h2>Log in</h2>
 
-  <!-- Error message if email is invalid -->
-  <div class="error-message">
-    <small *ngIf="email!.dirty && email!.invalid">Sorry, you must enter a valid email address!</small>
+  <!-- Input fields -->
+  <div class="input-container ">
+    <input pInputText formControlName="email" id="email" type="email" placeholder="Email"/>
+    <label for="email"></label>
+
+    <div class="error-message">
+      <small *ngIf="email!.dirty && email!.invalid">Invalid email address!</small>
+    </div>
   </div>
 
-  <!-- Input fields -->
-  <input pInputText formControlName="email" id="email" type="email" placeholder="Email"/>
-  <label for="email"></label>
 
-  <input pInputText formControlName="password" id="password" type="password" placeholder="Password" />
-  <label for="password"></label>
+  <div class="input-container ">
+    <input pInputText formControlName="password" id="password" type="password" placeholder="Password" />
+    <label for="password"></label>
+
+    <div class="error-message">
+      <small *ngIf="password!.dirty && password!.invalid">Password too short!</small>
+    </div>
+  </div>
 
   <!-- Submit button -->
+  <div>
   <p-button type="submit" label="Log-in" id="login-button" severity="success"></p-button>
+  </div>
 </form>

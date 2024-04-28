@@ -5,24 +5,47 @@ form {
   align-items: center;
 }
 
+form > div {
+  width: 25%;
+}
+
+.input-container {
+  position: relative;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
 input {
-  padding: 12px 20px;
-  margin: 8px 0 20px 0;
+  padding: 10px 50px 10px 10px;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  border-radius: 5px; /* Make input boxes round */
+  border-radius: 5px;
+  color: #616A77;
+  font-size: 16px;
 }
+
 
 input:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow effect when hovering over input fields */
 }
 
-p-button {
-  margin-top: 10px;
+.error-message{
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  height: 10px;
+  color: red;
 }
 
-.error-message { 
-  height: 10px; /* Reserve space for error message */
-  margin-bottom: 10px; 
-  color: red;
+:host ::ng-deep input::placeholder, 
+:host ::ng-deep .p-dropdown-label  {
+  color: #ccc;
+}
+
+:host ::ng-deep .p-button {
+  margin-left: 30%;
 }

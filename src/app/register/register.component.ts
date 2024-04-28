@@ -39,15 +39,19 @@ export class RegisterComponent {
     ]),
     password: new FormControl('', [
         Validators.required,
+        Validators.minLength(8),
     ]),
         street: new FormControl('', [
         Validators.required,
+        Validators.minLength(1),
     ]),
         streetNumber: new FormControl('', [
         Validators.required,
+        Validators.pattern(/^\d+$/),
     ]),
         zipCode: new FormControl('', [
         Validators.required,
+        Validators.pattern(/^\d+$/),
     ]),
         city: new FormControl('', [
         Validators.required,
@@ -55,13 +59,18 @@ export class RegisterComponent {
         country: new FormControl('', [
         Validators.required,
     ]),
+        birthdate: new FormControl('', [
+        Validators.required,
+    ]),
 
-  });
+  }
+
+);
   countries: SelectItem[] = [
-    { label: 'United States', value: 'USA' },
-    { label: 'Germany', value: 'Germany' },
     { label: 'France', value: 'France' },
-    { label: 'United Kingdom', value: 'UK' }
+    { label: 'Germany', value: 'Germany' },
+    { label: 'United Kingdom', value: 'UK' },
+    { label: 'United States', value: 'USA' },
   ];
 
   showOtherInput: boolean = false;
@@ -88,5 +97,31 @@ export class RegisterComponent {
   get title(){
     return this.registerForm.get("title");
   }
-
+  get firstName(){
+    return this.registerForm.get("firstName");
+  }
+  get lastName(){
+    return this.registerForm.get("lastName");
+  }
+  get password(){
+    return this.registerForm.get("password");
+  }
+  get birthdate(){
+    return this.registerForm.get("birthdate");
+  }
+  get street(){
+    return this.registerForm.get("street");
+  }
+  get streetNumber(){
+    return this.registerForm.get("streetNumber");
+  }
+  get zipCode(){
+    return this.registerForm.get("zipCode");
+  }
+  get city(){
+    return this.registerForm.get("city");
+  }
+  get country(){
+    return this.registerForm.get("country");
+  }
 }
