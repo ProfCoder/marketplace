@@ -33,15 +33,6 @@ input {
 input:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
 }
-/* 
-.error-message{
-  position: absolute;
-  bottom: -10px;
-  left: 20px;
-  height: 10px;
-  color: red;
-} */
-
 
 .error-message{
   color: red;

@@ -107,21 +107,17 @@
 
   </div>
   <div class="input-container">
-    <p-dropdown [options]="countries" optionLabel="label" optionValue="value" [showClear]="true" placeholder="* Country"></p-dropdown>
+    <p-dropdown [options]="countries" optionLabel="label" optionValue="value" formControlName="country" [showClear]="true" placeholder="* Country"></p-dropdown>
 
     <!-- This error won't ever show as since we have a dropdown, it is only considered "dirty" when a country has been selected,
     at which point it stops being invalid. An alternative method would be to not check if it's "dirty", but then it would immediately
     show an error message, before the user has chosen anything.-->
     <div class="error-message">
-      <small *ngIf="country!.dirty && country!.invalid">Please select a country!</small>
+      <small *ngIf="country?.invalid && (country?.touched || formSubmitted)">Please select a country!</small>
     </div>
   </div>
 
   <p id="default-address">Your address will be used as the default shipping address.</p>
-
-  <button pButton pRipple label="Submit" class="p-button-success"></button>
-
-
+  <button type="submit" pButton pRipple label="Submit" class="p-button-success"></button>
   </div>
-
 </form>
