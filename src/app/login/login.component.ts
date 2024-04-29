@@ -28,11 +28,15 @@ export class LoginComponent {
             //Validators.minLength(8),
         ])
     });
+
+    formSubmitted: boolean = false;
+    
     onSubmit(){ // what happens when button is pressed
         if (this.loginForm.invalid){
             console.log("invalid");
         }
         console.log("submitted");
+        this.formSubmitted = true;
     }
     get email(){
         return this.loginForm.get("email");
