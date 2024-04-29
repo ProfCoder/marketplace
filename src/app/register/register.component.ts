@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -19,7 +19,13 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+  maxDate: Date = new Date();
+
+  ngOnInit() {
+  //Disable future dates selection for birthday in the calendar
+    this.maxDate.setDate(this.maxDate.getDate());
+  }
   constructor(private cdr: ChangeDetectorRef, private router: Router) {} // ChangeDetectorRef is used to manually trigger change detection for radio buttons 
   registerForm = new FormGroup({
       firstName: new FormControl('', [
@@ -72,6 +78,12 @@ export class RegisterComponent {
 
   showOtherInput: boolean = false;
   formSubmitted: boolean = false;
+
+/**
+ * Method called when the registration form is submitted.
+ * If the form is valid, performs necessary actions such as sending form data to a server and navigating to the success page.
+ * If the form is invalid, logs error messages for each invalid field.
+ */
 
   onSubmit() {
     this.formSubmitted = true;

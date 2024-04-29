@@ -62,7 +62,7 @@
     
     <h3>Birthdate</h3>
     <div class="input-container">
-      <p-calendar [iconDisplay]="'input'" [showIcon]="true" formControlName="birthdate" inputId="birthday"  placeholder="* Birthdate"></p-calendar>
+      <p-calendar [iconDisplay]="'input'" [showIcon]="true" formControlName="birthdate" inputId="birthday" [maxDate]="maxDate" placeholder="* Birthdate"></p-calendar>
       <div class="error-message">
         <small *ngIf="birthdate!.dirty && birthdate!.invalid">Invalid date!</small>
       </div>
@@ -109,9 +109,6 @@
   <div class="input-container">
     <p-dropdown [options]="countries" optionLabel="label" optionValue="value" formControlName="country" [showClear]="true" placeholder="* Country"></p-dropdown>
 
-    <!-- This error won't ever show as since we have a dropdown, it is only considered "dirty" when a country has been selected,
-    at which point it stops being invalid. An alternative method would be to not check if it's "dirty", but then it would immediately
-    show an error message, before the user has chosen anything.-->
     <div class="error-message">
       <small *ngIf="country?.invalid && (country?.touched || formSubmitted)">Please select a country!</small>
     </div>
