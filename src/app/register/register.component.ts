@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   maxDate: Date = new Date();
 
   ngOnInit() {
-  //Disable future dates selection for birthday in the calendar
+  // Define the maxDate property to disable future dates Disable future dates selection for birthday in the calendar
     this.maxDate.setDate(this.maxDate.getDate());
   }
   constructor(private cdr: ChangeDetectorRef, private router: Router) {} // ChangeDetectorRef is used to manually trigger change detection for radio buttons 

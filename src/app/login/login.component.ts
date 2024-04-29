@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FloatLabelModule, ButtonModule ],
+    imports: [CommonModule, ReactiveFormsModule, FloatLabelModule,ButtonModule ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })
