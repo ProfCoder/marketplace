@@ -3,7 +3,7 @@
   <h2>Log in</h2>
 
   <!-- Input fields -->
-  <div class="input-container ">
+  <div class="input-container">
     <input pInputText formControlName="email" id="email" type="email" placeholder="Email"/>
     <label for="email"></label>
 
@@ -11,7 +11,6 @@
       <small *ngIf="email!.dirty && email!.invalid">Invalid email address!</small>
     </div>
   </div>
-
 
   <div class="input-container ">
     <input pInputText formControlName="password" id="password" type="password" placeholder="Password" />
@@ -23,7 +22,7 @@
   </div>
 
   <!-- Submit button -->
-  <div>
+  <div class="input-container"> 
   <p-button type="submit" label="Log-in" id="login-button" severity="success"></p-button>
   </div>
 </form>

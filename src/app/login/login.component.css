@@ -7,6 +7,8 @@ form {
 
 form > div {
   width: 25%;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-container {
@@ -20,7 +22,7 @@ form > div {
 }
 
 input {
-  padding: 10px 50px 10px 10px;
+  padding: 10px 20px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -28,24 +30,26 @@ input {
   font-size: 16px;
 }
 
-
 input:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow effect when hovering over input fields */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
 }
-
+/* 
 .error-message{
   position: absolute;
   bottom: -10px;
-  left: 0;
+  left: 20px;
   height: 10px;
   color: red;
+} */
+
+
+.error-message{
+  color: red;
+  display: flex;
+  justify-content: flex-start;
 }
 
 :host ::ng-deep input::placeholder, 
 :host ::ng-deep .p-dropdown-label  {
   color: #ccc;
-}
-
-:host ::ng-deep .p-button {
-  margin-left: 30%;
 }
