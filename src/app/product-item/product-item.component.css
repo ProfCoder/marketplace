@@ -1,0 +1,11 @@
+.card {
+  width: 18rem;
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1)
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
