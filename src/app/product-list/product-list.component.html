@@ -1,4 +1,13 @@
-<div class="products-container">
+<div class="view-selection-container">
+  <button class="p-button list-button" [class.selected]="listViewMode" (click)="listViewMode = true">
+    <i class="pi pi-bars"></i>
+  </button>
+  <button class="p-button grid-button"[class.selected]="!listViewMode" (click)="listViewMode = false">
+    <i class="pi pi-th-large"></i>
+  </button>
+</div>
+
+<div class="grid-view" [ngClass]="{'list-view': listViewMode}">
   <div *ngFor="let product of products">
     <app-product-item [product]="product"></app-product-item>
   </div>

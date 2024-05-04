@@ -1,7 +1,6 @@
 <div class="card">
-  <img width="20%" class="card-img" src="./assets/products/images/{{product.id}}.jpg" alt="{{product.name}}">
-
-  <p class="card-text">{{ product.brand }}</p>
-  <h5 class="card-title">{{ product.name }}</h5>
-  <p class="card-text">${{ product.price }}</p>
+  <div class="image-container"><img class="card-img" src="./assets/products/images/{{product.id}}.jpg" alt="{{product.name}}"></div>
+  <div class="card-brand">{{ product.brand }}</div>
+  <div class="card-name">{{ product.name }}</div>
+  <div class="card-price">{{ product.price }} &#8364;</div>
 </div>
