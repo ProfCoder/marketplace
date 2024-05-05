@@ -2,7 +2,7 @@
 
 ## Assignment 2: Log In and Registration Form
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [9.5/10]** ✅ 
 **Deadline: 30.04.2024 13:30**  
 
 Log In Form:
@@ -27,11 +27,15 @@ You can find all design patterns in the book [Designing Interfaces: Patterns for
 
 In this assignment, you will design and implement the forms for the Log In and Registration page. 
 
-- [ ] [Implement Log In Form](#implement-log-in-form) (3 Points)
-- [ ] [Implement Register Form](#implement-register-form) (4 Points)
-- [ ] [Add Input Hints to Register Form](#add-input-hints-to-register-form) (1 Points)
-- [ ] [Add Input Validation to Log In and Register Form](#add-input-validation-to-log-in-and-register-form) (2 Points)
+- [ ] [Implement Log In Form](#implement-log-in-form) (3/3 Points)
+- [ ] [Implement Register Form](#implement-register-form) (4/4 Points)
+- [ ] [Add Input Hints to Register Form](#add-input-hints-to-register-form) (1/1 Points)
+- [ ] [Add Input Validation to Log In and Register Form](#add-input-validation-to-log-in-and-register-form) (1.5/2 Points)
+
+  > ⚠️ Some error messages do not communicate the type of error well. E.g. an empty email field says that the email is invalid. The design patterns book contains some high-level guidelines on writing good error messages.
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
+
+> ⚠️ Make sure that the contrast between text and background is sufficient. Low contrast creates accessibility issues. See <https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast>
 
 ### Instructions
 
