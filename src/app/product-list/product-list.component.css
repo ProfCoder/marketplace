@@ -3,6 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-column-gap: 10px;
   grid-row-gap: 20px;
+  
 }
 
 .list-view {
@@ -10,9 +11,9 @@
   flex-direction: column;
 }
 
-.list-view .product-item {
+/* .list-view .product-item {
   border: 1px solid #ccc;
-}
+} */
 
 .view-selection-container {
   display: flex;
@@ -55,3 +56,4 @@
   color: #fff;
   background-color:#4982F6;
 }
+

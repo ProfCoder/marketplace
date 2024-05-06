@@ -10,4 +10,5 @@ import { Product } from '../services/product';
 })
 export class ProductItemComponent {
   @Input() product!: Product;
+  @Input() listViewMode = false;
 }

@@ -1,4 +1,4 @@
-.card {
+.product-item {
   display: flex;
   flex-direction: column;
   justify-content:space-between;
@@ -9,7 +9,7 @@
   height: 510px;
 }
 
-.image-container {
+ .image-container {
     text-align: center;
 }
 
@@ -21,11 +21,13 @@
 .card-brand {
   color: #909399;
   width: 40%;
+  margin-bottom: 15px;
 }
 
 .card-name {
   font-size: 18px;
   font-weight: 500;
+  margin-bottom: 15px;
 }
 
 .card-price {
@@ -36,5 +38,47 @@
   border-radius: 5px;
   font-weight: 500;
   font-size: 18px;
-
 }
+
+.list-view {
+  display: flex;
+  flex-direction: row;
+
+  height: 130px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: 0 0.1px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: none 0 0 0;
+}
+
+.list-view .image-container {
+  width: 170px;
+  
+  margin: 0;
+  padding: 0;
+}
+
+.list-view .desc-container {
+  width: 970px;
+}
+
+.list-view .card-img {
+  width: 90px;
+  object-fit:cover;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.list-view .card-brand {
+  margin: 15px 0;
+  padding: 0;
+}
+
+.list-view .card-name {
+  margin: 10px 0;
+  padding: 0;
+}
+
+

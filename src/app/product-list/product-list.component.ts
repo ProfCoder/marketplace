@@ -11,16 +11,6 @@ import { ProductItemComponent } from '../product-item/product-item.component';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-// export class ProductListComponent {
-//   products: Product[] = [];
-  
-//   constructor(private ProductService: ProductService){
-//     this.ProductService.getAllProductMetadata().subscribe((products: Product[]) => {
-//       this.products = products;
-//     });
-//   };
-// }
-
 
 export class ProductListComponent {
   products: Product[] = [];

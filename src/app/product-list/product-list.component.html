@@ -9,6 +9,6 @@
 
 <div class="grid-view" [ngClass]="{'list-view': listViewMode}">
   <div *ngFor="let product of products">
-    <app-product-item [product]="product"></app-product-item>
+    <app-product-item [product]="product" [listViewMode]="listViewMode"></app-product-item>
   </div>
 </div>
