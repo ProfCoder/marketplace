@@ -2,7 +2,7 @@
 
 ## Assignment 3: Product List
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [10/10]** ✅ 
 **Deadline: 07.05.2024 13:30**  
 
 Product List:
@@ -26,10 +26,12 @@ You can find all design patterns in the book [Designing Interfaces: Patterns for
 
 In this assignment, you will load a dataset of products (locally) and display it as a list of items. You also allow the user to view the list in an alternative view (grid).
 
-- [ ] [Implement Product List](#implement-product-list) (3 Points)
-- [ ] [Design and Implement Product Item](#design-and-implement-product-item) (5 Points)
-- [ ] [Add Alternative View (Grid)](#add-alternative-view-grid) (2 Points)
+- [ ] [Implement Product List](#implement-product-list) (3/3 Points)
+- [ ] [Design and Implement Product Item](#design-and-implement-product-item) (5/5 Points)
+- [ ] [Add Alternative View (Grid)](#add-alternative-view-grid) (2/2 Points)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
+
+> ⚠️ The outline of your products (list and grid view) is not visible on my screen (1080p) when zoomed out. It only becomes visible after a certain zoom threshold is reached. You might want to fix this.
 
 ### Instructions
 
