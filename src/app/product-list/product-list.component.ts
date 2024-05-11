@@ -33,9 +33,9 @@ export class ProductListComponent {
     if (this.isLoading || this.endOfList) {
       return;
     }
-
+  
     this.isLoading = true;
-
+  
     this.productService.getNextProductMetadata(this.chunkSize).subscribe(
       (nextProducts: Product[]) => {
         if (nextProducts.length === 0) {
@@ -43,13 +43,20 @@ export class ProductListComponent {
           this.isLoading = false;
           return;
         }
-
+  
         this.products = [...this.products, ...nextProducts];
+  
+        if (nextProducts.length < this.chunkSize) {
+          this.endOfList = true;
+        }
+  
         this.isLoading = false;
       },
       error => {
         console.error('Loading products error:', error);
         this.isLoading = false;
-      });
+      }
+    );
   }
+  
 }

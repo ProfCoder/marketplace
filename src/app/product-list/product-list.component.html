@@ -13,14 +13,15 @@
   </div>
 </div>
 
-<div class="loading-more-container">
-  <button  pButton type="button" [disabled]="isLoading" (click)="loadMoreProducts()">
+<div class="loading-more-container" *ngIf="!endOfList">
+  <button pButton type="button" [disabled]="isLoading" (click)="loadMoreProducts()">
     <span *ngIf="!isLoading">Load more</span>
     <span *ngIf="isLoading">
       <i class="pi pi-spin pi-spinner"></i>  Loading...
     </span>
   </button>
 </div>
+
 
 <div class="end-of-list-message" *ngIf="endOfList">
   <p>No more products to load.</p>
