@@ -22,9 +22,25 @@
   </button>
 </div>
 
+<!-- <div class="end-of-list-message" *ngIf="endOfList">
+  <p>No more products available.</p>
+  <button class="scroll-to-top-button p-button p-button-text" type="button" (click)="scrollToTop()">
+    <span class="button-content">
+      <i class="pi pi-angle-double-up pi-circle"></i>
+      <span>Back to Top</span>
+    </span>
+  </button>  
+</div> -->
 
 <div class="end-of-list-message" *ngIf="endOfList">
-  <p>No more products to load.</p>
+  <p>No more products available.</p>
+  <button class="scroll-to-top-button p-button p-button-text" type="button" (click)="scrollToTop()">
+    <span class="button-content">
+      <i class="pi pi-angle-double-up pi-circle"></i>
+      <span>Back to Top</span>
+    </span>
+  </button>  
 </div>
+
 
 
