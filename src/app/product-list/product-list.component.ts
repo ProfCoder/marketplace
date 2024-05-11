@@ -12,12 +12,12 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-
 export class ProductListComponent {
   products: Product[] = [];
   listViewMode = false; // Initially set to grid view
   isLoading = false;
   chunkSize = 9;
+  endOfList = false;
 
   constructor(private productService: ProductService) {
     this.loadInitialProducts();
@@ -30,18 +30,26 @@ export class ProductListComponent {
   }
 
   loadMoreProducts() {
-    if (this.isLoading || this.products.length % this.chunkSize !== 0) {
+    if (this.isLoading || this.endOfList) {
       return;
     }
 
     this.isLoading = true;
 
-    this.productService.getNextProductMetadata(this.chunkSize).subscribe((nextProducts: Product[]) => {
-      this.products = [...this.products, ...nextProducts];
-      this.isLoading = false;
-    }, error => {
-      console.error('Loading products error:', error);
-      this.isLoading = false;
-    });
+    this.productService.getNextProductMetadata(this.chunkSize).subscribe(
+      (nextProducts: Product[]) => {
+        if (nextProducts.length === 0) {
+          this.endOfList = true;
+          this.isLoading = false;
+          return;
+        }
+
+        this.products = [...this.products, ...nextProducts];
+        this.isLoading = false;
+      },
+      error => {
+        console.error('Loading products error:', error);
+        this.isLoading = false;
+      });
   }
 }
