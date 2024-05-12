@@ -4,11 +4,12 @@ import { ProductService } from '../services/product.service';
 import { Product } from '../services/product';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ CommonModule, ProductItemComponent, ButtonModule ],
+  imports: [ CommonModule, ProductItemComponent, ButtonModule, ProgressSpinnerModule ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })

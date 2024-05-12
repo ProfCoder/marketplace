@@ -125,3 +125,20 @@
 .scroll-to-top-button:hover span {
   color: #0056b3;
 }
+
+.custom-button {
+  background-color: transparent;
+  border: none;
+}
+
+:host ::ng-deep .p-progress-spinner-circle { 
+  animation: spinner 0.5s ease-in-out infinite; 
+} 
+
+@keyframes spinner { 
+100%, 
+0% { 
+  stroke: #4a91e2c0;
+} 
+
+}

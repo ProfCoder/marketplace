@@ -14,23 +14,16 @@
 </div>
 
 <div class="loading-more-container" *ngIf="!endOfList">
-  <button pButton type="button" [disabled]="isLoading" (click)="loadMoreProducts()">
-    <span *ngIf="!isLoading">Load more</span>
-    <span *ngIf="isLoading">
-      <i class="pi pi-spin pi-spinner"></i>  Loading...
-    </span>
+  <button pButton class="custom-button" type="button" [disabled]="isLoading" (click)="loadMoreProducts()">
+    <span *ngIf="!isLoading">Load more products</span>
+    <p-progressSpinner 
+    styleClass="w-6rem h-6rem" 
+    strokeWidth="3" 
+    animationDuration=".5s"
+    styleClass="spinner" 
+     /> 
   </button>
 </div>
-
-<!-- <div class="end-of-list-message" *ngIf="endOfList">
-  <p>No more products available.</p>
-  <button class="scroll-to-top-button p-button p-button-text" type="button" (click)="scrollToTop()">
-    <span class="button-content">
-      <i class="pi pi-angle-double-up pi-circle"></i>
-      <span>Back to Top</span>
-    </span>
-  </button>  
-</div> -->
 
 <div class="end-of-list-message" *ngIf="endOfList">
   <p>No more products available.</p>
