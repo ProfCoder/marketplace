@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../services/product.service';
 import { Product } from '../services/product';
@@ -18,6 +18,7 @@ export class ProductListComponent {
   isLoading = false;
   chunkSize = 9;
   endOfList = false;
+  @ViewChild('scrollingContainer') private scrollingContainer!: ElementRef;
 
   constructor(private productService: ProductService) {
     this.loadInitialProducts();
@@ -62,4 +63,16 @@ export class ProductListComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(): void {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.body.clientHeight;
+  
+    let atBottom = (scrollTop + windowHeight + 100) >= documentHeight;
+  
+    if (atBottom && !this.isLoading && !this.endOfList) {
+      this.loadMoreProducts();
+    }
+  }
 }
