@@ -1,54 +1,103 @@
 # Interactive Systems - Tutorial
 
-## Assignment 4: Infinite Product List
+## Assignment 5: Product Page
 
 **Achieved Points: [__/10]**  
-**Deadline: 14.05.2024 13:30**
+**Deadline: 21.05.2024 13:30**
 
 ### Design Patterns
 
-The following Design Patterns are applied in this assignment:
+The following Design Patterns (or guidelines) are applied in this assignment:
 
-- [ ] [Infinite List](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=342) (Page 322)
-- [ ] [Loading Indicator](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=348) (Page 328)
+- [ ] [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229) (Page 209)
+- [ ] [Hover Tools](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=407) (Page 387)
 
 You can find all design patterns in the book [Designing Interfaces: Patterns for Effective Interaction Design](https://ebookcentral.proquest.com/lib/uni-konstanz/detail.action?docID=5996435)
 
 ### Tasks
 
-In this assignment, you will make the product list dynamic and allow the user to load more items on request.
+In this assignment, you will implement a product details page for the products in our shop.
 
-- [ ] [Implement Infinite List](#implement-infinite-list) (6 Points)
-- [ ] [Design and Implement Loading Indicator](#design-and-implement-loading-indicator) (4 Points)
-- [ ] [Bonus: Load on Scroll](#bonus-load-on-scroll) (+2 Points)
+- [ ] [Create Product Page and Add Routing](#create-product-page-and-add-routing) (3 Points)
+- [ ] [Design Product Page with a Clear Visual Hierarchy](#design-product-page-with-a-clear-visual-hierarchy) (4 Points)
+- [ ] [Implement Color Selection](#implement-color-selection) (2 Points)
+- [ ] [Implement Hover Tools](#implement-hover-tools) (1 Point)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
-
-<img src="images/loading.mp4"  width="600">
 
 ### Instructions
 
-> 💡 We added new functions in the `ProductService` (`product.service.ts`). Instead of `getAllProductMetadata()`, you should now use `getInitialProductMetadata()` and `getNextProductMetadata()`.
+#### Create Product Page and Add Routing
+3 Points
 
-#### Implement Infinite List
+- Create a component for a product page that will (later) display the details of a product.
+- Add routing to the page so that when the user clicks on a product in the list/grid view, the product page for that product is displayed.
+> 💡 Carefully decide which element (in the grid/list view of each product) serves as a link to the product page.
 
-- Use the new `getInitialProductMetadata(n)` method of the `ProductService` to only load the first chunk of `n` items when the page is first loaded. Find a reasonable amount of items to be loaded, as described in the design pattern [Infinite List](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=342).
-- Add a button below the list/grid view. When the user clicks on it, the new `getNextProductMetadata(n)` function should be called to load the next chunk of `n` items.
-- For your design, apply the design pattern [Infinite List](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=342).
+> 💡 [This article](https://www.samjulien.com/how-to-use-route-parameters-in-angular) provides a nice explanation of using route parameters in Angular. Hint: In our tutorial we use `params` instead of `paramsMap` (but you are free to choose).
 
-#### Design and Implement Loading Indicator
+> 💡 You can define a route for the product page with the parameter `id` by adding the following to your your `app.routes.ts`:
+> ```
+> {
+>    path: 'products/:id',
+>    component: ProductDetailComponent
+> },
+>```
 
-- Create an animated loading indicator.
-- While the next items are being loaded, show the loading indicator at the end of the list. When the loading process is finished, hide the loading indicator again.
-- While the items are being loaded and the loading indicator is shown, the user should not be able to request more items.
-- For your design, apply the design pattern [Loading Indicator](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=348).
+> 💡 You can make an element navigate to a route with `[routerLink]`. You can pass route parameters with `[routerLink]="['/products', product.id]"`. Then in your product page component you can read parameters from the route using `this.route.snapshot.params['id']` when `ActivatedRoute` is imported in the constructor (`constructor(private route: ActivatedRoute, …)`). Alternatively, you can subscribe to the parameters of the route with `this.route.params.subscribe((params: Params) => {…})`. See the tutorial slides and [this link](https://www.samjulien.com/how-to-use-route-parameters-in-angular) for an explanation of the differences between both methods.
 
-#### Bonus: Load on Scroll
+#### Design Product Page with a Clear Visual Hierarchy
+4 Points
 
-- This task is optional. If you implement this feature, you can get up to 2 additional points.
-- Instead of using a "Load more" button, load more items when the user scrolls down to the end of the list.
+- The product page needs to have at least the following elements:
+  - Brand
+  - Title
+  - Picture
+  - Price
+  - Color variants (Element should exist as part of this task; implementation of the color selection is part of [Implement Color Selection](#implement-color-selection))
+  - Size (dropdown)
+  - Details (description)
+- All details that are given in the product metadata object should be displayed. If you want to add more elements to make it more realistic, feel free to do so.
+- The product page should also contain a short paragraph with a description of the product (see image as example). Since the product metadata contain no descriptions, you are free to invent or generate some text, or use blind text. It is ok to show the same text for every product.  
+  <img src="images/pillow-description-english.png"  width="600">
+- Design the size and layout of the page elements in a way that provides a clear [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229).
+  > 💡 [This article](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/) has also a good overview of how to achieve a good visual hierarchy.
+  
+  > 💡 Have a look at Gestalt Laws. 
+- Find suitable design decisions especially for:
+  - Font sizes
+  - Order of elements
+  - Distances between elements
+  - Labels (Which elements might profit from a label?)
+
+#### Implement Color Selection
+2 Points
+
+- If a product has several color variants, the user should be able to choose between them. When a color variant is chosen, the displayed product picture should be updated to the picture of that variant.
+> 💡 Not all products have several color variants. The product with the id `10004` has several variants.
+
+> 💡 You can use routing with query parameters to switch between color options:
+> You can add `[queryParams]="{color: product.colors.at(0)?.color_id}` to the element in the list/grid view that routes to the product page (uses `[routerLink]`) to add the color as query parameter to the URL. Then in the product page you can read the query parameters like this:
+> ```
+> this.route.queryParams.subscribe((params) => {
+>   if (params['color']) {
+>       // do something
+>   } else {
+>       // do something else
+>   }
+> });
+>```
+> Alternatively, you can use `this.route.snapshot.queryParams['color’]`. See the tutorial slides and [this link](https://www.samjulien.com/how-to-use-route-parameters-in-angular) for an explanation of the differences between both methods.
+
+#### Implement Hover Tools
+1 Point
+
+- When the user hovers over the picture, hover tools should become visible.
+- For your design, apply the design pattern [Hover Tools](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=407)
+> 💡You can use the [PrimeNG Image](https://primeng.org/image) `<p-image ...></p-image>` element with `[preview]="true"` as attribute to use the hover tools provided by PrimeNG.
 
 #### Tag the Final Commit
 
-- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment4`.
+- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment5`.
 
-> 💡 You can tag a commit in the terminal with the command `git tag -a assignment4` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
+> 💡 You can tag a commit in the terminal with the command `git tag -a assignment5` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
+
