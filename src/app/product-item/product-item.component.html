@@ -1,9 +1,9 @@
 <div class="product-item" [class.list-view]="listViewMode" [class.grid-view]="!listViewMode">
-  <a [routerLink]="['/products', product.id]">
-    <div class="image-container">
-      <img class="card-img" [src]="productService.getProductImage(product.id)" alt="{{product.name}}">
-    </div>
-  </a>
+  <div class="image-container">
+    <a [routerLink]="['/products', product.id]">
+      <img class="card-img" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}">
+    </a>
+  </div>
   <div class="desc-container">
     <div class="card-brand">{{ product.brand }}</div>
     <div class="card-name">{{ product.name }}</div>
