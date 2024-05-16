@@ -14,6 +14,7 @@ export interface Product {
     type: string;
     // The product category. Something broad, like 'Apparel'
     category: string;
+    description: string;
     // An array of color variants for certain products.
     colors: {
         // The color ID is simultaneously the filename of the image showing the product in that color variant.

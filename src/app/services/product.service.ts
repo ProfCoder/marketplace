@@ -68,22 +68,22 @@ export class ProductService {
             })
         });
     }
-
-    // Get the product metadata for a single product by its id. Also returns an Observable.
-    getProductMetadata(id: string) {
+    getProductMetadata(id: string): Observable<Product> {
         return new Observable<Product>((subscriber) => {
             this.productMetadata?.subscribe((products) => {
-                let product = products.find((product) => {
-                    return product.id == id;
-                })
+                let product = products.find((product) => product.id === id);
                 if (product === undefined) {
                     subscriber.error(new Error(`Product with ID ${id} does not exist in dataset`));
                 } else {
+                    // Add default description (Lorem Ipsum)
+                    if (!product.description) {
+                        product.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.";
+                    }
                     subscriber.next(product);
                     subscriber.complete();
                 }
-            })
-        })
+            });
+        });
     }
 
     getProductImage(id: string) {

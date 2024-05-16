@@ -31,7 +31,7 @@ export class LoginComponent {
 
     formSubmitted: boolean = false;
     
-    onSubmit(){ // what happens when button is pressed
+    onSubmit(){ 
         if (this.loginForm.invalid){
             console.log("invalid");
         }
