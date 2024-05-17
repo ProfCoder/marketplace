@@ -1,9 +1,64 @@
-<div *ngIf="product">
-    <h1>{{ product.name }}</h1>
-    <img [src]="productService.getProductImage(product.id)" alt="{{ product.name }}">
-    <p>{{ product.description }}</p>
-    <p>Brand: {{ product.brand }}</p>
-    <p>Price: {{ product.price }} &#8364;</p>
+<div class="back-button" (click)="navigateHome()">‹ Back to Home Page</div>
+<div class="product-container" *ngIf="product">
+  <div class="product-image-container">
+    <img class="product-image" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}">
+    <div class="click-image-text">Click picture to open expanded view</div>
   </div>
+  <div class="product-details-container">
+    <h2>{{ product.name }}</h2>
 
-  
+    <div class="rating-container">
+      <div class="rating-numbers">
+        {{ product.rating.toFixed(1) }}
+      </div>
+      <div class="rating-stars">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <i class="star"
+            [ngClass]="{
+              'full': product.rating >= star,
+              'half': product.rating >= star - 0.5 && product.rating < star
+            }">
+          </i>
+        </ng-container> 
+      </div>
+      <span class="separator"> | </span>
+      <div class="rating-quantity">
+        {{ formatNumberWithCommas(product.ratingQuantity) }} reviews
+      </div>
+    </div>
+
+    <hr>
+
+    <p class="price"> {{ product.price }} &#8364;</p>
+    <p class="description">{{ product.description }}</p>
+    <p><span class="title-weight">Brand: </span> {{ product.brand }}</p>
+    <p><span class="title-weight">Gender:</span> {{ product.gender }}</p>
+
+    <div class="size-selector">
+      <span class="size-title title-weight">Sizes:</span>
+      <div class="size-boxes">
+        <div 
+          *ngFor="let size of product.sizes" 
+          class="size-box" 
+          [ngClass]="{'selected': size === selectedSize}" 
+          (click)="selectSize(size)">
+          {{ size }}
+        </div>
+      </div>
+    </div>
+    
+    <div class="color-selector">
+      <span class="title-weight">Colors:</span>
+      <div class="color-boxes">
+        <div 
+          *ngFor="let color of product.colors" 
+          class="color-box" 
+          [ngStyle]="{'background-color': color.color_hex}" 
+          [ngClass]="{'selected': color === selectedColor}" 
+          (click)="selectColor(color)">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
