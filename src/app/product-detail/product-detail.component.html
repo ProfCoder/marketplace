@@ -1,7 +1,12 @@
 <div class="back-button" (click)="navigateHome()">‹ Back to Home Page</div>
 <div class="product-container" *ngIf="product">
   <div class="product-image-container">
-    <img class="product-image" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}">
+    <p-image class="product-image" *ngIf="selectedColor" [src]="productService.getProductImage(selectedColor.color_id)" alt="{{ product.name }}" [preview]="true" />
+    <p-image class="product-image" *ngIf="!selectedColor" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}" [preview]="true"/>
+    <!-- <img class="product-image" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}"> -->
+
+    <!-- <img class="product-image" width=100% *ngIf="selectedColor" [src]="productService.getProductImage(selectedColor.color_id)" alt="{{ product.name }}" />
+    <img class="product-image" width=100% *ngIf="!selectedColor" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}" /> -->
     <div class="click-image-text">Click picture to open expanded view</div>
   </div>
   <div class="product-details-container">
@@ -55,7 +60,7 @@
           class="color-box" 
           [ngStyle]="{'background-color': color.color_hex}" 
           [ngClass]="{'selected': color === selectedColor}" 
-          (click)="selectColor(color)">
+          (click)="onColorSelect(color)">
         </div>
       </div>
     </div>

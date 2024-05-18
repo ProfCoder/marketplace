@@ -1,6 +1,6 @@
 <div class="product-item" [class.list-view]="listViewMode" [class.grid-view]="!listViewMode">
   <div class="image-container">
-    <a [routerLink]="['/products', product.id]">
+    <a [routerLink]="['/products', product.id]" >
       <img class="card-img" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}">
     </a>
   </div>
