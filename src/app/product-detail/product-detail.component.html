@@ -1,12 +1,20 @@
 <div class="back-button" (click)="navigateHome()">‹ Back to Home Page</div>
 <div class="product-container" *ngIf="product">
   <div class="product-image-container">
-    <p-image class="product-image" *ngIf="selectedColor" [src]="productService.getProductImage(selectedColor.color_id)" alt="{{ product.name }}" [preview]="true" />
-    <p-image class="product-image" *ngIf="!selectedColor" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}" [preview]="true"/>
-    <!-- <img class="product-image" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}"> -->
-
-    <!-- <img class="product-image" width=100% *ngIf="selectedColor" [src]="productService.getProductImage(selectedColor.color_id)" alt="{{ product.name }}" />
-    <img class="product-image" width=100% *ngIf="!selectedColor" [src]="productService.getProductImage(product.id)" alt="{{ product.name }}" /> -->
+    <p-image 
+      class="product-image" 
+      *ngIf="selectedColor" 
+      [src]="productService.getProductImage(selectedColor.color_id)" 
+      [alt]="product.name" 
+      [preview]="true" 
+    ></p-image>
+    <p-image 
+      class="product-image" 
+      *ngIf="!selectedColor" 
+      [src]="productService.getProductImage(product.id)" 
+      [alt]="product.name" 
+      [preview]="true"
+    ></p-image>
     <div class="click-image-text">Click picture to open expanded view</div>
   </div>
   <div class="product-details-container">
@@ -17,7 +25,7 @@
         {{ product.rating.toFixed(1) }}
       </div>
       <div class="rating-stars">
-        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
           <i class="star"
             [ngClass]="{
               'full': product.rating >= star,
@@ -34,25 +42,29 @@
 
     <hr>
 
-    <p class="price"> {{ product.price }} &#8364;</p>
+    <p class="price">{{ product.price }} &#8364;</p>
     <p class="description">{{ product.description }}</p>
     <p><span class="title-weight">Brand: </span> {{ product.brand }}</p>
     <p><span class="title-weight">Gender:</span> {{ product.gender }}</p>
 
-    <div class="size-selector">
-      <span class="size-title title-weight">Sizes:</span>
-      <div class="size-boxes">
-        <div 
-          *ngFor="let size of product.sizes" 
-          class="size-box" 
-          [ngClass]="{'selected': size === selectedSize}" 
-          (click)="selectSize(size)">
-          {{ size }}
-        </div>
-      </div>
-    </div>
+
+<div class="size-selector" *ngIf="product">
+  <span class="size-title title-weight">Sizes:</span>
+  <select class="size-dropdown" (change)="onSizeChange($event)">
+    <option *ngFor="let size of product.sizes" [value]="size" [selected]="size === selectedSize">{{ size }}</option>
+  </select>
+</div>
+
+
+  
+  
+  
+  
     
-    <div class="color-selector">
+    
+    
+    
+    <div class="color-selector" *ngIf="product.colors.length">
       <span class="title-weight">Colors:</span>
       <div class="color-boxes">
         <div 
