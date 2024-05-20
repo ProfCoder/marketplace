@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ImageModule } from 'primeng/image';
 
-
-
 interface ProductWithRating extends Product {
   rating: number;
   ratingQuantity: number;
@@ -27,6 +25,7 @@ export class ProductDetailComponent implements OnInit {
   selectedColor: { color_id: string, color_name: string; color_hex: string } | null = null;
   productImageSrc: string | null = null;
   selectedQuantity: number = 1; 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,16 +47,18 @@ export class ProductDetailComponent implements OnInit {
         if (!this.product.description) {
           this.product.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         }
-
+  
         this.route.queryParams.subscribe((queryParams) => {
           console.log('Query Params:', queryParams);
           const colorName = queryParams['color'];
           if (colorName) {
             this.selectColorByName(colorName);
+          } else if (this.product.colors.length > 0) {
+            this.selectedColor = this.product.colors[0]; 
           } else {
             this.selectedColor = null;
           }
-
+  
           const sizeParam = queryParams['size'];
           console.log('Size Param:', sizeParam);
           if (sizeParam && this.product.sizes.includes(sizeParam)) {
@@ -73,7 +74,7 @@ export class ProductDetailComponent implements OnInit {
       });
     });
   }
-
+  
   getRandomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -86,7 +87,7 @@ export class ProductDetailComponent implements OnInit {
     this.selectedSize = size;
     this.updateUrl();
   }
-
+  
   selectColor(color: { color_id: string, color_name: string, color_hex: string }): void {
     this.selectedColor = color;
     this.updateUrl();
@@ -107,6 +108,12 @@ export class ProductDetailComponent implements OnInit {
       queryParams: { color: color.color_name, size: this.selectedSize },
       queryParamsHandling: 'merge',
     });
+  }
+
+  navigateToProduct(): void {
+    if (this.product) {
+      this.router.navigate(['/product', this.product.id]);
+    }
   }
 
   navigateHome(): void {
@@ -166,10 +173,10 @@ export class ProductDetailComponent implements OnInit {
   }
   
   addToBasket(): void {
-    // Logic to add the product to the basket goes here
+    // Logic to add the product will be done for the next assigments 
   }
 
   buyNow(): void {
-    // Logic to initiate the buying process goes here
+    // Logic to but product will be done for the next assigments 
   }
 }
