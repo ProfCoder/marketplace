@@ -1,3 +1,4 @@
+
 <div class="back-button" (click)="navigateHome()">‹ Back to Home Page</div>
 
 <div class="product-container" *ngIf="product">
@@ -102,3 +103,41 @@
   </div>
 
 </div>
+
+
+<div class="recommended-products-container" *ngIf="recommendedProducts.length > 0">
+  <div class="recommended-products-header">
+    <h3>You might also like</h3>
+  </div>
+  <div class="recommended-product-list">
+    <div class="recommended-product-item" *ngFor="let recommendedProduct of recommendedProducts">
+      <a [routerLink]="['/products', recommendedProduct.id]">
+        <img [src]="productService.getProductImage(recommendedProduct.id)" alt="{{ recommendedProduct.name }}">
+        <p>{{ recommendedProduct.name }}</p>
+      </a>
+    </div>
+  </div>
+</div>
+<hr class="hr-bottom">
+
+<div class="feedback-container">
+  <h3 class="feedback-title">Top reviews from Germany</h3>
+  <div class="feedback-item" *ngFor="let feedback of feedbacks">
+    <div class="user-info">
+      <img *ngIf="feedback.userId !== undefined" [src]="getUserImage(feedback.userId)" alt="User Photo">
+      <p class="username">{{ feedback.userName }}</p>
+    </div>
+    <div class="feedback-content">
+      <div class="rating-stars">
+        <ng-container *ngFor="let star of feedback.stars">
+          <i class="star" [ngClass]="{
+            'full': star >= 1,
+            'half': star > 0 && star < 1
+          }"></i>
+        </ng-container>
+      </div>
+      <p>{{ feedback.comment }}</p>
+    </div>
+  </div>
+</div>
+

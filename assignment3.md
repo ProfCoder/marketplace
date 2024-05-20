@@ -58,7 +58,7 @@ In this assignment, you will load a dataset of products (locally) and display it
   - Brand
   - Price
   - Image
-  > 💡 The image name corresponds to the product id. Therefore, you can use `<img src="./assets/products/images/{{product.id}}.jpg">` to load the image of the product.
+  > 💡 The image name corresponds to the product id. Therefore, you can use `<img src="./assets/products//{{product.id}}.jpg">` to load the image of the product.
 - For your design, apply the design pattern [Cards](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=373)
 
 #### Add Alternative View (Grid)

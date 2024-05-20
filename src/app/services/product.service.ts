@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Product } from './product';
 import { Observable, map } from 'rxjs';
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -30,6 +31,18 @@ export class ProductService {
     getAllProductMetadata() {
         return this.productMetadata;
     }
+      // Method to get the first 6 products with the same type and category as the specified product
+// ProductService
+
+getRecommendedProducts(type: string, category: string, productIdToExclude: string): Observable<Product[]> {
+    return this.productMetadata.pipe(
+      // Filter products based on type and category, excluding the current product
+      map(products => products.filter(product => product.type === type && product.category === category && product.id !== productIdToExclude)),
+      // Return only the first 6 filtered products
+      map(filteredProducts => filteredProducts.slice(0, 6))
+    );
+  }
+  
 
     // Returns a limited number of products. Optionally passes a filter to limit what products are selected.
     getInitialProductMetadata(numItems: number, filter?: (product: Product) => boolean) {
@@ -59,7 +72,6 @@ export class ProductService {
                 subscriber.error(new Error("Tried to fetch more products without initialization. Run getInitialProductMetadata to obtain the first set of items."));
             }
             this.filteredProductMetadata.subscribe(allProducts => {
-                // Add artificial delay
                 setTimeout(() => {
                     subscriber.next(allProducts.slice(this.nextIndex, this.nextIndex + numItems));
                     this.nextIndex += numItems;
@@ -75,7 +87,7 @@ export class ProductService {
                 if (product === undefined) {
                     subscriber.error(new Error(`Product with ID ${id} does not exist in dataset`));
                 } else {
-                    // Add default description (Lorem Ipsum)
+                    // Added default description (Lorem Ipsum)
                     if (!product.description) {
                         product.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.";
                     }
