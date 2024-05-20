@@ -391,7 +391,47 @@ hr {
     margin-top: 5px; 
   }
   
+  /* .scroll-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .scroll-to-top-button.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+   */
 
+   .scroll-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 10%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scroll-top-button:hover {
+    opacity: 0.8;
+  }
+  
+  
+  
 /* Media query for responsive design */
 @media (max-width: 768px) {
     .back-button {
