@@ -1,25 +1,31 @@
 <div class="back-button" (click)="navigateHome()">‹ Back to Home Page</div>
+
+
 <div class="product-container" *ngIf="product">
+
   <div class="product-image-container">
-    <p-image 
-      class="product-image" 
-      *ngIf="selectedColor" 
-      [src]="productService.getProductImage(selectedColor.color_id)" 
-      [alt]="product.name" 
-      [preview]="true" 
-    ></p-image>
-    <p-image 
-      class="product-image" 
-      *ngIf="!selectedColor" 
-      [src]="productService.getProductImage(product.id)" 
-      [alt]="product.name" 
-      [preview]="true"
-    ></p-image>
+    <div class="image-box">
+        <p-image 
+          class="product-image" 
+          *ngIf="selectedColor" 
+          [src]="productService.getProductImage(selectedColor.color_id)" 
+          [alt]="product.name" 
+          [preview]="true" 
+        ></p-image>
+        <p-image 
+          class="product-image" 
+          *ngIf="!selectedColor" 
+          [src]="productService.getProductImage(product.id)" 
+          [alt]="product.name" 
+          [preview]="true"
+        ></p-image>
+    </div>
     <div class="click-image-text">Click picture to open expanded view</div>
   </div>
+  
+  
   <div class="product-details-container">
     <h2>{{ product.name }}</h2>
-
     <div class="rating-container">
       <div class="rating-numbers">
         {{ product.rating.toFixed(1) }}
@@ -39,35 +45,91 @@
         {{ formatNumberWithCommas(product.ratingQuantity) }} reviews
       </div>
     </div>
-
     <hr>
 
-    <p class="price">{{ product.price }} &#8364;</p>
-    <p class="description">{{ product.description }}</p>
-    <p><span class="title-weight">Brand: </span> {{ product.brand }}</p>
-    <p><span class="title-weight">Gender:</span> {{ product.gender }}</p>
+    <div class="details-section-container">
 
 
-<div class="size-selector" *ngIf="product">
-  <span class="size-title title-weight">Sizes:</span>
-  <select class="size-dropdown" (change)="onSizeChange($event)">
-    <option *ngFor="let size of product.sizes" [value]="size" [selected]="size === selectedSize">{{ size }}</option>
-  </select>
-</div>
 
-    
-    <div class="color-selector" *ngIf="product.colors.length">
-      <span class="title-weight">Colors:</span>
-      <div class="color-boxes">
-        <div 
-          *ngFor="let color of product.colors" 
-          class="color-box" 
-          [ngStyle]="{'background-color': color.color_hex}" 
-          [ngClass]="{'selected': color === selectedColor}" 
-          (click)="onColorSelect(color)">
-        </div>
-      </div>
+    <div class="product-details">
+      <p class="price">{{ product.price }} &#8364;</p>
+      <p class="description">{{ product.description }}</p>
+      <p><span class="title-weight">Brand: </span> {{ product.brand }}</p>
+      <p><span class="title-weight">Gender:</span> {{ product.gender }}</p>
+  
+  
+  <div class="size-selector" *ngIf="product">
+    <span class="size-title title-weight">Sizes: </span>
+    <select class="size-dropdown" (change)="onSizeChange($event)">
+      <option class="color-option" *ngFor="let size of product.sizes" [value]="size" [selected]="size === selectedSize">{{ size }}</option>
+    </select>
+  </div>
+  
+      
+<!-- <div class="color-selector" *ngIf="product.colors.length">
+  <div>
+    <span class="title-weight">Colors:</span>
+    <span *ngIf="selectedColor">&nbsp;{{ selectedColor.color_name }}</span>
+  </div>
+  <div class="color-boxes">
+    <div 
+      *ngFor="let color of product.colors" 
+      class="color-box" 
+      [ngStyle]="{'background-color': color.color_hex}" 
+      [ngClass]="{'selected': color === selectedColor}" 
+      (click)="onColorSelect(color)">
     </div>
-    
+  </div>
+</div> -->
+
+
+<div class="color-selector" *ngIf="product.colors.length">
+  <div>
+    <span class="title-weight">Colors: </span>
+    <span *ngIf="selectedColor">&nbsp;{{ selectedColor.color_name }}</span>
+  </div>
+  <div class="color-boxes">
+    <div
+      *ngFor="let color of product.colors"
+      class="color-box"
+      [ngClass]="{'selected': color === selectedColor}"
+      (click)="onColorSelect(color)"
+      [ngStyle]="{'background-color': color.color_hex}">
+    </div>
   </div>
 </div>
+
+
+  
+      
+    </div>
+
+
+</div>
+  </div>
+  
+  <div class="shopping-settings">
+    
+    <div class="delivery">
+      <i class="pi pi-truck" style="font-size: 1.3rem"></i> <span> Free delivery</span>
+    </div>
+    <div class="free-return">
+      <i class="pi pi-replay" style="font-size: 1.3rem"></i> <span> Free return</span></div>
+    <div class="stock">In Stock</div>
+    <div class="quantity">
+      <button class="minus" (click)="decreaseQuantity()" [disabled]="selectedQuantity === 0">-</button>
+      <span class="quantity-selected">{{ selectedQuantity }}</span>
+      <button class="plus" (click)="increaseQuantity()" [disabled]="selectedQuantity === 20">+</button>
+    </div>
+    <div class="total_amount">{{ getTotalPrice() | currency:'EUR':'symbol':'1.2-2' }}</div>
+    <div>
+      <button class="add-to-basket" (click)="addToBasket()">Add to Basket</button>
+    </div>
+    <div >
+      <button class="buy-now" (click)="buyNow()">Buy Now</button>
+    </div>
+  </div>
+
+</div>
+
+

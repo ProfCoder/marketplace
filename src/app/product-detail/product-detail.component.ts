@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ImageModule } from 'primeng/image';
 
+
+
 interface ProductWithRating extends Product {
   rating: number;
   ratingQuantity: number;
@@ -24,7 +26,7 @@ export class ProductDetailComponent implements OnInit {
   selectedSize: string | null = null;
   selectedColor: { color_id: string, color_name: string; color_hex: string } | null = null;
   productImageSrc: string | null = null;
-
+  selectedQuantity: number = 1; 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -142,5 +144,32 @@ export class ProductDetailComponent implements OnInit {
     } else {
       this.productImageSrc = this.productService.getProductImage(this.product.id);
     }
+  }
+
+  decreaseQuantity(): void {
+    if (this.selectedQuantity > 0) {
+      this.selectedQuantity--;
+    }
+  }
+
+  increaseQuantity(): void {
+    if (this.selectedQuantity < 20) {
+      this.selectedQuantity++;
+    }
+  }
+
+  getTotalPrice(): number {
+    if (this.product && this.product.price) {
+      return this.product.price * this.selectedQuantity;
+    }
+    return 0;
+  }
+  
+  addToBasket(): void {
+    // Logic to add the product to the basket goes here
+  }
+
+  buyNow(): void {
+    // Logic to initiate the buying process goes here
   }
 }
