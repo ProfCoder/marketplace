@@ -390,28 +390,12 @@ hr {
   p {
     margin-top: 5px; 
   }
-  
-  /* .scroll-to-top-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  
-  .scroll-to-top-button.visible {
-    opacity: 1;
-    visibility: visible;
-  }
-   */
 
    .scroll-top-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff; 
+    background-color: #007bffb3; 
     color: white;
     border: none;
     border-radius: 10%;
