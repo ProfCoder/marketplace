@@ -1,23 +1,22 @@
-
 <div class="back-button" (click)="navigateHome()">‹ Back to Home Page</div>
 
 <div class="product-container" *ngIf="product">
   <div class="product-image-container">
     <div class="image-box">
-        <p-image 
-          class="product-image" 
-          *ngIf="selectedColor" 
-          [src]="productService.getProductImage(selectedColor.color_id)" 
-          [alt]="product.name" 
-          [preview]="true" 
-        ></p-image>
-        <p-image 
-          class="product-image" 
-          *ngIf="!selectedColor" 
-          [src]="productService.getProductImage(product.id)" 
-          [alt]="product.name" 
-          [preview]="true"
-        ></p-image>
+      <p-image 
+        class="product-image" 
+        *ngIf="selectedColor" 
+        [src]="productService.getProductImage(selectedColor.color_id)" 
+        [alt]="product.name" 
+        [preview]="true" 
+      ></p-image>
+      <p-image 
+        class="product-image" 
+        *ngIf="!selectedColor" 
+        [src]="productService.getProductImage(product.id)" 
+        [alt]="product.name" 
+        [preview]="true"
+      ></p-image>
     </div>
     <div class="click-image-text">Click picture to open expanded view</div>
   </div>
@@ -58,7 +57,6 @@
             <option class="color-option" *ngFor="let size of product.sizes" [value]="size" [selected]="size === selectedSize">{{ size }}</option>
           </select>
         </div>
-
 
         <div class="color-selector" *ngIf="product.colors.length">
           <div>
@@ -101,9 +99,7 @@
       <button class="buy-now" (click)="buyNow()">Buy Now</button>
     </div>
   </div>
-
 </div>
-
 
 <div class="recommended-products-container" *ngIf="recommendedProducts.length > 0">
   <div class="recommended-products-header">
@@ -111,7 +107,7 @@
   </div>
   <div class="recommended-product-list">
     <div class="recommended-product-item" *ngFor="let recommendedProduct of recommendedProducts">
-      <a [routerLink]="['/products', recommendedProduct.id]">
+      <a [routerLink]="['/products', recommendedProduct.id]" (click)="onRecommendedProductClick(recommendedProduct)">
         <img [src]="productService.getProductImage(recommendedProduct.id)" alt="{{ recommendedProduct.name }}">
         <p>{{ recommendedProduct.name }}</p>
       </a>

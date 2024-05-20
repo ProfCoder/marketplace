@@ -211,29 +211,32 @@ export class ProductDetailComponent implements OnInit {
     if (this.product && this.product.price) {
       return this.product.price * this.selectedQuantity;
     }
-    return 0;
+    return 0  }
+  
+    addToBasket(): void {
+      // Logic to add the product will be done for the next assignments 
+    }
+  
+    buyNow(): void {
+      // Logic to buy product will be done for the next assignments 
+    }
+  
+    // Method to load recommended products
+    loadRecommendedProducts(): void {
+      const { type, category, id } = this.product;
+  
+      this.productService.getRecommendedProducts(type, category, id).subscribe(
+        (recommendedProducts: Product[]) => {
+          this.recommendedProducts = recommendedProducts;
+        },
+        (error) => {
+          console.error('Error loading recommended products:', error);
+        }
+      );
+    }
+    onRecommendedProductClick(recommendedProduct: Product): void {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.router.navigate(['/products', recommendedProduct.id]);
+    }
   }
   
-  addToBasket(): void {
-    // Logic to add the product will be done for the next assignments 
-  }
-
-  buyNow(): void {
-    // Logic to buy product will be done for the next assignments 
-  }
-
-// Method to load recommended products
-loadRecommendedProducts(): void {
-  const { type, category, id } = this.product;
-
-  this.productService.getRecommendedProducts(type, category, id).subscribe(
-    (recommendedProducts: Product[]) => {
-      this.recommendedProducts = recommendedProducts;
-    },
-    (error) => {
-      console.error('Error loading recommended products:', error);
-    }
-  );
-}
-
-}
