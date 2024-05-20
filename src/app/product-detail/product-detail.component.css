@@ -393,8 +393,8 @@ hr {
 
    .scroll-top-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 40px;
+    right: 40px;
     background-color: #007bffb3; 
     color: white;
     border: none;
