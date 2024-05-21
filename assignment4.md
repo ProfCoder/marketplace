@@ -2,7 +2,7 @@
 
 ## Assignment 4: Infinite Product List
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [12/10]** ✅  
 **Deadline: 14.05.2024 13:30**
 
 ### Design Patterns
@@ -18,9 +18,9 @@ You can find all design patterns in the book [Designing Interfaces: Patterns for
 
 In this assignment, you will make the product list dynamic and allow the user to load more items on request.
 
-- [ ] [Implement Infinite List](#implement-infinite-list) (6 Points)
-- [ ] [Design and Implement Loading Indicator](#design-and-implement-loading-indicator) (4 Points)
-- [ ] [Bonus: Load on Scroll](#bonus-load-on-scroll) (+2 Points)
+- [ ] [Implement Infinite List](#implement-infinite-list) (6/6 Points)
+- [ ] [Design and Implement Loading Indicator](#design-and-implement-loading-indicator) (4/4 Points)
+- [ ] [Bonus: Load on Scroll](#bonus-load-on-scroll) (+2/+2 Points)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
 
 <img src="images/loading.mp4"  width="600">
