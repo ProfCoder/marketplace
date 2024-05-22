@@ -22,4 +22,5 @@ export interface Product {
     colors: Color[];
     // Available sizes. An Array of strings like 'L', 'XXL'...
     sizes: string[];
+    description?: string;
 }

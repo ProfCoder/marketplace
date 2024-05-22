@@ -332,4 +332,16 @@ export class ProductService {
     getProductImage(id: string) {
         return `./assets/products/images/${id}.jpg`;
     }
+
+    getRecommendedProducts(type: string, category: string, productId: string): Observable<Product[]> {
+        return this.productMetadata.pipe(
+            map(products => 
+                products.filter(product => 
+                    product.type === type && 
+                    product.category === category && 
+                    product.id !== productId // Exclude the current product
+                )
+            )
+        );
+    }
 }

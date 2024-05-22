@@ -54,6 +54,7 @@ export class ProductDetailComponent implements OnInit {
       'Jimmy Carter',
       'Gerald Ford',
       'Richard Nixon',
+      'Jimmy Carter'
     ];
     // Generate 10 feedbacks
     for (let i = 1; i < 11; i++) {
@@ -63,7 +64,7 @@ export class ProductDetailComponent implements OnInit {
       const starRating = +(rating / 2).toFixed(1);
       const stars = Array.from({ length: 5 }, (_, index) => (index < starRating ? 1 : 0));
       const userName = lastTenPresidents[i];
-      const userId = `${i}`; // Unique identifier
+      const userId = `${i}`;
       this.feedbacks.push({ comment, rating, stars, userName, userId });
     }
   }
@@ -203,7 +204,8 @@ export class ProductDetailComponent implements OnInit {
   updateProductImage(): void {
     if (this.selectedColor) {
       const color = this.product.colors.find((c) => c.color_name === this.selectedColor?.color_name);
-      if (color) {        this.productImageSrc = this.productService.getProductImage(color.color_id);
+      if (color) {
+        this.productImageSrc = this.productService.getProductImage(color.color_id);
       }
     } else {
       this.productImageSrc = this.productService.getProductImage(this.product.id);
@@ -240,20 +242,20 @@ export class ProductDetailComponent implements OnInit {
   // Method to load recommended products
   loadRecommendedProducts(): void {
     const { type, category, id } = this.product;
-
+  
     this.productService.getRecommendedProducts(type, category, id).subscribe(
       (recommendedProducts: Product[]) => {
-        this.recommendedProducts = recommendedProducts;
+        this.recommendedProducts = recommendedProducts.slice(0, 6);
       },
       (error) => {
         console.error('Error loading recommended products:', error);
       }
     );
   }
+  
 
   onRecommendedProductClick(recommendedProduct: Product): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.router.navigate(['/products', recommendedProduct.id]);
   }
 }
-
