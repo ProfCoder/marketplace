@@ -4,6 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { SuccessRegistrationComponent } from './register/success-registration.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component'; 
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,10 @@ export const routes: Routes = [
     {
         path: 'colors/:id',
         component: ProductDetailComponent,
+    },
+    {
+        path: 'search-results',
+        component: SearchResultsComponent,
     },
     {
         path: '**',

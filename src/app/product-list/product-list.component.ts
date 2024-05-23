@@ -5,13 +5,16 @@ import { Product } from '../services/product';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ CommonModule, ProductItemComponent, ButtonModule, ProgressSpinnerModule ],
+  imports: [ CommonModule, ProductItemComponent, ButtonModule, ProgressSpinnerModule, FormsModule, SearchComponent  ],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
   products: Product[] = [];
@@ -19,9 +22,10 @@ export class ProductListComponent {
   isLoading = false;
   chunkSize = 9;
   endOfList = false;
+  searchValue: string = ''
   @ViewChild('scrollingContainer') private scrollingContainer!: ElementRef;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
     this.loadInitialProducts();
   }
 
@@ -62,6 +66,9 @@ export class ProductListComponent {
   }
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  onSearchClick() {
+    this.router.navigate(['/search-results'], { queryParams: { query: this.searchValue } });
   }
   
   @HostListener('window:scroll', ['$event'])

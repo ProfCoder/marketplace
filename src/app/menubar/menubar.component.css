@@ -2,7 +2,8 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    background-color: rgb(68, 167, 188);
     height: 10ex
 }
 
@@ -43,6 +44,11 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
     align-items: center;
     justify-self: end;
 }
+
+.white-text .p-button-label {
+    color: white !important; 
+}
+
 
 /*
 Use the combination of :host and ::ng-deep to adapt PrimeNG styles
