@@ -238,8 +238,17 @@ export class ProductService {
     }
 
     getBrandList(): Observable<string[]> {
-        return this.getMetadataList<string>('brand');
-    }
+        return new Observable<string[]>((subscriber) => {
+          this.productMetadata.subscribe((allProducts) => {
+            subscriber.next(
+              [
+                ...new Set(allProducts.map((product) => product.brand)),
+              ].sort()
+            );
+            subscriber.complete();
+          });
+        });
+      }
 
     getGenderList(): Observable<string[]> {
         return this.getMetadataList<string>('gender');

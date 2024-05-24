@@ -1,2 +1,22 @@
 <app-search></app-search>
 
+<div class="result-info-container">
+  <div class="results-info">X over Y results for "Z"</div>
+  <div class="sorting">
+    <p-dropdown
+      [options]="sortOptions"
+      [(ngModel)]="selectedSortOption"
+      placeholder="Sort by"
+      (onChange)="onSortChange($event)"
+    ></p-dropdown>
+  </div>
+</div>
+
+<div class="search-container">
+    <div class="filters-container">
+
+    </div>
+
+    
+    <div class="results-container">ds</div>
+</div>

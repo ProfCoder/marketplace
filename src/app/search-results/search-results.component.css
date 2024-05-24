@@ -1,0 +1,79 @@
+.result-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 0 0 30px;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.1);
+}
+
+.results-info {
+    width: 75%;
+}
+
+.sorting {
+    width: 25%;
+
+}
+
+  
+::ng-deep .sorting p-dropdown .p-dropdown-label {
+    width: 170px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+
+
+  }
+
+  
+
+
+
+.search-container {
+    background-color: greenyellow;
+    display: flex;
+    flex-direction: row;
+}
+
+.filters-container {
+    background-color: lightcoral;
+    width: 30%;
+}
+
+.filter-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .filter-options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter-options div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .filter-options label {
+    margin-left: 5px;
+  }
+  
+  .see-more-button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.results-container {
+    background-color: lightblue;
+    width: 70%;
+}
