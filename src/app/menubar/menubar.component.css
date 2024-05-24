@@ -57,3 +57,8 @@ See https://primeng.org/theming#scopedcss and https://angular.io/guide/component
 :host ::ng-deep .menu-entries .p-button-label {
     font-weight: normal;
 }
+
+
+.mylogo {
+   width: 190px;
+}

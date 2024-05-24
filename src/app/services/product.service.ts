@@ -67,7 +67,9 @@ export class ProductService {
      * @param colorsFiltered - An optional array of colors to filter products by.
      * @param sizesFiltered - An optional array of sizes to filter products by.
      * @returns An Observable that emits an array of `numItems` products.
-     */
+    //  */
+
+
     getInitialProductMetadata(
         numItems: number,
         filter?: (product: Product) => boolean,
@@ -80,6 +82,8 @@ export class ProductService {
         sizesFiltered?: string[],
         priceRange?: number[]
     ) {
+        console.log('Received price range:', priceRange); 
+        
         // Initialize optional arguments with empty arrays if not provided
         searchText ||= '';
         brandsFiltered ||= [];
@@ -88,7 +92,7 @@ export class ProductService {
         categoriesFiltered ||= [];
         colorsFiltered ||= [];
         sizesFiltered ||= [];
-        priceRange ||= [0, Number.MAX_VALUE];
+    
         return new Observable<Product[]>((subscriber) => {
             this.productMetadata.subscribe(() => {
                 this.filteredProductMetadata = this.productMetadata.pipe(
@@ -103,7 +107,11 @@ export class ProductService {
                             categoriesFiltered ||= [];
                             colorsFiltered ||= [];
                             sizesFiltered ||= [];
+                            
+                            const priceInRange = !priceRange || (product.price >= priceRange[0] && product.price <= priceRange[1]);
+                            
                             return (
+                                priceInRange &&
                                 this.filterProduct(
                                     product,
                                     searchText,
@@ -127,7 +135,9 @@ export class ProductService {
             });
         });
     }
+    
 
+    
     private filterProduct(
         product: Product,
         searchText: string,
