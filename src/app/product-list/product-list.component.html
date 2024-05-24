@@ -1,6 +1,4 @@
-<app-search></app-search>
-
-<div class="view-selection-container">
+ <div class="view-selection-container">
   <button class="view-button list-button" [class.selected]="listViewMode" (click)="listViewMode = true">
     <i class="pi pi-bars"></i>
   </button>
@@ -19,11 +17,12 @@
   <button pButton class="custom-button" type="button" [disabled]="isLoading" (click)="loadMoreProducts()">
     <span *ngIf="!isLoading">Load more products</span>
     <p-progressSpinner 
-    styleClass="w-6rem h-6rem" 
-    strokeWidth="3" 
-    animationDuration=".5s"
-    styleClass="spinner" 
-     /> 
+      *ngIf="isLoading"
+      styleClass="w-6rem h-6rem" 
+      strokeWidth="3" 
+      animationDuration=".5s"
+      styleClass="spinner">
+    </p-progressSpinner>
   </button>
 </div>
 
@@ -36,6 +35,3 @@
     </span>
   </button>  
 </div>
-
-
-

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
     selector: 'app-menubar',
     standalone: true,
-    imports: [CommonModule, ButtonModule, RouterModule],
+    imports: [CommonModule, ButtonModule, RouterModule, SearchComponent],
     templateUrl: './menubar.component.html',
     styleUrl: './menubar.component.css',
 })

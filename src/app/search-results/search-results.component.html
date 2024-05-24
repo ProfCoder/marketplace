@@ -1,22 +1,33 @@
-<app-search></app-search>
-
 <div class="result-info-container">
-  <div class="results-info">X over Y results for "Z"</div>
-  <div class="sorting">
-    <p-dropdown
-      [options]="sortOptions"
-      [(ngModel)]="selectedSortOption"
-      placeholder="Sort by"
-      (onChange)="onSortChange($event)"
-    ></p-dropdown>
-  </div>
-</div>
-
-<div class="search-container">
-    <div class="filters-container">
-
+    <div class="results-info">X over Y results for "Z"</div>
+    <div class="sorting">
+      <p-dropdown
+        [options]="sortOptions"
+        [(ngModel)]="selectedSortOption"
+        placeholder="Sort by"
+        (onChange)="onSortChange($event)"
+      ></p-dropdown>
     </div>
-
-    
-    <div class="results-container">ds</div>
-</div>
+  </div>
+  
+  <div class="search-container">
+    <div class="filters-container">
+      <h4>Brands</h4>
+      <div *ngFor="let brand of brandList">
+        <input
+          type="checkbox"
+          [value]="brand"
+          (change)="onBrandFilterChange($event)"
+        />{{ brand }}
+      </div>
+    </div>
+  
+    <div class="results-container">
+      <app-product-list
+        [searchValue]="searchValue"
+        [selectedBrands]="selectedBrands"
+        [products]="filteredProducts"
+      ></app-product-list>
+    </div>
+  </div>
+  

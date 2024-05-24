@@ -77,7 +77,8 @@ export class ProductService {
         typesFiltered?: string[],
         categoriesFiltered?: string[],
         colorsFiltered?: string[],
-        sizesFiltered?: string[]
+        sizesFiltered?: string[],
+        priceRange?: number[]
     ) {
         // Initialize optional arguments with empty arrays if not provided
         searchText ||= '';
@@ -87,6 +88,7 @@ export class ProductService {
         categoriesFiltered ||= [];
         colorsFiltered ||= [];
         sizesFiltered ||= [];
+        priceRange ||= [0, Number.MAX_VALUE];
         return new Observable<Product[]>((subscriber) => {
             this.productMetadata.subscribe(() => {
                 this.filteredProductMetadata = this.productMetadata.pipe(
@@ -110,7 +112,7 @@ export class ProductService {
                                     typesFiltered,
                                     categoriesFiltered,
                                     colorsFiltered,
-                                    sizesFiltered
+                                    sizesFiltered,
                                 ) &&
                                 (!filter || filter(product))
                             );
