@@ -30,7 +30,22 @@
             (onSlideEnd)="onPriceFilterChange()">
         </p-slider>
         <div>Min: {{ priceRange[0] }} - Max: {{ priceRange[1] }}</div>
+    
+    
+        <h4>Categories</h4>
+        <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" (onChange)="onCategoryFilterChange($event)"></p-dropdown>
+
+
+        <h4>Gender</h4>
+<div *ngFor="let gender of genderList">
+    <input
+        type="checkbox"
+        [value]="gender"
+        (change)="onGenderFilterChange($event)"
+    />{{ gender }}
+</div>
     </div>
+    
 
 
     <div class="results-container">
@@ -41,5 +56,8 @@
         ></app-product-list>
       </div> 
     
+
+
+
   </div>
   

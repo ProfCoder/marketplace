@@ -366,3 +366,4 @@ export class ProductService {
         );
     }
 }
+export type GenderList = string[];
