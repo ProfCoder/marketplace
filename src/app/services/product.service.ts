@@ -10,11 +10,11 @@ import { Color } from './color';
 
 // Provides product metadata to the application.
 export class ProductService {
-    productMetadata: Observable<Product[]>;
+    productMetadata: Observable<Product[]>; // Observable containing all product metadata
     // Stores all products with filter applied
-    filteredProductMetadata: Observable<Product[]>;
+    filteredProductMetadata: Observable<Product[]>; // Observable containing filtered product metadata
 
-    nextIndex: number = 0;
+    nextIndex: number = 0; // Index to track the next set of products to be retrieved
 
     constructor(private http: HttpClient) {
         // For simplicity, we load all product metadata when the application starts
@@ -42,7 +42,7 @@ export class ProductService {
      * product name (case insensitive).
      *
      * ...Filtered arrays specify features of that metadata category to include
-     * in the dataset. These are disjuncitve *inside* categories, meaning e.g. inclusion of
+     * in the dataset. These are disjunctive *inside* categories, meaning e.g. inclusion of
      * 'Shirts' and 'Sandals' in `typesFiltered` returns a dataset that includes *both*
      * shirts and sandals.
      * However, they are conjunctive *across* categories, meaning that e.g. inclusion of
@@ -66,10 +66,9 @@ export class ProductService {
      * @param categoriesFiltered - An optional array of categories to filter products by.
      * @param colorsFiltered - An optional array of colors to filter products by.
      * @param sizesFiltered - An optional array of sizes to filter products by.
+     * @param priceRange - An optional price range to filter products by. 
      * @returns An Observable that emits an array of `numItems` products.
-    //  */
-
-
+     */
     getInitialProductMetadata(
         numItems: number,
         filter?: (product: Product) => boolean,
@@ -98,7 +97,7 @@ export class ProductService {
                 this.filteredProductMetadata = this.productMetadata.pipe(
                     map((allProducts) =>
                         allProducts.filter((product) => {
-                            // Intialize with empty values if not provided.
+                            // Initialize with empty values if not provided.
                             // Empty values behave like no filter/search term
                             searchText ||= '';
                             brandsFiltered ||= [];
@@ -111,7 +110,7 @@ export class ProductService {
                             const priceInRange = !priceRange || (product.price >= priceRange[0] && product.price <= priceRange[1]);
                             
                             return (
-                                priceInRange &&
+                                priceInRange && 
                                 this.filterProduct(
                                     product,
                                     searchText,
@@ -135,9 +134,7 @@ export class ProductService {
             });
         });
     }
-    
 
-    
     private filterProduct(
         product: Product,
         searchText: string,
@@ -192,7 +189,6 @@ export class ProductService {
         return true;
     }
 
-    
     /**
      * Returns next numItems number of products. Only returns the new products,
      * the frontend is responsible for storing already obtained products.
@@ -260,7 +256,7 @@ export class ProductService {
             subscriber.complete();
           });
         });
-      }
+    }
 
     getGenderList(): Observable<string[]> {
         return this.getMetadataList<string>('gender');
@@ -296,7 +292,6 @@ export class ProductService {
             });
         });
     }
-    
 
     getCategoryList(): Observable<string[]> {
         return this.getMetadataList<string>('category');
@@ -361,6 +356,12 @@ export class ProductService {
                     product.id !== productId // Exclude the current product
                 )
             )
+        );
+    }
+
+    getMaxPrice(): Observable<number> {
+        return this.productMetadata.pipe(
+            map(products => Math.max(...products.map(product => product.price)))
         );
     }
 }

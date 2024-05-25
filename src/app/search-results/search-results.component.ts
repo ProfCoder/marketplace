@@ -50,6 +50,7 @@ export class SearchResultsComponent implements OnInit {
     this.loadCategories();
     this.loadGenders();
     this.loadColors();
+    this.loadMaxPrice(); // Diamond: Load the maximum price on init
   }
 
   loadGenders() {
@@ -143,6 +144,13 @@ export class SearchResultsComponent implements OnInit {
     this.updateProductList();
   }
 
+  loadMaxPrice() { // Diamond: Method to load the maximum price
+    this.productService.getMaxPrice().subscribe((maxPrice) => {
+      this.maxPrice = maxPrice;
+      this.priceRange = [0, this.maxPrice];
+    });
+  }
+
   updateProductList() {
     console.log('Updating product list with price range and genders:', this.priceRange, this.selectedGenders);
 
@@ -162,4 +170,3 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 }
-
