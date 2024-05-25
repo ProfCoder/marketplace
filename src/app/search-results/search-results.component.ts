@@ -8,11 +8,13 @@ import { ProductListComponent } from '../product-list/product-list.component';
 import { SearchComponent } from '../search/search.component';
 import { SliderModule } from 'primeng/slider';
 import { Color } from '../services/color';
+import { SelectItem } from 'primeng/api';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [CommonModule, FormsModule, DropdownModule, ProductListComponent, SearchComponent, SliderModule],
+  imports: [CommonModule, FormsModule, DropdownModule, ProductListComponent, SearchComponent, SliderModule,  MultiSelectModule],
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
@@ -39,6 +41,9 @@ export class SearchResultsComponent implements OnInit {
   selectedGenders: string[] = [];
   colorList: Color[] = [];
   selectedColors: string[] = [];
+  selectedSizes: string[] = [];
+sizeList: string[] = []; 
+sizeListOptions: SelectItem[] = []
 
   constructor(private router: Router, private productService: ProductService) {
     this.selectedCategory = 'All';
@@ -50,8 +55,35 @@ export class SearchResultsComponent implements OnInit {
     this.loadCategories();
     this.loadGenders();
     this.loadColors();
-    this.loadMaxPrice(); // Diamond: Load the maximum price on init
+    this.loadMaxPrice(); 
+    this.loadSizes();
   }
+
+
+  loadSizes() {
+    this.productService.getSizesList().subscribe((sizes: string[]) => {
+        this.sizeListOptions = sizes.map(size => ({ label: size, value: size }));
+    });
+}
+
+onSizeFilterChange(event: any) {
+    this.updateProductList();
+}
+
+toggleSelectAllSizes(event: any) {
+  if (event.target.checked) {
+      this.selectedSizes = this.sizeListOptions.map(option => option.value);
+  } else {
+      this.selectedSizes = [];
+  }
+}
+
+areAllSizesSelected(): boolean {
+  return this.selectedSizes.length === this.sizeListOptions.length;
+}
+
+
+
 
   loadGenders() {
     this.productService.getGenderList().subscribe((genders: string[]) => {
@@ -144,7 +176,7 @@ export class SearchResultsComponent implements OnInit {
     this.updateProductList();
   }
 
-  loadMaxPrice() { // Diamond: Method to load the maximum price
+  loadMaxPrice() { 
     this.productService.getMaxPrice().subscribe((maxPrice) => {
       this.maxPrice = maxPrice;
       this.priceRange = [0, this.maxPrice];
@@ -152,8 +184,6 @@ export class SearchResultsComponent implements OnInit {
   }
 
   updateProductList() {
-    console.log('Updating product list with price range and genders:', this.priceRange, this.selectedGenders);
-
     this.productService.getInitialProductMetadata(
       9,
       undefined,
@@ -163,7 +193,7 @@ export class SearchResultsComponent implements OnInit {
       undefined,
       this.selectedCategory === 'All' ? [] : [this.selectedCategory],
       this.selectedColors,
-      undefined,
+      this.selectedSizes,
       this.priceRange
     ).subscribe((products: any[]) => {
       this.filteredProducts = products;

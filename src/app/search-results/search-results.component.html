@@ -43,6 +43,20 @@
           [checked]="selectedGenders.includes(gender)"
         />{{ gender }}
       </div>
+
+
+    <h4>Sizes</h4>
+    <div class="sizes-container custom-dropdown-wrapper">
+        <div class="select-all-checkbox">
+            <input type="checkbox" (change)="toggleSelectAllSizes($event)" [checked]="areAllSizesSelected()">
+            <!-- <label class="size-label">All</label> -->
+        </div>
+        <p-multiSelect class="sizes-container" [options]="sizeListOptions" [(ngModel)]="selectedSizes" (onChange)="onSizeFilterChange($event)" [style]="{ 'width.px': 200 }" placeholder="All">
+            <ng-template pTemplate="header">
+            </ng-template>
+        </p-multiSelect>
+    </div>
+    
   
       <h4>Colors</h4>
       <div *ngFor="let color of colorList" class="color-box-container">
@@ -55,6 +69,7 @@
         </div>
         {{ color.color_name }}
       </div>
+
     </div>
   
     <div class="results-container">

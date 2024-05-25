@@ -96,3 +96,24 @@
 .color-box.selected {
   border: 2px solid #000;
 }
+
+
+.custom-dropdown-wrapper {
+  width: 400px; 
+}
+
+.custom-dropdown {
+  width: 100%; 
+}
+
+
+
+.select-all-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+
+.size-label {
+  font-size: 16px;
+  margin-right: 5px;
+}
