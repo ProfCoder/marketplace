@@ -282,23 +282,21 @@ export class ProductService {
             this.productMetadata.subscribe((allProducts) => {
                 subscriber.next(
                     allProducts
-                        // Get color variants
-                        .map((product) => product['colors'])
-                        // Dissolve colors into single array
+                        .map((product) => product.colors)
                         .flat()
-                        // Deduplicate if color names are equal (name is the same)
                         .filter(
                             (color, index, self) =>
                                 self.findIndex(
                                     (c) => c.color_name === color.color_name
                                 ) === index
                         )
-                        .sort()
+                        .sort((a, b) => a.color_name.localeCompare(b.color_name))
                 );
                 subscriber.complete();
             });
         });
     }
+    
 
     getCategoryList(): Observable<string[]> {
         return this.getMetadataList<string>('category');

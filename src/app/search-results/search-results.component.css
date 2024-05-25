@@ -33,7 +33,6 @@
 
 
 .search-container {
-    background-color: greenyellow;
     display: flex;
     flex-direction: row;
 }
@@ -75,4 +74,25 @@
 .results-container {
     background-color: lightblue;
     width: 70%;
+}
+
+
+/* dsdsds */
+
+.color-box-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.color-box.selected {
+  border: 2px solid #000;
 }

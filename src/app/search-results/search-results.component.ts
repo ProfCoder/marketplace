@@ -7,7 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { SearchComponent } from '../search/search.component';
 import { SliderModule } from 'primeng/slider';
-import { GenderList } from '../services/product.service'; 
+import { Color } from '../services/color';
 
 @Component({
   selector: 'app-search-results',
@@ -30,24 +30,26 @@ export class SearchResultsComponent implements OnInit {
   brandList: string[] = [];
   categoryList: string[] = [];
   selectedBrands: string[] = [];
-  selectedCategory: string = 'All'; // Set 'All' as default category
+  selectedCategory: string = 'All';
   filteredProducts: any[] = [];
-  priceRange: number[] = [0, 1000]; 
-  minPrice: number = 0; 
-  maxPrice: number = 1000; 
-  genderList: string[] = []; // Change type to string[]
+  priceRange: number[] = [0, 1000];
+  minPrice: number = 0;
+  maxPrice: number = 1000;
+  genderList: string[] = [];
   selectedGenders: string[] = [];
+  colorList: Color[] = [];
+  selectedColors: string[] = [];
 
   constructor(private router: Router, private productService: ProductService) {
-    // Initialize selectedCategory with 'All'
-    this.selectedCategory = 'All'; 
+    this.selectedCategory = 'All';
   }
-  
+
   ngOnInit() {
     this.includeSearchComponent = false;
     this.loadBrands();
-    this.loadCategories(); 
-    this.loadGenders(); 
+    this.loadCategories();
+    this.loadGenders();
+    this.loadColors();
   }
 
   loadGenders() {
@@ -59,18 +61,17 @@ export class SearchResultsComponent implements OnInit {
   onGenderFilterChange(event: any) {
     const gender = event.target.value;
     if (event.target.checked) {
-        if (!this.selectedGenders.includes(gender)) {
-            this.selectedGenders.push(gender);
-        }
+      if (!this.selectedGenders.includes(gender)) {
+        this.selectedGenders.push(gender);
+      }
     } else {
-        const index = this.selectedGenders.indexOf(gender);
-        if (index > -1) {
-            this.selectedGenders.splice(index, 1);
-        }
+      const index = this.selectedGenders.indexOf(gender);
+      if (index > -1) {
+        this.selectedGenders.splice(index, 1);
+      }
     }
     this.updateProductList();
-}
-
+  }
 
   loadBrands() {
     this.productService.getBrandList().subscribe((brands) => {
@@ -106,7 +107,6 @@ export class SearchResultsComponent implements OnInit {
 
   loadCategories() {
     this.productService.getCategoryList().subscribe((categories) => {
-      // Include 'All' as the first option in the category list
       this.categoryList = ['All', ...categories];
     });
   }
@@ -115,27 +115,51 @@ export class SearchResultsComponent implements OnInit {
     this.updateProductList();
   }
 
+  loadColors() {
+    this.productService.getColorsList().subscribe((colors: Color[]) => {
+      this.colorList = colors;
+    });
+  }
+
+  onColorFilterChange(event: any, color: string) {
+    if (event.target.checked) {
+      this.selectedColors.push(color);
+    } else {
+      const index = this.selectedColors.indexOf(color);
+      if (index > -1) {
+        this.selectedColors.splice(index, 1);
+      }
+    }
+    this.updateProductList();
+  }
+
+  onColorBoxClick(color: string) {
+    const index = this.selectedColors.indexOf(color);
+    if (index > -1) {
+      this.selectedColors.splice(index, 1);
+    } else {
+      this.selectedColors.push(color);
+    }
+    this.updateProductList();
+  }
+
   updateProductList() {
     console.log('Updating product list with price range and genders:', this.priceRange, this.selectedGenders);
-    
-    // Filter products based on selected brands, genders, and categories
+
     this.productService.getInitialProductMetadata(
-        9, 
-        undefined,
-        this.searchValue,
-        this.selectedBrands,
-        this.selectedGenders, 
-        undefined,
-        this.selectedCategory === 'All' ? [] : [this.selectedCategory],
-        undefined,
-        undefined,
-        this.priceRange 
+      9,
+      undefined,
+      this.searchValue,
+      this.selectedBrands,
+      this.selectedGenders,
+      undefined,
+      this.selectedCategory === 'All' ? [] : [this.selectedCategory],
+      this.selectedColors,
+      undefined,
+      this.priceRange
     ).subscribe((products: any[]) => {
-        this.filteredProducts = products;
+      this.filteredProducts = products;
     });
+  }
 }
 
-
-
-
-}
