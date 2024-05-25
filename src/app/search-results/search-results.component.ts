@@ -30,7 +30,7 @@ export class SearchResultsComponent implements OnInit {
   brandList: string[] = [];
   categoryList: string[] = [];
   selectedBrands: string[] = [];
-  selectedCategory: string = '';
+  selectedCategory: string = 'All'; // Set 'All' as default category
   filteredProducts: any[] = [];
   priceRange: number[] = [0, 1000]; 
   minPrice: number = 0; 
@@ -39,17 +39,16 @@ export class SearchResultsComponent implements OnInit {
   selectedGenders: string[] = [];
 
   constructor(private router: Router, private productService: ProductService) {
-    this.selectedCategory = ''; 
+    // Initialize selectedCategory with 'All'
+    this.selectedCategory = 'All'; 
   }
   
-
   ngOnInit() {
     this.includeSearchComponent = false;
     this.loadBrands();
     this.loadCategories(); 
     this.loadGenders(); 
   }
-
 
   loadGenders() {
     this.productService.getGenderList().subscribe((genders: string[]) => {
@@ -103,34 +102,40 @@ export class SearchResultsComponent implements OnInit {
   onPriceFilterChange() {
     console.log('Price Range:', this.priceRange);
     this.updateProductList();
+  }
+
+  loadCategories() {
+    this.productService.getCategoryList().subscribe((categories) => {
+      // Include 'All' as the first option in the category list
+      this.categoryList = ['All', ...categories];
+    });
+  }
+
+  onCategoryFilterChange(event: any) {
+    this.updateProductList();
+  }
+
+  updateProductList() {
+    console.log('Updating product list with price range and genders:', this.priceRange, this.selectedGenders);
+    
+    // Filter products based on selected brands, genders, and categories
+    this.productService.getInitialProductMetadata(
+        9, 
+        undefined,
+        this.searchValue,
+        this.selectedBrands,
+        this.selectedGenders, 
+        undefined,
+        this.selectedCategory === 'All' ? [] : [this.selectedCategory],
+        undefined,
+        undefined,
+        this.priceRange 
+    ).subscribe((products: any[]) => {
+        this.filteredProducts = products;
+    });
 }
 
-loadCategories() {
-  this.productService.getCategoryList().subscribe((categories) => {
-    this.categoryList = categories;
-  });
-}
 
-onCategoryFilterChange(event: any) {
-  this.updateProductList();
-}
 
-updateProductList() {
-  console.log('Updating product list with price range and genders:', this.priceRange, this.selectedGenders);
-  this.filteredProducts = [];
-  this.productService.getInitialProductMetadata(
-      9, 
-      undefined,
-      this.searchValue,
-      this.selectedBrands,
-      this.selectedGenders, 
-      undefined,
-      [this.selectedCategory], 
-      undefined,
-      undefined,
-      this.priceRange 
-  ).subscribe((products: any[]) => {
-      this.filteredProducts = products;
-  });
-}
+
 }

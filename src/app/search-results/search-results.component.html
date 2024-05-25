@@ -31,19 +31,26 @@
         </p-slider>
         <div>Min: {{ priceRange[0] }} - Max: {{ priceRange[1] }}</div>
     
-    
         <h4>Categories</h4>
         <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" (onChange)="onCategoryFilterChange($event)"></p-dropdown>
-
+        
 
         <h4>Gender</h4>
-<div *ngFor="let gender of genderList">
-    <input
-        type="checkbox"
-        [value]="gender"
-        (change)="onGenderFilterChange($event)"
-    />{{ gender }}
-</div>
+        <div *ngFor="let gender of genderList">
+            <input
+                type="checkbox"
+                [value]="gender"
+                (change)="onGenderFilterChange($event)"
+                [checked]="selectedGenders.includes(gender)"
+            />
+            {{ gender }}
+        </div>
+
+
+<h4>Sizes</h4>
+
+<h4>Colors</h4>
+
     </div>
     
 
