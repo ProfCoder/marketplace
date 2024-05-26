@@ -2,7 +2,7 @@
 
 ## Assignment 5: Product Page
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [10/10]** ✅ 
 **Deadline: 21.05.2024 13:30**
 
 ### Design Patterns
@@ -18,11 +18,13 @@ You can find all design patterns in the book [Designing Interfaces: Patterns for
 
 In this assignment, you will implement a product details page for the products in our shop.
 
-- [ ] [Create Product Page and Add Routing](#create-product-page-and-add-routing) (3 Points)
-- [ ] [Design Product Page with a Clear Visual Hierarchy](#design-product-page-with-a-clear-visual-hierarchy) (4 Points)
-- [ ] [Implement Color Selection](#implement-color-selection) (2 Points)
-- [ ] [Implement Hover Tools](#implement-hover-tools) (1 Point)
+- [ ] [Create Product Page and Add Routing](#create-product-page-and-add-routing) (3/3 Points)
+- [ ] [Design Product Page with a Clear Visual Hierarchy](#design-product-page-with-a-clear-visual-hierarchy) (4/4 Points)
+- [ ] [Implement Color Selection](#implement-color-selection) (2/2 Points)
+- [ ] [Implement Hover Tools](#implement-hover-tools) (1/1 Point)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
+
+> 🏅 Very cool product page with very nice additional (working!) elements :)
 
 ### Instructions
 
