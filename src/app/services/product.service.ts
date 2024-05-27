@@ -347,6 +347,31 @@ export class ProductService {
         return `./assets/products/images/${id}.jpg`;
     }
 
+    getProductImageByColor(product: Product, selectedColors: string[]): string {
+        console.log('Product ID:', product.id);
+        console.log('Product Colors:', product.colors);
+        console.log('Selected Colors:', selectedColors);
+      
+        // Find the first color in the product's colors array that matches any of the selected colors
+        const matchingColor = product.colors.find(color => selectedColors.includes(color.color_name));
+      
+        console.log('Matching Color:', matchingColor);
+      
+        // If a matching color is found, return its corresponding image URL
+        if (matchingColor) {
+          return `./assets/products/images/${matchingColor.color_id}.jpg`;
+        }
+      
+        // If no matching color is found, return a default image URL or handle it as appropriate for your application
+        return './assets/products/images/defult.jpg'; // Default image URL
+      }
+      
+      getProductById(productId: string): Observable<Product> {
+        // Make an HTTP request to your backend API to fetch the product by ID
+        return this.http.get<Product>(`/api/products/${productId}`);
+      }
+
+
     getRecommendedProducts(type: string, category: string, productId: string): Observable<Product[]> {
         return this.productMetadata.pipe(
             map(products => 

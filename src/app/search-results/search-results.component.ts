@@ -10,6 +10,8 @@ import { SliderModule } from 'primeng/slider';
 import { Color } from '../services/color';
 import { SelectItem } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { Product } from '../services/product';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-results',
@@ -20,7 +22,6 @@ import { MultiSelectModule } from 'primeng/multiselect';
 })
 export class SearchResultsComponent implements OnInit {
   searchValue: string = '';
-  selectedSortOption: any;
   sortOptions = [
     { label: 'Price: Low to high', value: 'priceAsc' },
     { label: 'Price: High to low', value: 'priceDesc' },
@@ -42,8 +43,8 @@ export class SearchResultsComponent implements OnInit {
   colorList: Color[] = [];
   selectedColors: string[] = [];
   selectedSizes: string[] = [];
-sizeList: string[] = []; 
-sizeListOptions: SelectItem[] = []
+  sizeList: string[] = []; 
+  sizeListOptions: SelectItem[] = [];
 
   constructor(private router: Router, private productService: ProductService) {
     this.selectedCategory = 'All';
@@ -54,36 +55,32 @@ sizeListOptions: SelectItem[] = []
     this.loadBrands();
     this.loadCategories();
     this.loadGenders();
-    this.loadColors();
+    // this.loadColors(); // Make sure loadColors is called before updateProductList
     this.loadMaxPrice(); 
     this.loadSizes();
   }
-
 
   loadSizes() {
     this.productService.getSizesList().subscribe((sizes: string[]) => {
         this.sizeListOptions = sizes.map(size => ({ label: size, value: size }));
     });
-}
-
-onSizeFilterChange(event: any) {
-    this.updateProductList();
-}
-
-toggleSelectAllSizes(event: any) {
-  if (event.target.checked) {
-      this.selectedSizes = this.sizeListOptions.map(option => option.value);
-  } else {
-      this.selectedSizes = [];
   }
-}
 
-areAllSizesSelected(): boolean {
-  return this.selectedSizes.length === this.sizeListOptions.length;
-}
+  onSizeFilterChange(event: any) {
+    this.updateProductList();
+  }
 
+  toggleSelectAllSizes(event: any) {
+    if (event.target.checked) {
+        this.selectedSizes = this.sizeListOptions.map(option => option.value);
+    } else {
+        this.selectedSizes = [];
+    }
+  }
 
-
+  areAllSizesSelected(): boolean {
+    return this.selectedSizes.length === this.sizeListOptions.length;
+  }
 
   loadGenders() {
     this.productService.getGenderList().subscribe((genders: string[]) => {
@@ -117,7 +114,7 @@ areAllSizesSelected(): boolean {
   }
 
   onSortChange(event: any) {
-    console.log('Selected sort option:', this.selectedSortOption);
+
   }
 
   onBrandFilterChange(event: any) {
@@ -148,30 +145,14 @@ areAllSizesSelected(): boolean {
     this.updateProductList();
   }
 
-  loadColors() {
-    this.productService.getColorsList().subscribe((colors: Color[]) => {
-      this.colorList = colors;
-    });
-  }
+  onColorFilterChange(color: string, event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    const isChecked = checkbox.checked;
 
-  onColorFilterChange(event: any, color: string) {
-    if (event.target.checked) {
+    if (isChecked) {
       this.selectedColors.push(color);
     } else {
-      const index = this.selectedColors.indexOf(color);
-      if (index > -1) {
-        this.selectedColors.splice(index, 1);
-      }
-    }
-    this.updateProductList();
-  }
-
-  onColorBoxClick(color: string) {
-    const index = this.selectedColors.indexOf(color);
-    if (index > -1) {
-      this.selectedColors.splice(index, 1);
-    } else {
-      this.selectedColors.push(color);
+      this.selectedColors = this.selectedColors.filter(c => c !== color);
     }
     this.updateProductList();
   }
@@ -200,3 +181,4 @@ areAllSizesSelected(): boolean {
     });
   }
 }
+

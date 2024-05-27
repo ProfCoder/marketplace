@@ -1,83 +1,79 @@
 <div class="result-info-container">
-    <div class="results-info">X over Y results for "Z"</div>
-    <div class="sorting">
-      <p-dropdown
-        [options]="sortOptions"
-        [(ngModel)]="selectedSortOption"
-        placeholder="Sort by"
-        (onChange)="onSortChange($event)"
-      ></p-dropdown>
-    </div>
+  <div class="results-info">X over Y results for "Z"</div>
+  <div class="sorting">
+    <p-dropdown
+      [options]="sortOptions"
+      placeholder="Sort by"
+      (onChange)="onSortChange($event)"
+    ></p-dropdown>
   </div>
-  
-  <div class="search-container">
-    <div class="filters-container">
-      <h4>Brands</h4>
-      <div *ngFor="let brand of brandList">
-        <input
-          type="checkbox"
-          [value]="brand"
-          (change)="onBrandFilterChange($event)"
-        />{{ brand }}
-      </div>
-  
-      <h4>Price Range</h4>
-      <p-slider 
-        [(ngModel)]="priceRange"
-        [min]="minPrice" 
-        [max]="maxPrice" 
-        [range]="true"
-        (onSlideEnd)="onPriceFilterChange()">
-      </p-slider>
-      <div>Min: {{ priceRange[0] }} - Max: {{ priceRange[1] }}</div>
-  
-      <h4>Categories</h4>
-      <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" (onChange)="onCategoryFilterChange($event)"></p-dropdown>
-  
-      <h4>Gender</h4>
-      <div *ngFor="let gender of genderList">
-        <input
-          type="checkbox"
-          [value]="gender"
-          (change)="onGenderFilterChange($event)"
-          [checked]="selectedGenders.includes(gender)"
-        />{{ gender }}
-      </div>
+</div>
 
+<div class="search-container">
+  <div class="filters-container">
+    <h4>Brands</h4>
+    <div *ngFor="let brand of brandList">
+      <input
+        type="checkbox"
+        [value]="brand"
+        (change)="onBrandFilterChange($event)"
+      />{{ brand }}
+    </div>
+
+    <h4>Price Range</h4>
+    <p-slider 
+      [(ngModel)]="priceRange"
+      [min]="minPrice" 
+      [max]="maxPrice" 
+      [range]="true"
+      (onSlideEnd)="onPriceFilterChange()">
+    </p-slider>
+    <div>Min: {{ priceRange[0] }} - Max: {{ priceRange[1] }}</div>
+
+    <h4>Categories</h4>
+    <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" (onChange)="onCategoryFilterChange($event)"></p-dropdown>
+
+    <h4>Gender</h4>
+    <div *ngFor="let gender of genderList">
+      <input
+        type="checkbox"
+        [value]="gender"
+        (change)="onGenderFilterChange($event)"
+        [checked]="selectedGenders.includes(gender)"
+      />{{ gender }}
+    </div>
 
     <h4>Sizes</h4>
     <div class="sizes-container custom-dropdown-wrapper">
-        <div class="select-all-checkbox">
-            <input type="checkbox" (change)="toggleSelectAllSizes($event)" [checked]="areAllSizesSelected()">
-            <!-- <label class="size-label">All</label> -->
-        </div>
-        <p-multiSelect class="sizes-container" [options]="sizeListOptions" [(ngModel)]="selectedSizes" (onChange)="onSizeFilterChange($event)" [style]="{ 'width.px': 200 }" placeholder="All">
-            <ng-template pTemplate="header">
-            </ng-template>
-        </p-multiSelect>
-    </div>
-    
-  
-      <h4>Colors</h4>
-      <div *ngFor="let color of colorList" class="color-box-container">
-        <div 
-          class="color-box"
-          [ngClass]="{'selected': selectedColors.includes(color.color_name)}"
-          [ngStyle]="{ 'background-color': color.color_hex }"
-          (click)="onColorBoxClick(color.color_name)"
-          title="{{ color.color_name }}">
-        </div>
-        {{ color.color_name }}
+      <div class="select-all-checkbox">
+        <input type="checkbox" (change)="toggleSelectAllSizes($event)" [checked]="areAllSizesSelected()">
       </div>
-
+      <p-multiSelect 
+        class="sizes-container" 
+        [options]="sizeListOptions" 
+        [(ngModel)]="selectedSizes" 
+        (onChange)="onSizeFilterChange($event)" 
+        [style]="{ 'width.px': 200 }" 
+        placeholder="All">
+        <ng-template pTemplate="header">
+        </ng-template>
+      </p-multiSelect>
     </div>
-  
-    <div class="results-container">
-      <app-product-list
-        [searchValue]="searchValue"
-        [selectedBrands]="selectedBrands"
-        [products]="filteredProducts"
-      ></app-product-list>
+
+    <div class="filter-container">
+      <label *ngFor="let color of ['Red', 'Blue', 'Green', 'Yellow']">
+        <input type="checkbox" [value]="color" (change)="onColorFilterChange(color, $event)">
+        {{ color }}
+      </label>
     </div>
   </div>
-  
+
+  <div class="results-container">
+    <app-product-list
+      [searchValue]="searchValue"
+      [selectedBrands]="selectedBrands"
+      [products]="filteredProducts"
+      [selectedColors]="selectedColors"
+    ></app-product-list>
+  </div>
+</div>
