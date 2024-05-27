@@ -6,6 +6,7 @@
         pInputText
 
         class="input-with-icon"
+        [(ngModel)]="searchValue"
         (keydown.enter)="onSearchClick()"
       />
       <i class="pi pi-search search-icon" (click)="onSearchClick()"></i>

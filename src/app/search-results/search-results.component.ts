@@ -12,6 +12,8 @@ import { SelectItem } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { FilterStateService } from '../services/filter-state.service';
 
 @Component({
   selector: 'app-search-results',
@@ -46,11 +48,27 @@ export class SearchResultsComponent implements OnInit {
   sizeList: string[] = []; 
   sizeListOptions: SelectItem[] = [];
 
-  constructor(private router: Router, private productService: ProductService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private filterStateService: FilterStateService,
+  ) {
     this.selectedCategory = 'All';
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.searchValue = params['query'] || "";
+      this.selectedBrands = params['brands'] ? params['brands'].split(',') : [];
+      this.selectedGenders = params['genders'] ? params['genders'].split(',') : [];
+      this.selectedCategory = params['category'] || 'All';
+      this.selectedColors = params['colors'] ? params['colors'].split(',') : [];
+      this.selectedSizes = params['sizes'] ? params['sizes'].split(',') : [];
+      this.priceRange = [params['priceMin'] ? +params['priceMin'] : 0, params['priceMax'] ? +params['priceMax'] : 1000];
+      this.updateProductList();
+  })
+
     this.includeSearchComponent = false;
     this.loadBrands();
     this.loadCategories();
@@ -166,7 +184,32 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
+  
+
   updateProductList() {
+    this.filterStateService.updateFilters({
+      brands: this.selectedBrands,
+      genders: this.selectedGenders,
+      category: this.selectedCategory,
+      colors: this.selectedColors,
+      sizes: this.selectedSizes,
+      priceMin: this.priceRange[0],
+      priceMax: this.priceRange[1]
+    });
+
+    const queryParams = {
+      query: this.searchValue || '',
+      brands: this.selectedBrands.join(','),
+      genders: this.selectedGenders.join(','),
+      category: this.selectedCategory,
+      colors: this.selectedColors.join(','),
+      sizes: this.selectedSizes.join(','),
+      priceMin: this.priceRange[0],
+      priceMax: this.priceRange[1]
+    };
+
+    this.router.navigate(['/search-results'], { queryParams });
+
     this.productService.getInitialProductMetadata(
       9,
       undefined,
