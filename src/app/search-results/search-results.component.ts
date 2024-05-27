@@ -57,6 +57,7 @@ export class SearchResultsComponent implements OnInit {
     this.loadGenders();
     this.loadMaxPrice(); 
     this.loadSizes();
+    this.loadColors();
   }
 
   loadSizes() {
@@ -142,16 +143,18 @@ export class SearchResultsComponent implements OnInit {
     console.log('Selected Price Range:', this.priceRange);
   }
 
-  onColorFilterChange(color: string, event: Event) {
-    const checkbox = event.target as HTMLInputElement;
-    const isChecked = checkbox.checked;
-  
-    if (isChecked) {
-      if (!this.selectedColors.includes(color)) {
-        this.selectedColors.push(color);
-      }
+  loadColors() {
+    this.productService.getColorsList().subscribe((colors: Color[]) => {
+      this.colorList = colors;
+    });
+  }
+
+  onColorBoxClick(colorName: string) {
+    const index = this.selectedColors.indexOf(colorName);
+    if (index > -1) {
+      this.selectedColors.splice(index, 1);
     } else {
-      this.selectedColors = this.selectedColors.filter(c => c !== color);
+      this.selectedColors.push(colorName);
     }
     this.updateProductList();
   }

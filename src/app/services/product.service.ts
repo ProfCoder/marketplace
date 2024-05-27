@@ -362,13 +362,12 @@ export class ProductService {
           return `./assets/products/images/${matchingColor.color_id}.jpg`;
         }
       
-        // If no matching color is found, return a default image URL or handle it as appropriate for your application
-        return './assets/products/images/10009.jpg'; // Default image URL
+        // If no matching color is found, return a default image URL 
+        return './assets/products/images/10009.jpg'; // for testing
         
       }
       
       getProductById(productId: string): Observable<Product> {
-        // Make an HTTP request to your backend API to fetch the product by ID
         return this.http.get<Product>(`/api/products/${productId}`);
       }
 
