@@ -13,6 +13,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
 
+
+
 @Component({
   selector: 'app-search-results',
   standalone: true,
@@ -67,7 +69,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onSizeFilterChange(event: any) {
-    this.updateProductList();
+    this.updateProductList([]);
   }
 
   toggleSelectAllSizes(event: any) {
@@ -100,7 +102,7 @@ export class SearchResultsComponent implements OnInit {
         this.selectedGenders.splice(index, 1);
       }
     }
-    this.updateProductList();
+    this.updateProductList([]);
   }
 
   loadBrands() {
@@ -127,12 +129,12 @@ export class SearchResultsComponent implements OnInit {
         this.selectedBrands.splice(index, 1);
       }
     }
-    this.updateProductList();
+    this.updateProductList([]);
   }
 
   onPriceFilterChange() {
     console.log('Price Range:', this.priceRange);
-    this.updateProductList();
+    this.updateProductList([]);
   }
 
   loadCategories() {
@@ -142,21 +144,24 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onCategoryFilterChange(event: any) {
-    this.updateProductList();
+    this.updateProductList([]);
   }
 
   onColorFilterChange(color: string, event: Event) {
     const checkbox = event.target as HTMLInputElement;
     const isChecked = checkbox.checked;
-
+  
     if (isChecked) {
       this.selectedColors.push(color);
     } else {
       this.selectedColors = this.selectedColors.filter(c => c !== color);
     }
-    this.updateProductList();
+    this.updateProductList(this.selectedColors);
   }
-
+  
+  
+  
+  
   loadMaxPrice() { 
     this.productService.getMaxPrice().subscribe((maxPrice) => {
       this.maxPrice = maxPrice;
@@ -164,7 +169,7 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  updateProductList() {
+  updateProductList(selectedColors: string[]) {
     this.productService.getInitialProductMetadata(
       9,
       undefined,
@@ -173,12 +178,14 @@ export class SearchResultsComponent implements OnInit {
       this.selectedGenders,
       undefined,
       this.selectedCategory === 'All' ? [] : [this.selectedCategory],
-      this.selectedColors,
+      selectedColors,
       this.selectedSizes,
       this.priceRange
     ).subscribe((products: any[]) => {
-      this.filteredProducts = products;
+      // Append new products to the existing filteredProducts array
+      this.filteredProducts = this.filteredProducts.concat(products);
     });
   }
-}
-
+  
+  
+} 

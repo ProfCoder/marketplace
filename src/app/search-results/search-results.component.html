@@ -62,10 +62,15 @@
 
     <div class="filter-container">
       <label *ngFor="let color of ['Red', 'Blue', 'Green', 'Yellow']">
-        <input type="checkbox" [value]="color" (change)="onColorFilterChange(color, $event)">
+        <input type="checkbox" [value]="color" (change)="onColorFilterChange(color, $event)" [checked]="selectedColors.includes(color)">
         {{ color }}
       </label>
+      
     </div>
+
+
+
+    
   </div>
 
   <div class="results-container">

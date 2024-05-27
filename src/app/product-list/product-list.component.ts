@@ -93,17 +93,7 @@ export class ProductListComponent implements OnChanges {
     this.router.navigate(['/search-results'], { queryParams: { query: this.searchValue } });
   }
 
-  onColorFilterChange(color: string, event: Event) {
-    const checkbox = event.target as HTMLInputElement;
-    const isChecked = checkbox.checked;
 
-    if (isChecked) {
-      this.selectedColors.push(color);
-    } else {
-      this.selectedColors = this.selectedColors.filter(c => c !== color);
-    }
-    this.loadInitialProducts();
-  }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {

@@ -8,12 +8,12 @@
   </button>
 </div>
 
-<div class="filter-container">
+<!-- <div class="filter-container">
   <label *ngFor="let color of ['Red', 'Blue', 'Green', 'Yellow']">
     <input type="checkbox" [value]="color" (change)="onColorFilterChange(color, $event)">
     {{ color }}
   </label>
-</div>
+</div> -->
 
 <div class="grid-view" [ngClass]="{'list-view': listViewMode}" #scrollingContainer>
   <div *ngFor="let product of products">
