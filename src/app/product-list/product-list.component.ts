@@ -22,6 +22,7 @@ export class ProductListComponent implements OnChanges {
   @Input() selectedBrands: string[] = [];
   @Input() products: Product[] = [];
   @Input() selectedColors: string[] = [];
+  
 
   listViewMode = false; // Initially set to grid view
   isLoading = false;

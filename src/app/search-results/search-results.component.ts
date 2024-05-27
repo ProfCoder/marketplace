@@ -13,12 +13,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
 
-
-
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [CommonModule, FormsModule, DropdownModule, ProductListComponent, SearchComponent, SliderModule,  MultiSelectModule],
+  imports: [CommonModule, FormsModule, DropdownModule, ProductListComponent, SearchComponent, SliderModule, MultiSelectModule],
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
@@ -57,27 +55,27 @@ export class SearchResultsComponent implements OnInit {
     this.loadBrands();
     this.loadCategories();
     this.loadGenders();
-    // this.loadColors(); // Make sure loadColors is called before updateProductList
     this.loadMaxPrice(); 
     this.loadSizes();
   }
 
   loadSizes() {
     this.productService.getSizesList().subscribe((sizes: string[]) => {
-        this.sizeListOptions = sizes.map(size => ({ label: size, value: size }));
+      this.sizeListOptions = sizes.map(size => ({ label: size, value: size }));
     });
   }
 
   onSizeFilterChange(event: any) {
-    this.updateProductList([]);
+    this.updateProductList();
   }
 
   toggleSelectAllSizes(event: any) {
     if (event.target.checked) {
-        this.selectedSizes = this.sizeListOptions.map(option => option.value);
+      this.selectedSizes = this.sizeListOptions.map(option => option.value);
     } else {
-        this.selectedSizes = [];
+      this.selectedSizes = [];
     }
+    this.updateProductList();
   }
 
   areAllSizesSelected(): boolean {
@@ -102,7 +100,7 @@ export class SearchResultsComponent implements OnInit {
         this.selectedGenders.splice(index, 1);
       }
     }
-    this.updateProductList([]);
+    this.updateProductList();
   }
 
   loadBrands() {
@@ -111,12 +109,8 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  onSearchClick() {
-    this.router.navigate(['/search-results'], { queryParams: { query: this.searchValue } });
-  }
-
   onSortChange(event: any) {
-
+    // Sorting logic here
   }
 
   onBrandFilterChange(event: any) {
@@ -129,12 +123,12 @@ export class SearchResultsComponent implements OnInit {
         this.selectedBrands.splice(index, 1);
       }
     }
-    this.updateProductList([]);
+    this.updateProductList();
   }
 
   onPriceFilterChange() {
     console.log('Price Range:', this.priceRange);
-    this.updateProductList([]);
+    this.updateProductList();
   }
 
   loadCategories() {
@@ -144,7 +138,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onCategoryFilterChange(event: any) {
-    this.updateProductList([]);
+    this.updateProductList();
+    console.log('Selected Price Range:', this.priceRange);
   }
 
   onColorFilterChange(color: string, event: Event) {
@@ -152,15 +147,14 @@ export class SearchResultsComponent implements OnInit {
     const isChecked = checkbox.checked;
   
     if (isChecked) {
-      this.selectedColors.push(color);
+      if (!this.selectedColors.includes(color)) {
+        this.selectedColors.push(color);
+      }
     } else {
       this.selectedColors = this.selectedColors.filter(c => c !== color);
     }
-    this.updateProductList(this.selectedColors);
+    this.updateProductList();
   }
-  
-  
-  
   
   loadMaxPrice() { 
     this.productService.getMaxPrice().subscribe((maxPrice) => {
@@ -169,7 +163,7 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  updateProductList(selectedColors: string[]) {
+  updateProductList() {
     this.productService.getInitialProductMetadata(
       9,
       undefined,
@@ -178,14 +172,11 @@ export class SearchResultsComponent implements OnInit {
       this.selectedGenders,
       undefined,
       this.selectedCategory === 'All' ? [] : [this.selectedCategory],
-      selectedColors,
+      this.selectedColors,
       this.selectedSizes,
       this.priceRange
     ).subscribe((products: any[]) => {
-      // Append new products to the existing filteredProducts array
-      this.filteredProducts = this.filteredProducts.concat(products);
+      this.filteredProducts = products;
     });
   }
-  
-  
-} 
+}

@@ -29,6 +29,22 @@ export class ProductItemComponent implements OnInit, OnChanges {
     }
   }
 
+  // updateProductImage() {
+  //   if (this.selectedColors.length > 0) {
+  //     // Use the selected colors to get respective images
+  //     this.productImages = this.selectedColors.map(color => 
+  //       this.productService.getProductImageByColor(this.product, [color])
+  //     );
+  //   } else if (this.product.colors.length > 0) {
+  //     // Show the first color initially if no color is selected
+  //     this.productImages = [this.productService.getProductImageByColor(this.product, [this.product.colors[0].color_name])];
+  //   } else {
+  //     // Fallback to a default image
+  //     this.productImages = ['./assets/products/images/10009.jpg'];
+  //   }
+  // }
+
+
   updateProductImage() {
     if (this.selectedColors.length > 0) {
       // Use the selected colors to get respective images
@@ -40,7 +56,7 @@ export class ProductItemComponent implements OnInit, OnChanges {
       this.productImages = [this.productService.getProductImageByColor(this.product, [this.product.colors[0].color_name])];
     } else {
       // Fallback to a default image
-      this.productImages = ['./assets/products/images/100009.jpg'];
+      this.productImages = ['./assets/products/images/10009.jpg'];
     }
   }
 }

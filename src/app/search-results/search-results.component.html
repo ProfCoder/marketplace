@@ -22,12 +22,13 @@
 
     <h4>Price Range</h4>
     <p-slider 
-      [(ngModel)]="priceRange"
-      [min]="minPrice" 
-      [max]="maxPrice" 
-      [range]="true"
-      (onSlideEnd)="onPriceFilterChange()">
-    </p-slider>
+    [(ngModel)]="priceRange"
+    [min]="minPrice" 
+    [max]="maxPrice" 
+    [range]="true"
+    (onSlideEnd)="onPriceFilterChange()">
+  </p-slider>
+  
     <div>Min: {{ priceRange[0] }} - Max: {{ priceRange[1] }}</div>
 
     <h4>Categories</h4>

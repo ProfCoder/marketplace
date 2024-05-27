@@ -363,7 +363,8 @@ export class ProductService {
         }
       
         // If no matching color is found, return a default image URL or handle it as appropriate for your application
-        return './assets/products/images/defult.jpg'; // Default image URL
+        return './assets/products/images/10009.jpg'; // Default image URL
+        
       }
       
       getProductById(productId: string): Observable<Product> {
