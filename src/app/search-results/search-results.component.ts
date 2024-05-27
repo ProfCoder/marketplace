@@ -13,12 +13,12 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { FilterStateService } from '../services/filter-state.service';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [CommonModule, FormsModule, DropdownModule, ProductListComponent, SearchComponent, SliderModule, MultiSelectModule],
+  imports: [CommonModule, FormsModule, DropdownModule, ProductListComponent, SliderModule, MultiSelectModule],
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.css']
 })
@@ -51,23 +51,35 @@ export class SearchResultsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private filterStateService: FilterStateService,
+    private productService: ProductService
   ) {
     this.selectedCategory = 'All';
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.searchValue = params['query'] || "";
-      this.selectedBrands = params['brands'] ? params['brands'].split(',') : [];
-      this.selectedGenders = params['genders'] ? params['genders'].split(',') : [];
-      this.selectedCategory = params['category'] || 'All';
-      this.selectedColors = params['colors'] ? params['colors'].split(',') : [];
-      this.selectedSizes = params['sizes'] ? params['sizes'].split(',') : [];
-      this.priceRange = [params['priceMin'] ? +params['priceMin'] : 0, params['priceMax'] ? +params['priceMax'] : 1000];
-      this.updateProductList();
-  })
+    this.route.queryParams.pipe(debounceTime(300)).subscribe(params => {
+      const newSearchValue = params['query'] || "";
+  const newBrands = params['brands'] ? params['brands'].split(',') : [];
+  const newGenders = params['genders'] ? params['genders'].split(',') : [];
+  const newCategory = params['category'] || 'All';
+  const newColors = params['colors'] ? params['colors'].split(',') : [];
+  const newSizes = params['sizes'] ? params['sizes'].split(',') : [];
+  const newPriceRange = [params['priceMin'] ? +params['priceMin'] : 0, params['priceMax'] ? +params['priceMax'] : 1000];
+
+  if (this.searchValue !== newSearchValue || !this.areArraysEqual(this.selectedBrands, newBrands) ||
+      !this.areArraysEqual(this.selectedGenders, newGenders) || this.selectedCategory !== newCategory ||
+      !this.areArraysEqual(this.selectedColors, newColors) || !this.areArraysEqual(this.selectedSizes, newSizes) ||
+      this.priceRange[0] !== newPriceRange[0] || this.priceRange[1] !== newPriceRange[1]) {
+
+    this.searchValue = newSearchValue;
+    this.selectedBrands = newBrands;
+    this.selectedGenders = newGenders;
+    this.selectedCategory = newCategory;
+    this.selectedColors = newColors;
+    this.selectedSizes = newSizes;
+    this.priceRange = newPriceRange;
+    this.updateProductList();}
+  });
 
     this.includeSearchComponent = false;
     this.loadBrands();
@@ -76,6 +88,10 @@ export class SearchResultsComponent implements OnInit {
     this.loadMaxPrice(); 
     this.loadSizes();
     this.loadColors();
+  }
+
+  areArraysEqual(arr1: any[], arr2: string | any[]) {
+    return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
   }
 
   loadSizes() {
@@ -187,16 +203,6 @@ export class SearchResultsComponent implements OnInit {
   
 
   updateProductList() {
-    this.filterStateService.updateFilters({
-      brands: this.selectedBrands,
-      genders: this.selectedGenders,
-      category: this.selectedCategory,
-      colors: this.selectedColors,
-      sizes: this.selectedSizes,
-      priceMin: this.priceRange[0],
-      priceMax: this.priceRange[1]
-    });
-
     const queryParams = {
       query: this.searchValue || '',
       brands: this.selectedBrands.join(','),

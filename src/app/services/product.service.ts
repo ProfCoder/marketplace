@@ -146,6 +146,11 @@ export class ProductService {
         sizesFiltered: string[]
     ): boolean {
         // Also evaluate search, as the filter can refine search results
+
+        console.log(`Filtering Product: ${product.name}`);
+        console.log(`Received Filters - Brands: ${brandsFiltered}, Genders: ${gendersFiltered}, Colors: ${colorsFiltered}`);
+
+
         if (
             !product.name
                 .toLowerCase()
