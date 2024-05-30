@@ -37,9 +37,9 @@ export class SearchResultsComponent implements OnInit {
   selectedBrands: string[] = [];
   selectedCategory: string = 'All';
   filteredProducts: any[] = [];
-  priceRange: number[] = [0, 1000];
+  priceRange: number[] = [0, 104];
   minPrice: number = 0;
-  maxPrice: number = 1000;
+  maxPrice: number = 104;
   genderList: string[] = [];
   selectedGenders: string[] = [];
   colorList: Color[] = [];

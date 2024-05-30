@@ -1,7 +1,7 @@
 <div class="product-item" [class.list-view]="listViewMode" [class.grid-view]="!listViewMode">
   <div class="image-container">
     <a [routerLink]="['/products', product.id]">
-      <img class="card-img" *ngFor="let imageUrl of productImages" [src]="imageUrl" alt="{{ product.name }}">
+      <img class="card-img" [src]="productImages[0]" alt="{{ product.name }}">
     </a>
   </div>
   <div class="desc-container">

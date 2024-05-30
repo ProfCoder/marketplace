@@ -30,10 +30,14 @@ export class ProductItemComponent implements OnInit, OnChanges {
   }
 
   updateProductImage() {
-    if (this.selectedColors.length > 0) {
-      this.productImages = this.selectedColors.map(color => 
-        this.productService.getProductImageByColor(this.product, [color])
-      );
+    if (this.selectedColors.length > 0 && this.product.colors.some(color => this.selectedColors.includes(color.color_name))) {
+
+      const matchingColors = this.product.colors.filter(color => this.selectedColors.includes(color.color_name));
+      if (matchingColors.length > 0) {
+        this.productImages = [this.productService.getProductImageByColor(this.product, [matchingColors[0].color_name])];
+      } else {
+        this.productImages = ['./assets/products/images/10009'];
+      }
     } else if (this.product.colors.length > 0) {
       this.productImages = [this.productService.getProductImageByColor(this.product, [this.product.colors[0].color_name])];
     } else {
