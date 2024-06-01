@@ -215,11 +215,11 @@ export class SearchResultsComponent implements OnInit {
       priceMax: this.priceRange[1],
       sort: this.selectedSortOption 
     };
-
+  
     this.router.navigate(['/search-results'], { queryParams });
-
+  
     this.productService.getInitialProductMetadata(
-      9,
+      999999, // Fetch a very large number of products
       undefined,
       this.searchValue,
       this.selectedBrands,
@@ -234,4 +234,5 @@ export class SearchResultsComponent implements OnInit {
       this.filteredProducts = products;
     });
   }
+  
 }
