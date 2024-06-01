@@ -35,9 +35,9 @@ export class SearchResultsComponent implements OnInit {
   selectedBrands: string[] = [];
   selectedCategory: string = 'All';
   filteredProducts: any[] = [];
-  priceRange: number[] = [0, 104];
+  priceRange: number[] = [0, 1000]; // Set the default price range
+  maxPrice: number = 1000; // Initialize maxPrice with default value
   minPrice: number = 0;
-  maxPrice: number = 104;
   genderList: string[] = [];
   selectedGenders: string[] = [];
   colorList: Color[] = [];
@@ -202,12 +202,17 @@ export class SearchResultsComponent implements OnInit {
     this.updateProductList();
   }
 
-  loadMaxPrice() { 
+
+  loadMaxPrice() {
     this.productService.getMaxPrice().subscribe((maxPrice) => {
-      this.maxPrice = maxPrice;
-      this.priceRange = [0, this.maxPrice];
+      this.maxPrice = Math.ceil(maxPrice); 
+      this.priceRange[1] = this.maxPrice; 
+      this.updateProductList(); 
     });
   }
+  
+  
+
 
   updateProductList() {
     const queryParams = {
@@ -240,5 +245,5 @@ export class SearchResultsComponent implements OnInit {
       this.filteredProducts = products;
     });
   }
-  
 }
+
