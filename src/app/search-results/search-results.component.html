@@ -1,8 +1,9 @@
 <div class="result-info-container">
-  <div class="results-info">X over Y results for "Z"</div>
+  <div class="results-info">{{ filteredProducts.length }} results for "{{ searchValue }}"</div>
   <div class="sorting">
     <p-dropdown
       [options]="sortOptions"
+      [(ngModel)]="selectedSortOption"
       placeholder="Sort by"
       (onChange)="onSortChange($event)"
     ></p-dropdown>

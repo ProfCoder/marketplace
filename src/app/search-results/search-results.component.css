@@ -18,19 +18,12 @@
 
 }
 
-  
 ::ng-deep .sorting p-dropdown .p-dropdown-label {
     width: 170px;
     height: 25px;
     display: flex;
     align-items: center;
-
-
   }
-
-  
-
-
 
 .search-container {
     display: flex;
@@ -72,11 +65,8 @@
 }
 
 .results-container {
-    background-color: lightblue;
     width: 70%;
 }
-
-
 
 .color-box {
   display: flex;
@@ -99,8 +89,6 @@
   opacity: 0.5;
 }
 
-
-
 .custom-dropdown-wrapper {
   width: 400px; 
 }
@@ -109,12 +97,9 @@
   width: 100%; 
 }
 
-
-
 .select-all-checkbox input[type="checkbox"] {
   display: none;
 }
-
 
 .size-label {
   font-size: 16px;

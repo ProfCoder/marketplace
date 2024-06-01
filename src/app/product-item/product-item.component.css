@@ -32,12 +32,13 @@
 
 .card-price {
   background-color:#ABC9FB;
-  width: 80px;
+  width: 100px;
   padding: 5px;
   border: 1px solid #90ADF8;
   border-radius: 5px;
   font-weight: 500;
   font-size: 18px;
+  text-align: center;
 }
 
 .card-price a {

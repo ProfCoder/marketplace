@@ -67,10 +67,11 @@ export class ProductService {
      * @param colorsFiltered - An optional array of colors to filter products by.
      * @param sizesFiltered - An optional array of sizes to filter products by.
      * @param priceRange - An optional price range to filter products by. 
+     * @param sort - An optional parameter to specify the sort order.
      * @returns An Observable that emits an array of `numItems` products.
      */
     getInitialProductMetadata(
-        numItems: number,
+        numItems: number, 
         filter?: (product: Product) => boolean,
         searchText?: string,
         brandsFiltered?: string[],
@@ -79,50 +80,50 @@ export class ProductService {
         categoriesFiltered?: string[],
         colorsFiltered?: string[],
         sizesFiltered?: string[],
-        priceRange?: number[]
-    ) {
+        priceRange?: number[],
+        sort: string = 'featured' // Default value for sort parameter
+    ): Observable<Product[]> {
         console.log('Received price range:', priceRange); 
         
-        // Initialize optional arguments with empty arrays if not provided
-        searchText ||= '';
-        brandsFiltered ||= [];
-        gendersFiltered ||= [];
-        typesFiltered ||= [];
-        categoriesFiltered ||= [];
-        colorsFiltered ||= [];
-        sizesFiltered ||= [];
+        searchText = searchText ?? '';
+        brandsFiltered = brandsFiltered ?? [];
+        gendersFiltered = gendersFiltered ?? [];
+        typesFiltered = typesFiltered ?? [];
+        categoriesFiltered = categoriesFiltered ?? [];
+        colorsFiltered = colorsFiltered ?? [];
+        sizesFiltered = sizesFiltered ?? [];
     
         return new Observable<Product[]>((subscriber) => {
             this.productMetadata.subscribe(() => {
                 this.filteredProductMetadata = this.productMetadata.pipe(
                     map((allProducts) =>
                         allProducts.filter((product) => {
-                            // Initialize with empty values if not provided.
-                            // Empty values behave like no filter/search term
-                            searchText ||= '';
-                            brandsFiltered ||= [];
-                            gendersFiltered ||= [];
-                            typesFiltered ||= [];
-                            categoriesFiltered ||= [];
-                            colorsFiltered ||= [];
-                            sizesFiltered ||= [];
-                            
                             const priceInRange = !priceRange || (product.price >= priceRange[0] && product.price <= priceRange[1]);
                             
                             return (
                                 priceInRange && 
                                 this.filterProduct(
                                     product,
-                                    searchText,
-                                    brandsFiltered,
-                                    gendersFiltered,
-                                    typesFiltered,
-                                    categoriesFiltered,
-                                    colorsFiltered,
-                                    sizesFiltered,
+                                    searchText!,
+                                    brandsFiltered!,
+                                    gendersFiltered!,
+                                    typesFiltered!,
+                                    categoriesFiltered!,
+                                    colorsFiltered!,
+                                    sizesFiltered!
                                 ) &&
                                 (!filter || filter(product))
                             );
+                        }).sort((a, b) => {
+                            if (!sort || sort === 'featured') return 0; // Default sorting by ID
+                            switch (sort) {
+                                case 'priceAsc':
+                                    return a.price - b.price;
+                                case 'priceDesc':
+                                    return b.price - a.price;
+                                default:
+                                    return 0;
+                            }
                         })
                     )
                 );
@@ -150,47 +151,13 @@ export class ProductService {
         console.log(`Filtering Product: ${product.name}`);
         console.log(`Received Filters - Brands: ${brandsFiltered}, Genders: ${gendersFiltered}, Colors: ${colorsFiltered}`);
 
-
-        if (
-            !product.name
-                .toLowerCase()
-                .includes(searchText.toLowerCase().trim())
-        )
-            return false;
-        if (
-            !brandsFiltered.includes(product.brand) &&
-            brandsFiltered.length > 0
-        )
-            return false;
-        if (
-            !gendersFiltered.includes(product.gender) &&
-            gendersFiltered.length > 0
-        )
-            return false;
-        if (!typesFiltered.includes(product.type) && typesFiltered.length > 0)
-            return false;
-        if (
-            !categoriesFiltered.includes(product.category) &&
-            categoriesFiltered.length > 0
-        )
-            return false;
-        if (
-            !colorsFiltered.some((name) =>
-                product.colors
-                    .flat()
-                    .map((color) => color.color_name)
-                    .includes(name)
-            ) &&
-            colorsFiltered.length > 0
-        )
-            return false;
-        if (
-            !sizesFiltered.some((size) =>
-                product.sizes.flat().includes(size)
-            ) &&
-            sizesFiltered.length > 0
-        )
-            return false;
+        if (!product.name.toLowerCase().includes(searchText.toLowerCase().trim())) return false;
+        if (!brandsFiltered.includes(product.brand) && brandsFiltered.length > 0) return false;
+        if (!gendersFiltered.includes(product.gender) && gendersFiltered.length > 0) return false;
+        if (!typesFiltered.includes(product.type) && typesFiltered.length > 0) return false;
+        if (!categoriesFiltered.includes(product.category) && categoriesFiltered.length > 0) return false;
+        if (!colorsFiltered.some((name) => product.colors.map((color) => color.color_name).includes(name)) && colorsFiltered.length > 0) return false;
+        if (!sizesFiltered.some((size) => product.sizes.includes(size)) && sizesFiltered.length > 0) return false;
         return true;
     }
 
@@ -204,7 +171,7 @@ export class ProductService {
      * @returns An Observable that emits an array of Product elements.
      * @throws An error if getInitialProductMetadata was not called before this.
      */
-    getNextProductMetadata(numItems: number) {
+    getNextProductMetadata(numItems: number): Observable<Product[]> {
         return new Observable<Product[]>((subscriber) => {
             if (this.nextIndex == 0) {
                 subscriber.error(
@@ -230,12 +197,10 @@ export class ProductService {
     }
 
     // Get the product metadata for a single product by its id. Also returns an Observable.
-    getProductMetadata(id: string) {
+    getProductMetadata(id: string): Observable<Product> {
         return new Observable<Product>((subscriber) => {
             this.productMetadata?.subscribe((products) => {
-                let product = products.find((product) => {
-                    return product.id == id;
-                });
+                let product = products.find((product) => product.id == id);
                 if (product === undefined) {
                     subscriber.error(
                         new Error(
@@ -318,7 +283,7 @@ export class ProductService {
             this.productMetadata.subscribe((allProducts) => {
                 subscriber.next(
                     allProducts
-                        .map((product) => product['sizes'])
+                        .map((product) => product.sizes)
                         // Dissolve sizes into single array
                         .flat()
                         // Deduplicate if size names are equal
@@ -348,7 +313,7 @@ export class ProductService {
         });
     }
 
-    getProductImage(id: string) {
+    getProductImage(id: string): string {
         return `./assets/products/images/${id}.jpg`;
     }
 
@@ -356,26 +321,24 @@ export class ProductService {
         console.log('Product ID:', product.id);
         console.log('Product Colors:', product.colors);
         console.log('Selected Colors:', selectedColors);
-      
+
         // Find the first color in the product's colors array that matches any of the selected colors
         const matchingColor = product.colors.find(color => selectedColors.includes(color.color_name));
-      
+
         console.log('Matching Color:', matchingColor);
-      
+
         // If a matching color is found, return its corresponding image URL
         if (matchingColor) {
-          return `./assets/products/images/${matchingColor.color_id}.jpg`;
+            return `./assets/products/images/${matchingColor.color_id}.jpg`;
         }
-      
+
         // If no matching color is found, return a default image URL 
         return './assets/products/images/10009.jpg'; // for testing
-        
-      }
-      
-      getProductById(productId: string): Observable<Product> {
-        return this.http.get<Product>(`/api/products/${productId}`);
-      }
+    }
 
+    getProductById(productId: string): Observable<Product> {
+        return this.http.get<Product>(`/api/products/${productId}`);
+    }
 
     getRecommendedProducts(type: string, category: string, productId: string): Observable<Product[]> {
         return this.productMetadata.pipe(
@@ -395,4 +358,5 @@ export class ProductService {
         );
     }
 }
+
 export type GenderList = string[];

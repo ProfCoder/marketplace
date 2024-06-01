@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProductListComponent } from '../product-list/product-list.component';
-import { SearchComponent } from '../search/search.component';
 import { SliderModule } from 'primeng/slider';
 import { Color } from '../services/color';
 import { SelectItem } from 'primeng/api';
@@ -13,7 +12,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-results',
@@ -25,10 +24,9 @@ import { debounceTime } from 'rxjs';
 export class SearchResultsComponent implements OnInit {
   searchValue: string = '';
   sortOptions = [
+    { label: 'Sort By: Featured', value: 'featured' },
     { label: 'Price: Low to high', value: 'priceAsc' },
-    { label: 'Price: High to low', value: 'priceDesc' },
-    { label: 'Avg. Customer Rate', value: 'customerRate' },
-    { label: 'Newest arrivals', value: 'newestArrivals' }
+    { label: 'Price: High to low', value: 'priceDesc' }
   ];
 
   includeSearchComponent: boolean = false;
@@ -47,6 +45,7 @@ export class SearchResultsComponent implements OnInit {
   selectedSizes: string[] = [];
   sizeList: string[] = []; 
   sizeListOptions: SelectItem[] = [];
+  selectedSortOption: string = 'featured'; // Default sort option
 
   constructor(
     private router: Router,
@@ -59,27 +58,30 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.pipe(debounceTime(300)).subscribe(params => {
       const newSearchValue = params['query'] || "";
-  const newBrands = params['brands'] ? params['brands'].split(',') : [];
-  const newGenders = params['genders'] ? params['genders'].split(',') : [];
-  const newCategory = params['category'] || 'All';
-  const newColors = params['colors'] ? params['colors'].split(',') : [];
-  const newSizes = params['sizes'] ? params['sizes'].split(',') : [];
-  const newPriceRange = [params['priceMin'] ? +params['priceMin'] : 0, params['priceMax'] ? +params['priceMax'] : 1000];
+      const newBrands = params['brands'] ? params['brands'].split(',') : [];
+      const newGenders = params['genders'] ? params['genders'].split(',') : [];
+      const newCategory = params['category'] || 'All';
+      const newColors = params['colors'] ? params['colors'].split(',') : [];
+      const newSizes = params['sizes'] ? params['sizes'].split(',') : [];
+      const newPriceRange = [params['priceMin'] ? +params['priceMin'] : 0, params['priceMax'] ? +params['priceMax'] : 1000];
+      const newSortOption = params['sort'] || 'featured';
 
-  if (this.searchValue !== newSearchValue || !this.areArraysEqual(this.selectedBrands, newBrands) ||
-      !this.areArraysEqual(this.selectedGenders, newGenders) || this.selectedCategory !== newCategory ||
-      !this.areArraysEqual(this.selectedColors, newColors) || !this.areArraysEqual(this.selectedSizes, newSizes) ||
-      this.priceRange[0] !== newPriceRange[0] || this.priceRange[1] !== newPriceRange[1]) {
+      if (this.searchValue !== newSearchValue || !this.areArraysEqual(this.selectedBrands, newBrands) ||
+          !this.areArraysEqual(this.selectedGenders, newGenders) || this.selectedCategory !== newCategory ||
+          !this.areArraysEqual(this.selectedColors, newColors) || !this.areArraysEqual(this.selectedSizes, newSizes) ||
+          this.priceRange[0] !== newPriceRange[0] || this.priceRange[1] !== newPriceRange[1] || this.selectedSortOption !== newSortOption) {
 
-    this.searchValue = newSearchValue;
-    this.selectedBrands = newBrands;
-    this.selectedGenders = newGenders;
-    this.selectedCategory = newCategory;
-    this.selectedColors = newColors;
-    this.selectedSizes = newSizes;
-    this.priceRange = newPriceRange;
-    this.updateProductList();}
-  });
+        this.searchValue = newSearchValue;
+        this.selectedBrands = newBrands;
+        this.selectedGenders = newGenders;
+        this.selectedCategory = newCategory;
+        this.selectedColors = newColors;
+        this.selectedSizes = newSizes;
+        this.priceRange = newPriceRange;
+        this.selectedSortOption = newSortOption;
+        this.updateProductList();
+      }
+    });
 
     this.includeSearchComponent = false;
     this.loadBrands();
@@ -145,7 +147,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onSortChange(event: any) {
-    // Sorting logic here
+    this.selectedSortOption = event.value;
+    this.updateProductList();
   }
 
   onBrandFilterChange(event: any) {
@@ -192,15 +195,13 @@ export class SearchResultsComponent implements OnInit {
     }
     this.updateProductList();
   }
-  
+
   loadMaxPrice() { 
     this.productService.getMaxPrice().subscribe((maxPrice) => {
       this.maxPrice = maxPrice;
       this.priceRange = [0, this.maxPrice];
     });
   }
-
-  
 
   updateProductList() {
     const queryParams = {
@@ -211,7 +212,8 @@ export class SearchResultsComponent implements OnInit {
       colors: this.selectedColors.join(','),
       sizes: this.selectedSizes.join(','),
       priceMin: this.priceRange[0],
-      priceMax: this.priceRange[1]
+      priceMax: this.priceRange[1],
+      sort: this.selectedSortOption 
     };
 
     this.router.navigate(['/search-results'], { queryParams });
@@ -226,7 +228,8 @@ export class SearchResultsComponent implements OnInit {
       this.selectedCategory === 'All' ? [] : [this.selectedCategory],
       this.selectedColors,
       this.selectedSizes,
-      this.priceRange
+      this.priceRange,
+      this.selectedSortOption 
     ).subscribe((products: any[]) => {
       this.filteredProducts = products;
     });
