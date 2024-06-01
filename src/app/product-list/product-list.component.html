@@ -27,12 +27,19 @@
   </button>
 </div>
 
-<div class="end-of-list-message" *ngIf="endOfList">
+<div class="end-of-list-message" *ngIf="endOfList && !isEmptyResults()">
   <p>No more products available.</p>
   <button class="scroll-to-top-button p-button p-button-text" type="button" (click)="scrollToTop()">
     <span class="button-content">
       <i class="pi pi-angle-double-up pi-circle"></i>
       <span>Back to Top</span>
     </span>
-  </button>  
+  </button>
 </div>
+
+<div class="end-of-list-message" *ngIf="endOfList && isEmptyResults()">
+  <p>Sorry, no products found. Please try a different search.</p>
+</div>
+
+
+

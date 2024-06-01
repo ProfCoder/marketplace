@@ -34,8 +34,8 @@ export class SearchResultsComponent implements OnInit {
   selectedBrands: string[] = [];
   selectedCategory: string = 'All';
   filteredProducts: any[] = [];
-  priceRange: number[] = [0, 1000]; // Set the default price range
-  maxPrice: number = 1000; // Initialize maxPrice with default value
+  priceRange: number[] = [0, 1000];
+  maxPrice: number = 1000; 
   minPrice: number = 0;
   genderList: string[] = [];
   selectedGenders: string[] = [];
@@ -45,8 +45,9 @@ export class SearchResultsComponent implements OnInit {
   sizeList: string[] = []; 
   sizeListOptions: SelectItem[] = [];
   selectedSortOption: string = 'featured';
-  isLoading: boolean = false; // Change to boolean
-
+  isLoading: boolean = false; 
+  listViewMode: boolean = false;
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -193,16 +194,14 @@ export class SearchResultsComponent implements OnInit {
   }
 
   resetFilters() {
-    // Reset all filter values to their default states
     this.selectedBrands = [];
     this.selectedCategory = 'All';
     this.selectedGenders = [];
     this.selectedColors = [];
     this.selectedSizes = [];
-    this.priceRange = [0, this.maxPrice]; // Reset price range to its default
+    this.priceRange = [0, this.maxPrice];
     this.selectedSortOption = 'featured';
   
-    // Update the product list with the reset filters
     this.updateProductList();
   }
   
@@ -241,7 +240,7 @@ export class SearchResultsComponent implements OnInit {
       sort: this.selectedSortOption 
     };
   
-    this.isLoading = true; // Set loading to true before fetching data
+    this.isLoading = true; 
   
     this.productService.getInitialProductMetadata(
       10000, 
@@ -257,10 +256,10 @@ export class SearchResultsComponent implements OnInit {
       this.selectedSortOption 
     ).subscribe((products: any[]) => {
       this.filteredProducts = products;
-      this.isLoading = false; // Set loading to false after fetching data
+      this.isLoading = false; 
     }, error => {
       console.error('Error loading products:', error);
-      this.isLoading = false; // Set loading to false if there's an error
+      this.isLoading = false; 
     });
   }
   

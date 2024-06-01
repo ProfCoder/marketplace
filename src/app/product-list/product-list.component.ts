@@ -94,7 +94,10 @@ export class ProductListComponent implements OnChanges {
     this.router.navigate(['/search-results'], { queryParams: { query: this.searchValue } });
   }
 
-
+  isEmptyResults(): boolean {
+    return this.products.length === 0 && this.searchValue !== '';
+  }
+  
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
