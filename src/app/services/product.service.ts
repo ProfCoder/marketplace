@@ -354,9 +354,18 @@ export class ProductService {
 
     getMaxPrice(): Observable<number> {
         return this.productMetadata.pipe(
-            map(products => Math.max(...products.map(product => product.price)))
+            map(products => {
+                if (!products || products.length === 0) {
+                    // Handle the case where there are no products
+                    return 0;
+                }
+                // Extract prices from products and find the maximum
+                const prices = products.map(product => product.price);
+                return Math.max(...prices);
+            })
         );
     }
+    
 }
 
 export type GenderList = string[];

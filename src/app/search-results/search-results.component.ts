@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,6 @@ import { SelectItem } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +23,7 @@ import { debounceTime } from 'rxjs/operators';
 export class SearchResultsComponent implements OnInit {
   searchValue: string = '';
   sortOptions = [
-    { label: 'Sort By: Featured', value: 'featured' },
+    { label: 'Featured', value: 'featured' },
     { label: 'Price: Low to high', value: 'priceAsc' },
     { label: 'Price: High to low', value: 'priceDesc' }
   ];
@@ -46,6 +45,7 @@ export class SearchResultsComponent implements OnInit {
   sizeList: string[] = []; 
   sizeListOptions: SelectItem[] = [];
   selectedSortOption: string = 'featured';
+  isLoading: boolean = false; // Change to boolean
 
   constructor(
     private router: Router,
@@ -206,14 +206,12 @@ export class SearchResultsComponent implements OnInit {
   loadMaxPrice() {
     this.productService.getMaxPrice().subscribe((maxPrice) => {
       this.maxPrice = Math.ceil(maxPrice); 
-      this.priceRange[1] = this.maxPrice; 
-      this.updateProductList(); 
+      this.priceRange[1] = this.maxPrice;
+      this.updateProductList();
     });
   }
   
   
-
-
   updateProductList() {
     const queryParams = {
       query: this.searchValue || '',
@@ -227,7 +225,7 @@ export class SearchResultsComponent implements OnInit {
       sort: this.selectedSortOption 
     };
   
-    this.router.navigate(['/search-results'], { queryParams });
+    this.isLoading = true; // Set loading to true before fetching data
   
     this.productService.getInitialProductMetadata(
       10000, 
@@ -243,7 +241,12 @@ export class SearchResultsComponent implements OnInit {
       this.selectedSortOption 
     ).subscribe((products: any[]) => {
       this.filteredProducts = products;
+      this.isLoading = false; // Set loading to false after fetching data
+    }, error => {
+      console.error('Error loading products:', error);
+      this.isLoading = false; // Set loading to false if there's an error
     });
   }
+  
 }
 
