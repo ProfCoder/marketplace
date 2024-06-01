@@ -15,7 +15,6 @@
 
 .sorting {
     width: 25%;
-
 }
 
 .search-value {
@@ -37,12 +36,13 @@
 
 .filters-container {
     width: 30%;
+    padding: 60px 10px 0 10px;
 }
 
 .filter-title {
     font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    /* font-weight: bold; */
+    margin-bottom: 45px;
   }
   
   .filter-options {
@@ -52,12 +52,50 @@
   
   .filter-options div {
     display: flex;
-    align-items: center;
+    align-items: center; 
     margin-bottom: 5px;
   }
   
   .filter-options label {
     margin-left: 5px;
+  }
+
+  .categories-filter-container {
+    margin-top: 65px;
+  }
+
+  .price-filter {
+    width: 70%;
+    height: 60px;
+  }
+
+  .price-filter-title {
+    font-size: 18px;
+  }
+
+  .price-filter-values {
+    text-align: center;
+    margin-top: 15px;
+    color:#3131319e;
+    font-size: 16px;
+  }
+
+  :host ::ng-deep .p-slide {
+    height: 100px;
+  }
+
+  :host ::ng-deep .p-slider-horizontal {
+ 
+  }
+
+  :host ::ng-deep .p-slider-handle { 
+    border: 7px solid #007184;
+    width: 25px; 
+    height: 25px; 
+  }
+
+  :host ::ng-deep .p-slider-range { 
+    background-color: #007184; 
   }
   
   .see-more-button {
@@ -73,25 +111,67 @@
     width: 70%;
 }
 
-.color-box {
+
+.color-filter-container {
+  /* width: 90%; */
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+}
+
+.color-title {
+  width: 100%; 
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.color-box-container {
+  position: relative;
+}
+
+.color-box {
   padding: 5px;
   margin: 2px;
   border: 1px solid #ccc;
   border-radius: 3px;
   cursor: pointer;
   color: #fff; 
-  text-align: center;
-  width: 100px;
-  height: 50px;
-  font-size: 18px;
+  width: 65px;
+  height: 60px;
+  font-weight: 700;
+  font-size: 10px;
+  border-radius: 10px;
 }
 
 .color-box.selected {
-  border: 10px solid #000; 
   opacity: 0.5;
+}
+
+.color-name {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  padding: 5px; 
+  border-radius: 5px;
+  z-index: 999;
+  max-width: calc(100% - 10px); 
+  overflow: hidden;
+  white-space: normal; 
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.color-box:hover .color-name {
+  display: block;
+}
+
+.dark-text {
+  color: black;
 }
 
 .custom-dropdown-wrapper {
@@ -111,3 +191,48 @@
   margin-right: 5px;
 }
 
+::ng-deep .search-results-product-list .grid-view .product-item  {
+  height: 420px;
+  min-height: 350px;
+  max-height: 490px;
+  padding: 10px;
+}
+
+
+::ng-deep .search-results-product-list .grid-view  {
+  /* grid-template-columns: repeat(3, minmax(20%, 30%)); */
+text-align: center;
+}
+
+
+::ng-deep .search-results-product-list .grid-view .card-img {
+  width: 150px;
+  margin-top: 5px;
+  padding: 0;
+  object-fit:cover;
+
+}
+
+::ng-deep .search-results-product-list .grid-view .card-brand {
+  margin-bottom: 5px;
+}
+
+
+::ng-deep .search-results-product-list .grid-view .card-price {
+  font-size: 16px;
+  width: 90px;
+  font-weight: 600;
+  padding: 7px 0;
+  margin: 15px 0;
+}
+
+::ng-deep .search-results-product-list .grid-view .desc-container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+}
+
+
+::ng-deep .search-results-product-list .grid-view .card-brand {
+  font-size: 18px;
+}

@@ -45,7 +45,7 @@ export class SearchResultsComponent implements OnInit {
   selectedSizes: string[] = [];
   sizeList: string[] = []; 
   sizeListOptions: SelectItem[] = [];
-  selectedSortOption: string = 'featured'; // Default sort option
+  selectedSortOption: string = 'featured';
 
   constructor(
     private router: Router,
@@ -90,6 +90,12 @@ export class SearchResultsComponent implements OnInit {
     this.loadMaxPrice(); 
     this.loadSizes();
     this.loadColors();
+  }
+
+
+  isColorDark(colorName: string): boolean {
+    const brightColors = ['Beige', 'Gold', 'Lavender', 'Pink', 'Silver', 'White', 'Yellow'];
+    return brightColors.includes(colorName);
   }
 
   areArraysEqual(arr1: any[], arr2: string | any[]) {
@@ -219,7 +225,7 @@ export class SearchResultsComponent implements OnInit {
     this.router.navigate(['/search-results'], { queryParams });
   
     this.productService.getInitialProductMetadata(
-      999999, // Fetch a very large number of products
+      10000, 
       undefined,
       this.searchValue,
       this.selectedBrands,

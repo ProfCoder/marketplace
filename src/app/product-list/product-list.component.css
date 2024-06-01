@@ -1,6 +1,7 @@
 .grid-view {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  grid-template-columns: repeat(3, minmax(32%, 35%));
   grid-column-gap: 10px;
   grid-row-gap: 20px;
 }
@@ -141,4 +142,16 @@
   stroke: #4a91e2c0;
 } 
 
+}
+
+@media screen and (max-width: 960px) {
+  .grid-view {
+    grid-template-columns: repeat(2, minmax(45%, 48%)); 
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .grid-view {
+    grid-template-columns: repeat(1, minmax(90%, 95%)); 
+  }
 }
