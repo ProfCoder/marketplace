@@ -192,6 +192,22 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
+  resetFilters() {
+    // Reset all filter values to their default states
+    this.selectedBrands = [];
+    this.selectedCategory = 'All';
+    this.selectedGenders = [];
+    this.selectedColors = [];
+    this.selectedSizes = [];
+    this.priceRange = [0, this.maxPrice]; // Reset price range to its default
+    this.selectedSortOption = 'featured';
+  
+    // Update the product list with the reset filters
+    this.updateProductList();
+  }
+  
+  
+
   onColorBoxClick(colorName: string) {
     const index = this.selectedColors.indexOf(colorName);
     if (index > -1) {

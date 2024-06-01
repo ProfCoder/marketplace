@@ -18,10 +18,12 @@
         <input
           type="checkbox"
           [value]="brand"
+          [checked]="selectedBrands.includes(brand)"
           (change)="onBrandFilterChange($event)"
         />{{ brand }}
       </div>
     </div>
+    
 
     <div class="price-filter">
       <h4 class="price-filter-title">Price Range</h4>
@@ -37,12 +39,18 @@
     
     
   
- 
     <div class="filter-title categories-filter-container">
       <h4>Categories</h4>
-      <p-dropdown [options]="categoryList" [(ngModel)]="selectedCategory" (onChange)="onCategoryFilterChange($event)"></p-dropdown>
-
+      <p-dropdown 
+        [options]="categoryList" 
+        [(ngModel)]="selectedCategory" 
+        (onChange)="onCategoryFilterChange($event)"
+        class="custom-dropdown"
+      ></p-dropdown>
     </div>
+    
+    
+    
     
     <div class="filter-title">
       <h4>Gender</h4>
@@ -90,6 +98,10 @@
       </div>
     </div>
     
+
+    <div class="reset-filter-container">
+      <button class="reset-filters-button" (click)="resetFilters()">Reset All Filters</button>
+    </div>
 
   </div>
 
