@@ -16,10 +16,10 @@
     justify-content: flex-end;
 }
 
-.search-value {
+/* .search-value {
     color:#C35500;
     font-weight: 600;
-}
+} */
 
 ::ng-deep .sorting p-dropdown .p-dropdown-label {
     height: 30px;
@@ -280,4 +280,12 @@
   width: 170px;
   margin-top: 5px;
   padding: 0;
+}
+
+.results-info {
+  color: white;
+}
+
+.search-value {
+color: white;
 }
