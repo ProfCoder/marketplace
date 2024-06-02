@@ -11,7 +11,7 @@ import { SelectItem } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Product } from '../services/product';
 import { Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-results',
@@ -57,7 +57,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.pipe(debounceTime(300)).subscribe(params => {
+    this.route.queryParams.pipe(debounceTime(300), switchMap(params => {
       const newSearchValue = params['query'] || "";
       const newBrands = params['brands'] ? params['brands'].split(',') : [];
       const newGenders = params['genders'] ? params['genders'].split(',') : [];
@@ -82,6 +82,11 @@ export class SearchResultsComponent implements OnInit {
         this.selectedSortOption = newSortOption;
         this.updateProductList();
       }
+
+      return this.productService.productMetadata;
+    })
+    ).subscribe(() => {
+      this.updateProductList();
     });
   
     this.includeSearchComponent = false;
@@ -91,6 +96,26 @@ export class SearchResultsComponent implements OnInit {
     this.loadMaxPrice(); 
     this.loadSizes();
     this.loadColors();
+  }
+
+  updateUrlParams() {
+    const queryParams = {
+      query: this.searchValue || null,
+      brands: this.selectedBrands.length ? this.selectedBrands.join(',') : null,
+      genders: this.selectedGenders.length ? this.selectedGenders.join(',') : null,
+      category: this.selectedCategory !== 'All' ? this.selectedCategory : null,
+      colors: this.selectedColors.length ? this.selectedColors.join(',') : null,
+      sizes: this.selectedSizes.length ? this.selectedSizes.join(',') : null,
+      priceMin: this.priceRange[0] !== this.minPrice ? this.priceRange[0] : null,
+      priceMax: this.priceRange[1] !== this.maxPrice ? this.priceRange[1] : null,
+      sort: this.selectedSortOption !== 'featured' ? this.selectedSortOption : null
+    };
+  
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
   }
   
 
@@ -110,6 +135,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onSizeFilterChange(event: any) {
+    this.updateUrlParams();
     this.updateProductList();
   }
 
@@ -144,6 +170,7 @@ export class SearchResultsComponent implements OnInit {
         this.selectedGenders.splice(index, 1);
       }
     }
+    this.updateUrlParams();
     this.updateProductList();
   }
 
@@ -155,6 +182,7 @@ export class SearchResultsComponent implements OnInit {
 
   onSortChange(event: any) {
     this.selectedSortOption = event.value;
+    this.updateUrlParams();
     this.updateProductList();
   }
 
@@ -168,11 +196,13 @@ export class SearchResultsComponent implements OnInit {
         this.selectedBrands.splice(index, 1);
       }
     }
+    this.updateUrlParams();
     this.updateProductList();
   }
 
   onPriceFilterChange() {
     console.log('Price Range:', this.priceRange);
+    this.updateUrlParams();
     this.updateProductList();
   }
 
@@ -183,6 +213,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onCategoryFilterChange(event: any) {
+    this.updateUrlParams();
     this.updateProductList();
     console.log('Selected Price Range:', this.priceRange);
   }
@@ -202,10 +233,9 @@ export class SearchResultsComponent implements OnInit {
     this.priceRange = [0, this.maxPrice];
     this.selectedSortOption = 'featured';
   
+    this.updateUrlParams();
     this.updateProductList();
   }
-  
-  
 
   onColorBoxClick(colorName: string) {
     const index = this.selectedColors.indexOf(colorName);
@@ -214,6 +244,7 @@ export class SearchResultsComponent implements OnInit {
     } else {
       this.selectedColors.push(colorName);
     }
+    this.updateUrlParams();
     this.updateProductList();
   }
 
@@ -226,9 +257,7 @@ export class SearchResultsComponent implements OnInit {
       this.updateProductList();
     });
   }
-  
-  
-  
+
   updateProductList() {
     const queryParams = {
       query: this.searchValue || '',
