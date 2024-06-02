@@ -64,14 +64,14 @@ export class SearchResultsComponent implements OnInit {
       const newCategory = params['category'] || 'All';
       const newColors = params['colors'] ? params['colors'].split(',') : [];
       const newSizes = params['sizes'] ? params['sizes'].split(',') : [];
-      const newPriceRange = [params['priceMin'] ? +params['priceMin'] : 0, params['priceMax'] ? +params['priceMax'] : 1000];
+      const newPriceRange = [params['priceMin'] ? +params['priceMin'] : this.minPrice, params['priceMax'] ? +params['priceMax'] : this.maxPrice];
       const newSortOption = params['sort'] || 'featured';
-
+  
       if (this.searchValue !== newSearchValue || !this.areArraysEqual(this.selectedBrands, newBrands) ||
           !this.areArraysEqual(this.selectedGenders, newGenders) || this.selectedCategory !== newCategory ||
           !this.areArraysEqual(this.selectedColors, newColors) || !this.areArraysEqual(this.selectedSizes, newSizes) ||
           this.priceRange[0] !== newPriceRange[0] || this.priceRange[1] !== newPriceRange[1] || this.selectedSortOption !== newSortOption) {
-
+  
         this.searchValue = newSearchValue;
         this.selectedBrands = newBrands;
         this.selectedGenders = newGenders;
@@ -83,7 +83,7 @@ export class SearchResultsComponent implements OnInit {
         this.updateProductList();
       }
     });
-
+  
     this.includeSearchComponent = false;
     this.loadBrands();
     this.loadCategories();
@@ -92,7 +92,7 @@ export class SearchResultsComponent implements OnInit {
     this.loadSizes();
     this.loadColors();
   }
-
+  
 
   isColorDark(colorName: string): boolean {
     const brightColors = ['Beige', 'Gold', 'Lavender', 'Pink', 'Silver', 'White', 'Yellow'];
@@ -220,11 +220,13 @@ export class SearchResultsComponent implements OnInit {
 
   loadMaxPrice() {
     this.productService.getMaxPrice().subscribe((maxPrice) => {
-      this.maxPrice = Math.ceil(maxPrice); 
-      this.priceRange[1] = this.maxPrice;
+      this.maxPrice = Math.ceil(maxPrice);
+      this.priceRange = [this.minPrice, this.maxPrice];
+      console.log('Max Price loaded:', this.maxPrice);
       this.updateProductList();
     });
   }
+  
   
   
   updateProductList() {
