@@ -273,8 +273,10 @@ export class SearchResultsComponent implements OnInit {
   
     this.isLoading = true; 
   
+    const itemCount = this.filteredProducts.length || 9;
+
     this.productService.getInitialProductMetadata(
-      10000, 
+      itemCount, 
       undefined,
       this.searchValue,
       this.selectedBrands,
