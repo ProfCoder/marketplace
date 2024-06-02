@@ -97,7 +97,6 @@ export class ProductListComponent implements OnChanges {
   isEmptyResults(): boolean {
     return this.products.length === 0 && this.searchValue !== '';
   }
-  
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -111,4 +110,7 @@ export class ProductListComponent implements OnChanges {
       this.loadMoreProducts();
     }
   }
+
+
+  
 }
