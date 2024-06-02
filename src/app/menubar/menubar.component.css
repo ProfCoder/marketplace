@@ -3,8 +3,9 @@ nav {
     justify-content: center;
     align-items: center;
     /* background-color: lightgray; */
-    background-color: rgb(68, 167, 188);
-    height: 10ex
+    /* background-color: rgb(68, 167, 188); */
+    /* height: 10ex; */
+    height: 70px;
 }
 
 .menu {
@@ -55,10 +56,18 @@ Use the combination of :host and ::ng-deep to adapt PrimeNG styles
 See https://primeng.org/theming#scopedcss and https://angular.io/guide/component-styles#special-selectors for more info
 */
 :host ::ng-deep .menu-entries .p-button-label {
-    font-weight: normal;
+    font-weight: 600;
+
+    color:black;
+}
+
+:host ::ng-deep .p-button {
+    font-weight: 600;
+
+    color:black;
 }
 
 
 .mylogo {
-   width: 190px;
+   width: 200px;
 }
