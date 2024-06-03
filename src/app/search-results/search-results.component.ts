@@ -274,7 +274,7 @@ export class SearchResultsComponent implements OnInit {
     this.isLoading = true; 
   
     this.productService.getInitialProductMetadata(
-      10000, 
+      9, 
       undefined,
       this.searchValue,
       this.selectedBrands,
