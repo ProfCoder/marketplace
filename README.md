@@ -1,72 +1,82 @@
 # Interactive Systems - Tutorial
 
-## Assignment 6: Search and Filter
+## Assignment 7: Shopping Cart
 
 **Achieved Points: [__/10]**  
-**Deadline: 04.06.2024 13:30**
+**Deadline: 11.06.2024 13:30**
 
-<img src="images/filter-example.png"  width="600">
+<img src="images/assignment7_teaser.png">
 
 ### Design Patterns
 
 The following Design Patterns (or guidelines) are applied in this assignment:
 
-- [ ] [Feature, Search and Browse](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=59) (Page 39)
-- [ ] [Dynamic Queries](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=475) (Page 455)
+- [ ] [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229) (Page 209)
+- [ ] [Cards](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=373) (Page 353)
 
 You can find all design patterns in the book [Designing Interfaces: Patterns for Effective Interaction Design](https://ebookcentral.proquest.com/lib/uni-konstanz/detail.action?docID=5996435)
 
 ### Tasks
 
-In this assignment, you will implement search and filter bars for our shop.
+In this assignment, you will implement a shopping cart.
 
-- [ ] [Create Filter Sidebar](#create-filter-sidebar) (7 Points)
-- [ ] [Create Search Bar](#create-search-bar) (3 Points)
+- [ ] [Implement 'Add to cart' button](#implement-add-to-cart-button) (2 Points)
+- [ ] [Design cart page](#design-cart-page) (6 Points)
+- [ ] [Implement Cart Badge](#implement-cart-badge) (2 Points)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
 
 ### Instructions
 
-#### Create Filter Sidebar
-7 Points
+#### Implement 'Add to cart' Button
+2 Points
 
-- Create a filter sidebar component that contains filters for at least three attributes that are given in the product metadata (excluding `name` and `id`).
-- The area containing the filters should be *to the side* of the list/grid view (not above).
-- You can implement the filters to be activated via a checkbox. However, if you want, you can use more sophisticated solutions and look at input elements that might more closely match the filterable attributes.
-  > 💡 The following PrimeNG components might be helpful: 
-  >    - [Checkbox](https://primeng.org/checkbox)
-  >    - [Multiselect](https://primeng.org/multiselect)
-  >    - [Slider (with range)](https://primeng.org/slider#range)
+- Add a button to the product page that allows the user to add this product to the shopping cart. The button should have a label and icon to communicate its function to the user. Ensure that it is not possible to add a product to the cart that does not have a valid size and color selected.
 
-- Your implementation should match the design pattern [Dynamic Queries](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=475): When a filter is activated/deactivated, the displayed products are updated instantly.
-- Your implementation should match common expectations of how filters work: When selecting multiple filters from the same category, products matching any of the filters should be shown. When selecting multiple filters across categories, products matching all of the filters should be shown.
+- Ensure that the contents of the shopping cart are retained across page reloads.
 
-  > 💡 You can find information on how to use `getInitialProductMetadata` for filtering in the updated `product.service.ts` file and in the tutorial slides. 
+  > 💡 The new `CartService` (in `cart.service.ts`) contains methods that use the browser's local storage to store data across page reloads (and sessions). To learn more about the `CartService` and local storage, see the tutorial slides and [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
 
-- When the applied filters (and/or search) result in 0 products, show a message to the user why no products are shown. Chose a suitable place in the UI for this message. In this case, the "Load more products"-button should also not be shown.
+  > 💡 The contents of the local storage can be checked in the web developer tools (sometimes called differently) of all common browsers.
 
-#### Create Search Bar
-3 Points
+#### Design Cart Page
+6 Points
 
-- Create a search bar above the product list. It should consist of an input field (to enter the search query) and a button (to start the search).
-  > 💡 You can use the [PrimeNG Input Group Component](https://primeng.org/inputgroup#button) for this.
+- Add a shopping cart page (e.g., accessible at the route <http://localhost:4200/cart>).
 
-  > 💡 You could add the search bar next to the layout switch button.
+- Add a cart button to the page header. When the cart button is clicked the shopping cart page should open.
 
-- When the user has typed something in the search field, they should be able to start the search by either clicking a "search" button or pressing enter on the keyboard (your implementation has to support both). It should not start immediately, while the user types.
+- On the cart page, add a list of items currently in the cart. Choose a suitable subset of product details to show in this list. The product image (of the correct color variant) must be included for each item. Clicking on a product in the cart should lead to this product's page.
 
-- Your implementation should match the "search" part of the design pattern [Feature, Search and Browse](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=59).
+  > 💡 When choosing details to show: Think about what information about the product the user might want to review at this point in their purchase.
 
-- When the applied search (and/or filters) result in 0 products, show a message to the user why there aren't any products shown. Chose a suitable place in the UI for this message. In this case, the "Load more products"-button should also not be shown.
+  > 💡 The new `CartService` (in `cart.service.ts`) contains methods that use the browser's local storage to store data across page reloads (and sessions).
 
-> 💡 You can find information on how to use `getInitialProductMetadata` for searching in the updated `product.service.ts` file and in the tutorial slides. 
+- For your design, apply the design patterns [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229) and [Cards](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=373).
 
-> 💡 The search function should search the product `name`. Specifically, if the search string is a substring of a product's `name` the product should be included in the search results.
+- When no items are in the cart, show a suitable message.
 
-> 💡 The search term and applied filters do _not_ need to be retained across site reloads.
+- The user should be able to change the quantity of each product in the shopping cart. Choose a suitable control to change the quantity. When the quantity of a product is set to 0, the product should be removed from the cart. Add also a button to directly remove a product from the cart.
+
+- Display the total price of all items (including quantities) added together. This price should update as the quantity of a product is changed.
+
+  > 💡 You are free to add additional prices (e.g. shipping or processing fees).
+
+- Add a checkout button that will later lead the user to the checkout process. You will implement the full checkout process in a future assignment. Integrate this button into the [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229) as the most prominent element.
+
+#### Implement Cart Badge
+2 Points
+
+- Add a badge to the cart button in the header to indicate the number of products currently in the cart. If the cart is empty, the badge should not be shown. The badge should update as products are added or removed from the shopping cart.
+
+  <img src="images/badge.png"  width="600">
+
+  > 💡 You can use the PrimeNG [Badge](https://primeng.org/badge) component or the built-in [badge attribute](https://primeng.org/badge#button) of the [Button](https://primeng.org/button) component for this task. Setting the `badge` button attribute to an empty string or `undefined` hides the badge.
+
+
 
 #### Tag the Final Commit
 
-- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment6`.
+- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment7`.
 
-> 💡 You can tag a commit in the terminal with the command `git tag -a assignment6` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
+> 💡 You can tag a commit in the terminal with the command `git tag -a assignment7` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
 
