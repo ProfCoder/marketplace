@@ -9,6 +9,7 @@ export interface CartItem {
     readonly id: string;
     // Selected color id of the product in the cart
     readonly color: string;
+    readonly colorName: string;
     // Selected size of the product in the cart
     readonly size: string;
     quantity: number;

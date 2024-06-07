@@ -86,6 +86,8 @@ export class CartService {
             (existing) =>
                 !this.isEquals(existing, item)
         );
+        this.items = [...this.items];
+
         if (this.items.length == 0)
             localStorage.removeItem('cartItems');
         else

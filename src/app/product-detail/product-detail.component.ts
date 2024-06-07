@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ImageModule } from 'primeng/image';
 import { ButtonModule } from 'primeng/button';
+import { CartItem } from '../services/cart-item';
+import { CartService } from '../services/cart.service';
 
 interface ProductWithRating extends Product {
   rating: number;
@@ -41,7 +43,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public productService: ProductService
+    public productService: ProductService,
+    private cartService: CartService
   ) {
     const lastTenPresidents = [
       'Joe Biden',
@@ -232,7 +235,21 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToBasket(): void {
-    // Logic to add the product will be done for the next assignments
+    if (!this.selectedSize || !this.selectedColor) {
+      alert('Please select a size and color.');
+      return;
+    }
+    
+    const cartItem: CartItem = {
+      id: this.product.id,
+      color: this.selectedColor.color_id,
+      colorName: this.selectedColor.color_name,
+      size: this.selectedSize,
+      quantity: this.selectedQuantity
+    };
+    
+    this.cartService.addCartItem(cartItem);
+    alert('Product added to cart!');
   }
 
   buyNow(): void {
