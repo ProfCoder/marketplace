@@ -5,10 +5,10 @@
       <img [src]="getProductImage(product)" alt="Product Image" width="100" [routerLink]="['/products', product.id]" style="cursor: pointer;">
       <div>
         <a [routerLink]="['/products', product.id]">Name: {{ product.name }}</a><br>
-        <a [routerLink]="['/products', product.id]">Price: {{ product.price }}</a><br>
+        <a [routerLink]="['/products', product.id]">Price: {{ product.price }}€</a><br>
         <a [routerLink]="['/products', product.id]">Size: {{ product.size }}</a><br>
         <a [routerLink]="['/products', product.id]">Color: {{ product.colorName }}</a><br>
-        <a [routerLink]="['/products', product.id]">Total price: {{ calculateTotalPrice(product.price, product.quantity) }}</a><br>
+        <a [routerLink]="['/products', product.id]">Total price: {{ calculateTotalPrice(product.price, product.quantity) }}€</a><br>
         <!-- <a [routerLink]="['/products', product.id]">Quantity: {{ product.quantity }}</a><br> -->
         <div>
           Quantity: 
@@ -20,7 +20,7 @@
       </div>
     </li>
   </ul>
-  <p>Total Price: ${{getTotalPrice()}}</p>
+  <p>Total Price: {{getTotalPrice()}}€</p>
 
   <button class="checkout-button">Checkout</button>
   <button (click)="clearCart()" class="clear-cart-button">Remove all items</button>
