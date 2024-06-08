@@ -24,6 +24,8 @@ main {
     padding-top: 2rem;
 }
 
+
+
 /* Set max width to have sensible line lengths on wide screen (responsive) */
 @media (min-width: 70rem) {
     main {
@@ -36,3 +38,4 @@ a {
     color: inherit;
     text-decoration: inherit;
 }
+

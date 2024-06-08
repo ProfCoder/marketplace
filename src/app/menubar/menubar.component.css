@@ -14,16 +14,6 @@ nav {
     grid-template-columns: 1fr 1fr;
 }
 
-/*
-Set a max width on wide screens.
-For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
-*/
-@media (min-width: 72rem) {
-    .menu {
-        width: var(--max-width)
-    }
-}
-
 #logo {
     display: flex;
     align-items: center;
@@ -50,6 +40,7 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
     color: white !important; 
 }
 
+
 .cart-badge {
     cursor: pointer;
     position: relative;
@@ -63,10 +54,9 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
  
 }
 
-.cart-badge .badge .p-badge .p-badge-value {
-    /* font-size: 22px;  */
-}
-
+/* .cart-badge .badge .p-badge .p-badge-value {
+    font-size: 10px; 
+} */
 
 
 
@@ -91,6 +81,11 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 
 
 
+::ng-deep .p-badge {
+  font-size: 13px;
+  padding: 0 6px; 
+}
+
   
 /*
 Use the combination of :host and ::ng-deep to adapt PrimeNG styles
@@ -104,11 +99,29 @@ See https://primeng.org/theming#scopedcss and https://angular.io/guide/component
 
 :host ::ng-deep .p-button {
     font-weight: 600;
-
     color:black;
 }
 
 
 .mylogo {
-   width: 200px;
+   width: 220px;
 }
+
+
+
+
+/*
+Set a max width on wide screens.
+For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
+*/
+@media (min-width: 72rem) {
+    .menu {
+        width: var(--max-width)
+    }
+}
+
+
+
+
+
+

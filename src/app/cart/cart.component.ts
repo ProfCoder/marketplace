@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
 [x: string]: any;
   cartItems: CartItem[] = [];
   products: any[] = [];
-  
+  quantityOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
 
   constructor(private cartService: CartService, private productService: ProductService) {}
 
@@ -51,19 +51,33 @@ export class CartComponent implements OnInit {
     });
   }
 
-  changeQuantity(product: any, change: number, event: MouseEvent) {
-    event.stopPropagation();
+  // changeQuantity(product: any, change: number, event: MouseEvent) {
+  //   event.stopPropagation();
 
+  //   const index = this.products.findIndex(p => p.id === product.id && p.color === product.color);
+  //   if (index > -1) {
+  //     this.products[index].quantity += change;
+  //     if (this.products[index].quantity < 1) {
+  //       this.removeProduct(this.products[index]);
+  //     } else {
+  //       this.cartService.setCartItem(this.products[index]);
+  //     }
+  //   }
+  // }
+
+  changeQuantity(product: ExtendedProduct, event: any) {
+    const newQuantity = parseInt(event.target.value);
     const index = this.products.findIndex(p => p.id === product.id && p.color === product.color);
     if (index > -1) {
-      this.products[index].quantity += change;
-      if (this.products[index].quantity < 1) {
+      this.products[index].quantity = newQuantity;
+      if (newQuantity < 1) {
         this.removeProduct(this.products[index]);
       } else {
         this.cartService.setCartItem(this.products[index]);
       }
     }
   }
+  
 
   calculateTotalPrice(quantity: number, price: number): string {
     return (quantity * price).toFixed(2);

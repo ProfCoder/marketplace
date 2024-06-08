@@ -1,0 +1,255 @@
+.cart-container {
+    /* background-color:#439cb00c; */
+    padding: 20px 15px;
+    
+}
+
+.basket-header-container {
+    /* height: 40px; */
+    padding: 0 0 20px 0;
+    /* padding-left: 5px; */
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.basket-header {
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+
+
+
+.header-price {
+    padding-right: 10px;
+    color: gray;
+    font-size: 16px;
+}
+
+.card-item-container {
+    border-bottom: 1px solid lightgray;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cart-image {
+    width: 15%;
+}
+
+.basket-item-description {
+/* background-color: #F3A41E; */
+width: 76%;
+}
+
+.cart-price {
+    width: 9%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* justify-content:start; */
+    padding-top: 20px;
+    padding-right: 3px;
+}
+
+.total-item-price {
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+
+
+.price-per-item {
+    color: rgba(128, 128, 128, 0.706);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.cart-name {
+    font-size: 20px;
+    font-weight: 700;
+  
+}
+
+.in-stock {
+    color: green;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 450;
+}
+
+.details-container {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    justify-content: space-between;
+}
+
+.details {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.cart-details{
+    font-size: 13px;
+}
+
+.cart-urls-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.quantity-container {
+    margin-right: 12px;
+}
+
+.quantity select {
+    padding: 1px 1px;
+    background-color: #F0F2F2;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer; 
+  }
+  
+  .quantity select:focus {
+    outline: none; 
+    /* border-color: dodgerblue; */
+  }
+  
+
+.delete-item-button, .save-item-button {
+    border: none;
+    /* background-color: #fff; */
+    background-color: transparent;
+    padding: 0;
+    color: #1b5e72c1;
+    font-size: 14px;
+    font-weight: 550; 
+}
+
+.delete-item-button {
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    margin-right: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.delete-item-button:hover, .save-item-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.item-middle-section-container {
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    /* background-color: red; */
+    height: 145px;
+}
+
+.basket-item-description {
+    padding-left: 20px;
+}
+
+
+
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 0;
+    margin-bottom: 40px;
+}
+
+.total-price-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.clear-button {
+    border: none;
+    /* width: 50%; */
+    text-align: left;
+    margin-top: 10px;
+}
+
+.total-price {
+    font-size: 18px;
+    padding: 10px 0;
+    /* text-align: right; */
+
+}
+.total-price-text {
+    font-weight: 600;
+}
+
+.checkout-button {
+    background-color: #F3A41E;
+    font-size: 20px;
+    font-weight: 550;
+    width: 240px;
+    padding: 20px 20px;
+    border: none;
+    border-radius: 150px;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
+    background-color: #f3a51ec4;
+}
+
+
+.empty-cart-container {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.main-page-button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    border:none;
+    border-radius: 10px;
+    background-color: #F3A41E;
+    cursor: pointer;
+    font-weight: 550;
+    font-size: 16px;
+}
+
+.main-page-button:hover {
+    background-color: #f3a51ec4;
+}
+
+/* Media query for smaller screen sizes */
+@media screen and (max-width: 768px) {
+    .card-item-container {
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    .cart-image,
+    .basket-item-description,
+    .cart-price {
+        width: 100%; 
+        
+    }
+
+    .cart-image img {
+        width: 220px;
+    }
+
+    .cart-price {
+        align-items: center;
+    }
+}
