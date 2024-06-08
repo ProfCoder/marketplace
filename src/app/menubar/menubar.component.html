@@ -10,7 +10,22 @@
         <div class="menu-entries">
             <p-button [routerLink]="['login']" [text]="true" icon="pi pi-sign-in" label="Log in"></p-button>
             <p-button [routerLink]="['register']" [text]="true" icon="pi pi-user-plus" label="Register"></p-button>
-            <p-button [routerLink]="['cart']" [text]="true" icon="pi pi-shopping-cart" label="Cart"></p-button>
+      
+
+            <!-- <span class="cart-badge" *ngIf="cartItemCount !== 0">
+                <i [routerLink]="['cart']" class="pi pi-bell text-3xl" pBadge [value]="cartItemCount"></i>
+                <i class="pi pi-shopping-cart" style="font-size: 1.6rem"></i>
+                <p-badge [value]="cartItemCount"  />
+            </span> -->
+
+            <span [routerLink]="['cart']" class="cart-badge" [ngClass]="{'fade-out': cartItemCount === 0}">
+                <i class="pi pi-shopping-cart" style="font-size: 1.8rem;"></i>
+                <p-badge [value]="cartItemCount" class="badge"></p-badge>
+            </span>
+            
+
+            
+            
         </div>
     </div>
 </nav>

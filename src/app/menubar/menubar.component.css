@@ -50,7 +50,48 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
     color: white !important; 
 }
 
+.cart-badge {
+    cursor: pointer;
+    position: relative;
+    animation: shake 0.5s ease-in-out; 
+}
 
+.cart-badge .badge {
+    position: absolute;
+    top: -9px;
+    right: -7px;
+ 
+}
+
+.cart-badge .badge .p-badge .p-badge-value {
+    /* font-size: 22px;  */
+}
+
+
+
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.fade-out {
+    animation: flyOut 0.5s forwards;
+}
+
+@keyframes flyOut {
+    0% { opacity: 1; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(10px); }
+    100% { opacity: 0; transform: translateX(20px); display: none; }
+}
+
+
+
+
+  
 /*
 Use the combination of :host and ::ng-deep to adapt PrimeNG styles
 See https://primeng.org/theming#scopedcss and https://angular.io/guide/component-styles#special-selectors for more info

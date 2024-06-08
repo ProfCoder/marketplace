@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
 [x: string]: any;
   cartItems: CartItem[] = [];
   products: any[] = [];
+  
 
   constructor(private cartService: CartService, private productService: ProductService) {}
 
@@ -101,4 +102,6 @@ export class CartComponent implements OnInit {
   navigateToProduct(id: string) {
     window.location.href = `/product/${id}`;
   }
+
+
 }

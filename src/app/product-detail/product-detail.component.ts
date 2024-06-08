@@ -236,21 +236,24 @@ export class ProductDetailComponent implements OnInit {
 
   addToBasket(): void {
     if (!this.selectedSize || !this.selectedColor) {
-      alert('Please select a size and color.');
-      return;
+        alert('Please select a size and color.');
+        return;
     }
     
     const cartItem: CartItem = {
-      id: this.product.id,
-      color: this.selectedColor.color_id,
-      colorName: this.selectedColor.color_name,
-      size: this.selectedSize,
-      quantity: this.selectedQuantity
+        id: this.product.id,
+        color: this.selectedColor.color_id,
+        colorName: this.selectedColor.color_name,
+        size: this.selectedSize,
+        quantity: this.selectedQuantity
     };
     
     this.cartService.addCartItem(cartItem);
-    alert('Product added to cart!');
-  }
+    
+    // Redirect to the cart page
+    this.router.navigate(['/cart']);
+}
+
 
   buyNow(): void {
     // Logic to buy product will be done for the next assignments

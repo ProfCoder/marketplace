@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from './cart-item';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CartService {
     items: CartItem[] = [];
+    cartItemsChanged: Subject<void> = new Subject<void>(); // Subject to emit events when cart items change
 
     constructor() {
         // Retrieve items from localStore when site is reloaded.
         const stored = localStorage.getItem('cartItems');
-        if (stored)
+        if (stored) {
             this.items = JSON.parse(stored);
+        }
     }
 
-    /**
-     * Checks if two CartItems are equal based on their id, color, and size.
-     * 
-     * We disregard quantity in the equality check as this does not make an item unique.
-     * @param first - The first CartItem to compare.
-     * @param second - The second CartItem to compare.
-     * @returns True if the CartItems are equal, false otherwise.
-     */
     private isEquals(first: CartItem, second: CartItem): boolean {
+        // Checks if two CartItems are equal based on their id, color, and size.
+        // We disregard quantity in the equality check as this does not make an item unique.
         return (
             first.id === second.id &&
             first.color === second.color &&
@@ -48,6 +45,7 @@ export class CartService {
             this.items.push(item);
         }
         localStorage.setItem('cartItems', JSON.stringify(this.items));
+        this.cartItemsChanged.next(); // Emit event when cart items change
     }
 
     /**
@@ -70,8 +68,8 @@ export class CartService {
             this.items.push(item);
         }
         localStorage.setItem('cartItems', JSON.stringify(this.items));
+        this.cartItemsChanged.next(); // Emit event when cart items change
     }
-
 
     /**
      * Removes a cart item from the cart.
@@ -92,6 +90,8 @@ export class CartService {
             localStorage.removeItem('cartItems');
         else
             localStorage.setItem('cartItems', JSON.stringify(this.items));
+        
+        this.cartItemsChanged.next(); // Emit event when cart items change
     }
 
     /**
@@ -100,6 +100,7 @@ export class CartService {
     clearCart(): void {
         this.items = [];
         localStorage.removeItem('cartItems');
+        this.cartItemsChanged.next(); // Emit event when cart items change
     }
 
     /**
