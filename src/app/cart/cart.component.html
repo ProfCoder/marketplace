@@ -1,39 +1,41 @@
 <div class="cart-container">
-  
-<div class="basket-header-container">
-  <div class="basket-header">Shopping Basket</div>
-  <div class="header-price">Price</div>
-</div>
+  <div class="basket-header-container">
+    <div class="basket-header">Shopping Basket</div>
+    <div class="header-price">Price</div>
+  </div>
 
-<div *ngIf="products.length > 0; else emptyCart">
-
+  <div *ngIf="products.length > 0; else emptyCart">
     <div class="card-item-container" *ngFor="let product of products; trackBy: trackByItems">
-      <div class="cart-image"><img [src]="getProductImage(product)" alt="Product Image" width="155" [routerLink]="['/products', product.id]" style="cursor: pointer;"></div>
+      <div class="cart-image">
+        <img [src]="getProductImage(product)" alt="Product Image" width="155" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+      </div>
       <div class="basket-item-description">
-          <a class="cart-name" [routerLink]="['/products', product.id]">{{ product.name }}</a>
-          <div class="in-stock">In stock</div>
-          <!-- <a class="cart-name" [routerLink]="['/products', product.id]">Price almaz: {{ product.price }}€</a><br> -->
-          <div class="item-middle-section-container">
-            <div class="details-container">
-              <div class="details">Details:</div>
-              <div class="cart-details">Type: {{ product.type }}</div>
-              <div class="cart-details">Size: {{ product.size }}</div>
-              <div class="cart-details">Color: {{ product.colorName }}</div>
-              <div class="cart-urls-container">
-                <div class="quantity-container">
-                  <div class="quantity">
-                    <select (change)="changeQuantity(product, $event)">
-                      <option *ngFor="let option of quantityOptions" [value]="option" [selected]="option === product.quantity">Qty: {{ option }}</option>
-                    </select>
-                  </div>
+        <a class="cart-name" [routerLink]="['/products', product.id]">{{ product.name }}</a>
+        <div class="in-stock">In stock</div>
+        <div class="item-middle-section-container">
+          <div class="details-container">
+            <div class="details">Details:</div>
+            <div class="cart-details">Type: {{ product.type }}</div>
+            <div class="cart-details">Size: {{ product.size }}</div>
+            <div class="cart-details">Color: {{ product['colorName'] }}</div>
+            <div class="cart-urls-container">
+              <div class="quantity-container">
+                <div class="quantity" *ngIf="!product.customQuantity">
+                  <select (change)="changeQuantity(product, $event)">
+                    <option *ngFor="let option of quantityOptions" [value]="option" [selected]="option === product.quantity">
+                      {{ option === 0 ? '0 (Delete)' : option === 10 ? '10+' : 'Qty: ' + option }}
+                    </option>
+                  </select>
                 </div>
-                <div><button class="delete-item-button" (click)="removeProduct(product)">Delete</button></div>
-                <div><button class="save-item-button">Save for later</button></div>
+                <div *ngIf="product.customQuantity">
+                  <input type="number" class="custom-quantity custom-quantity-focus" [value]="product.quantity" (blur)="handleCustomQuantity(product, $event)" (keydown.enter)="handleCustomQuantity(product, $event)" placeholder="Enter quantity">
+                </div>
               </div>
+              <div><button class="delete-item-button" (click)="removeProduct(product)">Delete</button></div>
+              <div><button class="save-item-button">Save for later</button></div>
             </div>
-            
           </div>
-
+        </div>
       </div>
       <div class="cart-price">
         <div class="total-item-price"> €{{ calculateTotalPrice(product.price, product.quantity) }}</div>
@@ -41,34 +43,22 @@
       </div>
     </div>
 
-
     <div class="total-price-container">
-      <!-- <button class="delete-item-button clear-button" (click)="clearCart()">Remove all items</button> -->
-      <div ><button *ngIf="products.length > 1" class="delete-item-button clear-button" (click)="clearCart()">Delete all items</button></div>
-      <div class="total-price">Total Price: <span class="total-price-text">€{{getTotalPrice()}}</span></div>
+      <div><button *ngIf="products.length > 1" class="delete-item-button clear-button" (click)="clearCart()">Delete all items</button></div>
+      <div class="total-price">Total Price: <span class="total-price-text">€{{ getTotalPrice() }}</span></div>
     </div>
-
-
 
     <div class="checkout-container">
-   
       <div class="cart-buttons">
         <button class="checkout-button">Proceed to Checkout</button>
-        <!-- <button (click)="clearCart()" class="clear-cart-button">Remove all items</button> -->
       </div>
     </div>
-    
-</div>
-
-
-</div>
-
-
-
-<ng-template #emptyCart>
-  <div class="empty-cart-container">
-    <div>Your shopping cart is empty.</div>
-    <div><button class="main-page-button" [routerLink]="['/']">Go to main page</button></div>
   </div>
 
-</ng-template>
+  <ng-template #emptyCart>
+    <div class="empty-cart-container">
+      <div>Your shopping cart is empty.</div>
+      <div><button class="main-page-button" [routerLink]="['/']">Go to main page</button></div>
+    </div>
+  </ng-template>
+</div>

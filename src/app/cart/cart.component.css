@@ -1,27 +1,19 @@
 .cart-container {
-    /* background-color:#439cb00c; */
     padding: 20px 15px;
-    
 }
 
 .basket-header-container {
-    /* height: 40px; */
     padding: 0 0 20px 0;
-    /* padding-left: 5px; */
     border-bottom: 1px solid lightgray;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
 }
+
 .basket-header {
     font-size: 22px;
     font-weight: 600;
-
 }
-
-
-
 
 .header-price {
     padding-right: 10px;
@@ -42,8 +34,7 @@
 }
 
 .basket-item-description {
-/* background-color: #F3A41E; */
-width: 75%;
+    width: 75%;
 }
 
 .cart-price {
@@ -51,7 +42,6 @@ width: 75%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* justify-content:start; */
     padding-top: 20px;
     padding-right: 3px;
 }
@@ -62,7 +52,6 @@ width: 75%;
     padding-bottom: 10px;
 }
 
-
 .price-per-item {
     color: rgba(128, 128, 128, 0.706);
     font-size: 12px;
@@ -72,7 +61,6 @@ width: 75%;
 .cart-name {
     font-size: 20px;
     font-weight: 700;
-  
 }
 
 .in-stock {
@@ -86,7 +74,6 @@ width: 75%;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-    /* align-items: flex-start; */
     justify-content: space-between;
 }
 
@@ -96,7 +83,7 @@ width: 75%;
     margin-bottom: 5px;
 }
 
-.cart-details{
+.cart-details {
     font-size: 13px;
 }
 
@@ -104,11 +91,12 @@ width: 75%;
     margin-top: 15px;
     display: flex;
     flex-direction: row;
-
 }
 
 .quantity-container {
     margin-right: 12px;
+    position: relative;
+
 }
 
 .quantity select {
@@ -116,23 +104,56 @@ width: 75%;
     background-color: #F0F2F2;
     border: 1px solid lightgray;
     border-radius: 5px;
-    cursor: pointer; 
-  }
-  
-  .quantity select:focus {
-    outline: none; 
-    /* border-color: dodgerblue; */
-  }
-  
+    cursor: pointer;
+    transition: width 0.3s;
+    width: 95px;
+}
+
+.quantity select.expanded {
+    width: 150px; 
+}
+
+.quantity select:focus {
+    outline: none;
+}
+
+.custom-quantity {
+    width: 95px;
+    background-color: #F0F2F2;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+.custom-quantity:focus {
+    border-color: dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+    padding: 2px 5px;
+}
+
+.custom-quantity::-webkit-outer-spin-button,
+.custom-quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.custom-quantity[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.custom-quantity.custom-quantity-focus {
+    border-color: dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+
 
 .delete-item-button, .save-item-button {
     border: none;
-    /* background-color: #fff; */
     background-color: transparent;
     padding: 0;
     color: #1b5e72c1;
     font-size: 14px;
-    font-weight: 550; 
+    font-weight: 550;
 }
 
 .delete-item-button {
@@ -151,16 +172,13 @@ width: 75%;
 .item-middle-section-container {
     display: flex;
     flex-direction: row;
-    justify-content:flex-start;
-    /* background-color: red; */
+    justify-content: flex-start;
     height: 145px;
 }
 
 .basket-item-description {
     padding-left: 20px;
 }
-
-
 
 .checkout-container {
     display: flex;
@@ -174,12 +192,11 @@ width: 75%;
 .total-price-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 .clear-button {
     border: none;
-    /* width: 50%; */
     text-align: left;
     margin-top: 10px;
 }
@@ -187,9 +204,8 @@ width: 75%;
 .total-price {
     font-size: 18px;
     padding: 10px 0;
-    /* text-align: right; */
-
 }
+
 .total-price-text {
     font-weight: 600;
 }
@@ -209,7 +225,6 @@ width: 75%;
     background-color: #f3a51ec4;
 }
 
-
 .empty-cart-container {
     margin-top: 50px;
     text-align: center;
@@ -219,7 +234,7 @@ width: 75%;
 .main-page-button {
     margin-top: 30px;
     padding: 10px 20px;
-    border:none;
+    border: none;
     border-radius: 10px;
     background-color: #F3A41E;
     cursor: pointer;
@@ -234,15 +249,14 @@ width: 75%;
 /* Media query for smaller screen sizes */
 @media screen and (max-width: 768px) {
     .card-item-container {
-        flex-direction: column; 
+        flex-direction: column;
         text-align: center;
     }
 
     .cart-image,
     .basket-item-description,
     .cart-price {
-        width: 100%; 
-        
+        width: 100%;
     }
 
     .cart-image img {
