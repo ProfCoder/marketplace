@@ -2,7 +2,7 @@
 
 ## Assignment 6: Search and Filter
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [9.5/10]** ✅ 
 **Deadline: 04.06.2024 13:30**
 
 <img src="images/filter-example.png"  width="600">
@@ -20,8 +20,10 @@ You can find all design patterns in the book [Designing Interfaces: Patterns for
 
 In this assignment, you will implement search and filter bars for our shop.
 
-- [ ] [Create Filter Sidebar](#create-filter-sidebar) (7 Points)
-- [ ] [Create Search Bar](#create-search-bar) (3 Points)
+- [ ] [Create Filter Sidebar](#create-filter-sidebar) (6.5/7 Points)
+
+  > ⚠️ The filters only become visible after starting a search. This makes it really hard to discover the filters. However, when visible the filters provide great visual feedback! Also really cool shop design & logo :) 🏅
+- [ ] [Create Search Bar](#create-search-bar) (3/3 Points)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
 
 ### Instructions
