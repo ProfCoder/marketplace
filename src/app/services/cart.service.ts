@@ -7,7 +7,8 @@ import { Subject } from 'rxjs';
 })
 export class CartService {
     items: CartItem[] = [];
-    cartItemsChanged: Subject<void> = new Subject<void>(); // Subject to emit events when cart items change
+    cartItemsChanged: Subject<void> = new Subject<void>(); 
+    private itemsRemoved: boolean = false; 
 
     constructor() {
         // Retrieve items from localStore when site is reloaded.
@@ -36,8 +37,7 @@ export class CartService {
      */
     addCartItem(item: CartItem): void {
         const existingItem = this.items.find(
-            (existing) =>
-                this.isEquals(existing, item)
+            (existing) => this.isEquals(existing, item)
         );
         if (existingItem) {
             existingItem.quantity += item.quantity;
@@ -45,7 +45,7 @@ export class CartService {
             this.items.push(item);
         }
         localStorage.setItem('cartItems', JSON.stringify(this.items));
-        this.cartItemsChanged.next(); // Emit event when cart items change
+        this.cartItemsChanged.next(); 
     }
 
     /**
@@ -56,8 +56,7 @@ export class CartService {
      */
     setCartItem(item: CartItem): void {
         const existingItem = this.items.find(
-            (existing) =>
-                this.isEquals(existing, item)
+            (existing) => this.isEquals(existing, item)
         );
         if (existingItem) {
             existingItem.quantity = item.quantity;
@@ -68,7 +67,7 @@ export class CartService {
             this.items.push(item);
         }
         localStorage.setItem('cartItems', JSON.stringify(this.items));
-        this.cartItemsChanged.next(); // Emit event when cart items change
+        this.cartItemsChanged.next(); 
     }
 
     /**
@@ -81,17 +80,17 @@ export class CartService {
      */
     removeCartItem(item: CartItem): void {
         this.items = this.items.filter(
-            (existing) =>
-                !this.isEquals(existing, item)
+            (existing) => !this.isEquals(existing, item)
         );
         this.items = [...this.items];
+        this.itemsRemoved = true; 
 
-        if (this.items.length == 0)
+        if (this.items.length === 0)
             localStorage.removeItem('cartItems');
         else
             localStorage.setItem('cartItems', JSON.stringify(this.items));
         
-        this.cartItemsChanged.next(); // Emit event when cart items change
+        this.cartItemsChanged.next(); 
     }
 
     /**
@@ -100,7 +99,8 @@ export class CartService {
     clearCart(): void {
         this.items = [];
         localStorage.removeItem('cartItems');
-        this.cartItemsChanged.next(); // Emit event when cart items change
+        this.itemsRemoved = true; 
+        this.cartItemsChanged.next(); 
     }
 
     /**
@@ -119,5 +119,20 @@ export class CartService {
      */
     getTotalCartItems(): number {
         return this.items.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    /**
+     * Checks if items were removed from the cart.
+     * @returns A boolean indicating if items were removed.
+     */
+    wereItemsRemoved(): boolean {
+        return this.itemsRemoved;
+    }
+
+    /**
+     * Resets the items removed flag.
+     */
+    resetItemsRemovedFlag(): void {
+        this.itemsRemoved = false;
     }
 }

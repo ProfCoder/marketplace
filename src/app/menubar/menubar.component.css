@@ -54,12 +54,6 @@ nav {
  
 }
 
-/* .cart-badge .badge .p-badge .p-badge-value {
-    font-size: 10px; 
-} */
-
-
-
 @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
@@ -77,9 +71,6 @@ nav {
     50% { opacity: 1; transform: translateX(10px); }
     100% { opacity: 0; transform: translateX(20px); display: none; }
 }
-
-
-
 
 ::ng-deep .p-badge {
   font-size: 13px;
