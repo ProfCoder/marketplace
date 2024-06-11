@@ -1,33 +1,107 @@
 # Interactive Systems - Tutorial
 
-## Assignment 7: Shopping Cart
+## Assignment 8: Checkout Wizard
 
-**Achieved Points: [__/10]**  
-**Deadline: 11.06.2024 13:30**
+**Achieved Points: [__/20]**  
+**Deadline: 25.06.2024 13:30**
 
-<img src="images/assignment7_teaser.png">
+<img src="images/assignment8_teaser.png">
 
 ### Design Patterns
 
 The following Design Patterns (or guidelines) are applied in this assignment:
 
+- [ ] [Wizard](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=106) (Page 86)
+- [ ] [Progressive Disclosure](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=244) (Page 224)
 - [ ] [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229) (Page 209)
-- [ ] [Cards](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=373) (Page 353)
+- [ ] [Structured Format](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=502) (Page 482)
+- [ ] [Input Hints](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=509) (Page 489)
+- [ ] [Input Prompt](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=514) (Page 494)
 
 You can find all design patterns in the book [Designing Interfaces: Patterns for Effective Interaction Design](https://ebookcentral.proquest.com/lib/uni-konstanz/detail.action?docID=5996435)
 
 ### Tasks
 
-In this assignment, you will implement a shopping cart.
+In this assignment, you will implement a checkout wizard for your shop.
 
-- [ ] [Implement 'Add to cart' button](#implement-add-to-cart-button) (2 Points)
-- [ ] [Design cart page](#design-cart-page) (6 Points)
-- [ ] [Implement Cart Badge](#implement-cart-badge) (2 Points)
+- [ ] [Design Wizard Structure](#design-wizard-structure) (6 Points)
+- [ ] [Implement 'Address' Step](#implement-address-step) (4 Points)
+- [ ] [Implement 'Delivery & Payment' Step](#implement-delivery--payment-step) (4 Points)
+- [ ] [Implement 'Summary' Step](#implement-summary-step) (4 Points)
+- [ ] [Implement Success Page](#implement-success-page) (2 Point)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
 
 ### Instructions
 
-#### Implement 'Add to cart' Button
+#### Design Wizard Structure
+6 Points
+
+- Create a new page for the checkout wizard. It should open when the checkout button on the cart page is pressed
+
+- Design a wizard interface for a multi-step checkout process with three steps: **Address, Delivery & Payment,** and **Summary** 
+
+- The user should see at all times which step they are currently in and which other steps must be performed. For your design, apply the design pattern [Wizard](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=106).
+
+  > 💡 You can use the PrimeNG [Stepper](https://primeng.org/stepper) component in your checkout wizard. Depending on your Angular version you may need to update the primeng npm package with `npm update primeng --save`.
+
+- Apply the pattern [Progressive Disclosure](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=244) to guide the user through the steps. Make sure that the steps must be completed in chronological order. Ensure that the contents of next and past steps are hidden in the current step.
+
+- When implementing the respective steps, ensure that the user cannot progress the wizard if the state of the current step is unclear (e.g. if a form is incomplete or otherwise invalid).
+
+- Apply a [Visual Hierarchy](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=229) for the wizard and all its steps.
+
+#### Implement 'Address' Step
+4 Points
+
+- In the first step of the checkout wizard, the user should enter the delivery address.
+
+- Provide a pre-filled address to simulate the saved address of a logged-in user.
+
+  > 💡 You can hard-code an address of your choice for this.
+
+- Allow the user to change the provided address. Ensure that the user cannot progress this step in the wizard until a valid address is entered. A valid address consists of a name, street name + number, postal code, city and country.
+
+- For the input of the custom address apply the patterns of [Assignment 2](assignment2.md): Apply [Structured Format](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=502), [Input Hints](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=509), [Input Prompt](https://ebookcentral.proquest.com/lib/uni-konstanz/reader.action?docID=5996435&ppg=514) where appropriate.
+
+> 💡 You can use PrimeNG components as you see fit.
+
+#### Implement 'Delivery & Payment' Step
+3 Points
+
+- In the second step of the checkout wizard, the user should select their preferred delivery option and payment method.
+
+- Provide at least three shipping options. Each shipping option should have a delivery time and price associated.
+
+- Provide at least three payment options.
+
+- For both shipping and payment options, choose suitable icons.
+
+  > 💡 You can use [PrimeIcons](https://primeng.org/icons#list) to find icons.
+
+- The user should only be able to select one payment option and one delivery option. It should not be possible to progress without selecting an option.
+
+#### Implement 'Summary' Step
+2 Points
+
+- In the last step of the checkout wizard, the user can review the checkout details before making a purchase.
+
+- This step should show the delivery address, selected delivery and payment method, and total price.
+
+- This step should contain a button that confirms the purchase. Upon pressing the button, the cart should be cleared.
+
+#### Implement Success Page
+2 Points
+
+- Design a page that the user is redirected to after completing the checkout wizard. This page should not be part of the wizard.
+
+- The page should inform the user that the checkout is successfully completed.
+
+- The page should contain a button to direct the user to the start page.
+
+
+
+
+<!-- #### Implement 'Add to cart' Button
 2 Points
 
 - Add a button to the product page that allows the user to add this product to the shopping cart. The button should have a label and icon to communicate its function to the user. Ensure that it is not possible to add a product to the cart that does not have a valid size and color selected.
@@ -70,13 +144,13 @@ In this assignment, you will implement a shopping cart.
 
   <img src="images/badge.png"  width="600">
 
-  > 💡 You can use the PrimeNG [Badge](https://primeng.org/badge) component or the built-in [badge attribute](https://primeng.org/badge#button) of the [Button](https://primeng.org/button) component for this task. Setting the `badge` button attribute to an empty string or `undefined` hides the badge.
+  > 💡 You can use the PrimeNG [Badge](https://primeng.org/badge) component or the built-in [badge attribute](https://primeng.org/badge#button) of the [Button](https://primeng.org/button) component for this task. Setting the `badge` button attribute to an empty string or `undefined` hides the badge. -->
 
 
 
 #### Tag the Final Commit
 
-- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment7`.
+- When you are finished with the assignment, tag the final commit before the deadline with the tag `assignment8`.
 
-> 💡 You can tag a commit in the terminal with the command `git tag -a assignment7` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
+> 💡 You can tag a commit in the terminal with the command `git tag -a assignment8` or in GitLab (Code -> Tags -> New tag). To push all tags to GitLab use the command `git push --tags`.
 
