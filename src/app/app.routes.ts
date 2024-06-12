@@ -6,6 +6,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component'; 
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutWizardComponent } from './checkout-wizard/checkout-wizard.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +40,10 @@ export const routes: Routes = [
     {
         path: 'cart',
         component: CartComponent,
+    },
+    {
+        path: 'checkout', 
+        component: CheckoutWizardComponent,
     },
     {
         path: '**',

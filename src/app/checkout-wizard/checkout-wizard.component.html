@@ -1,0 +1,17 @@
+<p-steps [model]="steps" [(activeIndex)]="currentStep"></p-steps>
+
+<div *ngIf="currentStep === 0">
+  <app-address-form (addressValidityChange)="onAddressValidityChange($event)"></app-address-form>
+  <button [disabled]="!addressValid" (click)="nextStep()">Next</button>
+</div>
+<div *ngIf="currentStep === 1">
+  <h3>Delivery & Payment</h3>
+  <!-- Content for step 2 -->
+  <button (click)="previousStep()">Back</button>
+  <button (click)="nextStep()">Next</button>
+</div>
+<div *ngIf="currentStep === 2">
+  <h3>Summary</h3>
+  <!-- Content for step 3 -->
+  <button (click)="previousStep()">Back</button>
+</div>

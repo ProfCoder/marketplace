@@ -5,6 +5,7 @@ import { CartItem } from '../services/cart-item';
 import { ProductService } from '../services/product.service';
 import { Product } from '../services/product';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 interface ExtendedProduct extends Product {
   color: string;
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
   products: ExtendedProduct[] = [];
   quantityOptions: number[] = Array.from({ length: 11 }, (_, i) => i); 
 
-  constructor(private cartService: CartService, private productService: ProductService) {}
+  constructor(private cartService: CartService, private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.cartItems = this.cartService.getAllCartItems();
@@ -122,5 +123,9 @@ export class CartComponent implements OnInit {
       quantity: product.quantity,
       colorName: product.colorName
     };
+  }
+  navigateToCheckout() {
+    this.router.navigate(['/checkout']);
+    console.log('Navigattion to checkout wizard');
   }
 }
