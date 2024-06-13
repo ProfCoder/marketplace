@@ -1,12 +1,25 @@
+
 <div>
   <h3>Choose a delivery address</h3>
-  <div>
-    <label *ngFor="let address of savedAddresses">
-      <input type="radio" name="address" (change)="selectAddress(address)" [checked]="address === selectedAddress">
-      {{ address.name }} {{ address.street }}, {{ address.city }}, {{ address.postalCode }}, {{ address.country }}
-    </label>
+  <div *ngFor="let address of savedAddresses; let i = index">
+    <div *ngIf="editingIndex === i; else displayAddress">
+      <input type="text" [(ngModel)]="address.name" placeholder="Name">
+      <input type="text" [(ngModel)]="address.street" placeholder="Street">
+      <input type="text" [(ngModel)]="address.city" placeholder="City">
+      <input type="text" [(ngModel)]="address.postalCode" placeholder="Postal Code">
+      <input type="text" [(ngModel)]="address.country" placeholder="Country">
+      <button (click)="saveUpdatedAddress(i)">Save</button>
+    </div>
+    <ng-template #displayAddress>
+      <label class="address-label">
+        <input type="radio" name="address" (change)="selectAddress(address)" [checked]="address === selectedAddress">
+        {{ address.name }} {{ address.street }}, {{ address.city }}, {{ address.postalCode }}, {{ address.country }} 
+      </label>
+      <button (click)="editAddress(i)">Change</button>
+      <button (click)="removeAddress(i)">Remove</button>
+    </ng-template>
   </div>
-  <button (click)="addNewAddress()">Add a new address</button>
+  <button (click)="addNewAddress()">Add another address</button>
   <div *ngIf="addingAddress">
     <input type="text" placeholder="Name" [(ngModel)]="newAddress.name" (input)="onInputChange('name', $event)">
     <input type="text" placeholder="Street" [(ngModel)]="newAddress.street" (input)="onInputChange('street', $event)">
@@ -14,14 +27,5 @@
     <input type="text" placeholder="Postal Code" [(ngModel)]="newAddress.postalCode" (input)="onInputChange('postalCode', $event)">
     <input type="text" placeholder="Country" [(ngModel)]="newAddress.country" (input)="onInputChange('country', $event)">
     <button (click)="saveNewAddress()">Save Address</button>
-  </div>
-
-  <div *ngIf="editingAddress">
-    <input type="text" placeholder="Name" [(ngModel)]="selectedAddress.name" (input)="onInputChange('name', $event)">
-    <input type="text" placeholder="Street" [(ngModel)]="selectedAddress.street" (input)="onInputChange('street', $event)">
-    <input type="text" placeholder="City" [(ngModel)]="selectedAddress.city" (input)="onInputChange('city', $event)">
-    <input type="text" placeholder="Postal Code" [(ngModel)]="selectedAddress.postalCode" (input)="onInputChange('postalCode', $event)">
-    <input type="text" placeholder="Country" [(ngModel)]="selectedAddress.country" (input)="onInputChange('country', $event)">
-    <button (click)="toggleEdit()">Done</button>
   </div>
 </div>
