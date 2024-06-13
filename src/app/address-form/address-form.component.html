@@ -1,14 +1,14 @@
-
 <div>
   <h3>Choose a delivery address</h3>
-  <div *ngFor="let address of savedAddresses; let i = index">
+  <div *ngFor="let address of savedAddresses; let i = index; trackBy: trackByIndex" [ngClass]="{'default-address': defaultAddressIndex === i}">
     <div *ngIf="editingIndex === i; else displayAddress">
-      <input type="text" [(ngModel)]="address.name" placeholder="Name">
-      <input type="text" [(ngModel)]="address.street" placeholder="Street">
-      <input type="text" [(ngModel)]="address.city" placeholder="City">
-      <input type="text" [(ngModel)]="address.postalCode" placeholder="Postal Code">
-      <input type="text" [(ngModel)]="address.country" placeholder="Country">
-      <button (click)="saveUpdatedAddress(i)">Save</button>
+      <input type="text" [(ngModel)]="address.name" placeholder="Name" (input)="onInputChange('name', $event)">
+      <input type="text" [(ngModel)]="address.street" placeholder="Street" (input)="onInputChange('street', $event)">
+      <input type="text" [(ngModel)]="address.city" placeholder="City" (input)="onInputChange('city', $event)">
+      <input type="text" [(ngModel)]="address.postalCode" placeholder="Postal Code" (input)="onInputChange('postalCode', $event)">
+      <input type="text" [(ngModel)]="address.country" placeholder="Country" (input)="onInputChange('country', $event)">
+      <button [disabled]="!isAddressValid(address)" (click)="saveUpdatedAddress(i)">Save</button>
+      <button (click)="cancelAddOrEdit()">Cancel</button>
     </div>
     <ng-template #displayAddress>
       <label class="address-label">
@@ -17,15 +17,10 @@
       </label>
       <button (click)="editAddress(i)">Change</button>
       <button (click)="removeAddress(i)">Remove</button>
-    </ng-template>
-  </div>
-  <button (click)="addNewAddress()">Add another address</button>
-  <div *ngIf="addingAddress">
-    <input type="text" placeholder="Name" [(ngModel)]="newAddress.name" (input)="onInputChange('name', $event)">
-    <input type="text" placeholder="Street" [(ngModel)]="newAddress.street" (input)="onInputChange('street', $event)">
-    <input type="text" placeholder="City" [(ngModel)]="newAddress.city" (input)="onInputChange('city', $event)">
-    <input type="text" placeholder="Postal Code" [(ngModel)]="newAddress.postalCode" (input)="onInputChange('postalCode', $event)">
-    <input type="text" placeholder="Country" [(ngModel)]="newAddress.country" (input)="onInputChange('country', $event)">
-    <button (click)="saveNewAddress()">Save Address</button>
-  </div>
-</div>
+      <button *ngIf="!address.isDefault" (click)="makeDefault(i)">Make Default</button>
+      <button (click)="toggleInstructions(i)">Add delivery instructions <i class="pi pi-angle-down"></i></button>
+      <div *ngIf="instructionsIndex === i" [@slideDown]="'open'">
+        <textarea [(ngModel)]="deliveryInstructions" placeholder="Enter delivery instructions"></textarea>
+        <button (click)="saveInstructions(i)">Save</button>
+      </div>
+   

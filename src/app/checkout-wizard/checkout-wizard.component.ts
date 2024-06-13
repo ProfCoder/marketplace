@@ -12,7 +12,6 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 })
 export class CheckoutWizardComponent {
   currentStep: number = 0;
-  addressValid: boolean = false;
 
   steps = [
     { label: 'Address' },
@@ -21,7 +20,7 @@ export class CheckoutWizardComponent {
   ];
 
   onAddressValidityChange(isValid: boolean) {
-    this.addressValid = isValid;
+
   }
 
   nextStep() {
