@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PaymentService {
+  private selectedShippingMethod = new BehaviorSubject<any>(null);
+  private selectedPayment = new BehaviorSubject<any>(null);
   private shippingCost = new BehaviorSubject<number>(0);
   private paymentsKey = 'payments';
   private payments: any[] = [];
@@ -19,6 +21,22 @@ export class PaymentService {
 
   getShippingCost(): Observable<number> {
     return this.shippingCost.asObservable();
+  }
+
+  getSelectedShippingMethod() {
+    return this.selectedShippingMethod.asObservable();
+  }
+
+  setSelectedShippingMethod(method: any) {
+    this.selectedShippingMethod.next(method);
+  }
+  
+  getSelectedPaymentMethod() {
+    return this.selectedPayment.asObservable();
+  }
+
+  setSelectedPaymentMethod(method: any) {
+    this.selectedPayment.next(method);
   }
 
   private loadPayments() {

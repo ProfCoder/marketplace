@@ -70,7 +70,7 @@ export class DeliveryPaymentComponent {
         id: 'next-day', 
         name: 'Next Day Delivery', 
         duration: '1 day', 
-        cost: '10€', 
+        cost: 10, 
         icon: 'pi pi-exclamation-circle',
         deliveryDate: this.formatDate(today, 1)
       },
@@ -78,7 +78,7 @@ export class DeliveryPaymentComponent {
         id: 'express', 
         name: 'Express Delivery', 
         duration: '3 days', 
-        cost: '5€', 
+        cost: 5, 
         icon: 'pi pi-send',
         deliveryDate: this.formatDate(today, 3)
       },
@@ -86,7 +86,7 @@ export class DeliveryPaymentComponent {
         id: 'standard', 
         name: 'Standard Delivery', 
         duration: '5 days', 
-        cost: 'free', 
+        cost: 0, 
         icon: 'pi pi-truck',
         deliveryDate: this.formatDate(today, 5)
       }
@@ -95,18 +95,18 @@ export class DeliveryPaymentComponent {
 
   
   selectShippingMethod(shippingId: string): void {
+    const selected = this.shippingOptions.find(option => option.id === shippingId);
     this.selectedShipping = shippingId;
     const cost = this.getSelectedShippingCost();
     this.paymentService.setShippingCost(cost);
+    this.paymentService.setSelectedShippingMethod(selected);
     this.shippingSelectionChange.emit(true);
   }
 
   getSelectedShippingCost(): number {
     const selectedShippingOption = this.shippingOptions.find(option => option.id === this.selectedShipping);
-    if (selectedShippingOption) {
-      return selectedShippingOption.cost === 'free' ? 0 : parseFloat(selectedShippingOption.cost.replace('€', ''));
-    }
-    return 0;
+      return selectedShippingOption.cost;
+
   }
 
   formatDate(date: Date, daysToAdd: number): string {
@@ -180,6 +180,7 @@ export class DeliveryPaymentComponent {
 
   selectPayment(payment: any) {
     if (this.isValidPayment(payment)) {
+      this.paymentService.setSelectedPaymentMethod(payment);
       this.selectedPayment = payment;
       this.paymentSelectionChange.emit(true);
   } else {

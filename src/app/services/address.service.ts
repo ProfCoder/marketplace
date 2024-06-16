@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class AddressService {
   private addressesKey = 'addresses';
   private addresses: any[] = [];
+  private selectedAddress = new BehaviorSubject<any>(null);
 
   constructor() {
     this.loadAddresses();
@@ -15,6 +17,7 @@ export class AddressService {
     const savedAddresses = localStorage.getItem(this.addressesKey);
     if (savedAddresses) {
       this.addresses = JSON.parse(savedAddresses);
+      // this.selectedAddress.next(this.addresses[0]);
     } else {
       this.addresses = [
         {
@@ -27,7 +30,13 @@ export class AddressService {
         },
       ];
       this.saveAddresses();
+      // this.selectedAddress.next(this.addresses[0]);
     }
+    if (this.addresses.length > 0) {
+      this.selectedAddress.next(this.addresses[0]);
+  } else {
+      this.selectedAddress.next(null);
+  }
   }
 
   private saveAddresses() {
@@ -51,5 +60,13 @@ export class AddressService {
   removeAddress(index: number) {
     this.addresses.splice(index, 1);
     this.saveAddresses();
+  }
+
+  getSelectedAddress() {
+    return this.selectedAddress.asObservable();
+  }
+
+  setSelectedAddress(address: any) {
+    this.selectedAddress.next(address);
   }
 }
