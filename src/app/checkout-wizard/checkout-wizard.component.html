@@ -6,8 +6,11 @@
 </div>
 <div *ngIf="currentStep === 1">
   <h3>Delivery & Payment</h3>
+  <app-delivery-payment 
+    (shippingSelectionChange)="onShippingSelectionChange($event)"
+    (paymentSelectionChange)="onPaymentSelectionChange($event)"></app-delivery-payment>
   <button (click)="previousStep()">Back</button>
-  <button (click)="nextStep()">Next</button>
+  <button [disabled]="!selectionValid" (click)="nextStep()">Next</button>
 </div>
 <div *ngIf="currentStep === 2">
   <h3>Summary</h3>

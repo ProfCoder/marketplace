@@ -1,1 +1,48 @@
-<p>Delivery & Payment step content goes here</p>
+<div>
+  <h3>Select Delivery and Payment Options</h3>
+
+  <div>
+    <h4>Delivery Options</h4>
+    <div *ngFor="let shipping of shippingOptions">
+      <input type="radio" name="shipping" [(ngModel)]="selectedShipping" [value]="shipping.id" (change)="selectShippingMethod(shipping.id)">
+      <i [class]="shipping.icon"></i> {{ shipping.name }} ({{ shipping.duration }}, {{ shipping.cost }}) - Arrives on {{ shipping.deliveryDate }}
+    </div>
+  </div>
+
+  <div>
+    <h4>Payment Options</h4>
+    
+    
+
+  <div *ngFor="let payment of payments; let i = index">
+    <div *ngIf="editingIndex === i; else displayPayment">
+      <input type="text" [(ngModel)]="payment.accountHolderName" placeholder="Account Holder's Name" required>
+      <input type="text" [(ngModel)]="editingFullDetails" [placeholder]="currentDetailsPlaceholder" required>
+      <button (click)="saveUpdatedPayment(i)">Update</button>
+      <button (click)="cancelAddOrEdit()">Cancel</button>
+    </div>
+    <ng-template #displayPayment>
+      <label>
+        <input type="radio" name="payment" (change)="selectPayment(payment)" [checked]="payment.default">
+        <img [src]="payment.imageUrl" alt="{{ payment.name }}" height="30">
+        {{ payment.name }} - {{ editingIndex === i ? payment.details : payment.maskedDetails }} Name: {{ payment.accountHolderName }}
+      </label>
+      <button (click)="editPayment(i)">Edit</button>
+      <button (click)="makeDefault(i)" *ngIf="!payment.default">Make Default</button>
+      <button (click)="removePayment(i)">Remove</button>
+    </ng-template>
+  </div>
+
+  <button (click)="addingPayment = true" *ngIf="!addingPayment">Add new payment method</button>
+  <div *ngIf="addingPayment">
+    <select [(ngModel)]="selectedPaymentType" (ngModelChange)="onPaymentTypeChange()">
+      <option *ngFor="let type of paymentTypes" [ngValue]="type">{{ type.displayName }}</option>
+    </select>
+  <img [src]="newPayment.imageUrl" alt="Payment Image" height="30px">
+    <input type="text" [(ngModel)]="newPayment.accountHolderName" placeholder="Account Holder's Name" required>
+    <input type="text" [(ngModel)]="newPayment.details" placeholder="{{currentDetailsPlaceholder}}" required>
+    
+    <button (click)="saveNewPayment()">Save</button>
+    <button (click)="cancelAddOrEdit()">Cancel</button>
+  </div>
+</div>
