@@ -8,6 +8,7 @@ export class AddressService {
   private addressesKey = 'addresses';
   private addresses: any[] = [];
   private selectedAddress = new BehaviorSubject<any>(null);
+  public addressAdding = new BehaviorSubject<boolean>(false); 
 
   constructor() {
     this.loadAddresses();
@@ -17,7 +18,6 @@ export class AddressService {
     const savedAddresses = localStorage.getItem(this.addressesKey);
     if (savedAddresses) {
       this.addresses = JSON.parse(savedAddresses);
-      // this.selectedAddress.next(this.addresses[0]);
     } else {
       this.addresses = [
         {
@@ -30,13 +30,12 @@ export class AddressService {
         },
       ];
       this.saveAddresses();
-      // this.selectedAddress.next(this.addresses[0]);
     }
     if (this.addresses.length > 0) {
       this.selectedAddress.next(this.addresses[0]);
-  } else {
+    } else {
       this.selectedAddress.next(null);
-  }
+    }
   }
 
   private saveAddresses() {
@@ -50,6 +49,7 @@ export class AddressService {
   addAddress(address: any) {
     this.addresses.push(address);
     this.saveAddresses();
+    this.addressAdding.next(false); 
   }
 
   updateAddress(index: number, address: any) {
@@ -68,5 +68,9 @@ export class AddressService {
 
   setSelectedAddress(address: any) {
     this.selectedAddress.next(address);
+  }
+
+  setAddressAddingState(isAdding: boolean) {
+    this.addressAdding.next(isAdding); 
   }
 }

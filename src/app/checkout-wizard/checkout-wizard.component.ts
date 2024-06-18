@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StepsModule } from 'primeng/steps';
@@ -8,7 +8,6 @@ import { PaymentService } from '../services/payment.service';
 import { CartService } from '../services/cart.service';
 import { AddressService } from '../services/address.service';
 import { Router } from '@angular/router';
-import { CartItem } from '../services/cart-item';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -16,8 +15,9 @@ import { ProductService } from '../services/product.service';
   standalone: true,
   imports: [CommonModule, FormsModule, StepsModule, AddressFormComponent, DeliveryPaymentComponent],
   templateUrl: './checkout-wizard.component.html',
+  styleUrls: ['./checkout-wizard.component.css'],
 })
-export class CheckoutWizardComponent {
+export class CheckoutWizardComponent implements OnInit {
   currentStep: number = 0;
   cartItems: any[] = [];
   totalCartPrice: number = 0;
@@ -28,7 +28,9 @@ export class CheckoutWizardComponent {
   selectionValid: boolean = false;
   shippingSelected: boolean = false;
   paymentSelected: boolean = false;
-
+  addressValid: boolean = false; 
+  addingAddress: boolean = false;
+  savedAddresses: any[] = []; 
   steps = [
     { label: 'Address' },
     { label: 'Delivery & Payment' },
@@ -48,7 +50,7 @@ export class CheckoutWizardComponent {
 
     this.addressService.getSelectedAddress().subscribe(address => {
       this.selectedAddress = address;
-    })
+    });
 
     this.paymentService.getSelectedShippingMethod().subscribe(method => {
       this.selectedShippingMethod = method;
@@ -58,7 +60,11 @@ export class CheckoutWizardComponent {
       this.selectedPaymentMethod = method;
     });
 
-    // this.totalPrice = this.cartService.getTotalPrice();
+    this.addressService.addressAdding.subscribe((isAdding: boolean) => {
+      this.addingAddress = isAdding;
+    });
+
+    this.savedAddresses = this.addressService.getAddresses();
   }
 
   loadCartItems() {
@@ -80,13 +86,12 @@ export class CheckoutWizardComponent {
             return item;
         });
     });
-}
+  }
 
   calculateItemsTotalPrice(): number {
     const total = this.cartItems.reduce((acc, item) => acc + (item.quantity * item.price), 0);
     return parseFloat(total.toFixed(2));
   }
-
 
   loadSummaryDetails() {
     this.selectedAddress = this.addressService.getSelectedAddress(); 
@@ -107,7 +112,7 @@ export class CheckoutWizardComponent {
   getProductImage(product: any): string {
     const color = product.colors.find((c: { color_id: any; }) => c.color_id === product.color);
     return color ? `./assets/products/images/${color.color_id}.jpg` : './assets/images/default.jpg';
-}
+  }
 
   calculateTotalPrice(quantity: number, price: number): string {
     return (quantity * price).toFixed(2);
@@ -120,7 +125,7 @@ export class CheckoutWizardComponent {
   }
 
   onAddressValidityChange(isValid: boolean) {
-
+    this.addressValid = isValid;
   }
 
   onShippingSelectionChange(isValid: boolean) {
@@ -137,11 +142,20 @@ export class CheckoutWizardComponent {
 
   updateSelectionValidity() {
     this.selectionValid = this.shippingSelected && this.paymentSelected;
-    console.log("Updated selection valid state:", this.selectionValid);
+  }
+
+  canProceedToNextStep(): boolean {
+    if (this.currentStep === 0) {
+      return this.savedAddresses.length > 0 && this.addressValid && !this.addingAddress;
+    }
+    if (this.currentStep === 1) {
+      return this.shippingSelected && this.paymentSelected;
+    }
+    return true;
   }
 
   nextStep() {
-    if (this.currentStep < this.steps.length - 1) {
+    if (this.currentStep < this.steps.length - 1 && this.canProceedToNextStep()) {
       this.currentStep++;
     }
   }

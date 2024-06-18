@@ -53,6 +53,7 @@ export class AddressFormComponent {
     deliveryInstructions: '',
   };
   deliveryInstructions: string = '';
+  showErrors = false; 
 
   countries: Country[] = [
     { name: 'Australia', code: 'AU' },
@@ -83,13 +84,17 @@ export class AddressFormComponent {
 
   addNewAddress() {
     this.addingAddress = true;
+    this.addressService.setAddressAddingState(true);
   }
 
   saveNewAddress() {
+    this.showErrors = true;
     if (this.isAddressValid(this.newAddress)) {
       this.addressService.addAddress({ ...this.newAddress });
       this.newAddress = { name: '', street: '', city: '', postalCode: '', country: null, deliveryInstructions: '' };
       this.addingAddress = false;
+      this.showErrors = false;
+      this.addressService.setAddressAddingState(false);
       this.savedAddresses = this.addressService.getAddresses();
       this.selectedAddress = this.savedAddresses[this.savedAddresses.length - 1];
       this.defaultAddressIndex = null;
@@ -107,10 +112,12 @@ export class AddressFormComponent {
   }
 
   saveUpdatedAddress(index: number) {
+    this.showErrors = true;
     if (this.isAddressValid(this.savedAddresses[index])) {
       this.addressService.updateAddress(index, this.savedAddresses[index]);
       this.editingIndex = null;
       this.addressBackup = null;
+      this.showErrors = false;
       this.savedAddresses = this.addressService.getAddresses();
       this.addressValidityChange.emit(true);
     }
@@ -123,6 +130,8 @@ export class AddressFormComponent {
       this.addressBackup = null;
     } else {
       this.addingAddress = false;
+      this.addressService.setAddressAddingState(false);
+      this.showErrors = false;
     }
   }
 

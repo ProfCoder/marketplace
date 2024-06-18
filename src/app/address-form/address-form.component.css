@@ -1,55 +1,27 @@
-import { Injectable } from '@angular/core';
+.address-label {
+  display: block;
+  margin-bottom: 10px;
+}
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AddressService {
-  private addressesKey = 'addresses';
-  private addresses: any[] = [];
-
-  constructor() {
-    this.loadAddresses();
+@keyframes moveToTop {
+  from {
+    transform: translateY(0);
   }
-
-  private loadAddresses() {
-    const savedAddresses = localStorage.getItem(this.addressesKey);
-    if (savedAddresses) {
-      this.addresses = JSON.parse(savedAddresses);
-    } else {
-      this.addresses = [
-        {
-          name: 'Almaz',
-          street: '12222, Nr. 111111, Jacob-Burckhardt-Straße 444',
-          city: 'Konstanz',
-          postalCode: '78464',
-          country: 'Germany',
-          deliveryInstructions: '',
-        },
-      ];
-      this.saveAddresses();
-    }
+  to {
+    transform: translateY(-20px);
   }
+}
 
-  private saveAddresses() {
-    localStorage.setItem(this.addressesKey, JSON.stringify(this.addresses));
-  }
+.default-address {
+  animation: moveToTop 0.5s ease-out;
+}
 
-  getAddresses() {
-    return this.addresses;
-  }
+.hidden {
+  display: none;
+}
 
-  addAddress(address: any) {
-    this.addresses.push(address);
-    this.saveAddresses();
-  }
-
-  updateAddress(index: number, address: any) {
-    this.addresses[index] = address;
-    this.saveAddresses();
-  }
-
-  removeAddress(index: number) {
-    this.addresses.splice(index, 1);
-    this.saveAddresses();
-  }
+.error-message {
+  color: red;
+  margin-top: 5px;
+  font-size: 12px;
 }
