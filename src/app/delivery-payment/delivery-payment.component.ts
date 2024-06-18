@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { PaymentService } from '../services/payment.service';
 
 export interface PaymentMethod {
@@ -29,6 +29,7 @@ export interface PaymentType {
   styleUrls: ['./delivery-payment.component.css']
 })
 export class DeliveryPaymentComponent {
+  @ViewChild('paymentForm') paymentForm!: NgForm;
   @Output() paymentSelectionChange = new EventEmitter<boolean>();
   @Output() shippingSelectionChange = new EventEmitter<boolean>();
 
@@ -36,6 +37,7 @@ export class DeliveryPaymentComponent {
 
   currentDetailsPlaceholder: string = '';
   editingFullDetails: string = '';
+  currentInputType: string = 'text';
   payments: PaymentMethod[];
   paymentTypes = [
     { id: 'credit', displayName: 'Credit Card', inputPlaceholder: 'Card Number', defaultImageUrl: 'https://npr.brightspotcdn.com/dims4/default/add8201/2147483647/strip/true/crop/445x281+0+0/resize/880x556!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwgvu%2Ffiles%2F201509%2Fvisa-chipAndPin.jpg' },
@@ -61,6 +63,7 @@ export class DeliveryPaymentComponent {
     this.initializeDefaultPaymentType();
     this.initializeShippingOptions();
     this.emitInitialSelectionStates();
+    this.setDefaultPaymentType();
   }
 
   initializeShippingOptions() {
@@ -121,7 +124,17 @@ export class DeliveryPaymentComponent {
 
     const defaultShippingSelected = !!this.selectedShipping;
     this.shippingSelectionChange.emit(defaultShippingSelected);
-}
+  }
+
+  setDefaultPaymentType(): void {
+    if (!this.selectedPaymentType) {
+      const defaultType = this.paymentTypes.find(type => type.id === 'credit');
+      if (defaultType) {
+        this.selectPaymentTypeByType(defaultType);
+        this.paymentSelectionChange.emit(true);
+      }
+    }
+  }
 
 
   initializeDefaultPaymentType(): void {
@@ -143,17 +156,17 @@ export class DeliveryPaymentComponent {
 
   isValidPayment(payment: PaymentMethod): boolean {
     return !!payment && !!payment.details && payment.details.trim() !== '' && !!payment.id;
-}
+  }
 
   onPaymentTypeChange(): void {
     if (this.selectedPaymentType) {
-      this.currentDetailsPlaceholder = this.selectedPaymentType.inputPlaceholder; 
-  
+      this.currentDetailsPlaceholder = this.selectedPaymentType?.inputPlaceholder || '';
+      this.currentInputType = this.selectedPaymentType.id === 'paypal' ? 'email' : 'number'; 
       this.newPayment = {
-        id: this.selectedPaymentType.id,
-        name: this.selectedPaymentType.displayName,
+        id: this.selectedPaymentType?.id || '',
+        name: this.selectedPaymentType?.displayName || '',
         details: '',
-        imageUrl: this.selectedPaymentType.defaultImageUrl,
+        imageUrl: this.selectedPaymentType?.defaultImageUrl || '',
         default: false,
         accountHolderName: ''
       };
@@ -163,6 +176,7 @@ export class DeliveryPaymentComponent {
   selectPaymentTypeByType(paymentType: PaymentType): void {
     this.selectedPaymentType = paymentType;
     this.currentDetailsPlaceholder = paymentType.inputPlaceholder;
+    this.currentInputType = paymentType.id === 'paypal' ? 'email' : 'number';
 
     this.newPayment = {
         id: paymentType.id,
@@ -198,6 +212,11 @@ export class DeliveryPaymentComponent {
       alert('Account holder name is required.');
       return;
     }
+
+    if (!this.newPayment.details.trim()) {
+      alert('Details cannot be empty');
+      return;
+    }
   
     //check if it's a credit card to mask number
     if (this.newPayment.id === 'credit' && this.newPayment.details) {
@@ -229,20 +248,20 @@ export class DeliveryPaymentComponent {
     if (!this.payments[index].accountHolderName.trim()) {
       alert('Account holder name is required.');
       return;
-  }
+   }
 
-  this.payments[index].details = this.editingFullDetails; 
-  if (this.payments[index].id === 'credit') {
-      this.payments[index].maskedDetails = `ending in ${this.editingFullDetails.slice(-4)}`; 
-  } else {
-      this.payments[index].maskedDetails = this.editingFullDetails;
-  }
+    this.payments[index].details = this.editingFullDetails; 
+    if (this.payments[index].id === 'credit') {
+        this.payments[index].maskedDetails = `ending in ${this.editingFullDetails.slice(-4)}`; 
+    } else {
+        this.payments[index].maskedDetails = this.editingFullDetails;
+    }
 
-  this.paymentService.updatePayment(index, this.payments[index]);
-  this.editingIndex = null;
-  this.payments = this.paymentService.getPayments();
-  this.paymentSelectionChange.emit(true);
-}
+    this.paymentService.updatePayment(index, this.payments[index]);
+    this.editingIndex = null;
+    this.payments = this.paymentService.getPayments();
+    this.paymentSelectionChange.emit(true);
+  }
 
   cancelAddOrEdit() {
     if (this.editingIndex !== null) {

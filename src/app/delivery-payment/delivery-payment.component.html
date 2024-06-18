@@ -5,7 +5,7 @@
     <h4>Delivery Options</h4>
     <div *ngFor="let shipping of shippingOptions">
       <input type="radio" name="shipping" [(ngModel)]="selectedShipping" [value]="shipping.id" (change)="selectShippingMethod(shipping.id)">
-      <i [class]="shipping.icon"></i> {{ shipping.name }} ({{ shipping.duration }}, {{ shipping.cost }}) - Arrives on {{ shipping.deliveryDate }}
+      <i [class]="shipping.icon"></i> {{ shipping.name }} ({{ shipping.duration }}, {{ shipping.cost }}€) - Arrives on {{ shipping.deliveryDate }}
     </div>
   </div>
 
@@ -35,14 +35,24 @@
 
   <button (click)="addingPayment = true" *ngIf="!addingPayment">Add new payment method</button>
   <div *ngIf="addingPayment">
-    <select [(ngModel)]="selectedPaymentType" (ngModelChange)="onPaymentTypeChange()">
-      <option *ngFor="let type of paymentTypes" [ngValue]="type">{{ type.displayName }}</option>
-    </select>
-  <img [src]="newPayment.imageUrl" alt="Payment Image" height="30px">
-    <input type="text" [(ngModel)]="newPayment.accountHolderName" placeholder="Account Holder's Name" required>
-    <input type="text" [(ngModel)]="newPayment.details" placeholder="{{currentDetailsPlaceholder}}" required>
-    
-    <button (click)="saveNewPayment()">Save</button>
-    <button (click)="cancelAddOrEdit()">Cancel</button>
+    <form #paymentForm="ngForm">
+      <select name="select" [(ngModel)]="selectedPaymentType" (ngModelChange)="onPaymentTypeChange()">
+        <option *ngFor="let type of paymentTypes" [ngValue]="type">{{ type.displayName }}</option>
+      </select>
+    <img [src]="newPayment.imageUrl" alt="Payment Image" height="30px">
+      <input type="text" [(ngModel)]="newPayment.accountHolderName" name="accountHolderName" placeholder="Account Holder's Name" required>
+      
+      <input [type]="currentInputType" [(ngModel)]="newPayment.details" #details="ngModel" [placeholder]="currentDetailsPlaceholder"
+            required [email]="currentInputType === 'email'" name="paymentDetails">
+      <div class="error" *ngIf="details.errors?.['required'] && details.touched">Details are required.</div>
+      <div class="error" *ngIf="details.errors?.['email'] && details.touched">Please enter a valid email address.</div>
+      <div class="error" *ngIf="details.errors?.['number'] && details.touched">Please enter a valid number.</div>
+      <!-- Just basic validation: if using Paypal, an email format input is needed. If credit card or SEPA, only numbers allowed. -->
+      <br>
+      <button (click)="saveNewPayment()" [disabled]="!paymentForm.valid">Save</button>
+      <button (click)="cancelAddOrEdit()">Cancel</button>
+      <!-- <input type="text" [(ngModel)]="newPayment.details" placeholder="{{currentDetailsPlaceholder}}" required> -->
+
+    </form>
   </div>
 </div>

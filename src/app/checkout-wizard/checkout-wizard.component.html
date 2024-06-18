@@ -39,6 +39,6 @@
         <h4>Shipping cost: {{ selectedShippingMethod?.cost === 0 ? 'Free' : selectedShippingMethod?.cost + '€' }}</h4>
         <h4>Total price: {{ totalPrice }}€</h4>
   </div>
-  <button (click)="confirmPurchase()">Confirm Purchase</button>
   <button (click)="previousStep()">Back</button>
+  <button (click)="confirmPurchase()">Confirm Purchase</button>
 </div>
