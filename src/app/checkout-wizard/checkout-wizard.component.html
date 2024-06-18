@@ -1,14 +1,18 @@
 <p-steps [model]="steps" [(activeIndex)]="currentStep"></p-steps>
 
 <div *ngIf="currentStep === 0">
-  <app-address-form (addressValidityChange)="onAddressValidityChange($event)"></app-address-form>
+  <app-address-form 
+    (addressValidityChange)="onAddressValidityChange($event)" 
+    (addressCreationState)="onAddressCreationStateChange($event)">
+  </app-address-form>
   <button [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
 </div>
 <div *ngIf="currentStep === 1">
   <h3>Delivery & Payment</h3>
   <app-delivery-payment 
     (shippingSelectionChange)="onShippingSelectionChange($event)"
-    (paymentSelectionChange)="onPaymentSelectionChange($event)"></app-delivery-payment>
+    (paymentSelectionChange)="onPaymentSelectionChange($event)">
+  </app-delivery-payment>
   <button (click)="previousStep()">Back</button>
   <button [disabled]="!selectionValid" (click)="nextStep()">Next</button>
 </div>

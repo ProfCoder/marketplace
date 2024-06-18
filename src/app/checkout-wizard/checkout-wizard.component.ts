@@ -15,7 +15,7 @@ import { ProductService } from '../services/product.service';
   standalone: true,
   imports: [CommonModule, FormsModule, StepsModule, AddressFormComponent, DeliveryPaymentComponent],
   templateUrl: './checkout-wizard.component.html',
-  styleUrls: ['./checkout-wizard.component.css'],
+  styleUrls: ['./checkout-wizard.component.css']
 })
 export class CheckoutWizardComponent implements OnInit {
   currentStep: number = 0;
@@ -28,9 +28,9 @@ export class CheckoutWizardComponent implements OnInit {
   selectionValid: boolean = false;
   shippingSelected: boolean = false;
   paymentSelected: boolean = false;
-  addressValid: boolean = false; 
+  addressValid: boolean = false;
   addingAddress: boolean = false;
-  savedAddresses: any[] = []; 
+
   steps = [
     { label: 'Address' },
     { label: 'Delivery & Payment' },
@@ -47,24 +47,22 @@ export class CheckoutWizardComponent implements OnInit {
 
   ngOnInit() {
     this.loadCartItems();
+    this.checkAddressValidity();
 
     this.addressService.getSelectedAddress().subscribe(address => {
       this.selectedAddress = address;
+      this.checkAddressValidity();
     });
 
     this.paymentService.getSelectedShippingMethod().subscribe(method => {
       this.selectedShippingMethod = method;
+      this.updateSelectionValidity();
     });
-  
+
     this.paymentService.getSelectedPaymentMethod().subscribe(method => {
       this.selectedPaymentMethod = method;
+      this.updateSelectionValidity();
     });
-
-    this.addressService.addressAdding.subscribe((isAdding: boolean) => {
-      this.addingAddress = isAdding;
-    });
-
-    this.savedAddresses = this.addressService.getAddresses();
   }
 
   loadCartItems() {
@@ -74,17 +72,17 @@ export class CheckoutWizardComponent implements OnInit {
 
   loadProductDetails() {
     this.productService.getAllProductMetadata().subscribe(products => {
-        this.cartItems = this.cartItems.map(item => {
-            const productDetails = products.find(p => p.id === item.id);
-            if (productDetails) {
-                return {
-                    ...item,
-                    ...productDetails,
-                    imageUrl: this.getProductImage(productDetails)
-                };
-            }
-            return item;
-        });
+      this.cartItems = this.cartItems.map(item => {
+        const productDetails = products.find(p => p.id === item.id);
+        if (productDetails) {
+          return {
+            ...item,
+            ...productDetails,
+            imageUrl: this.getProductImage(productDetails)
+          };
+        }
+        return item;
+      });
     });
   }
 
@@ -97,7 +95,6 @@ export class CheckoutWizardComponent implements OnInit {
     this.selectedAddress = this.addressService.getSelectedAddress(); 
     this.selectedShippingMethod = this.paymentService.getSelectedShippingMethod();
     this.selectedPaymentMethod = this.paymentService.getSelectedPaymentMethod();
-    // this.totalPrice = this.cartService.getTotalPrice();
   }
 
   confirmPurchase() {
@@ -126,6 +123,7 @@ export class CheckoutWizardComponent implements OnInit {
 
   onAddressValidityChange(isValid: boolean) {
     this.addressValid = isValid;
+    this.updateSelectionValidity();
   }
 
   onShippingSelectionChange(isValid: boolean) {
@@ -140,22 +138,26 @@ export class CheckoutWizardComponent implements OnInit {
     this.updateTotalPrice();
   }
 
+  onAddressCreationStateChange(isAdding: boolean) {
+    this.addingAddress = isAdding;
+    this.updateSelectionValidity();
+  }
+
   updateSelectionValidity() {
-    this.selectionValid = this.shippingSelected && this.paymentSelected;
+    this.selectionValid = this.addressValid && this.shippingSelected && this.paymentSelected;
+  }
+
+  checkAddressValidity() {
+    const addresses = this.addressService.getAddresses();
+    this.addressValid = addresses.length > 0;
   }
 
   canProceedToNextStep(): boolean {
-    if (this.currentStep === 0) {
-      return this.savedAddresses.length > 0 && this.addressValid && !this.addingAddress;
-    }
-    if (this.currentStep === 1) {
-      return this.shippingSelected && this.paymentSelected;
-    }
-    return true;
+    return this.addressValid && !this.addingAddress;
   }
 
   nextStep() {
-    if (this.currentStep < this.steps.length - 1 && this.canProceedToNextStep()) {
+    if (this.currentStep < this.steps.length - 1) {
       this.currentStep++;
     }
   }

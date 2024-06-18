@@ -36,6 +36,7 @@ interface Country {
 })
 export class AddressFormComponent {
   @Output() addressValidityChange = new EventEmitter<boolean>();
+  @Output() addressCreationState = new EventEmitter<boolean>();
 
   savedAddresses: any[];
   selectedAddress: any;
@@ -53,7 +54,7 @@ export class AddressFormComponent {
     deliveryInstructions: '',
   };
   deliveryInstructions: string = '';
-  showErrors = false; 
+  showErrors: boolean = false;
 
   countries: Country[] = [
     { name: 'Australia', code: 'AU' },
@@ -74,7 +75,7 @@ export class AddressFormComponent {
     });
     this.selectedAddress = this.savedAddresses[0];
     this.defaultAddressIndex = null;
-    this.addressValidityChange.emit(true);
+    this.checkAddressValidity();
   }
 
   toggleEdit() {
@@ -84,26 +85,28 @@ export class AddressFormComponent {
 
   addNewAddress() {
     this.addingAddress = true;
-    this.addressService.setAddressAddingState(true);
+    this.addressCreationState.emit(true);
   }
 
   saveNewAddress() {
-    this.showErrors = true;
     if (this.isAddressValid(this.newAddress)) {
       this.addressService.addAddress({ ...this.newAddress });
       this.newAddress = { name: '', street: '', city: '', postalCode: '', country: null, deliveryInstructions: '' };
       this.addingAddress = false;
-      this.showErrors = false;
-      this.addressService.setAddressAddingState(false);
+      this.addressCreationState.emit(false);
       this.savedAddresses = this.addressService.getAddresses();
       this.selectedAddress = this.savedAddresses[this.savedAddresses.length - 1];
       this.defaultAddressIndex = null;
-      this.addressValidityChange.emit(true);
+      this.checkAddressValidity();
+    } else {
+      this.showErrors = true;
+      this.checkAddressValidity();
     }
   }
 
   selectAddress(address: any) {
     this.selectedAddress = address;
+    this.checkAddressValidity();
   }
 
   editAddress(index: number) {
@@ -112,14 +115,15 @@ export class AddressFormComponent {
   }
 
   saveUpdatedAddress(index: number) {
-    this.showErrors = true;
     if (this.isAddressValid(this.savedAddresses[index])) {
       this.addressService.updateAddress(index, this.savedAddresses[index]);
       this.editingIndex = null;
       this.addressBackup = null;
-      this.showErrors = false;
       this.savedAddresses = this.addressService.getAddresses();
-      this.addressValidityChange.emit(true);
+      this.checkAddressValidity();
+    } else {
+      this.showErrors = true;
+      this.checkAddressValidity();
     }
   }
 
@@ -130,9 +134,9 @@ export class AddressFormComponent {
       this.addressBackup = null;
     } else {
       this.addingAddress = false;
-      this.addressService.setAddressAddingState(false);
-      this.showErrors = false;
+      this.addressCreationState.emit(false);
     }
+    this.checkAddressValidity();
   }
 
   removeAddress(index: number) {
@@ -141,7 +145,7 @@ export class AddressFormComponent {
     if (this.selectedAddress === this.savedAddresses[index]) {
       this.selectedAddress = this.savedAddresses[0];
     }
-    this.addressValidityChange.emit(true);
+    this.checkAddressValidity();
   }
 
   makeDefault(index: number) {
@@ -179,6 +183,11 @@ export class AddressFormComponent {
 
   isAddressValid(address: any) {
     return address.name && address.street && address.city && address.postalCode && address.country;
+  }
+
+  checkAddressValidity() {
+    const isValid = this.savedAddresses.length > 0 && this.savedAddresses.some(address => this.isAddressValid(address));
+    this.addressValidityChange.emit(isValid);
   }
 
   trackByIndex(index: number, item: any) {
