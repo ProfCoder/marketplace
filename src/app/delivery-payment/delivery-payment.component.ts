@@ -219,7 +219,7 @@ export class DeliveryPaymentComponent {
     }
   
     //check if it's a credit card to mask number
-    if (this.newPayment.id === 'credit' && this.newPayment.details) {
+    if ((this.newPayment.id === 'credit' || this.newPayment.id === "sepa") && this.newPayment.details) {
       this.newPayment.maskedDetails = `ending in ${this.newPayment.details.slice(-4)}`;
     } else {
       this.newPayment.maskedDetails = this.newPayment.details; 
@@ -238,6 +238,7 @@ export class DeliveryPaymentComponent {
 
     const paymentType = this.paymentTypes.find(type => type.id === this.payments[index].id);
     if (paymentType) {
+      this.selectedPaymentType = paymentType;
       this.currentDetailsPlaceholder = paymentType.inputPlaceholder;
     }
 
@@ -245,13 +246,17 @@ export class DeliveryPaymentComponent {
 }
 
   saveUpdatedPayment(index: number): void {
-    if (!this.payments[index].accountHolderName.trim()) {
-      alert('Account holder name is required.');
+  //   if (!this.payments[index].accountHolderName.trim()) {
+  //     alert('Account holder name is required.');
+  //     return;
+  //  }
+
+    if (!this.paymentForm.valid) {
       return;
-   }
+    }
 
     this.payments[index].details = this.editingFullDetails; 
-    if (this.payments[index].id === 'credit') {
+    if (this.payments[index].id === 'credit' || this.payments[index].id === 'sepa') {
         this.payments[index].maskedDetails = `ending in ${this.editingFullDetails.slice(-4)}`; 
     } else {
         this.payments[index].maskedDetails = this.editingFullDetails;
@@ -299,5 +304,33 @@ export class DeliveryPaymentComponent {
     this.payments[index].default = true;
     this.paymentService.savePayments(); 
     this.paymentSelectionChange.emit(true);
+  }
+
+  getPattern(): string {
+    if (!this.selectedPaymentType) return ''; 
+    switch (this.selectedPaymentType.id) {
+      case 'credit':
+        return '^[0-9]{16}$';  //16 digits for credit cards
+      case 'sepa':
+        return '^[0-9]{22}$';  //22 digits for IBAN
+      case 'paypal':
+        return '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$';// Email for PayPal
+      default:
+        return '';
+    }
+  }
+
+  getErrorMessage(): string {
+    if (!this.selectedPaymentType) return 'Invalid input.';
+    switch (this.selectedPaymentType.id) {
+      case 'credit':
+        return 'Card number must have exactly 16 digits.';
+      case 'sepa':
+        return 'IBAN must have exactly 22 digits.';
+      case 'paypal':
+        return 'Please enter a valid email address.';
+      default:
+        return 'Invalid input.';
+    }
   }
 }
