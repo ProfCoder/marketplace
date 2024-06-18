@@ -1,13 +1,19 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AddressService } from '../services/address.service';
+
+interface Country {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-address-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DropdownModule],
   templateUrl: './address-form.component.html',
   styleUrls: ['./address-form.component.css'],
   animations: [
@@ -43,10 +49,20 @@ export class AddressFormComponent {
     street: '',
     city: '',
     postalCode: '',
-    country: '',
+    country: null as Country | null,
     deliveryInstructions: '',
   };
   deliveryInstructions: string = '';
+
+  countries: Country[] = [
+    { name: 'Australia', code: 'AU' },
+    { name: 'Canada', code: 'CA' },
+    { name: 'Germany', code: 'DE' }, 
+    { name: 'Italy', code: 'IT' },
+    { name: 'Spain', code: 'SP' },
+    { name: 'United Kingdom', code: 'UK' },
+    { name: 'United States', code: 'US' },
+  ];
 
   constructor(private addressService: AddressService) {
     this.savedAddresses = this.addressService.getAddresses();
@@ -72,7 +88,7 @@ export class AddressFormComponent {
   saveNewAddress() {
     if (this.isAddressValid(this.newAddress)) {
       this.addressService.addAddress({ ...this.newAddress });
-      this.newAddress = { name: '', street: '', city: '', postalCode: '', country: '', deliveryInstructions: '' };
+      this.newAddress = { name: '', street: '', city: '', postalCode: '', country: null, deliveryInstructions: '' };
       this.addingAddress = false;
       this.savedAddresses = this.addressService.getAddresses();
       this.selectedAddress = this.savedAddresses[this.savedAddresses.length - 1];
@@ -87,7 +103,7 @@ export class AddressFormComponent {
 
   editAddress(index: number) {
     this.editingIndex = index;
-    this.addressBackup = { ...this.savedAddresses[index] }; // Backup original address
+    this.addressBackup = { ...this.savedAddresses[index] }; 
   }
 
   saveUpdatedAddress(index: number) {
@@ -102,7 +118,7 @@ export class AddressFormComponent {
 
   cancelAddOrEdit() {
     if (this.editingIndex !== null) {
-      this.savedAddresses[this.editingIndex] = this.addressBackup; // Revert to original address
+      this.savedAddresses[this.editingIndex] = this.addressBackup; 
       this.editingIndex = null;
       this.addressBackup = null;
     } else {
@@ -120,13 +136,13 @@ export class AddressFormComponent {
   }
 
   makeDefault(index: number) {
-    this.savedAddresses.forEach(address => address.isDefault = false); // Reset all defaults
+    this.savedAddresses.forEach(address => address.isDefault = false); 
     const address = this.savedAddresses.splice(index, 1)[0];
-    address.isDefault = true; // Set as default
+    address.isDefault = true; 
     this.savedAddresses.unshift(address);
     this.selectedAddress = address;
-    this.defaultAddressIndex = 0; // Trigger animation
-    setTimeout(() => this.defaultAddressIndex = null, 500); // Reset after animation
+    this.defaultAddressIndex = 0; 
+    setTimeout(() => this.defaultAddressIndex = null, 500); 
   }
 
   toggleInstructions(index: number) {
@@ -139,7 +155,7 @@ export class AddressFormComponent {
   saveInstructions(index: number) {
     this.savedAddresses[index].deliveryInstructions = this.deliveryInstructions;
     this.instructionsIndex = null;
-    this.addressService.updateAddress(index, this.savedAddresses[index]); // Save the updated address
+    this.addressService.updateAddress(index, this.savedAddresses[index]); 
   }
 
   onInputChange(field: string, event: Event) {
