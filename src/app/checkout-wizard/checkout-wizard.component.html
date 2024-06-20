@@ -14,7 +14,7 @@
     (paymentSelectionChange)="onPaymentSelectionChange($event)">
   </app-delivery-payment>
   <button (click)="previousStep()">Back</button>
-  <button [disabled]="!selectionValid" (click)="nextStep()">Next</button>
+  <button [disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
 </div>
 <div *ngIf="currentStep === 2">
   <h3>Summary</h3>

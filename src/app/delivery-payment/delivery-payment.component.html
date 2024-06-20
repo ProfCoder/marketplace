@@ -27,7 +27,7 @@
       <button (click)="saveUpdatedPayment(i)">Update</button>
       <button (click)="cancelAddOrEdit()">Cancel</button>
 
-      <div class="error-message" *ngIf="paymentDetails.errors?.['pattern'] && (paymentDetails.dirty || paymentDetails.touched)" class="error">
+      <div class="error-message" *ngIf="paymentDetails.errors?.['pattern'] && (paymentDetails.dirty || paymentDetails.touched)" >
         {{ getErrorMessage() }}
       </div>
     </form>
@@ -36,7 +36,7 @@
     <ng-template #displayPayment>
       <label>
         <input type="radio" name="payment" (change)="selectPayment(payment)" [checked]="payment.default">
-        <img [src]="payment.imageUrl" alt="{{ payment.name }}" height="30">
+        <img [src]="payment.imageUrl" alt="{{ payment.name }}" height="30" width="40">
         {{ payment.name }} - {{ editingIndex === i ? payment.details : payment.maskedDetails }} Name: {{ payment.accountHolderName }}
       </label>
       <button (click)="editPayment(i)">Edit</button>
@@ -51,24 +51,31 @@
       <select name="select" [(ngModel)]="selectedPaymentType" (ngModelChange)="onPaymentTypeChange()">
         <option *ngFor="let type of paymentTypes" [ngValue]="type">{{ type.displayName }}</option>
       </select>
-    <img [src]="newPayment.imageUrl" alt="Payment Image" height="30px">
-      <input type="text" [(ngModel)]="newPayment.accountHolderName" name="accountHolderName" placeholder="Account Holder's Name" required><input
-  [type]="currentInputType"
-  [(ngModel)]="newPayment.details"
-  name="paymentDetails"
-  #paymentDetails="ngModel"
-  #details="ngModel"
-  [placeholder]="currentDetailsPlaceholder"
-  required
-  [pattern]="getPattern()"
-  [disabled]="!addingPayment && selectedPaymentType?.id !== 'credit'"
-/>
+    <!-- <img [src]="newPayment.imageUrl" alt="Payment Image" height="30" width="40"> -->
+      <input type="text" [(ngModel)]="newPayment.accountHolderName" name="accountHolderName" #accountHolderName="ngModel" placeholder="Account Holder's Name" required>
+      
+      <input
+        [type]="currentInputType"
+        [(ngModel)]="newPayment.details"
+        name="paymentDetails"
+        #paymentDetails="ngModel"
+        #details="ngModel"
+        [placeholder]="currentDetailsPlaceholder"
+        required
+        [pattern]="getPattern()"
+        [disabled]="!addingPayment && selectedPaymentType?.id !== 'credit'"
+      />
+      
 
-      <div class="error-message" *ngIf="details.errors?.['required'] && details.touched">Details are required.</div>
-      <div class="error-message" *ngIf="details.errors?.['email'] && details.touched">Please enter a valid email address.</div>
-      <div *ngIf="paymentDetails.errors?.['pattern'] && (paymentDetails.dirty || paymentDetails.touched)" class="error">
+      <div class="error-message" *ngIf="(accountHolderName!.dirty) && accountHolderName!.invalid">Name cannot be empty!</div>
+
+      <div class="error-message" *ngIf="paymentDetails.errors?.['required'] && (paymentDetails.dirty || paymentDetails.touched)">
+            Details cannot be empty!
+          </div>
+      <div *ngIf="paymentDetails.errors?.['pattern'] && (paymentDetails.dirty || paymentDetails.touched)" class="error-message">
         {{ getErrorMessage() }}
       </div>
+
 
       <br>
       <button (click)="saveNewPayment()" [disabled]="!paymentForm.valid">Save</button>

@@ -41,9 +41,16 @@ export class DeliveryPaymentComponent {
   payments: PaymentMethod[];
   paymentTypes = [
     { id: 'credit', displayName: 'Credit Card', inputPlaceholder: 'Card Number', defaultImageUrl: 'https://npr.brightspotcdn.com/dims4/default/add8201/2147483647/strip/true/crop/445x281+0+0/resize/880x556!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwgvu%2Ffiles%2F201509%2Fvisa-chipAndPin.jpg' },
-    { id: 'paypal', displayName: 'PayPal', inputPlaceholder: 'Email Address', defaultImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/320px-PayPal.svg.png' },
-    { id: 'sepa', displayName: 'SEPA', inputPlaceholder: 'IBAN', defaultImageUrl: 'https://t3.ftcdn.net/jpg/00/62/43/88/360_F_62438887_eZPerFRxvwahpWTXHst9yOcbucMO8CKd.jpg' }
+    { id: 'paypal', displayName: 'PayPal', inputPlaceholder: 'Email Address', defaultImageUrl: 'https://www.sketchappsources.com/resources/source-image/PayPalCard.png' },
+    { id: 'sepa', displayName: 'SEPA', inputPlaceholder: 'IBAN', defaultImageUrl: 'https://t4.ftcdn.net/jpg/00/57/14/71/360_F_57147193_lha7qzwiGz6eIjQ0aFiXqNGDk980lj6M.jpg' }
   ];
+  creditCardImages: string [] = [
+    "https://www.deutsche-bank.de/dam/deutschebank/de/pgk/ub/kreditkarten-1059x755-master-card-standard-w35441.png.transform/db_eccs_common_imageDesktop/image.png",
+    "https://www.sparkasse.de/_next/image?url=%2Fuploads%2Frote_visa_und_girocard_der_sparkasse_muster_Abb_Spk_C22_VID_m_SE_VS_2784_65b18c3605.jpg&w=1920&q=75",
+    "https://www.vr.de/privatkunden/unsere-produkte/was-ist-eine-kreditkarte/kreditkarte/_jcr_content/parsys/textmitbild_1/image.img.png/1660834937444/visa-standard-dz-bank-vrnw-kreditkarte-nur-diese-seite.jpg",
+    "https://www.bild.de/kreditkarten/wp-content/uploads/2022/08/revolut-kreditkarte.png",
+    "https://www.bild.de/kreditkarten/wp-content/uploads/2022/02/dkb-debitkarte-visa.png"
+  ]
   selectedPaymentType: PaymentType | null = null;
   addingPayment = false;
   editingIndex: number | null = null;
@@ -162,6 +169,16 @@ export class DeliveryPaymentComponent {
     if (this.selectedPaymentType) {
       this.currentDetailsPlaceholder = this.selectedPaymentType?.inputPlaceholder || '';
       this.currentInputType = this.selectedPaymentType.id === 'paypal' ? 'email' : 'number'; 
+
+      if (this.selectedPaymentType.id === 'credit') {
+        const creditPaymentsCount = this.payments.filter(p => p.id === 'credit').length;
+        const imageIndex = creditPaymentsCount % this.creditCardImages.length;
+        this.newPayment.imageUrl = this.creditCardImages[imageIndex];
+      } else {
+        this.newPayment.imageUrl = this.selectedPaymentType.defaultImageUrl;
+      }
+  
+
       this.newPayment = {
         id: this.selectedPaymentType?.id || '',
         name: this.selectedPaymentType?.displayName || '',
@@ -196,11 +213,11 @@ export class DeliveryPaymentComponent {
     if (this.isValidPayment(payment)) {
       this.paymentService.setSelectedPaymentMethod(payment);
       this.selectedPayment = payment;
-      this.paymentSelectionChange.emit(true);
+      this.paymentSelectionChange.emit(this.isValidPayment(payment) && payment === this.selectedPayment);
   } else {
       this.selectedPayment = null;
       this.paymentSelectionChange.emit(false);
-  }
+    }
   }
 
   addNewPayment() {
@@ -208,17 +225,13 @@ export class DeliveryPaymentComponent {
   }
 
   saveNewPayment() {
-    if (!this.newPayment.accountHolderName.trim()) {
-      alert('Account holder name is required.');
-      return;
-    }
-
-    if (!this.newPayment.details.trim()) {
-      alert('Details cannot be empty');
-      return;
-    }
   
-    //check if it's a credit card to mask number
+     if (this.newPayment.id === 'credit' && this.newPayment.details) {
+        const creditPaymentsCount = this.payments.filter(p => p.id === 'credit').length;
+        const imageIndex = creditPaymentsCount % this.creditCardImages.length;
+        this.newPayment.imageUrl = this.creditCardImages[imageIndex];
+     }
+    //check if it's a credit card/iban to mask number
     if ((this.newPayment.id === 'credit' || this.newPayment.id === "sepa") && this.newPayment.details) {
       this.newPayment.maskedDetails = `ending in ${this.newPayment.details.slice(-4)}`;
     } else {
@@ -230,6 +243,7 @@ export class DeliveryPaymentComponent {
     this.addingPayment = false;
     this.payments = this.paymentService.getPayments();
     this.paymentSelectionChange.emit(true);
+    this.paymentSelectionChange.emit(false);
   }
 
   editPayment(index: number): void {
@@ -278,12 +292,19 @@ export class DeliveryPaymentComponent {
   }
 
   removePayment(index: number) {
-    if (this.payments[index].default && this.payments.length > 1) {
-      this.selectPayment(this.payments[index === 0 ? 1 : 0]);
-    }
+    const wasDefault = this.payments[index].default;
+    this.payments.splice(index, 1);
     this.paymentService.removePayment(index);
     this.payments = this.paymentService.getPayments();
-    this.paymentSelectionChange.emit(true);
+
+    if (wasDefault && this.payments.length > 0) {
+        this.selectPayment(this.payments[0]); 
+    } else if (this.payments.length === 0) {
+        this.selectedPayment = null;
+        this.paymentSelectionChange.emit(false);
+    } else {
+        this.paymentSelectionChange.emit(false);
+    }
   }
 
   resetNewPayment() {

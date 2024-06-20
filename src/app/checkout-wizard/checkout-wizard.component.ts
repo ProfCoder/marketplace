@@ -144,7 +144,7 @@ export class CheckoutWizardComponent implements OnInit {
   }
 
   updateSelectionValidity() {
-    this.selectionValid = this.addressValid && this.shippingSelected && this.paymentSelected;
+    this.selectionValid = this.addressValid && this.shippingSelected && this.paymentSelected && this.selectedPaymentMethod != null;
   }
 
   checkAddressValidity() {
