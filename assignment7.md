@@ -2,7 +2,7 @@
 
 ## Assignment 7: Shopping Cart
 
-**Achieved Points: [__/10]**  
+**Achieved Points: [9.5/10]** ✅ 
 **Deadline: 11.06.2024 13:30**
 
 <img src="images/assignment7_teaser.png">
@@ -20,9 +20,11 @@ You can find all design patterns in the book [Designing Interfaces: Patterns for
 
 In this assignment, you will implement a shopping cart.
 
-- [ ] [Implement 'Add to cart' button](#implement-add-to-cart-button) (2 Points)
-- [ ] [Design cart page](#design-cart-page) (6 Points)
-- [ ] [Implement Cart Badge](#implement-cart-badge) (2 Points)
+- [ ] [Implement 'Add to cart' button](#implement-add-to-cart-button) (2/2 Points)
+- [ ] [Design cart page](#design-cart-page) (5.5/6 Points)
+
+  > ⚠️ Your shopping cart header button is hidden when the cart is empty. This might make it confusing for new users that are used to other shopping sites.
+- [ ] [Implement Cart Badge](#implement-cart-badge) (2/2 Points)
 - [ ] [Tag the Final Commit](#tag-the-final-commit)
 
 ### Instructions
