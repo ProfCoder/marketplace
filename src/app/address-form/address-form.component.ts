@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +9,11 @@ import { AddressService } from '../services/address.service';
 interface Country {
   name: string;
   code: string;
+}
+
+interface AddressType {
+  name: string;
+  value: string;
 }
 
 @Component({
@@ -48,9 +54,12 @@ export class AddressFormComponent {
   newAddress = {
     name: '',
     street: '',
+    streetNumber: '',  // Add the streetNumber property here
     city: '',
     postalCode: '',
     country: null as Country | null,
+    type: '',
+    otherType: '',
     deliveryInstructions: '',
   };
   deliveryInstructions: string = '';
@@ -66,11 +75,21 @@ export class AddressFormComponent {
     { name: 'United States', code: 'US' },
   ];
 
+  addressTypes: AddressType[] = [
+    { name: 'Home', value: 'Home' },
+    { name: 'Office', value: 'Office' },
+    { name: 'Other', value: 'Other' }
+  ];
+
   constructor(private addressService: AddressService) {
     this.savedAddresses = this.addressService.getAddresses();
     this.savedAddresses.forEach(address => {
       if (!address.deliveryInstructions) {
         address.deliveryInstructions = '';
+      }
+      // Add streetNumber to each address if not present
+      if (!address.streetNumber) {
+        address.streetNumber = '';
       }
     });
     this.selectedAddress = this.savedAddresses[0];
@@ -91,7 +110,7 @@ export class AddressFormComponent {
   saveNewAddress() {
     if (this.isAddressValid(this.newAddress)) {
       this.addressService.addAddress({ ...this.newAddress });
-      this.newAddress = { name: '', street: '', city: '', postalCode: '', country: null, deliveryInstructions: '' };
+      this.newAddress = { name: '', street: '', streetNumber: '', city: '', postalCode: '', country: null, type: '', otherType: '', deliveryInstructions: '' };
       this.addingAddress = false;
       this.addressCreationState.emit(false);
       this.savedAddresses = this.addressService.getAddresses();
@@ -181,8 +200,17 @@ export class AddressFormComponent {
     }
   }
 
+  onTypeChange(address: any, event: any) {
+    if (event.value !== 'Other') {
+      address.otherType = '';
+    }
+  }
+
   isAddressValid(address: any) {
-    return address.name && address.street && address.city && address.postalCode && address.country;
+    if (address.type === 'Other' && !address.otherType) {
+      return false;
+    }
+    return address.name && address.street && address.streetNumber && address.city && address.postalCode && address.country && address.type;
   }
 
   checkAddressValidity() {
@@ -194,3 +222,4 @@ export class AddressFormComponent {
     return index;
   }
 }
+

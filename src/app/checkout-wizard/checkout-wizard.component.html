@@ -1,48 +1,51 @@
-<p-steps [model]="steps" [(activeIndex)]="currentStep"></p-steps>
+<div class="wizard-container">
+  <p-steps class="stepper" [model]="steps" [(activeIndex)]="currentStep"></p-steps>
+  <div class="stepper-hr"></div>
 
-<div *ngIf="currentStep === 0">
-  <app-address-form 
-    (addressValidityChange)="onAddressValidityChange($event)" 
-    (addressCreationState)="onAddressCreationStateChange($event)">
-  </app-address-form>
-  <button [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
-</div>
-<div *ngIf="currentStep === 1">
-  <h3>Delivery & Payment</h3>
-  <app-delivery-payment 
-    (shippingSelectionChange)="onShippingSelectionChange($event)"
-    (paymentSelectionChange)="onPaymentSelectionChange($event)">
-  </app-delivery-payment>
-  <button (click)="previousStep()">Back</button>
-  <button [disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
-</div>
-<div *ngIf="currentStep === 2">
-  <h3>Summary</h3>
-  <div *ngFor="let item of cartItems; trackBy: trackByItemId">
-     <img [src]="getProductImage(item)" alt="Product Image" height="300">
-    <div>
-      <p>Name: {{ item.name }}</p>
-      <p>Quantity: {{ item.quantity }}</p>
-      <p>Price: ${{ calculateTotalPrice(item.quantity, item.price) }}</p>
+  <div *ngIf="currentStep === 0">
+    <app-address-form 
+      (addressValidityChange)="onAddressValidityChange($event)" 
+      (addressCreationState)="onAddressCreationStateChange($event)">
+    </app-address-form>
+    <button [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
+  </div>
+  <div *ngIf="currentStep === 1">
+    <h3>Delivery & Payment</h3>
+    <app-delivery-payment 
+      (shippingSelectionChange)="onShippingSelectionChange($event)"
+      (paymentSelectionChange)="onPaymentSelectionChange($event)">
+    </app-delivery-payment>
+    <button (click)="previousStep()">Back</button>
+    <button [disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
+  </div>
+  <div *ngIf="currentStep === 2">
+    <h3>Summary</h3>
+    <div *ngFor="let item of cartItems; trackBy: trackByItemId">
+       <img [src]="getProductImage(item)" alt="Product Image" height="300">
+      <div>
+        <p>Name: {{ item.name }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>Price: ${{ calculateTotalPrice(item.quantity, item.price) }}</p>
+      </div>
     </div>
+    <div>
+      <h4>Delivery Address</h4>
+      <p>{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
+    </div>
+    <div>
+      <h4>Shipping Method</h4>
+      <p>{{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
+    </div>
+    <div>
+      <h4>Payment Method</h4>
+      <p>{{ selectedPaymentMethod.name }}</p>
+    </div>
+    <div>
+      <h4>Items price: {{ calculateItemsTotalPrice() }}€</h4>
+          <h4>Shipping cost: {{ selectedShippingMethod?.cost === 0 ? 'Free' : selectedShippingMethod?.cost + '€' }}</h4>
+          <h4>Total price: {{ totalPrice }}€</h4>
+    </div>
+    <button (click)="previousStep()">Back</button>
+    <button (click)="confirmPurchase()">Confirm Purchase</button>
   </div>
-  <div>
-    <h4>Delivery Address</h4>
-    <p>{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
-  </div>
-  <div>
-    <h4>Shipping Method</h4>
-    <p>{{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
-  </div>
-  <div>
-    <h4>Payment Method</h4>
-    <p>{{ selectedPaymentMethod.name }}</p>
-  </div>
-  <div>
-    <h4>Items price: {{ calculateItemsTotalPrice() }}€</h4>
-        <h4>Shipping cost: {{ selectedShippingMethod?.cost === 0 ? 'Free' : selectedShippingMethod?.cost + '€' }}</h4>
-        <h4>Total price: {{ totalPrice }}€</h4>
-  </div>
-  <button (click)="previousStep()">Back</button>
-  <button (click)="confirmPurchase()">Confirm Purchase</button>
 </div>

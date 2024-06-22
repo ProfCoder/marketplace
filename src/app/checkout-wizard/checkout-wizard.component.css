@@ -1,0 +1,35 @@
+.wizard-container {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.521);
+    box-shadow: 1px 1px 3px 4px rgba(0, 0, 0, 0.041);
+    padding: 35px 25px 30px 25px;
+}
+
+
+
+.stepper-hr {
+
+ 
+    margin-bottom: 50px;
+}
+
+/* ::ng-deep .stepper .p-steps-item .p-steps-number {
+  background-size: contain;
+  color: transparent; 
+  cursor: pointer;
+}
+
+::ng-deep .stepper .p-steps-item:nth-child(1) .p-steps-number {
+  background: url('/assets/icons/address.svg') no-repeat center center;
+}
+
+::ng-deep .stepper .p-steps-item:nth-child(2) .p-steps-number {
+  background: url('/assets/icons/payment_delivery.svg') no-repeat center center;
+}
+
+::ng-deep .stepper .p-steps-item:nth-child(3) .p-steps-number {
+  background: url('/assets/icons/summary.svg') no-repeat center center;
+}
+
+::ng-deep .stepper .p-steps-item.p-steps-current .p-steps-number {
+  background-color: blue;
+} */
