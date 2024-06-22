@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { PaymentMethod } from '../delivery-payment/delivery-payment.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentService {
   private selectedShippingMethod = new BehaviorSubject<any>(null);
+  private selectedPaymentMethod = new BehaviorSubject<PaymentMethod | null>(null);
   private selectedPayment = new BehaviorSubject<any>(null);
   private shippingCost = new BehaviorSubject<number>(0);
   private paymentsKey = 'payments';
@@ -31,12 +33,12 @@ export class PaymentService {
     this.selectedShippingMethod.next(method);
   }
   
-  getSelectedPaymentMethod() {
-    return this.selectedPayment.asObservable();
+  getSelectedPaymentMethod(): Observable<PaymentMethod | null> {
+    return this.selectedPaymentMethod.asObservable();
   }
 
-  setSelectedPaymentMethod(method: any) {
-    this.selectedPayment.next(method);
+  setSelectedPaymentMethod(method: PaymentMethod) {
+    this.selectedPaymentMethod.next(method);
   }
 
   private loadPayments() {

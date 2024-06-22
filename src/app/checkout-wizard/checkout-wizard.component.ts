@@ -61,8 +61,10 @@ export class CheckoutWizardComponent implements OnInit {
 
     this.paymentService.getSelectedPaymentMethod().subscribe(method => {
       this.selectedPaymentMethod = method;
+      this.paymentSelected = !!method;
       this.updateSelectionValidity();
     });
+  
   }
 
   loadCartItems() {

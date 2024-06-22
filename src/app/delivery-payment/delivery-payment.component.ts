@@ -40,16 +40,16 @@ export class DeliveryPaymentComponent {
   currentInputType: string = 'text';
   payments: PaymentMethod[];
   paymentTypes = [
-    { id: 'credit', displayName: 'Credit Card', inputPlaceholder: 'Card Number', defaultImageUrl: 'https://npr.brightspotcdn.com/dims4/default/add8201/2147483647/strip/true/crop/445x281+0+0/resize/880x556!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwgvu%2Ffiles%2F201509%2Fvisa-chipAndPin.jpg' },
-    { id: 'paypal', displayName: 'PayPal', inputPlaceholder: 'Email Address', defaultImageUrl: 'https://www.sketchappsources.com/resources/source-image/PayPalCard.png' },
-    { id: 'sepa', displayName: 'SEPA', inputPlaceholder: 'IBAN', defaultImageUrl: 'https://t4.ftcdn.net/jpg/00/57/14/71/360_F_57147193_lha7qzwiGz6eIjQ0aFiXqNGDk980lj6M.jpg' }
+    { id: 'credit', displayName: 'Credit Card', inputPlaceholder: 'Card Number', defaultImageUrl: 'assets/icons/card1.png' },
+    { id: 'paypal', displayName: 'PayPal', inputPlaceholder: 'Email Address', defaultImageUrl: 'assets/icons/paypal.png' },
+    { id: 'sepa', displayName: 'SEPA', inputPlaceholder: 'IBAN', defaultImageUrl: 'assets/icons/sepa.jpg' }
   ];
   creditCardImages: string [] = [
-    "https://www.deutsche-bank.de/dam/deutschebank/de/pgk/ub/kreditkarten-1059x755-master-card-standard-w35441.png.transform/db_eccs_common_imageDesktop/image.png",
-    "https://www.sparkasse.de/_next/image?url=%2Fuploads%2Frote_visa_und_girocard_der_sparkasse_muster_Abb_Spk_C22_VID_m_SE_VS_2784_65b18c3605.jpg&w=1920&q=75",
-    "https://www.vr.de/privatkunden/unsere-produkte/was-ist-eine-kreditkarte/kreditkarte/_jcr_content/parsys/textmitbild_1/image.img.png/1660834937444/visa-standard-dz-bank-vrnw-kreditkarte-nur-diese-seite.jpg",
-    "https://www.bild.de/kreditkarten/wp-content/uploads/2022/08/revolut-kreditkarte.png",
-    "https://www.bild.de/kreditkarten/wp-content/uploads/2022/02/dkb-debitkarte-visa.png"
+    "assets/icons/card1.png",
+    "assets/icons/card2.webp",
+    "assets/icons/card3.jpg",
+    "assets/icons/card4.png",
+    "assets/icons/card5.png"
   ]
   selectedPaymentType: PaymentType | null = null;
   addingPayment = false;
@@ -70,6 +70,7 @@ export class DeliveryPaymentComponent {
     this.initializeDefaultPaymentType();
     this.initializeShippingOptions();
     this.emitInitialSelectionStates();
+    this.emitInitialPaymentSelectionState();
     this.setDefaultPaymentType();
   }
 
@@ -131,6 +132,16 @@ export class DeliveryPaymentComponent {
 
     const defaultShippingSelected = !!this.selectedShipping;
     this.shippingSelectionChange.emit(defaultShippingSelected);
+  }
+
+  emitInitialPaymentSelectionState(): void {
+    const defaultPayment = this.payments.find(p => p.default);
+  if (defaultPayment && this.isValidPayment(defaultPayment)) {
+    this.paymentService.setSelectedPaymentMethod(defaultPayment);
+    this.paymentSelectionChange.emit(true);
+  } else {
+    this.paymentSelectionChange.emit(false);
+  }
   }
 
   setDefaultPaymentType(): void {
@@ -210,10 +221,12 @@ export class DeliveryPaymentComponent {
 
 
   selectPayment(payment: any) {
+    this.selectedPayment = payment;
+    const isValid = this.isValidPayment(payment);
     if (this.isValidPayment(payment)) {
       this.paymentService.setSelectedPaymentMethod(payment);
       this.selectedPayment = payment;
-      this.paymentSelectionChange.emit(this.isValidPayment(payment) && payment === this.selectedPayment);
+      this.paymentSelectionChange.emit(isValid && payment === this.selectedPayment);
   } else {
       this.selectedPayment = null;
       this.paymentSelectionChange.emit(false);
