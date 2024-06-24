@@ -42,23 +42,42 @@
     <div class="checkout-info">
     
       <div class="checkout-info-left">
-        <h4>Delivery Address</h4>
-        <p>{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
+        <div class="info-heading">Delivery Address</div>
+        <p class="info-sub-text">{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
 
 
  
-        <h4>Shipping Method</h4>
-        <p>{{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
+        <div class="info-heading">Shipping Method</div>
+        <p class="info-sub-text"> {{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
 
-        <h4>Payment Method</h4>
-        <p>{{ selectedPaymentMethod.name }}</p>
+        <div class="info-heading">Payment Method</div>
+        <p class="info-sub-text">{{ selectedPaymentMethod.name }}</p>
       </div>
 
       <div class="checkout-info-right">
-    
-        <h4>Items price: {{ calculateItemsTotalPrice() }}€</h4>
-        <h4>Shipping cost: {{ selectedShippingMethod?.cost === "FREE" ? 'Free' : (selectedShippingMethod?.cost + '€') }}</h4>
-        <h4>Total price: {{ totalPrice }}€</h4>
+        <div class="order-summary">Order Summary</div>
+        <div class="order-price-container">
+          <div>
+            <div class="order-price-sub">
+              <div class="order-price-header">Items price:</div>
+              <div class="order-price">{{ calculateItemsTotalPrice() }}€</div>
+            </div>
+
+            <div class="order-price-sub">
+              <div class="order-price-header">Shipping cost: </div>
+              <div class="order-price">{{ selectedShippingMethod?.cost === "FREE" ? 'Free' : (selectedShippingMethod?.cost + '€') }}</div>
+            </div>
+
+            <div class="order-price-sub total-price">
+              <div class="order-price-final">Order Total:  <div class="vat">Order total include VAT. </div> </div>
+            
+              <div class="order-total-price">{{ totalPrice }}€</div>
+            </div>
+          </div>
+       
+  
+        </div>
+
   </div>
       </div>
       <button  class="confirm-button"(click)="confirmPurchase()">Confirm Purchase</button>
