@@ -2,11 +2,15 @@
   color: red;
 }
 
+.delivery-container {
+  margin-bottom: 50px;
+}
 
 .address-heading {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 18px;
   color: grey;
+  font-weight: 500;
   margin-bottom: 30px;
   margin-left: 4px;
 }
@@ -84,6 +88,7 @@
 
 .shipping-duration, .shipping-date {
   margin-top: 5px;
+  color: rgb(66, 63, 63);
 }
 
 .radio-circle {
@@ -131,4 +136,108 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.2s;
+}
+
+
+
+
+
+.payment-container {
+  margin-bottom: 50px;
+}
+
+.payment-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.payment-option-box {
+
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  width: calc(33% - 20px);
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.payment-option-box.selected {
+  border: 3px solid #2A83A4;
+}
+
+.payment-option-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.payment-name {
+  font-weight: bold;
+}
+
+.payment-details {
+  margin-top: 5px;
+  color: rgb(66, 63, 63);
+}
+
+.radio-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2D87A7;
+  border-radius: 50%;
+  position: relative;
+}
+
+.radio-circle input[type="radio"] {
+  display: none;
+}
+
+.radio-circle input[type="radio"]:checked + .circle::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #2D87A7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.circle::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: blue;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
 }

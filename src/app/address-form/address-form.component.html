@@ -1,6 +1,6 @@
 
 <div>
-  <div class="address-heading">Select your preferable address</div>
+  <div class="address-heading">Select Delivery Address</div>
   <div *ngIf="savedAddresses.length > 0; else noAddresses">
     <div *ngFor="let address of savedAddresses; let i = index; trackBy: trackByIndex" 
          [ngClass]="{'default-address': defaultAddressIndex === i, 'default-address-card': address.isDefault}" 

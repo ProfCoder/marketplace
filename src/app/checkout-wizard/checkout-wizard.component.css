@@ -1,13 +1,16 @@
 .wizard-container {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.521);
-    box-shadow: 1px 1px 3px 4px rgba(0, 0, 0, 0.041);
-    padding: 35px 25px 30px 25px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.521);
+  box-shadow: 1px 1px 3px 4px rgba(0, 0, 0, 0.041);
+  padding: 35px 25px 30px 25px;
 }
 
 .stepper-hr {
-    margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
+.next-button {
+  margin-left: 20px;
+}
 
 .wizard-button {
   background-color: #007BFF;
@@ -30,14 +33,118 @@
 .wizard-button:disabled {
   background-color: #d3d3d3;
   color: #a1a1a1;
-  cursor: default; /* Ensure no cursor change on hover */
-  pointer-events: none; /* Disable all hover effects */
+  cursor: default; 
+  pointer-events: none;
+}
+
+.checkout-product-container {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.checkout-card-container {
+  width: 75%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  margin-top: 20px;
+  padding-left: 30px;
+
+}
+
+.checkout-item-image {
+  width: 150px;
+  /* height: 300px; */
+  padding: 15px 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkout-item-quantity {
+  font-size: 20px;
+}
+
+.checkout-item-price {
+  color:#1a1a87;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.address-heading {
+  font-weight: 300;
+  font-size: 18px;
+  color: grey;
+  font-weight: 500;
+  margin-bottom: 30px;
+  margin-left: 4px;
+}
+
+.checkout-item-details {
+  padding: 20px 10px 20px 45px;
+}
+
+.checkout-item-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.order-information {
+  margin-top: 40px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+
+.checkout-info {
+  display: flex;
+  flex-direction:  row;
+  margin-top: 50px;
+  
+}
+
+
+.checkout-info-left {
+  border: 2px solid #2A83A5;
+  padding: 20px 40px;
+}
+
+.checkout-info-right {
+  border: 2px solid #2A83A5;
+  padding: 20px 40px;
 }
 
 
 
 
+.confirm-button {
+  display: block;
+  background-color: #F5CA00; 
+  padding: 12px 17px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  border:none;
+  margin-top: 30px;
+  margin-bottom: 35px;
+}
 
+.confirm-button:hover {
+  background-color: #f5c800c2; 
+  cursor: pointer;
+
+}
 
 /* ::ng-deep .stepper .p-steps-item .p-steps-number {
   background-size: contain;
