@@ -6,8 +6,8 @@ import { PaymentService } from '../services/payment.service';
 export interface PaymentMethod {
   id: string;
   name: string;
-  details: string; // Full card number
-  maskedDetails?: string; // Masked card number
+  details: string; 
+  maskedDetails?: string; 
   imageUrl: string;
   default: boolean;
   accountHolderName: string;
@@ -78,29 +78,30 @@ export class DeliveryPaymentComponent {
     const today = new Date();
     this.shippingOptions = [
       { 
-        id: 'next-day', 
-        name: 'Next Day Delivery', 
-        duration: '1 day', 
-        cost: 10, 
-        icon: 'pi pi-exclamation-circle',
-        deliveryDate: this.formatDate(today, 1)
+        id: 'standard', 
+        name: 'Standard', 
+        duration: '5 days', 
+        cost: "FREE", 
+        icon: 'pi pi-truck',
+        deliveryDate: this.formatDate(today, 5)
       },
       { 
         id: 'express', 
-        name: 'Express Delivery', 
+        name: 'Express', 
         duration: '3 days', 
         cost: 5, 
         icon: 'pi pi-send',
         deliveryDate: this.formatDate(today, 3)
       },
       { 
-        id: 'standard', 
-        name: 'Standard Delivery', 
-        duration: '5 days', 
-        cost: 0, 
-        icon: 'pi pi-truck',
-        deliveryDate: this.formatDate(today, 5)
+        id: 'next-day', 
+        name: 'Next Day', 
+        duration: '1 day', 
+        cost: 10, 
+        icon: 'pi pi-star',
+        deliveryDate: this.formatDate(today, 1)
       }
+
     ];
   }
 

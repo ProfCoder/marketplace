@@ -1,3 +1,134 @@
 .error-message {
   color: red;
 }
+
+
+.address-heading {
+  font-weight: 300;
+  font-size: 16px;
+  color: grey;
+  margin-bottom: 30px;
+  margin-left: 4px;
+}
+
+
+.delivery-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* gap: 20px; */
+}
+
+.delivery-option-box {
+  
+  border: 1px solid #ccc;
+  padding: 30px 20px;
+
+  border-radius: 8px;
+  width: 30%;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+.delivery-option-box i {
+  font-size: 24px; 
+}
+
+.delivery-option-box.selected {
+  border: 3px solid #2A83A4;
+
+
+}
+
+.delivery-option-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.delivery-option-box input[type="radio"] {
+  display: none;
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  
+}
+
+.shipping-cost {
+  position: absolute;
+  top: -15px;
+  right: -1px;
+  background-color: rgba(211, 211, 211, 0.384);
+  color: red;
+  border-radius: 10px;
+  padding: 5px 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.delivery-options .delivery-option-box:first-child .shipping-cost {
+  background-color: #E6F7D9;
+  color: #37870f;
+}
+
+
+.shipping-name {
+  font-weight: bold;
+}
+
+.shipping-duration, .shipping-date {
+  margin-top: 5px;
+}
+
+.radio-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2D87A7;
+  border-radius: 50%;
+  position: relative;
+
+}
+
+.radio-circle input[type="radio"] {
+  display: none;
+  
+}
+
+.radio-circle input[type="radio"]:checked + .circle::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  /* background-color: blue; */
+  background-color: #2D87A7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.circle::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: blue;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s;
+}

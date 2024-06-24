@@ -1,13 +1,31 @@
 <div>
-  <h3>Select Delivery and Payment Options</h3>
 
-  <div>
-    <h4>Delivery Options</h4>
-    <div *ngFor="let shipping of shippingOptions">
-      <input type="radio" name="shipping" [(ngModel)]="selectedShipping" [value]="shipping.id" (change)="selectShippingMethod(shipping.id)">
-      <i [class]="shipping.icon"></i> {{ shipping.name }} ({{ shipping.duration }}, {{ shipping.cost }}€) - Arrives on {{ shipping.deliveryDate }}
+   <div>
+    <div class="address-heading">Select your delivery options</div>
+    <div class="delivery-options">
+      <label *ngFor="let shipping of shippingOptions" class="delivery-option-box" [class.selected]="selectedShipping === shipping.id" (click)="selectShippingMethod(shipping.id)">
+        <input type="radio" name="shipping" [(ngModel)]="selectedShipping" [value]="shipping.id" (change)="selectShippingMethod(shipping.id)">
+        <div class="option-content">
+          <div class="shipping-cost" [ngStyle]="{'background-color': shipping.cost === 'FREE' ? '#E6F7D9' : 'rgba(211, 211, 211, 0.384)', 'color': shipping.cost === 'FREE' ? '#37870f' : '#8A8D93'}">
+            {{ shipping.cost === 'FREE' ? 'FREE' : shipping.cost + '€' }}
+          </div>
+          
+          <i [class]="shipping.icon"></i>
+          <div class="shipping-name">{{ shipping.name }}</div>
+          <div class="shipping-duration">{{ shipping.duration }}</div>
+          <div class="shipping-date">Arrives on {{ shipping.deliveryDate }}</div>
+          <div class="radio-circle">
+            <input type="radio" name="shippingRadio" [(ngModel)]="selectedShipping" [value]="shipping.id">
+            <div class="circle"></div>
+            
+          </div>
+        </div>
+      </label>
     </div>
   </div>
+  
+  
+  
 
   <div>
     <h4>Payment Options</h4>

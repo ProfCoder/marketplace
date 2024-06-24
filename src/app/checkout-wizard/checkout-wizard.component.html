@@ -7,16 +7,16 @@
       (addressValidityChange)="onAddressValidityChange($event)" 
       (addressCreationState)="onAddressCreationStateChange($event)">
     </app-address-form>
-    <button [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
+    <button class="wizard-button" [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
   </div>
   <div *ngIf="currentStep === 1">
-    <h3>Delivery & Payment</h3>
+    <!-- <h3>Delivery & Payment</h3> -->
     <app-delivery-payment 
       (shippingSelectionChange)="onShippingSelectionChange($event)"
       (paymentSelectionChange)="onPaymentSelectionChange($event)">
     </app-delivery-payment>
-    <button (click)="previousStep()">Back</button>
-    <button [disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
+    <button class="wizard-button" (click)="previousStep()">Back</button>
+    <button class="wizard-button"[disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
   </div>
   <div *ngIf="currentStep === 2">
     <h3>Summary</h3>
@@ -45,7 +45,9 @@
           <h4>Shipping cost: {{ selectedShippingMethod?.cost === 0 ? 'Free' : selectedShippingMethod?.cost + '€' }}</h4>
           <h4>Total price: {{ totalPrice }}€</h4>
     </div>
-    <button (click)="previousStep()">Back</button>
+    <button class="wizard-button" (click)="previousStep()">Back</button>
     <button (click)="confirmPurchase()">Confirm Purchase</button>
   </div>
+
+  
 </div>
