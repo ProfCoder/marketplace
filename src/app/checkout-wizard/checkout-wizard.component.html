@@ -7,7 +7,11 @@
       (addressValidityChange)="onAddressValidityChange($event)" 
       (addressCreationState)="onAddressCreationStateChange($event)">
     </app-address-form>
-    <button class="wizard-button next-button" [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
+    <div class="next-right">
+      <div>  <button class="wizard-button next-button" [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button></div>
+    
+    </div>
+
   </div>
   <div *ngIf="currentStep === 1">
     <!-- <h3>Delivery & Payment</h3> -->
@@ -15,8 +19,13 @@
       (shippingSelectionChange)="onShippingSelectionChange($event)"
       (paymentSelectionChange)="onPaymentSelectionChange($event)">
     </app-delivery-payment>
-    <button class="wizard-button" (click)="previousStep()">Back</button>
-    <button class="wizard-button next-button"[disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
+    <div class="next-back">
+      <div> <button class="wizard-button back-button" (click)="previousStep()">Back</button></div>
+      <div>    <button class="wizard-button next-button"[disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button></div>
+     
+  
+    </div>
+
   </div>
 
   <div *ngIf="currentStep === 2">
@@ -85,7 +94,7 @@
       
     <div>
 
-    <button class="wizard-button" (click)="previousStep()">Back</button>
+    <button class="wizard-button back-button" (click)="previousStep()">Back</button>
 
   </div>
 
