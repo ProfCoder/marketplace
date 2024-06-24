@@ -119,8 +119,17 @@ export class CheckoutWizardComponent implements OnInit {
 
   updateTotalPrice(): void {
     const itemsTotal = this.calculateItemsTotalPrice();
-    const shippingCost = this.selectedShippingMethod ? parseFloat(this.selectedShippingMethod.cost) : 0;
+    const shippingCost = this.selectedShippingMethod ? this.parseShippingCost(this.selectedShippingMethod.cost) : 0;
     this.totalPrice = itemsTotal + shippingCost;
+  }
+
+  parseShippingCost(cost: any): number {
+    if (cost === 'Free') {
+      return 0;
+    } else {
+      const parsedCost = parseFloat(cost);
+      return isNaN(parsedCost) ? 0 : parsedCost;
+    }
   }
 
   onAddressValidityChange(isValid: boolean) {
