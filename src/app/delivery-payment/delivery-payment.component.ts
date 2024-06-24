@@ -334,12 +334,27 @@ export class DeliveryPaymentComponent {
     }
   }
 
+  // makeDefault(index: number) {
+  //   this.payments.forEach(p => p.default = false);
+  //   this.payments[index].default = true;
+  //   this.paymentService.savePayments(); 
+  //   this.paymentSelectionChange.emit(true);
+  // }
+
   makeDefault(index: number) {
     this.payments.forEach(p => p.default = false);
     this.payments[index].default = true;
-    this.paymentService.savePayments(); 
+  
+    if (index !== 0) {
+      const [defaultPayment] = this.payments.splice(index, 1);
+      this.payments.unshift(defaultPayment);
+    }
+  
+    this.paymentService.savePayments();
     this.paymentSelectionChange.emit(true);
   }
+  
+  
 
   getPattern(): string {
     if (!this.selectedPaymentType) return ''; 

@@ -179,7 +179,7 @@
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   cursor: pointer;
   text-align: center;
-  position: relative; /* For positioning the default label */
+  position: relative;
 }
 
 .default-label {
