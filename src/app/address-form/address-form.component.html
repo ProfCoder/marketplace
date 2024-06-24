@@ -108,7 +108,7 @@
   </ng-template>
 
 
-  <button class="add-button" (click)="addNewAddress()"> + Add a new address</button>
+  <button class="add-button" (click)="addNewAddress()"> + Add new address</button>
   <div class="address-card" *ngIf="addingAddress">
     <div class="address-field-container">
       <input class="address-input" type="text" placeholder="Name" [(ngModel)]="newAddress.name" (input)="onInputChange('name', $event)">
