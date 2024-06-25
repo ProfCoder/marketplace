@@ -62,12 +62,12 @@
    </div>
    <button class="add-button" (click)="addingPayment = true" *ngIf="!addingPayment">+ Add new payment method</button>
    <div class="new-card2" *ngIf="addingPayment">
-     <form #paymentForm="ngForm">
+     <form class="form" #paymentForm="ngForm">
        <select class="drop-down" name="select" [(ngModel)]="selectedPaymentType" (ngModelChange)="onPaymentTypeChange()">
          <option *ngFor="let type of paymentTypes" [ngValue]="type">{{ type.displayName }}</option>
        </select>
-       <input type="text" [(ngModel)]="newPayment.accountHolderName" name="accountHolderName" #accountHolderName="ngModel" placeholder="Account Holder's Name" required>
-       <input [type]="currentInputType" [(ngModel)]="newPayment.details" name="paymentDetails" #paymentDetails="ngModel" #details="ngModel" [placeholder]="currentDetailsPlaceholder" required [pattern]="getPattern()" [disabled]="!addingPayment && selectedPaymentType?.id !== 'credit'" />
+       <input class="first" type="text" [(ngModel)]="newPayment.accountHolderName" name="accountHolderName" #accountHolderName="ngModel" placeholder="Account Holder's Name" required>
+       <input class="second" [type]="currentInputType" [(ngModel)]="newPayment.details" name="paymentDetails" #paymentDetails="ngModel" #details="ngModel" [placeholder]="currentDetailsPlaceholder" required [pattern]="getPattern()" [disabled]="!addingPayment && selectedPaymentType?.id !== 'credit'" />
        <div class="error-message" *ngIf="(accountHolderName!.dirty) && accountHolderName!.invalid">Name cannot be empty!</div>
        <div class="error-message" *ngIf="paymentDetails.errors?.['required'] && (paymentDetails.dirty || paymentDetails.touched)">Details cannot be empty!</div>
        <div *ngIf="paymentDetails.errors?.['pattern'] && (paymentDetails.dirty || paymentDetails.touched)" class="error-message">{{ getErrorMessage() }}</div>

@@ -334,7 +334,13 @@ background-color: rgba(0, 0, 255, 0.656);
   margin-left: 25px;
 }
 
+.second {
+  margin-left: 25px;
+}
 
+.first {
+  margin-left: 25px;
+}
 .button-newcard {
   border:none; 
   margin-right: 20px;
@@ -345,7 +351,9 @@ background-color: rgba(0, 0, 255, 0.656);
   border-radius: 5px;
   margin-top: 20px;
 }
-
+.form {
+  margin-top: 30px;
+}
 .button-newcard:hover{
 
   background-color:#2982A4 ;
