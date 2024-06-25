@@ -229,11 +229,7 @@
           <div *ngIf="address.isDefault" class="default-badge">Default</div>
           <label class="address-label">
             <div class="address-field name">
-              <input type="radio" name="address"
-              [value]="address"
-              [(ngModel)]="selectedAddress"
-              (change)="selectAddress(address)">
-                   <!-- <input type="radio" name="address" (change)="selectAddress(address)" [checked]="address === selectedAddress"> -->
+              <input type="radio" name="address" (change)="selectAddress(address)" [checked]="address === selectedAddress">
               <span class="delivering">Delivering to {{ address.name }}</span>
             </div>
             <div class="address-field street">{{ address.street }}, {{ address.streetNumber }}</div>

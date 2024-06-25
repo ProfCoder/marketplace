@@ -38,13 +38,6 @@ export class AddressService {
     }
   }
 
-  private initDefaultAddress() {
-    const defaultAddress = this.addresses.find(addr => addr.isDefault) || this.addresses[0];
-    if (defaultAddress) {
-        this.setSelectedAddress(defaultAddress);
-    }
-}
-
   private saveAddresses() {
     localStorage.setItem(this.addressesKey, JSON.stringify(this.addresses));
   }
@@ -62,9 +55,6 @@ export class AddressService {
   updateAddress(index: number, address: any) {
     this.addresses[index] = address;
     this.saveAddresses();
-    if (this.selectedAddress.getValue() === this.addresses[index]) {
-      this.setSelectedAddress(this.addresses[index]);
-    }
   }
 
   removeAddress(index: number) {
@@ -82,9 +72,5 @@ export class AddressService {
 
   setAddressAddingState(isAdding: boolean) {
     this.addressAdding.next(isAdding); 
-  }
-
-  getSelectedAddressValue() {
-    return this.selectedAddress.getValue();
   }
 }

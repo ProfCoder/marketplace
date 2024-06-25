@@ -52,8 +52,6 @@ export class CheckoutWizardComponent implements OnInit {
     this.addressService.getSelectedAddress().subscribe(address => {
       this.selectedAddress = address;
       this.checkAddressValidity();
-      this.loadSummaryDetails();
-      this.updateSelectionValidity();
     });
 
     this.paymentService.getSelectedShippingMethod().subscribe(method => {
@@ -96,7 +94,7 @@ export class CheckoutWizardComponent implements OnInit {
   }
 
   loadSummaryDetails() {
-    this.selectedAddress = this.addressService.getSelectedAddressValue();
+    this.selectedAddress = this.addressService.getSelectedAddress(); 
     this.selectedShippingMethod = this.paymentService.getSelectedShippingMethod();
     this.selectedPaymentMethod = this.paymentService.getSelectedPaymentMethod();
   }
@@ -178,12 +176,6 @@ export class CheckoutWizardComponent implements OnInit {
   previousStep() {
     if (this.currentStep > 0) {
       this.currentStep--;
-      if (this.currentStep === 0) {
-        this.addressService.getSelectedAddress().subscribe(address => {
-          this.selectedAddress = address;
-          this.updateSelectionValidity();
-        });
-      }
     }
   }
 }
