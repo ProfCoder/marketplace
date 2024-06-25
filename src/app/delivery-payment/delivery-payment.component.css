@@ -87,12 +87,60 @@
 }
 
 .card-height2 {
+  height: 215px;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  /* align-items:end; */
+  padding-top: 20px;
+
+}
+
+.card-height2 form {
   height: 205px;
   /* background-color: red; */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 10px;
 
+
+}
+
+
+.card-height2 form input {
+
+padding: 10px;
+
+}
+
+.drop-down {
+  padding: 10px 15px;
+}
+
+.new-card2 form input {
+  padding: 10px 15px;
+}
+
+
+
+
+.update-card {
+  background-color: rgba(0, 0, 255, 0.737);
+  border: none;
+  color:white;
+  border-radius: 5px;
+  /* width: 70px; */
+  text-align: center;
+  font-size: 18px;
+  font-weight: 550;
+  padding: 5px 20px;
+}
+
+.update-card:hover {
+cursor: pointer;
+background-color: rgba(0, 0, 255, 0.656);
 }
 
 .shipping-cost {
@@ -286,6 +334,24 @@
   margin-left: 25px;
 }
 
+
+.button-newcard {
+  border:none; 
+  margin-right: 20px;
+  background-color:#2982A4 ;
+  color:white;
+  font-size: 16px;
+  padding: 8px 17px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.button-newcard:hover{
+
+  background-color:#2982A4 ;
+cursor: pointer;
+background-color: (41, 129, 164, 0.774);
+}
 .button-container {
   display: flex;
   flex-direction: row;
