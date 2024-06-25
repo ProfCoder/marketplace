@@ -14,7 +14,6 @@
 
   </div>
   <div *ngIf="currentStep === 1">
-    <!-- <h3>Delivery & Payment</h3> -->
     <app-delivery-payment 
       (shippingSelectionChange)="onShippingSelectionChange($event)"
       (paymentSelectionChange)="onPaymentSelectionChange($event)">

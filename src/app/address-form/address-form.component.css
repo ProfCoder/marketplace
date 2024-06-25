@@ -1,3 +1,4 @@
+
 .address-heading {
   font-weight: 300;
   font-size: 18px;
@@ -12,7 +13,7 @@
   padding: 18px;
   margin-bottom: 25px;
   border-radius: 8px;
-  
+  position: relative;
 }
 
 .address-card:last-child {
@@ -32,7 +33,6 @@
 }
 
 .address-field-container {
-  /* margin-bottom: 20px; */
   padding: 10px 25px;
 }
 
@@ -43,7 +43,6 @@
   border: 1px solid #635f5f;
   border-radius: 4px;
   font-size: 16px;
-
 }
 
 .address-field {
@@ -60,26 +59,13 @@
 
 .address-field.street,
 .address-field.streetNumber,
-
-.address-field.postalCode{
+.address-field.postalCode {
   margin-left: 30px;
-}
-
-/* .address-field.city */
-/* .address-field.country  */
-
-.address-type {
-  background-color: #f0f0f0;
-  border-radius: 12px;
-  padding: 4px 8px;
-
-  margin-bottom: 8px;
 }
 
 button {
   margin-top: 8px;
   margin-right: 8px;
-
 }
 
 textarea {
@@ -124,14 +110,23 @@ textarea:focus {
 }
 
 .default-address-card {
-  /* background-color: #e6f7ff; */
-  /* border-color: #91d5ff; */
   border: 2px solid #3b80f6ae;
+}
+
+.default-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #074f9c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .big-button button {
   background-color: white;
-  /* border: 1px solid #074f9c; */
   margin: 20px 0 35px 25px;
   border-radius: 5px;
   padding: 5px 0;
@@ -150,12 +145,9 @@ textarea:focus {
 
 .add-button {
   background-color: white;
-  /* border: 1px solid #074f9c; */
-  /* margin: 20px 0 35px 25px; */
   margin-bottom: 30px;
   border-radius: 5px;
   padding: 7px 10px;
-  /* width: 160px; */
   background-color: #074f9ccd;
   color: white;
   font-size: 15px;
@@ -164,16 +156,12 @@ textarea:focus {
   cursor: pointer;
 }
 
-
-
 .add-button:hover {
   background-color: rgba(7, 79, 156, 0.724);
 }
 
 .inside-button {
   background-color: white;
-  /* border: 1px solid #074f9c; */
-  /* margin: 20px 0 35px 25px; */
   border-radius: 5px;
   padding: 5px 0;
   width: 100px;
