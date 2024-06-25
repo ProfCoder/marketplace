@@ -58,7 +58,7 @@ export class PaymentService {
           id: 'paypal',
           name: 'PayPal',
           details: 'user@example.com',
-          imageUrl: '',
+          imageUrl: 'assets/icons/paypal.png',
           default: false
         }
       ];
