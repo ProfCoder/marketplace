@@ -82,6 +82,42 @@ export class AddressFormComponent {
     this.checkAddressValidity();
   }
 
+  ngOnInit() {
+    this.loadAddresses();
+    this.initializeSelectedAddress();
+    this.addressService.getSelectedAddress().subscribe(selected => {
+      if (selected) {
+        this.selectedAddress = selected;
+      } else if (this.savedAddresses.length > 0) {
+        this.selectedAddress = this.savedAddresses[0];
+        this.addressService.setSelectedAddress(this.selectedAddress);
+      }
+      this.checkAddressValidity();
+    });
+  }
+
+  initializeSelectedAddress() {
+    this.addressService.getSelectedAddress().subscribe(selected => {
+      if (selected) {
+        this.selectedAddress = selected;
+      } else if (this.savedAddresses.length > 0) {
+        this.selectedAddress = this.savedAddresses[0];
+        this.addressService.setSelectedAddress(this.selectedAddress);
+      }
+      this.addressValidityChange.emit(this.isAddressValid(this.selectedAddress));
+    });
+  }
+
+  loadAddresses() {
+    this.savedAddresses = this.addressService.getAddresses();
+    if (!this.selectedAddress && this.savedAddresses.length > 0) {
+      this.selectedAddress = this.savedAddresses[0];
+      this.addressService.setSelectedAddress(this.selectedAddress);
+    }
+  }
+
+
+
   toggleEdit() {
     this.editingIndex = null;
     this.addressBackup = null;
@@ -100,6 +136,7 @@ export class AddressFormComponent {
       this.addressCreationState.emit(false);
       this.savedAddresses = this.addressService.getAddresses();
       this.selectedAddress = this.savedAddresses[this.savedAddresses.length - 1];
+      this.addressService.setSelectedAddress(this.selectedAddress);
       this.defaultAddressIndex = null;
       this.checkAddressValidity();
     } else {
@@ -110,7 +147,8 @@ export class AddressFormComponent {
 
   selectAddress(address: any) {
     this.selectedAddress = address;
-    this.checkAddressValidity();
+    this.addressService.setSelectedAddress(address);
+    this.addressValidityChange.emit(this.isAddressValid(address));
   }
 
   editAddress(index: number) {
