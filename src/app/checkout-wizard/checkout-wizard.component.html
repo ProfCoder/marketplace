@@ -1,48 +1,206 @@
-<p-steps [model]="steps" [(activeIndex)]="currentStep"></p-steps>
+<!-- <div class="wizard-container">
+  <p-steps class="stepper" [model]="steps" [(activeIndex)]="currentStep"></p-steps>
+  <div class="stepper-hr"></div>
 
-<div *ngIf="currentStep === 0">
-  <app-address-form 
-    (addressValidityChange)="onAddressValidityChange($event)" 
-    (addressCreationState)="onAddressCreationStateChange($event)">
-  </app-address-form>
-  <button [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button>
-</div>
-<div *ngIf="currentStep === 1">
-  <h3>Delivery & Payment</h3>
-  <app-delivery-payment 
-    (shippingSelectionChange)="onShippingSelectionChange($event)"
-    (paymentSelectionChange)="onPaymentSelectionChange($event)">
-  </app-delivery-payment>
-  <button (click)="previousStep()">Back</button>
-  <button [disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button>
-</div>
-<div *ngIf="currentStep === 2">
-  <h3>Summary</h3>
-  <div *ngFor="let item of cartItems; trackBy: trackByItemId">
-     <img [src]="getProductImage(item)" alt="Product Image" height="300">
-    <div>
-      <p>Name: {{ item.name }}</p>
-      <p>Quantity: {{ item.quantity }}</p>
-      <p>Price: ${{ calculateTotalPrice(item.quantity, item.price) }}</p>
+  <div *ngIf="currentStep === 0">
+    <app-address-form 
+      (addressValidityChange)="onAddressValidityChange($event)" 
+      (addressCreationState)="onAddressCreationStateChange($event)">
+    </app-address-form>
+    <div class="next-right">
+      <div>  <button class="wizard-button next-button" [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button></div>
+    
     </div>
+
   </div>
-  <div>
-    <h4>Delivery Address</h4>
-    <p>{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
+  <div *ngIf="currentStep === 1">
+    <app-delivery-payment 
+      (shippingSelectionChange)="onShippingSelectionChange($event)"
+      (paymentSelectionChange)="onPaymentSelectionChange($event)">
+    </app-delivery-payment>
+    <div class="next-back">
+      <div> <button class="wizard-button back-button" (click)="previousStep()">Back</button></div>
+      <div>    <button class="wizard-button next-button"[disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button></div>
+     
+  
+    </div>
+
   </div>
-  <div>
-    <h4>Shipping Method</h4>
-    <p>{{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
+
+  <div *ngIf="currentStep === 2">
+     <div class="address-heading">Summary</div>
+
+
+     <div class="checkout-product-container">
+
+      <div class="checkout-card-container" *ngFor="let item of cartItems; trackBy: trackByItemId">
+        <div class="checkout-item-image">
+          <img class="checkout-image" [src]="getProductImage(item)" alt="Product Image">
+        </div>
+        <div class="checkout-item-details">
+          <p class="checkout-item-name">{{ item.name }}</p>
+          <p class="checkout-item-quantity">Size: {{ item.size }}</p>
+          <p class="checkout-item-quantity">Quantity: {{ item.quantity }}</p>
+          <p class="checkout-item-price">${{ calculateTotalPrice(item.quantity, item.price) }}</p>
+        </div>
+      </div>
+    
+      
+      <div class="order-information">Order Information</div>
+    <div class="checkout-info">
+    
+      <div class="checkout-info-left">
+        <div class="info-heading">Delivery Address</div>
+        <p class="info-sub-text">{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
+
+
+ 
+        <div class="info-heading">Shipping Method</div>
+        <p class="info-sub-text"> {{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
+
+        <div class="info-heading">Payment Method</div>
+        <p class="info-sub-text">{{ selectedPaymentMethod.name }}</p>
+      </div>
+
+      <div class="checkout-info-right">
+        <div class="order-summary">Order Summary</div>
+        <div class="order-price-container">
+          <div>
+            <div class="order-price-sub">
+              <div class="order-price-header">Items price:</div>
+              <div class="order-price">{{ calculateItemsTotalPrice() }}€</div>
+            </div>
+
+            <div class="order-price-sub">
+              <div class="order-price-header">Shipping cost: </div>
+              <div class="order-price">{{ selectedShippingMethod?.cost === "FREE" ? 'Free' : (selectedShippingMethod?.cost + '€') }}</div>
+            </div>
+
+            <div class="order-price-sub total-price">
+              <div class="order-price-final">Order Total:  <div class="vat">Order total include VAT. </div> </div>
+            
+              <div class="order-total-price">{{ totalPrice }}€</div>
+            </div>
+          </div>
+       
+  
+        </div>
+
   </div>
-  <div>
-    <h4>Payment Method</h4>
-    <p>{{ selectedPaymentMethod.name }}</p>
+      </div>
+      <button  class="confirm-button"(click)="confirmPurchase()">Confirm Purchase</button>
+      </div>
+      
+    <div>
+
+    <button class="wizard-button back-button" (click)="previousStep()">Back</button>
+
   </div>
-  <div>
-    <h4>Items price: {{ calculateItemsTotalPrice() }}€</h4>
-        <h4>Shipping cost: {{ selectedShippingMethod?.cost === 0 ? 'Free' : selectedShippingMethod?.cost + '€' }}</h4>
-        <h4>Total price: {{ totalPrice }}€</h4>
+
+  
+</div>
+</div> -->
+
+<div class="wizard-container">
+  <p-steps class="stepper" [model]="steps" [(activeIndex)]="currentStep"></p-steps>
+  <div class="stepper-hr"></div>
+
+  <div *ngIf="currentStep === 0">
+    <app-address-form 
+      (addressValidityChange)="onAddressValidityChange($event)" 
+      (addressCreationState)="onAddressCreationStateChange($event)"
+      (addressSelected)="onAddressSelected($event)"> <!-- Bind new event here -->
+    </app-address-form>
+    <div class="next-right">
+      <div>  <button class="wizard-button next-button" [disabled]="!canProceedToNextStep()" (click)="nextStep()">Next</button></div>
+    
+    </div>
+
   </div>
-  <button (click)="previousStep()">Back</button>
-  <button (click)="confirmPurchase()">Confirm Purchase</button>
+  <div *ngIf="currentStep === 1">
+    <app-delivery-payment 
+      (shippingSelectionChange)="onShippingSelectionChange($event)"
+      (paymentSelectionChange)="onPaymentSelectionChange($event)">
+    </app-delivery-payment>
+    <div class="next-back">
+      <div> <button class="wizard-button back-button" (click)="previousStep()">Back</button></div>
+      <div>    <button class="wizard-button next-button"[disabled]="!selectionValid || !selectedPaymentMethod" (click)="nextStep()">Next</button></div>
+     
+  
+    </div>
+
+  </div>
+
+  <div *ngIf="currentStep === 2">
+     <div class="address-heading">Summary</div>
+
+
+     <div class="checkout-product-container">
+
+      <div class="checkout-card-container" *ngFor="let item of cartItems; trackBy: trackByItemId">
+        <div class="checkout-item-image">
+          <img class="checkout-image" [src]="getProductImage(item)" alt="Product Image">
+        </div>
+        <div class="checkout-item-details">
+          <p class="checkout-item-name">{{ item.name }}</p>
+          <p class="checkout-item-quantity">Size: {{ item.size }}</p>
+          <p class="checkout-item-quantity">Quantity: {{ item.quantity }}</p>
+          <p class="checkout-item-price">${{ calculateTotalPrice(item.quantity, item.price) }}</p>
+        </div>
+      </div>
+    
+      
+      <div class="order-information">Order Information</div>
+    <div class="checkout-info">
+    
+      <div class="checkout-info-left">
+        <div class="info-heading">Delivery Address</div>
+        <p class="info-sub-text">{{ selectedAddress?.street }}, {{ selectedAddress?.city }}, {{ selectedAddress?.postalCode }}</p>
+
+
+ 
+        <div class="info-heading">Shipping Method</div>
+        <p class="info-sub-text"> {{ selectedShippingMethod.name }} - {{ selectedShippingMethod.duration }}</p>
+
+        <div class="info-heading">Payment Method</div>
+        <p class="info-sub-text">{{ selectedPaymentMethod.name }}</p>
+      </div>
+
+      <div class="checkout-info-right">
+        <div class="order-summary">Order Summary</div>
+        <div class="order-price-container">
+          <div>
+            <div class="order-price-sub">
+              <div class="order-price-header">Items price:</div>
+              <div class="order-price">{{ calculateItemsTotalPrice() }}€</div>
+            </div>
+
+            <div class="order-price-sub">
+              <div class="order-price-header">Shipping cost: </div>
+              <div class="order-price">{{ selectedShippingMethod?.cost === "FREE" ? 'Free' : (selectedShippingMethod?.cost + '€') }}</div>
+            </div>
+
+            <div class="order-price-sub total-price">
+              <div class="order-price-final">Order Total:  <div class="vat">Order total include VAT. </div> </div>
+            
+              <div class="order-total-price">{{ totalPrice }}€</div>
+            </div>
+          </div>
+       
+  
+        </div>
+
+  </div>
+      </div>
+      <button  class="confirm-button"(click)="confirmPurchase()">Confirm Purchase</button>
+      </div>
+      
+    <div>
+
+    <button class="wizard-button back-button" (click)="previousStep()">Back</button>
+
+  </div>
+
+  
+</div>
 </div>

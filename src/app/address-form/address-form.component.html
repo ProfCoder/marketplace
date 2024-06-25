@@ -1,59 +1,91 @@
+
 <div>
-  <h3>Choose a delivery address</h3>
+  <div class="address-heading">Select Delivery Address</div>
   <div *ngIf="savedAddresses.length > 0; else noAddresses">
-    <div *ngFor="let address of savedAddresses; let i = index; trackBy: trackByIndex" [ngClass]="{'default-address': defaultAddressIndex === i}">
+    <div *ngFor="let address of savedAddresses; let i = index; trackBy: trackByIndex" 
+         [ngClass]="{'default-address': defaultAddressIndex === i, 'default-address-card': address.isDefault}" 
+         class="address-card">
       <div *ngIf="editingIndex === i; else displayAddress">
-        <input type="text" [(ngModel)]="address.name" placeholder="Name" (input)="onInputChange('name', $event)">
-        <div *ngIf="showErrors && !address.name" class="error-message">Name is required</div>
-        <input type="text" [(ngModel)]="address.street" placeholder="Street" (input)="onInputChange('street', $event)">
-        <div *ngIf="showErrors && !address.street" class="error-message">Street is required</div>
-        <input type="text" [(ngModel)]="address.city" placeholder="City" (input)="onInputChange('city', $event)">
-        <div *ngIf="showErrors && !address.city" class="error-message">City is required</div>
-        <input type="text" [(ngModel)]="address.postalCode" placeholder="Postal Code" (input)="onInputChange('postalCode', $event)">
-        <div *ngIf="showErrors && !address.postalCode" class="error-message">Postal Code is required</div>
-        <p-dropdown 
-          [options]="countries"
-          [(ngModel)]="address.country"
-          optionLabel="name"
-          [filter]="true"
-          filterBy="name" 
-          [showClear]="true"
-          placeholder="Select a Country">
+        <div class="address-field-container">
+          <input class="address-input" type="text" [(ngModel)]="address.name" placeholder="Name" (input)="onInputChange('name', $event)">
+          <div *ngIf="showErrors && !address.name" class="error-message">Name is required</div>
+        </div>
+        <div class="address-field-container">
+          <input class="address-input" type="text" [(ngModel)]="address.street" placeholder="Street" (input)="onInputChange('street', $event)">
+          <div *ngIf="showErrors && !address.street" class="error-message">Street is required</div>
+        </div>
+        <div class="address-field-container">
+          <input class="address-input" type="text" [(ngModel)]="address.streetNumber" placeholder="Street Number" (input)="onInputChange('streetNumber', $event)">
+          <div *ngIf="showErrors && !address.streetNumber" class="error-message">Street Number is required</div>
+        </div>
+        <div class="address-field-container">
+          <input class="address-input" type="text" [(ngModel)]="address.city" placeholder="City" (input)="onInputChange('city', $event)">
+          <div *ngIf="showErrors && !address.city" class="error-message">City is required</div>
+        </div>
+        <div class="address-field-container">
+          <input class="address-input" type="text" [(ngModel)]="address.postalCode" placeholder="Postal Code" (input)="onInputChange('postalCode', $event)">
+          <div *ngIf="showErrors && !address.postalCode" class="error-message">Postal Code is required</div>
+        </div>
+        <div class="address-field-container">
+          <p-dropdown 
+            [options]="countries"
+            [(ngModel)]="address.country"
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name" 
+            [showClear]="true"
+            placeholder="Select a Country">
               <ng-template pTemplate="selectedItem" let-selectedOption>
-                  <div class="flex align-items-center gap-2">
-                      <img 
-                          src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                          [class]="'flag flag-' + (address.country?.code?.toLowerCase() || '')"
-                          style="width: 18px" />
-                      <div>{{ selectedOption.name }}</div>
-                  </div>
+                <div class="flex align-items-center gap-2">
+                  <img 
+                    src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                    [class]="'flag flag-' + (address.country?.code?.toLowerCase() || '')"
+                    style="width: 18px" />
+                  <div>{{ selectedOption.name }}</div>
+                </div>
               </ng-template>
               <ng-template let-country pTemplate="item">
-                  <div class="flex align-items-center gap-2">
-                      <img 
-                          src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                          [class]="'flag flag-' + country.code.toLowerCase()"
-                          style="width: 18px" />
-                      <div>{{ country.name }}</div>
-                  </div>
+                <div class="flex align-items-center gap-2">
+                  <img 
+                    src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                    [class]="'flag flag-' + country.code.toLowerCase()"
+                    style="width: 18px" />
+                  <div>{{ country.name }}</div>
+                </div>
               </ng-template>
-        </p-dropdown>
-        <div *ngIf="showErrors && !address.country" class="error-message">Country is required</div>
-        <button [disabled]="!isAddressValid(address)" (click)="saveUpdatedAddress(i)">Save</button>
-        <button (click)="cancelAddOrEdit()">Cancel</button>
+          </p-dropdown>
+          <div *ngIf="showErrors && !address.country" class="error-message">Country is required</div>
+        </div>
+        <div >
+          <button class="inside-button" [disabled]="!isAddressValid(address)" (click)="saveUpdatedAddress(i)">Save</button>
+          <button class="inside-button" (click)="cancelAddOrEdit()">Cancel</button>
+        </div>
       </div>
       <ng-template #displayAddress>
-        <label class="address-label">
-          <input type="radio" name="address" (change)="selectAddress(address)" [checked]="address === selectedAddress">
-          {{ address.name }} {{ address.street }}, {{ address.city }}, {{ address.postalCode }}, {{ address.country?.name }} 
-        </label>
-        <button (click)="editAddress(i)">Change</button>
-        <button (click)="removeAddress(i)">Remove</button>
-        <button *ngIf="!address.isDefault" (click)="makeDefault(i)">Make Default</button>
-        <button (click)="toggleInstructions(i)">Add delivery instructions <i class="pi pi-angle-down"></i></button>
-        <div *ngIf="instructionsIndex === i" [@slideDown]="'open'">
-          <textarea [(ngModel)]="deliveryInstructions" placeholder="Enter delivery instructions"></textarea>
-          <button (click)="saveInstructions(i)">Save</button>
+        <div class="address-content">
+          <div *ngIf="address.isDefault" class="default-badge">Default</div>
+          <label class="address-label">
+            <div class="address-field name">
+              <input type="radio" name="address" (change)="selectAddress(address)" [checked]="address === selectedAddress">
+              <span class="delivering">Delivering to {{ address.name }}</span>
+            </div>
+            <div class="address-field street">{{ address.street }}, {{ address.streetNumber }}</div>
+            <div>
+              <span class="address-field postalCode">{{ address.postalCode }}</span>, 
+              <span class="address-field city">{{ address.city }}</span>,
+              <span class="address-field country">{{ address.country?.name }}</span>
+            </div>
+          </label>
+          <div class="button-container">
+            <button (click)="editAddress(i)">Edit</button>
+            <button (click)="removeAddress(i)">Remove</button>
+            <button *ngIf="!address.isDefault" (click)="makeDefault(i)">Make Default</button>
+            <button (click)="toggleInstructions(i)">Add Delivery Instructions <i class="pi pi-angle-down"></i></button>
+          </div>
+          <div *ngIf="instructionsIndex === i" [@slideDown]="'open'">
+            <textarea [(ngModel)]="deliveryInstructions" placeholder="Enter delivery instructions" maxlength="200"></textarea>
+            <button class="inside-button" (click)="saveInstructions(i)">Save</button>
+          </div>
         </div>
       </ng-template>
     </div>
@@ -61,45 +93,64 @@
   <ng-template #noAddresses>
     <p>No addresses saved. Please add a new address.</p>
   </ng-template>
-  <button (click)="addNewAddress()">Add a new address</button>
-  <div *ngIf="addingAddress">
-    <input type="text" placeholder="Name" [(ngModel)]="newAddress.name" (input)="onInputChange('name', $event)">
-    <div *ngIf="showErrors && !newAddress.name" class="error-message">Name is required</div>
-    <input type="text" placeholder="Street" [(ngModel)]="newAddress.street" (input)="onInputChange('street', $event)">
-    <div *ngIf="showErrors && !newAddress.street" class="error-message">Street is required</div>
-    <input type="text" placeholder="City" [(ngModel)]="newAddress.city" (input)="onInputChange('city', $event)">
-    <div *ngIf="showErrors && !newAddress.city" class="error-message">City is required</div>
-    <input type="text" placeholder="Postal Code" [(ngModel)]="newAddress.postalCode" (input)="onInputChange('postalCode', $event)">
-    <div *ngIf="showErrors && !newAddress.postalCode" class="error-message">Postal Code is required</div>
-    <p-dropdown 
-      [options]="countries"
-      [(ngModel)]="newAddress.country"
-      optionLabel="name"
-      [filter]="true"
-      filterBy="name" 
-      [showClear]="true"
-      placeholder="Select a Country">
+
+  <button class="add-button" (click)="addNewAddress()"> + Add new address</button>
+  <div class="address-card" *ngIf="addingAddress">
+    <div class="address-field-container">
+      <input class="address-input" type="text" placeholder="Name" [(ngModel)]="newAddress.name" (input)="onInputChange('name', $event)">
+      <div *ngIf="showErrors && !newAddress.name" class="error-message">Name is required</div>
+    </div>
+    <div class="address-field-container">
+      <input class="address-input" type="text" placeholder="Street" [(ngModel)]="newAddress.street" (input)="onInputChange('street', $event)">
+      <div *ngIf="showErrors && !newAddress.street" class="error-message">Street is required</div>
+    </div>
+    <div class="address-field-container">
+      <input class="address-input" type="text" placeholder="Street Number" [(ngModel)]="newAddress.streetNumber" (input)="onInputChange('streetNumber', $event)">
+      <div *ngIf="showErrors && !newAddress.streetNumber" class="error-message">Street Number is required</div>
+    </div>
+    <div class="address-field-container">
+      <input class="address-input" type="text" placeholder="City" [(ngModel)]="newAddress.city" (input)="onInputChange('city', $event)">
+      <div *ngIf="showErrors && !newAddress.city" class="error-message">City is required</div>
+    </div>
+    <div class="address-field-container">
+      <input class="address-input" type="text" placeholder="Postal Code" [(ngModel)]="newAddress.postalCode" (input)="onInputChange('postalCode', $event)">
+      <div *ngIf="showErrors && !newAddress.postalCode" class="error-message">Postal Code is required</div>
+    </div>
+    <div class="address-field-container">
+      <p-dropdown 
+        [options]="countries"
+        [(ngModel)]="newAddress.country"
+        optionLabel="name"
+        [filter]="true"
+        filterBy="name" 
+        [showClear]="true"
+        placeholder="Select a Country">
           <ng-template pTemplate="selectedItem" let-selectedOption>
-              <div class="flex align-items-center gap-2">
-                  <img 
-                      src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                      [class]="'flag flag-' + (newAddress.country?.code?.toLowerCase() || '')"
-                      style="width: 18px" />
-                  <div>{{ selectedOption.name }}</div>
-              </div>
+            <div class="flex align-items-center gap-2">
+              <img 
+                src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + (newAddress.country?.code?.toLowerCase() || '')"
+                style="width: 18px" />
+              <div>{{ selectedOption.name }}</div>
+            </div>
           </ng-template>
           <ng-template let-country pTemplate="item">
-              <div class="flex align-items-center gap-2">
-                  <img 
-                      src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                      [class]="'flag flag-' + country.code.toLowerCase()"
-                      style="width: 18px" />
-                  <div>{{ country.name }}</div>
-              </div>
+            <div class="flex align-items-center gap-2">
+              <img 
+                src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + country.code.toLowerCase()"
+                style="width: 18px" />
+              <div>{{ country.name }}</div>
+            </div>
           </ng-template>
-    </p-dropdown>
-    <div *ngIf="showErrors && !newAddress.country" class="error-message">Country is required</div>
-    <button (click)="saveNewAddress()">Save Address</button>
-    <button (click)="cancelAddOrEdit()">Cancel</button>
+      </p-dropdown>
+      <div *ngIf="showErrors && !newAddress.country" class="error-message">Country is required</div>
+    </div>
+
+    <div class="big-button">
+      <button  (click)="saveNewAddress()">Save</button>
+      <button  (click)="cancelAddOrEdit()">Cancel</button>
+    </div>
   </div>
 </div>
+
