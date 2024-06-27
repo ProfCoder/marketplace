@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'app-login',
@@ -11,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })
+
+
 export class LoginComponent {
     loginForm = new FormGroup({
         email: new FormControl('', [

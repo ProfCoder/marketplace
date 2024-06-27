@@ -148,6 +148,37 @@
   animation: spinner 0.5s ease-in-out infinite; 
 } 
 
+.scroll-top-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #007bffb3; 
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Initially hidden */
+}
+
+.scroll-top-button.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-top-button:hover {
+  opacity: 0.8;
+}
+
+
 
 @keyframes spinner { 
 100%, 

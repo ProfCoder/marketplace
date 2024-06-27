@@ -24,6 +24,7 @@ export class ProductListComponent implements OnChanges {
   @Input() products: Product[] = [];
   @Input() selectedColors: string[] = [];
   cartItemCount: number = 0; 
+  showScrollButton: boolean = false;
 
   listViewMode = false; // Initially set to grid view
   isLoading = false;
@@ -92,7 +93,7 @@ export class ProductListComponent implements OnChanges {
     );
   }
 
-  scrollToTop() {
+  scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -109,11 +110,14 @@ export class ProductListComponent implements OnChanges {
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.body.clientHeight;
-
+  
     let atBottom = (scrollTop + windowHeight + 100) >= documentHeight;
-
+  
     if (atBottom && !this.isLoading && !this.endOfList) {
       this.loadMoreProducts();
     }
+  
+    this.showScrollButton = scrollTop > windowHeight / 2;
   }
+  
 }

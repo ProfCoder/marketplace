@@ -1,36 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from '../search/search.component';
 import { CartService } from '../services/cart.service'; 
 import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'app-menubar',
     standalone: true,
-    imports: [CommonModule, ButtonModule, RouterModule, SearchComponent, BadgeModule],
+    imports: [CommonModule, ButtonModule, RouterModule, SearchComponent, BadgeModule,  OverlayPanelModule],
     templateUrl: './menubar.component.html',
     styleUrls: ['./menubar.component.css'],
 })
 export class MenubarComponent implements OnInit {
     cartItemCount: number = 0; 
     itemsRemoved: boolean = false;
+    overlayVisible: boolean = false;
 
     constructor(private router: Router, private cartService: CartService) { } 
 
+    toggleOverlay() {
+        this.overlayVisible = !this.overlayVisible;
+    }
+
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: Event): void {
+        const target = event.target as HTMLElement;
+        const isClickInsidePopup = target.closest('.popup-container');
+        if (!isClickInsidePopup) {
+            this.overlayVisible = false;
+        }
+    }
+
     ngOnInit(): void {
-        // This code runs after the component's been constructed.
-        // The constructor (see above) should only perform lightweight operations.
-        // Everything else goes here. Component needs to implement OnInit interface.
-        // See https://angular.io/guide/lifecycle-hooks for more info about the component lifecycle
         this.updateCartItemCount(); 
 
-        // Listen to router events to reset the itemsRemoved flag on navigation
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.itemsRemoved = this.cartService.wereItemsRemoved();
                 this.cartService.resetItemsRemovedFlag();
+                this.overlayVisible = false; // Close overlay on navigation end
             }
         });
     }
