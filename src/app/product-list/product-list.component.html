@@ -1,9 +1,62 @@
-<div class="view-selection-container">
-  <div>
-    <button class="view-button filter-button" [routerLink]="['/search-results']">
+<!-- <div class="view-selection-container">
+  <div *ngIf="!onSearchResultsPage">
+    <button class="view-button filter-button" (click)="onSearchClick()">
       <i class="pi pi-filter"></i>
     </button>
   </div>
+  
+  <div class="grid-list-button">
+    <button class="view-button list-button" [class.selected]="listViewMode" (click)="listViewMode = true">
+      <i class="pi pi-bars"></i>
+    </button>
+    <button class="view-button grid-button" [class.selected]="!listViewMode" (click)="listViewMode = false">
+      <i class="pi pi-th-large"></i>
+    </button>
+  </div>
+  <button [class.show]="showScrollButton" class="scroll-top-button" (click)="scrollToTop()">
+    <i class="pi pi-angle-double-up" style="font-size: 1rem"></i>
+  </button>
+</div>
+
+<div class="grid-view" [ngClass]="{'list-view': listViewMode}" #scrollingContainer>
+  <div *ngFor="let product of products">
+    <app-product-item [product]="product" [listViewMode]="listViewMode" [selectedColors]="selectedColors"></app-product-item>
+  </div>
+</div>
+
+<div class="loading-more-container" *ngIf="!endOfList">
+  <button pButton class="custom-button" type="button" [disabled]="isLoading" (click)="loadMoreProducts()">
+    <span *ngIf="!isLoading">Load more products</span>
+    <p-progressSpinner 
+      *ngIf="isLoading"
+      styleClass="w-6rem h-6rem" 
+      strokeWidth="3" 
+      animationDuration=".5s"
+      styleClass="spinner">
+    </p-progressSpinner>
+  </button>
+</div>
+
+<div class="end-of-list-message" *ngIf="endOfList && !isEmptyResults()">
+  <p>No more products available.</p>
+  <button class="scroll-to-top-button p-button p-button-text" type="button" (click)="scrollToTop()">
+    <span class="button-content">
+      <i class="pi pi-angle-double-up pi-circle"></i>
+      <span>Back to Top</span>
+    </span>
+  </button>
+</div>
+
+<div class="end-of-list-message" *ngIf="isEmptyResults()">
+  <p>Sorry, no products found. Please try a different search.</p>
+</div> -->
+<div class="view-selection-container">
+  <div *ngIf="!onSearchResultsPage">
+    <button class="view-button filter-button" [routerLink]="['/search-results']" (click)="onSearchClick()">
+      <i class="pi pi-filter"></i>
+    </button>
+  </div>
+  
   <div class="grid-list-button">
     <button class="view-button list-button" [class.selected]="listViewMode" (click)="listViewMode = true">
       <i class="pi pi-bars"></i>

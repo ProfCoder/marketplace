@@ -58,7 +58,9 @@
   border-bottom-right-radius: 0;
 }
 
-.grid-list-button {}
+.grid-list-button {
+  margin-left: auto; 
+}
 
 .selected {
   color: #fff;
