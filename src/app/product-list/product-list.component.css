@@ -13,7 +13,7 @@
 
 .view-selection-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding-right: 20px;
   background-color: #F9FAFB;
@@ -32,6 +32,16 @@
   border: 1px solid #ccc;
 }
 
+.view-button:hover {
+  cursor: pointer;
+}
+
+.filter-button{
+  margin-left: 20px;
+  border-radius: 10px;
+}  
+
+
 .grid-button {
   border-left: none;
   border-top-right-radius: 10px;
@@ -47,6 +57,8 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+.grid-list-button {}
 
 .selected {
   color: #fff;
