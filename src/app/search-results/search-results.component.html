@@ -1,6 +1,5 @@
 <div class="result-info-container">
-  <!-- <div class="results-info">{{ filteredProducts.length }} results for <span class="search-value">"{{ searchValue }}"</span></div> -->
-  <div class="results-info">Results for <span class="search-value">"{{ searchValue }}"</span></div>
+  <div class="results-info" *ngIf="searchValue">Results for <span class="search-value">"{{ searchValue }}"</span></div>
   <div class="sorting">
     <p-dropdown
       [options]="sortOptions"
@@ -10,6 +9,7 @@
     ></p-dropdown>
   </div>
 </div>
+
 
 <div class="search-container">
   <div class="filters-container">
@@ -24,7 +24,6 @@
         />{{ brand }}
       </div>
     </div>
-    
 
     <div class="price-filter">
       <h4 class="price-filter-title">Price Range</h4>
@@ -38,8 +37,6 @@
       <div class="price-filter-values">Min: {{ priceRange[0] }} -  {{ priceRange[1] }}</div>
     </div>
     
-    
-  
     <div class="filter-title categories-filter-container">
       <h4>Categories</h4>
       <p-dropdown 
@@ -49,9 +46,6 @@
         class="custom-dropdown"
       ></p-dropdown>
     </div>
-    
-    
-    
     
     <div class="filter-title">
       <h4>Gender</h4>
@@ -98,7 +92,6 @@
         </div>
       </div>
     </div>
-    
 
     <div class="reset-filter-container">
       <button class="reset-filters-button" (click)="resetFilters()">Reset All Filters</button>
@@ -108,11 +101,10 @@
 
   <div class="results-container">
     <app-product-list class="search-results-product-list"
-    [searchValue]="searchValue"
-    [selectedBrands]="selectedBrands"
-    [products]="filteredProducts"
-    [selectedColors]="selectedColors"
-  ></app-product-list>
-  
+      [searchValue]="searchValue"
+      [selectedBrands]="selectedBrands"
+      [products]="filteredProducts"
+      [selectedColors]="selectedColors"
+    ></app-product-list>
   </div>
 </div>
