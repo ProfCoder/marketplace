@@ -31,7 +31,7 @@
         <div class="menu-entries">
             <div class="popup-container">
                 <button class="view-button list-button user-icon" (click)="toggleOverlay()">
-                    <i class="pi pi-user" style="font-size: 1.5rem;"></i>
+                    <i class="pi pi-user"></i>
                 </button>
                 <div class="overlay" *ngIf="overlayVisible">
                     <button class="overlay-close" (click)="toggleOverlay()"><i class="pi pi-times"></i></button>
@@ -42,7 +42,7 @@
             </div>
             <ng-container *ngIf="cartItemCount > 0 || itemsRemoved">
                 <span [routerLink]="['cart']" class="cart-badge" [ngClass]="{'fade-out': itemsRemoved}">
-                    <i class="pi pi-shopping-cart" style="font-size: 1.8rem;"></i>
+                    <i class="pi pi-shopping-cart" ></i>
                     <p-badge [value]="cartItemCount" class="badge"></p-badge>
                 </span>
             </ng-container>

@@ -53,3 +53,117 @@
     color: #43a5bd9f;; 
   }
   
+
+
+
+/* Small screens (mobile phones): up to 375px (23.4375rem) */
+@media (max-width: 23.4375rem) {
+  .search-input {
+    width: 80%;
+  }
+
+  .search-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-align: center;
+
+  }
+
+  .search-container  {
+    height: 100px;
+  }
+
+  .search-container .search-input .search-icon {
+    font-size: 1rem;
+
+}
+    
+
+
+
+}
+
+/* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
+@media (min-width: 23.5rem) and (max-width: 51.25rem) {
+
+  .search-input {
+    width: 80%;
+  }
+
+  .search-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .search-container  {
+    height: 110px;
+  }
+
+  .search-container .search-input .search-icon {
+    font-size: 1.4rem;
+
+}
+
+}
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+  .search-input {
+    width: 50%;
+  }
+
+  .search-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .search-container  {
+    height: 100px;
+  }
+
+}
+
+/* Large desktops/laptops: 1441px (90.0625rem) to 2560px (160rem) */
+@media (min-width: 90.0625rem) and (max-width: 160rem) {
+
+  .search-input {
+    width: 40%;
+  }
+
+  .search-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .search-container  {
+    height: 110px;
+  }
+  
+}
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+  .search-container .search-input .search-icon {
+    font-size: 1.5rem;
+
+}
+
+.search-input {
+  min-width: 20%;
+}
+
+.search-title {
+  font-size: 27px;
+  margin-bottom: 20px;
+}
+
+.search-container  {
+  height: 150px;
+}
+
+}
+
+
+
+
+

@@ -2,9 +2,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: lightgray; */
-    /* background-color: rgb(68, 167, 188); */
-    /* height: 10ex; */
     height: 70px;
 }
 
@@ -18,6 +15,10 @@ nav {
     display: flex;
     align-items: center;
     color: none;
+}
+
+.cart-badge .pi.pi-shopping-cart {
+    color: black;
 }
 
 #title {
@@ -53,6 +54,10 @@ nav {
     top: -9px;
     right: -7px;
  
+}
+
+.view-button.list-button.user-icon .pi.pi-user {
+    color: black;
 }
 
 @keyframes shake {
@@ -154,7 +159,7 @@ See https://primeng.org/theming#scopedcss and https://angular.io/guide/component
     font-weight: 550;
     width: 100%;
     text-align: center;
-    padding: 5px;;
+    padding: 5px;
 }
 
 .overlay-link:hover {
@@ -187,12 +192,152 @@ See https://primeng.org/theming#scopedcss and https://angular.io/guide/component
 Set a max width on wide screens.
 For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
 */
-@media (min-width: 72rem) {
+/* Small screens (mobile phones): up to 375px (23.4375rem) */
+@media (max-width: 23.4375rem) {
     .menu {
-        width: var(--max-width)
+        width: 100%; /* You can adjust this width as needed */
     }
+    .view-button.list-button.user-icon .pi.pi-user {
+        font-size: 1rem;
+        
+    }
+    
+    .mylogo {
+        width: 140px;
+    }
+    
+    .overlay {
+        transform: translateX(-90%);
+    }
+
+    .overlay-close {
+  display: none;
+    }
+    
+    .overlay-close .pi {
+        display: none;
+    }
+    
+    
+
 }
 
+/* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
+@media (min-width: 23.5rem) and (max-width: 51.25rem) {
+    .menu {
+        width: 90%; 
+    }
+
+    .mylogo {
+        width: 150px;
+    }
+
+    .view-button.list-button.user-icon .pi.pi-user {
+        font-size:  1.2rem;
+    }
+
+    .overlay {
+        transform: translateX(-75%);
+        width: 175px;
+    }
+
+    .overlay-link {
+        margin: 5px 0;
+
+        font-weight: 600;
+  
+        padding: 17px 5px;
+    }
+    
+    
+
+    .overlay-close {
+        display: none;
+          }
+          
+          .overlay-close .pi {
+              display: none;
+          }
+
+          .cart-badge .pi.pi-shopping-cart {
+            font-size: 1.5rem; 
+            margin-left: 10px;
+        }
+
+}
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+    .menu {
+        width: 85%; /* Adjust this width as needed */
+    }
+
+    .view-button.list-button.user-icon .pi.pi-user {
+        font-size:  1.6rem;
+    }
+
+    .cart-badge .pi.pi-shopping-cart {
+        font-size: 1.8rem; /* Adjust the size as needed */
+    }
+
+
+}
+
+/* Large desktops/laptops: 1441px (90.0625rem) to 2560px (160rem) */
+@media (min-width: 90.0625rem) and (max-width: 160rem) {
+    .menu {
+        width: var(--max-width); /* 68rem as per the original setting */
+    }
+
+    .mylogo {
+        width: 205px;
+    }
+
+    .view-button.list-button.user-icon .pi.pi-user {
+        font-size:  1.5rem;
+    }
+
+    .cart-badge .pi.pi-shopping-cart {
+        font-size: 2.0rem; 
+    } 
+    
+    
+}
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+    .menu {
+        width: var(--extra-wide-max-width); /* 120rem as per the new setting */
+    }
+
+
+    .mylogo {
+        width: 255px;
+    }
+
+    .view-button.list-button.user-icon .pi.pi-user {
+        font-size:  1.8rem;
+    }
+
+
+    .overlay {
+      
+        width: 185px;
+    }
+
+    .overlay-link {
+        margin: 5px 0;
+
+        font-weight: 600;
+        font-size: 18px;
+  
+        padding: 17px 5px;
+    }
+    
+    .cart-badge .pi.pi-shopping-cart {
+        font-size: 2.0rem; 
+    }
+}
 
 
 

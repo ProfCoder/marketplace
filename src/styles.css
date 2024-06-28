@@ -10,6 +10,7 @@ Useful for CSS that is re-used across components
 
 :root {
     --max-width: 68rem;
+    --extra-wide-max-width: 180rem; /* Define a new variable for extra-wide screens */
 }
 
 body {
@@ -24,12 +25,17 @@ main {
     padding-top: 2rem;
 }
 
-
-
 /* Set max width to have sensible line lengths on wide screen (responsive) */
 @media (min-width: 70rem) {
     main {
-        width: var(--max-width)
+        width: var(--max-width);
+    }
+}
+
+/* Extra-wide screen adjustments */
+@media (min-width: 3440px) {
+    main {
+        width: var(--extra-wide-max-width);
     }
 }
 
@@ -38,4 +44,3 @@ a {
     color: inherit;
     text-decoration: inherit;
 }
-
