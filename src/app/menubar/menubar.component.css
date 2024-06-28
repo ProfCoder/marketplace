@@ -195,7 +195,10 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 /* Small screens (mobile phones): up to 375px (23.4375rem) */
 @media (max-width: 23.4375rem) {
     .menu {
-        width: 100%; /* You can adjust this width as needed */
+        width: 100%;
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
     }
     .view-button.list-button.user-icon .pi.pi-user {
         font-size: 1rem;
@@ -218,6 +221,13 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
         display: none;
     }
     
+    .menu #logo {
+        display: block;
+    }
+
+    .menu-entries {
+        display: block;
+    }
     
 
 }
