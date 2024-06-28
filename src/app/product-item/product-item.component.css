@@ -91,4 +91,96 @@
   padding: 0;
 }
 
+/* Small screens (mobile phones): up to 375px (23.4375rem) */
+@media (max-width: 23.4375rem) {
+  .product-item {
+    height: auto;
+  }
+  .product-item .card-img {
+    width: 80%; /* Adjust as needed */
+    height: auto;
+  }
+  .product-item .card-name, 
+  .product-item .card-brand {
+    font-size: 0.7rem; /* Adjust as needed */
+  }
+  .product-item .card-price {
+    font-size: 0.4rem; /* Adjust as needed */
+    max-width: 40px; /* Adjust as needed */
+    padding: 2px;
+  }
+}
 
+/* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
+@media (min-width: 23.5rem) and (max-width: 51.25rem) {
+  .product-item {
+    height: auto;
+  }
+  .product-item .card-img {
+    width: 70%; /* Adjust as needed */
+    height: auto;
+  }
+  .product-item .card-name, 
+  .product-item .card-brand {
+    font-size: 1.2rem; /* Adjust as needed */
+  }
+  .product-item .card-price {
+    font-size: 1.2rem; /* Adjust as needed */
+    width: 100px; /* Adjust as needed */
+  }
+}
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+  .product-item {
+    height: auto;
+  }
+  .product-item .card-img {
+    width: 60%; /* Adjust as needed */
+    height: auto;
+  }
+  .product-item .card-name, 
+  .product-item .card-brand {
+    font-size: 1.4rem; /* Adjust as needed */
+  }
+  .product-item .card-price {
+    font-size: 1.4rem; /* Adjust as needed */
+    width: 120px; /* Adjust as needed */
+  }
+}
+
+/* Large desktops/laptops: 1441px (90.0625rem) to 2560px (160rem) */
+@media (min-width: 90.0625rem) and (max-width: 160rem) {
+
+  .product-item .card-name, 
+  .product-item .card-brand {
+    font-size: 1.5rem; /* Adjust as needed */
+  }
+  .product-item .card-price {
+    font-size: 1.5rem; /* Adjust as needed */
+    width: 120px; /* Adjust as needed */
+  }
+  .product-item {
+    height: 540px;
+  }
+
+}
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+  .product-item {
+    height: auto;
+  }
+  .product-item .card-img {
+    width: 40%; /* Adjust as needed */
+    height: auto;
+  }
+  .product-item .card-name, 
+  .product-item .card-brand {
+    font-size: 1.8rem; /* Adjust as needed */
+  }
+  .product-item .card-price {
+    font-size: 1.8rem; /* Adjust as needed */
+    width: 140px; /* Adjust as needed */
+  }
+}

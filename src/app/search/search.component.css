@@ -149,11 +149,11 @@
 }
 
 .search-input {
-  min-width: 20%;
+  max-width: 30%;
 }
 
 .search-title {
-  font-size: 27px;
+  font-size: 30px;
   margin-bottom: 20px;
 }
 
