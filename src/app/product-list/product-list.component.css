@@ -499,7 +499,16 @@ nav {
 
 }
 
+.scroll-top-button {
 
+display: none;
+}
+
+
+:host ::ng-deep .spinner {
+    width: 3rem;
+    height: 3rem;
+}
 
 }
 
@@ -557,7 +566,11 @@ nav {
   .grid-view {
       grid-template-columns: repeat(2, minmax(45%, 48%)); /* 2 items per line */
   }
+  .scroll-top-button {
 
+    display: none;
+    }
+    
   
 
 
