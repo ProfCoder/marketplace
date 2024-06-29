@@ -51,7 +51,7 @@ nav {
 
 .cart-badge .badge {
     position: absolute;
-    top: -9px;
+    top: -19px;
     right: -7px;
  
 }
@@ -389,7 +389,11 @@ width: 80%;
         height: 32px;
         padding: 4px 4px 6px 4px; 
       }
-
+      .cart-badge .badge {
+        top: -29px;
+        right: -10px;
+     
+    }
 
 }
 
