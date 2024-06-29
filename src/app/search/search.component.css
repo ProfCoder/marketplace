@@ -8,6 +8,7 @@
     background-color: rgb(68, 167, 188);
     background: linear-gradient(to right, rgb(68, 167, 188), rgb(36, 123, 160));
     /* background: radial-gradient(circle, rgb(68, 167, 188), rgb(36, 123, 160)); */
+
   }
   
   .search-title {
@@ -71,6 +72,8 @@
 
   .search-container  {
     height: 100px;
+    margin-top: 10px;
+  
   }
 
   .search-container .search-input .search-icon {
@@ -96,7 +99,8 @@
   }
 
   .search-container  {
-    height: 110px;
+
+ 
   }
 
   .search-container .search-input .search-icon {
@@ -144,21 +148,27 @@
 /* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
 @media (min-width: 160.0625rem) {
   .search-container .search-input .search-icon {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 
 }
 
 .search-input {
-  max-width: 30%;
+  width: 40%;
+}
+
+.search-input input {
+  padding: 25px 20px;
+  font-size: 34px;
 }
 
 .search-title {
-  font-size: 30px;
+  font-size: 36px;
   margin-bottom: 20px;
 }
 
 .search-container  {
-  height: 150px;
+  height: 170px;
+  margin-top: 10px;
 }
 
 }

@@ -189,20 +189,19 @@ See https://primeng.org/theming#scopedcss and https://angular.io/guide/component
 
 
 /*
-Set a max width on wide screens.
 For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
 */
 /* Small screens (mobile phones): up to 375px (23.4375rem) */
 @media (max-width: 23.4375rem) {
     .menu {
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-direction: column; 
         align-items: center;
     }
     .view-button.list-button.user-icon .pi.pi-user {
         font-size: 1rem;
-        
+
     }
     
     .mylogo {
@@ -223,12 +222,35 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
     
     .menu #logo {
         display: block;
+        margin-top: 5px;
     }
 
     .menu-entries {
-        display: block;
+        margin-top: 5px;
+        display: flex;
+
     }
-    
+    .cart-badge .pi.pi-shopping-cart {
+        font-size: 1.2rem; 
+        /* margin-left: 10px; */
+
+    }
+    .cart-badge .badge {
+  
+        top: -12px;
+        right: -15px;
+     
+    }
+
+    ::ng-deep .p-badge {
+        font-size: 8px;
+        /* width: 12px; */
+        /* height: 20px; */
+        /* padding: 1px  ;  */
+        /* padding: 5 1px;  */
+      }
+
+
 
 }
 
@@ -236,14 +258,24 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 @media (min-width: 23.5rem) and (max-width: 51.25rem) {
     .menu {
         width: 90%; 
+        /* display: flex; */
+        /* flex-direction: column;
+        align-items: center; */
     }
 
     .mylogo {
+       
         width: 150px;
+       
     }
 
     .view-button.list-button.user-icon .pi.pi-user {
-        font-size:  1.2rem;
+        font-size: 1.2rem;
+    }
+
+    .menu-entries {
+
+
     }
 
     .overlay {
@@ -253,28 +285,29 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 
     .overlay-link {
         margin: 5px 0;
-
         font-weight: 600;
-  
         padding: 17px 5px;
     }
-    
-    
 
     .overlay-close {
         display: none;
-          }
-          
-          .overlay-close .pi {
-              display: none;
-          }
+    }
 
-          .cart-badge .pi.pi-shopping-cart {
-            font-size: 1.5rem; 
-            margin-left: 10px;
-        }
+    .overlay-close .pi {
+        display: none;
+    }
 
+    .cart-badge .pi.pi-shopping-cart {
+        font-size: 1.5rem; 
+        /* margin-left: 10px; */
+    }
+
+    /* Center the user icon and badge */
+    .menu-entries {
+
+    }
 }
+
 
 /* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
 @media (min-width: 51.3125rem) and (max-width: 90rem) {
@@ -296,7 +329,7 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 /* Large desktops/laptops: 1441px (90.0625rem) to 2560px (160rem) */
 @media (min-width: 90.0625rem) and (max-width: 160rem) {
     .menu {
-        width: var(--max-width); /* 68rem as per the original setting */
+width: 80%;
     }
 
     .mylogo {
@@ -317,36 +350,47 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 /* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
 @media (min-width: 160.0625rem) {
     .menu {
-        width: var(--extra-wide-max-width); /* 120rem as per the new setting */
+width: 80%;
+     
     }
 
 
     .mylogo {
-        width: 255px;
+        width: 300px;
     }
 
     .view-button.list-button.user-icon .pi.pi-user {
-        font-size:  1.8rem;
+        font-size:  2.4rem;
     }
 
 
     .overlay {
       
-        width: 185px;
+        width: 220px;
     }
 
     .overlay-link {
         margin: 5px 0;
 
         font-weight: 600;
-        font-size: 18px;
+        font-size: 24px;
   
         padding: 17px 5px;
     }
     
     .cart-badge .pi.pi-shopping-cart {
-        font-size: 2.0rem; 
+        font-size: 2.7rem; 
+        margin-left: 15px;
     }
+
+    ::ng-deep .p-badge {
+        font-size: 26px;
+        width: 30px;
+        height: 32px;
+        padding: 4px 4px 6px 4px; 
+      }
+
+
 }
 
 

@@ -25,18 +25,48 @@ main {
     padding-top: 2rem;
 }
 
-/* Set max width to have sensible line lengths on wide screen (responsive) */
-@media (min-width: 70rem) {
+/* Small screens (mobile phones): up to 375px */
+@media (max-width: 23.4375rem) {
     main {
-        width: var(--max-width);
+        width: 90%; /* Adjust as needed */
     }
 }
 
-/* Extra-wide screen adjustments */
-@media (min-width: 3440px) {
+/* iPads/Tablets: 376px to 820px */
+@media (min-width: 23.5rem) and (max-width: 51.25rem) {
     main {
-        width: var(--extra-wide-max-width);
+        width: 90%; /* Adjust as needed */
     }
+}
+
+/* Small desktops/laptops: 821px to 1440px */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+    main {
+        /* width: var(--extra-wide-max-width);  */
+        padding: 0 70px ;
+    }
+}
+
+/* Large desktops/laptops: 1441px to 2560px */
+@media (min-width: 90.0625rem) and (max-width: 160rem) {
+    main {
+        width: 80%;
+    }
+}
+
+/* Extra-large screens (ultrawide monitors): 2561px and above */
+@media (min-width: 160.0625rem) {
+    main {
+        /* width: var(--extra-wide-max-width);  */
+        /* padding: 0 150px ; */
+        width: 80%;
+    }
+}
+
+/* Prevent underlining when complex content is inside <a> tag */
+a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 /* Prevent underlining when complex content is inside <a> tag */

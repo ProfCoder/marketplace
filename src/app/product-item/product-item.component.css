@@ -22,23 +22,29 @@
   color: #909399;
   width: 90%;
   margin-bottom: 15px;
+  height: 50px;
+  margin-top: 30px;
 }
 
 .card-name {
   font-size: 18px;
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  height: 70px;
+  padding: 0 10px 20px 0;
+  
 }
 
 .card-price {
   background-color:#ABC9FB;
   width: 100px;
-  padding: 5px;
+  padding: 5px 10px;
   border: 1px solid #90ADF8;
   border-radius: 5px;
   font-weight: 500;
   font-size: 18px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .card-price a {
@@ -109,6 +115,27 @@
     max-width: 40px; /* Adjust as needed */
     padding: 2px;
   }
+
+
+  .card-brand {
+    margin-bottom: 10px;
+    height: 20px;
+    margin-top: 15px;
+  }
+  
+  .card-name {
+
+    margin-bottom: 25px;
+    height: 50px;
+  
+    
+  }
+  
+  .card-price {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
 }
 
 /* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
@@ -128,6 +155,7 @@
     font-size: 1.2rem; /* Adjust as needed */
     width: 100px; /* Adjust as needed */
   }
+
 }
 
 /* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
@@ -161,7 +189,7 @@
     width: 120px; /* Adjust as needed */
   }
   .product-item {
-    height: 540px;
+    height: auto;
   }
 
 }
@@ -169,10 +197,12 @@
 /* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
 @media (min-width: 160.0625rem) {
   .product-item {
+
+    padding: 35px;
     height: auto;
   }
   .product-item .card-img {
-    width: 40%; /* Adjust as needed */
+    width: 50%; 
     height: auto;
   }
   .product-item .card-name, 
@@ -183,4 +213,5 @@
     font-size: 1.8rem; /* Adjust as needed */
     width: 140px; /* Adjust as needed */
   }
+
 }
