@@ -21,7 +21,7 @@ input {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
-  color: #616A77;
+  /* color: #616A77; */
   font-size: 16px;
 }
 
@@ -36,5 +36,5 @@ input:hover {
 
 :host ::ng-deep input::placeholder, 
 :host ::ng-deep .p-dropdown-label  {
-  color: #ccc;
+  color: #555;
 }

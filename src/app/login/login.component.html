@@ -9,7 +9,8 @@
     <label for="email"></label>
     </div>
     <div class="error-message">
-      <small *ngIf="(email!.dirty || formSubmitted) && email!.invalid">Invalid email address!</small>
+      <small *ngIf="email?.errors?.['required'] && (email?.dirty || formSubmitted)">Email address cannot be empty!</small>
+          <small *ngIf="email?.errors?.['email'] && (email?.touched || formSubmitted) && !email?.errors?.['required']">Please enter a valid email address!</small>
     </div>
   </div>
 
@@ -20,7 +21,7 @@
   </div>
 
     <div class="error-message">
-      <small *ngIf="(password!.dirty|| formSubmitted) && password!.invalid">Invalid password!</small>
+      <small *ngIf="(password!.dirty|| formSubmitted) && password!.invalid">Password cannot be empty!</small>
     </div>
   </div>
 

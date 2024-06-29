@@ -46,8 +46,13 @@
         <input pInputText formControlName="email" id="email" type="email" placeholder="* Email"/>
         <label for="email"></label>
         <p class="credentials">You will need your email to log in to the store.</p>
-        <div class="error-message">
+        <!-- <div class="error-message">
           <small *ngIf="(email!.dirty || formSubmitted) && email!.invalid">Invalid email address!</small>
+        </div> -->
+
+        <div class="error-message">
+          <small *ngIf="email?.errors?.['required'] && (email?.dirty || formSubmitted)">Email address cannot be empty!</small>
+          <small *ngIf="email?.errors?.['email'] && (email?.touched || formSubmitted) && !email?.errors?.['required']">Please enter a valid email address!</small>
         </div>
       </div>
       <div>
@@ -55,7 +60,8 @@
         <label for="password"></label>
         <p class="credentials">Your password needs at least 8 characters.</p>
         <div class="error-message" style="left: 50%">
-          <small *ngIf="(password!.dirty || formSubmitted) && password!.invalid">Password is too short!</small>
+          <small *ngIf="password?.errors?.['required'] && (password?.dirty || formSubmitted)">Password cannot be empty!</small>
+          <small *ngIf="(password!.dirty || formSubmitted) && password!.invalid && !password?.errors?.['required']">Password is too short!</small>
         </div>
       </div>
     </div>
@@ -64,7 +70,7 @@
     <div class="input-container">
       <p-calendar [iconDisplay]="'input'" [showIcon]="true" formControlName="birthdate" inputId="birthday" [maxDate]="maxDate" placeholder="* Birthdate"></p-calendar>
       <div class="error-message">
-        <small *ngIf="(birthdate!.dirty || formSubmitted) && birthdate!.invalid">Invalid date!</small>
+        <small *ngIf="(birthdate!.dirty || formSubmitted) && birthdate!.invalid">Date cannot be empty!</small>
       </div>
     </div>
  
@@ -83,7 +89,9 @@
         <input class="street_number" pInputText formControlName="streetNumber" inputId="street_number" id="street-number" placeholder="* No."/>
         <label for="street_number"></label>
         <div class="error-message" style="left: 50%">
-          <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid">Invalid street number!</small>
+          <!-- <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid">Invalid street number!</small> -->
+          <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid && !streetNumber?.errors?.['required']">Invalid street number!</small>
+          <small *ngIf="streetNumber?.errors?.['required'] && (streetNumber?.dirty || formSubmitted)">Street number cannot be empty!</small>
         </div>
       </div>
 
@@ -93,7 +101,8 @@
       <input pInputText formControlName="zipCode" id="zip-code" type="text" placeholder="* Postcal Code"/>
       <label for="zip-code"></label>
       <div class="error-message">
-        <small *ngIf="(zipCode!.dirty || formSubmitted) && zipCode!.invalid">Invalid postal code!</small>
+        <small *ngIf="(zipCode!.dirty || formSubmitted) && zipCode!.invalid && !zipCode?.errors?.['required']">Invalid postal code number!</small>
+        <small *ngIf="zipCode?.errors?.['required'] && (zipCode?.dirty || formSubmitted)">Postal code cannot be empty!</small>
       </div>
     </div>
 
