@@ -590,7 +590,7 @@ display: none;
   }
 
   .grid-view {
-      grid-template-columns: repeat(3, minmax(30%, 32%)); /* 3 items per line */
+      grid-template-columns: repeat(3, minmax(30%, 33%)); /* 3 items per line */
   }
 
   .view-selection-container {
@@ -617,7 +617,7 @@ display: none;
   }
 
   .grid-view {
-      grid-template-columns: repeat(3, minmax(30%, 32%)); /* 3 items per line */
+      grid-template-columns: repeat(3, minmax(30%, 33%)); /* 3 items per line */
   }
 }
 
