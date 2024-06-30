@@ -67,7 +67,7 @@ nav {
     display: flex;
     align-items: center;
     justify-self: end;
-    flex-direction: column; /* Ensure it is centered in smaller screens */
+    flex-direction: column; 
     align-items: center;
 }
 
@@ -590,7 +590,7 @@ display: none;
   }
 
   .grid-view {
-      grid-template-columns: repeat(2, minmax(45%, 48%)); /* 2 items per line */
+      grid-template-columns: repeat(3, minmax(30%, 32%)); /* 3 items per line */
   }
 
   .view-selection-container {
