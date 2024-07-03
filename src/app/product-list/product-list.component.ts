@@ -27,7 +27,7 @@ export class ProductListComponent implements OnChanges, OnInit {
   showScrollButton: boolean = false;
   onSearchResultsPage = false;
 
-  listViewMode = false; // Initially set to grid view
+  listViewMode =  true; // Initially set to grid view 
   isLoading = false;
   chunkSize = 9; // Default chunk size
   endOfList = false;

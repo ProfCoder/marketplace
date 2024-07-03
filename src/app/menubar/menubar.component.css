@@ -192,28 +192,33 @@ See https://primeng.org/theming#scopedcss and https://angular.io/guide/component
 For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
 */
 /* Small screens (mobile phones): up to 375px (23.4375rem) */
-@media (max-width: 23.4375rem) {
+@media (max-width: 27rem) {
     .menu {
         width: 90%;
         display: flex;
         flex-direction: column; 
         align-items: center;
     }
+
+
+
     .view-button.list-button.user-icon .pi.pi-user {
         font-size: 1rem;
+        font-weight: 550;
 
     }
     
     .mylogo {
-        width: 140px;
+        width: 150px;
+       ;
     }
     
     .overlay {
-        transform: translateX(-90%);
+        /* transform: translateX(-90%); */
     }
 
     .overlay-close {
-  display: none;
+        display: none;
     }
     
     .overlay-close .pi {
@@ -232,7 +237,8 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
     }
     .cart-badge .pi.pi-shopping-cart {
         font-size: 1.2rem; 
-        /* margin-left: 10px; */
+        margin-left: 20px;
+     
 
     }
     .cart-badge .badge {
@@ -255,7 +261,7 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 }
 
 /* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
-@media (min-width: 23.5rem) and (max-width: 51.25rem) {
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
     .menu {
         width: 90%; 
         /* display: flex; */

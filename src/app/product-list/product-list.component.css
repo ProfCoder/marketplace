@@ -201,8 +201,6 @@ nav {
     font-weight: 700;
 }
 
-
-
 .grid-view {
     display: grid;
     grid-template-columns: repeat(3, minmax(32%, 35%));
@@ -371,8 +369,8 @@ nav {
     justify-content: center;
     align-items: center;
     transition: opacity 0.3s ease;
-    opacity: 0; /* Initially hidden */
-    visibility: hidden; /* Initially hidden */
+    opacity: 0; 
+    visibility: hidden; 
 }
 
 .scroll-top-button.show {
@@ -393,44 +391,11 @@ nav {
 
 
 
-/* Small screens (mobile phones): up to 375px (23.4375rem) */
-@media (max-width: 23.4375rem) {
-  .menu {
-      width: 100%;
-      display: flex;
-      flex-direction: column; 
-
-      align-items: center;
-  }
-
-  .view-button.list-button.user-icon .pi.pi-user {
-      font-size: 1rem;
-  }
-
-  .mylogo {
-      width: 140px;
-  }
-
-  .overlay {
-      transform: translateX(-90%);
-  }
-
-  .overlay-close {
-      display: none;
-  }
-
-  .overlay-close .pi {
-      display: none;
-  }
-
-  .menu-entries {
-      display: block;
-      text-align: center;
-    
-  }
+/* Small screens (mobile phones): up to 432px (27rem) */
+@media (max-width: 27rem) {
 
   .grid-view {
-      grid-template-columns: repeat(1, minmax(90%, 95%)); /* 1 item per line */
+      grid-template-columns: repeat(1, minmax(100%, 95%)); /* 1 item per line */
   }
 
 
@@ -467,7 +432,7 @@ nav {
   }
 
   .view-button.filter-button .pi.pi-filter {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   
   .view-button.list-button .pi.pi-bars {
@@ -489,14 +454,9 @@ nav {
 }
 
 .filter-container {
-  /* text-align: center; */
-
   text-align: center;
   margin: 0;
   padding: 0;
-
-  /* margin-right: 10px; */
-
 }
 
 .scroll-top-button {
@@ -513,7 +473,7 @@ display: none;
 }
 
 /* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
-@media (min-width: 23.5rem) and (max-width: 51.25rem) {
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
   .menu {
       width: 90%; 
       display: flex;
@@ -701,14 +661,14 @@ display: none;
 
 
 .scroll-top-button {
-
-    width: 75px;
-    height: 75px;
+    right: 80px;
+    width: 80px;
+    height: 80px;
 }
 
 
 .scroll-top-button .pi.pi-angle-double-up {
-    font-size: 2.5rem; 
+    font-size: 2.7rem; 
 
   }
 
