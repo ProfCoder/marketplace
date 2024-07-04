@@ -476,18 +476,46 @@
 
     padding: 35px;
     height: auto;
+
   }
   .product-item .card-img {
     width: 50%; 
     height: auto;
+    
   }
   .product-item .card-name, 
   .product-item .card-brand {
-    font-size: 1.8rem; 
+    font-size: 2rem; 
   }
   .product-item .card-price {
-    font-size: 1.8rem; 
-    width: 140px;
+    font-size: 2rem; 
+    width: 155px;
   }
+
+
+
+
+  .list-view .card-img {
+    width: 70%; 
+    /* height: auto; */
+   
+  }
+
+  .list-view .card-name {
+    font-size: 2rem; 
+  }
+
+  .list-view .card-brand {
+    font-size: 2rem; 
+  }
+
+  .list-view .desc-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* width: 70%; */
+    /* padding: 20px 10px; */
+  }
+
 
 }

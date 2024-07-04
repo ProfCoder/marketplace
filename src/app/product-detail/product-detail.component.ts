@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener, Renderer2, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Product } from '../services/product';
@@ -8,6 +8,8 @@ import { ImageModule } from 'primeng/image';
 import { ButtonModule } from 'primeng/button';
 import { CartItem } from '../services/cart-item';
 import { CartService } from '../services/cart.service';
+
+
 
 interface ProductWithRating extends Product {
   rating: number;
@@ -30,6 +32,9 @@ interface Feedback {
   styleUrls: ['./product-detail.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
+
+
+
 export class ProductDetailComponent implements OnInit {
   product!: ProductWithRating;
   selectedSize: string | null = null;
@@ -48,15 +53,15 @@ export class ProductDetailComponent implements OnInit {
   ) {
     const lastTenPresidents = [
       'Joe Biden',
-      'Donald Trump',
+      'Linus Torvalds',
       'Barack Obama',
+      'Donald Trump',
       'George W. Bush',
       'Bill Clinton',
       'George H. W. Bush',
       'Ronald Reagan',
       'Jimmy Carter',
       'Gerald Ford',
-      'Richard Nixon',
       'Jimmy Carter'
     ];
     // Generate 10 feedbacks

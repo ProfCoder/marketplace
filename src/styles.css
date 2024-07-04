@@ -25,15 +25,15 @@ main {
     padding-top: 2rem;
 }
 
-/* Small screens (mobile phones): up to 375px */
-@media (max-width: 23.4375rem) {
+/* Small screens (mobile phones): up to  432px */
+@media (max-width: 27rem) {
     main {
         width: 90%; /* Adjust as needed */
     }
 }
 
 /* iPads/Tablets: 376px to 820px */
-@media (min-width: 23.5rem) and (max-width: 51.25rem) {
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
     main {
         width: 90%; /* Adjust as needed */
     }

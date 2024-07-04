@@ -57,7 +57,7 @@
 
 
 
-/* Small screens (mobile phones): up to 375px (23.4375rem) */
+/* Small screens (mobile phones): up to 432px (27rem) */
 @media (max-width: 27rem) {
   .search-input {
     width: 80%;

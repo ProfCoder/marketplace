@@ -22,7 +22,7 @@
   </div>
 
   <div class="product-details-container">
-    <h2>{{ product.name }}</h2>
+    <div class="product-detail-name">{{ product.name }}</div>
     <div class="rating-container">
       <div class="rating-numbers">
         {{ product.rating.toFixed(1) }}
@@ -51,17 +51,32 @@
         <p><span class="title-weight">Brand: </span> {{ product.brand }}</p>
         <p><span class="title-weight">Gender:</span> {{ product.gender }}</p>
 
-        <div class="size-selector" *ngIf="product">
+        <!-- <div class="size-selector" *ngIf="product">
           <span class="size-title title-weight">Sizes: </span>
           <select class="size-dropdown" (change)="onSizeChange($event)">
             <option class="color-option" *ngFor="let size of product.sizes" [value]="size" [selected]="size === selectedSize">{{ size }}</option>
           </select>
+        </div> -->
+
+        <div class="size-selector" *ngIf="product">
+          <span class="size-title title-weight">Sizes: </span>
+          <div class="size-boxes">
+            <div 
+              class="size-box" 
+              *ngFor="let size of product.sizes" 
+              [ngClass]="{'selected': size === selectedSize}"
+              (click)="selectSize(size)"
+            >
+              {{ size }}
+            </div>
+          </div>
         </div>
+        
 
         <div class="color-selector" *ngIf="product.colors.length">
-          <div>
+          <div class="color-name">
             <span class="title-weight">Colors: </span>
-            <span *ngIf="selectedColor">&nbsp;{{ selectedColor.color_name }}</span>
+            <span class="color-name" *ngIf="selectedColor">&nbsp;{{ selectedColor.color_name }}</span>
           </div>
           <div class="color-boxes">
             <div
@@ -80,10 +95,10 @@
 
   <div class="shopping-settings">
     <div class="delivery">
-      <i class="pi pi-truck" style="font-size: 1.1rem"></i> <span> Free delivery</span>
+      <i class="pi pi-truck" ></i> <span class="shopping-sub-text"> Free delivery</span>
     </div>
     <div class="free-return">
-      <i class="pi pi-replay" style="font-size: 1.1rem"></i> <span> Free return</span></div>
+      <i class="pi pi-replay" ></i> <span class="shopping-sub-text"> Free return</span></div>
     <div class="stock">In Stock</div>
     <div class="quantity">
       <button class="minus" (click)="decreaseQuantity()" [disabled]="selectedQuantity === 1">-</button>
@@ -92,12 +107,10 @@
       <p class="quantity-text">Quantity</p>
     </div>
     <div class="total_amount">{{ getTotalPrice() | currency:'EUR':'symbol':'1.2-2' }}</div>
-    <div>
+    <div class="add-to-basket-container">
       <button class="add-to-basket" (click)="addToBasket()">Add to Basket</button>
     </div>
-    <!-- <div>
-      <button class="buy-now" (click)="buyNow()">Buy Now</button>
-    </div> -->
+
   </div>
   
   <div class="recommended-products-container" *ngIf="recommendedProducts.length > 0">
@@ -132,7 +145,7 @@
             }"></i>
           </ng-container>
         </div>
-        <p>{{ feedback.comment }}</p>
+        <p class="feedback-text">{{ feedback.comment }}</p>
       </div>
     </div>
   </div>
@@ -141,6 +154,7 @@
     <i class="pi pi-angle-double-up" style="font-size: 1rem"></i>
   </button>
 </div>
+
 
 
 
