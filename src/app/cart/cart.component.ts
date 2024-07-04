@@ -7,6 +7,7 @@ import { Product } from '../services/product';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 
+
 interface ExtendedProduct extends Product {
   color: string;
   size: string;
