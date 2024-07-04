@@ -1,129 +1,159 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div>
-    <p class="required-fields">Fields marked * are required.</p>
-    <h3>Name</h3>
-    <div class="radio-buttons-container">
-      <span>
-        <p-radioButton name="title" value="Mr." formControlName="title" inputId="option1" (click)="selectMrOrMrs()"></p-radioButton>
-        <label for="option1" class="ml-2">Mr.</label>
-      </span>
-      <span>
-        <p-radioButton name="title" value="Mrs." formControlName="title" inputId="option2" (click)="selectMrOrMrs()"></p-radioButton>
-        <label for="option2" class="ml-2">Mrs.</label>
-      </span>
-      <span class="other-input-container">
-        <p-radioButton name="title" value="Other" formControlName="title" inputId="option3" (click)="selectOtherOption()"></p-radioButton>
-        <label for="option3" class="ml-3" *ngIf="!showOtherInput">Other</label>
-      </span>
-          <!-- Conditionally display input form for "Other" -->
-      <div *ngIf="showOtherInput" class="other-title">
-        <input pInputText formControlName="otherTitle" id="other-title" type="text" placeholder="Other"/>
-        <label for="other-title"></label>
-      </div>
-    </div>
-    
-    <div class="input-container">
-  <div>
-      <input pInputText formControlName="firstName" id="first-name" type="text" placeholder="* First name"/>
-      <label for="first-name"></label>
+<div class="register-container">
 
-      <div class="error-message">
-        <small *ngIf="(firstName!.dirty || formSubmitted) && firstName!.invalid">Name cannot be empty!</small>
-      </div>
-    </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div>
-      <input pInputText formControlName="lastName" id="last-name" type="text" placeholder="* Last name" />
-      <label for="last-name"></label>
-
-      <div class="error-message" style="left: 50%">
-        <small *ngIf="(lastName!.dirty || formSubmitted) && lastName!.invalid">Last name cannot be empty!</small>
-      </div>
-    </div>
-  </div>
+      <p class="required-fields">Fields marked * are required.</p>
+      <h3>Title</h3>
+      <div class="radio-buttons-container">
+        <div class="radio-gap">
+          <p-radioButton name="title" value="Mr." formControlName="title" inputId="option1" (click)="selectMrOrMrs()"></p-radioButton>
+          <label for="option1" class="ml-2">Mr.</label>
+        </div>
+        <div  class="radio-gap">
+          <p-radioButton name="title" value="Mrs." formControlName="title" inputId="option2" (click)="selectMrOrMrs()"></p-radioButton>
+          <label for="option2" class="ml-2">Mrs.</label>
+        </div>
+        <div class="other-input-container ">
+          <div>
+            <p-radioButton name="title" value="Other" formControlName="title" inputId="option3" (click)="selectOtherOption()"></p-radioButton>
+            <label for="option3" class="ml-3" *ngIf="!showOtherInput">Other</label>
+          </div>
+      
+          
   
-    <div class="input-container">
-      <div>
-        <input pInputText formControlName="email" id="email" type="email" placeholder="* Email"/>
-        <label for="email"></label>
-        <p class="credentials">You will need your email to log in to the store.</p>
-        <!-- <div class="error-message">
-          <small *ngIf="(email!.dirty || formSubmitted) && email!.invalid">Invalid email address!</small>
-        </div> -->
-
-        <div class="error-message">
-          <small *ngIf="email?.errors?.['required'] && (email?.dirty || formSubmitted)">Email address cannot be empty!</small>
-          <small *ngIf="email?.errors?.['email'] && (email?.touched || formSubmitted) && !email?.errors?.['required']">Please enter a valid email address!</small>
+   
+        <div *ngIf="showOtherInput" class="other-title">
+          <input pInputText formControlName="otherTitle" id="other-title" type="text" placeholder="Other"/>
+          <label for="other-title"></label>
         </div>
       </div>
+      </div>
+      
+      <div class="input-container second-part">
+    <div class="input-register">
       <div>
-        <input pInputText formControlName="password" id="password" type="password" placeholder="* Password" />
-        <label for="password"></label>
-        <p class="credentials">Your password needs at least 8 characters.</p>
-        <div class="error-message" style="left: 50%">
-          <small *ngIf="password?.errors?.['required'] && (password?.dirty || formSubmitted)">Password cannot be empty!</small>
-          <small *ngIf="(password!.dirty || formSubmitted) && password!.invalid && !password?.errors?.['required']">Password is too short!</small>
+        <input pInputText formControlName="firstName" id="first-name" type="text" placeholder="* First name"/>
+        <label for="first-name"></label>
+      </div>
+  
+  
+        <div class="error-message2">
+          <small *ngIf="(firstName!.dirty || formSubmitted) && firstName!.invalid">Name cannot be empty!</small>
+        </div>
+      </div>
+      <div  class="input-register second-line">
+        <div>
+          <input pInputText formControlName="lastName" id="last-name" type="text" placeholder="* Last name" />
+          <label for="last-name"></label>
+        </div>
+  
+  
+        <div class="error-message2" >
+          <small *ngIf="(lastName!.dirty || formSubmitted) && lastName!.invalid">Last name cannot be empty!</small>
         </div>
       </div>
     </div>
     
-    <h3>Birthdate</h3>
-    <div class="input-container">
-      <p-calendar [iconDisplay]="'input'" [showIcon]="true" formControlName="birthdate" inputId="birthday" [maxDate]="maxDate" placeholder="* Birthdate"></p-calendar>
-      <div class="error-message">
-        <small *ngIf="(birthdate!.dirty || formSubmitted) && birthdate!.invalid">Date cannot be empty!</small>
-      </div>
-    </div>
- 
-    <h3>Address</h3>
-
-    <div class="input-container">
-      <div>
-        <input pInputText formControlName="street" id="street" type="text" placeholder="* Street"/>
-        <label for="street"></label>
-        <div class="error-message">
-          <small *ngIf="(street!.dirty || formSubmitted) && street!.invalid">Street name cannot be empty!</small>
-      </div>
-    </div>
-
-    <div>
-        <input class="street_number" pInputText formControlName="streetNumber" inputId="street_number" id="street-number" placeholder="* No."/>
-        <label for="street_number"></label>
-        <div class="error-message" style="left: 50%">
-          <!-- <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid">Invalid street number!</small> -->
-          <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid && !streetNumber?.errors?.['required']">Invalid street number!</small>
-          <small *ngIf="streetNumber?.errors?.['required'] && (streetNumber?.dirty || formSubmitted)">Street number cannot be empty!</small>
+      <div class="input-container">
+        <div  class="input-register">
+          <div>
+            <input pInputText formControlName="email" id="email" type="email" placeholder="* Email"/>
+            <label for="email"></label>
+          </div>
+  
+          <div class="credentials">You will need your email to log in to the store.</div>
+          <!-- <div class="error-message">
+            <small *ngIf="(email!.dirty || formSubmitted) && email!.invalid">Invalid email address!</small>
+          </div> -->
+  
+          <div class="2 error-email-message2">
+            <small *ngIf="email?.errors?.['required'] && (email?.dirty || formSubmitted)">Email address cannot be empty!</small>
+            <small *ngIf="email?.errors?.['email'] && (email?.touched || formSubmitted) && !email?.errors?.['required']">Please enter a valid email address!</small>
+          </div>
+        </div>
+        <div  class="input-register second-line">
+          <div>
+            <input pInputText formControlName="password" id="password" type="password" placeholder="* Password" />
+            <label for="password"></label>
+            <p class="credentials">Your password needs at least 8 characters.</p>
+          </div>
+  
+          <div class="error-email-message2">
+            <small *ngIf="password?.errors?.['required'] && (password?.dirty || formSubmitted)">Password cannot be empty!</small>
+            <small *ngIf="(password!.dirty || formSubmitted) && password!.invalid && !password?.errors?.['required']">Password is too short!</small>
+          </div>
         </div>
       </div>
-
+      
+      <h3>Birthdate</h3>
+      <div class="input-register">
+        <div>
+          <p-calendar [iconDisplay]="'input'" [showIcon]="true" formControlName="birthdate" inputId="birthday" [maxDate]="maxDate" placeholder="* Birthdate"></p-calendar>
+        </div>
+       
+        <div class="error-message2 birthdate-error">
+          <small *ngIf="(birthdate!.dirty || formSubmitted) && birthdate!.invalid">Date cannot be empty!</small>
+        </div>
+      </div>
+   
+      <h3>Address</h3>
+  
+      <div class="input-container input-register">
+        <div>
+          <input pInputText formControlName="street" id="street" type="text" placeholder="* Street"/>
+          <label for="street"></label>
+          <div class="error-message2">
+            <small *ngIf="(street!.dirty || formSubmitted) && street!.invalid">Street name cannot be empty!</small>
+        </div>
+      </div>
+  
+      <div class="input-register second-line">
+        <div>
+          <input class="street_number" pInputText formControlName="streetNumber" inputId="street_number" id="street-number" placeholder="* No."/>
+          <label for="street_number"></label>
+        </div>
+  
+          <div class="error-message2" >
+            <!-- <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid">Invalid street number!</small> -->
+            <small *ngIf="(streetNumber!.dirty || formSubmitted) && streetNumber!.invalid && !streetNumber?.errors?.['required']">Invalid street number!</small>
+            <small *ngIf="streetNumber?.errors?.['required'] && (streetNumber?.dirty || formSubmitted)">Street number cannot be empty!</small>
+          </div>
+        </div>
+  
+      </div>
+      <div class="input-container input-register">
+        <div >
+        <input pInputText formControlName="zipCode" id="zip-code" type="text" placeholder="* Postcal Code"/>
+        <label for="zip-code"></label>
+        <div class="error-message2">
+          <small *ngIf="(zipCode!.dirty || formSubmitted) && zipCode!.invalid && !zipCode?.errors?.['required']">Invalid postal code number!</small>
+          <small *ngIf="zipCode?.errors?.['required'] && (zipCode?.dirty || formSubmitted)">Postal code cannot be empty!</small>
+        </div>
+      </div>
+  
+      <div class="input-register second-line">
+        <div>
+          <input pInputText formControlName="city" id="city" type="text" placeholder="* City"/>
+          <label for="city"></label>
+        </div>
+  
+        <div class="error-message2" >
+          <small *ngIf="(city!.dirty || formSubmitted) && city!.invalid">City cannot be empty!</small>
+        </div>
+      </div>
+  
     </div>
-    <div class="input-container">
-      <div>
-      <input pInputText formControlName="zipCode" id="zip-code" type="text" placeholder="* Postcal Code"/>
-      <label for="zip-code"></label>
-      <div class="error-message">
-        <small *ngIf="(zipCode!.dirty || formSubmitted) && zipCode!.invalid && !zipCode?.errors?.['required']">Invalid postal code number!</small>
-        <small *ngIf="zipCode?.errors?.['required'] && (zipCode?.dirty || formSubmitted)">Postal code cannot be empty!</small>
+    <div >
+      <p-dropdown [options]="countries" optionLabel="label" optionValue="value" formControlName="country" [showClear]="true" placeholder="* Country"></p-dropdown>
+  
+      <div class="error-message2">
+        <small *ngIf="country?.invalid && (country?.touched || formSubmitted)">Please select a country!</small>
       </div>
     </div>
-
-    <div>
-      <input pInputText formControlName="city" id="city" type="text" placeholder="* City"/>
-      <label for="city"></label>
-      <div class="error-message" style="left: 50%">
-        <small *ngIf="(city!.dirty || formSubmitted) && city!.invalid">City cannot be empty!</small>
-      </div>
+  
+    <p id="default-address">Your address will be used as the default shipping address.</p>
+    <button type="submit" pButton pRipple label="Submit" class="p-button-success"></button>
     </div>
-
-  </div>
-  <div class="input-container">
-    <p-dropdown [options]="countries" optionLabel="label" optionValue="value" formControlName="country" [showClear]="true" placeholder="* Country"></p-dropdown>
-
-    <div class="error-message">
-      <small *ngIf="country?.invalid && (country?.touched || formSubmitted)">Please select a country!</small>
-    </div>
-  </div>
-
-  <p id="default-address">Your address will be used as the default shipping address.</p>
-  <button type="submit" pButton pRipple label="Submit" class="p-button-success"></button>
-  </div>
-</form>
+  </form>
+</div>
