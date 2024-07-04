@@ -1,4 +1,4 @@
-<div>
+<div class="delivery-payment-container">
   <div class="delivery-container">
    <div class="address-heading">Select Delivery Options</div>
    <div class="delivery-options">
@@ -20,6 +20,8 @@
        </div>
      </label>
    </div>
+
+   
  </div>
 
  <div class="payment-container">
@@ -30,7 +32,7 @@
          <div *ngIf="payment.default" class="default-label">Default</div>
          <div class="card-height2" *ngIf="editingIndex === i; else displayPayment">
            <form #paymentForm="ngForm" (ngSubmit)="saveUpdatedPayment(i)">
-             <input type="text" [(ngModel)]="payment.accountHolderName" name="accountHolderName" placeholder="Account Holder's Name" required>
+             <input class="input-card" type="text" [(ngModel)]="payment.accountHolderName" name="accountHolderName" placeholder="Account Holder's Name" required>
              <input type="text" name="details" [(ngModel)]="editingFullDetails" [placeholder]="currentDetailsPlaceholder" required [pattern]="getPattern()" #paymentDetails="ngModel">
              <button class="update-card" type="submit">Update</button>
              <button class="update-card" type="button" (click)="cancelAddOrEdit()">Cancel</button>

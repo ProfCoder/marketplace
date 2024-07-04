@@ -380,3 +380,314 @@ background-color: (41, 129, 164, 0.774);
 .button-container button:hover {
   color: rgba(5, 86, 173, 0.666);
 }
+
+
+/* Small screens (mobile phones): 261px - 432px (27rem) */
+@media  (max-width: 27rem) {
+.button-container {
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  margin-top: 28px;
+
+  
+}
+
+.button-container button {  
+  border: none;
+  background-color: white;
+  color: #074f9c;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  font-size: 1.2rem;
+}
+
+
+  .card-height2 button{
+    max-width: 50%;
+    margin-top: 20px;
+    padding: 8px 8px;
+  }
+.card-height2 {
+  height: 280px;
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  padding-top: 45px;
+
+}
+
+
+.card-height {
+  height: 280px;
+  padding-top: 45px;
+
+}
+  .delivery-options {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px; 
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    
+  }
+  
+  .delivery-option-box {
+    display: block; 
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    background-color: #fff; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+  }
+  
+  .delivery-option-box.selected {
+    border-color: blue;
+  }
+.shipping-cost {
+  top:10px;
+    
+}
+
+.payment-options {
+  flex-direction: column;
+
+}
+.payment-option-wrapper {
+  width: 100%;
+}
+
+
+
+.card-height2 button{
+  max-width: 70%;
+  margin-top: 20px;
+  padding:  10px 14px;
+
+}
+.card-height2  {
+  padding-top: 20px;
+height: 290px;
+
+
+
+}
+.card-height2 form {
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.drop-down {
+  /* font-size: 1.4rem; */
+  width: 70%;
+  margin: 0;
+  /* padding: ; */
+}
+
+.form {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.form input {
+  width: 90%;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px;
+
+
+}
+
+.button-newcard  button, .button-newcard{
+  width: 150px;
+  padding: 15px 0;
+}
+.add-button {
+  padding: 12px 8px;
+  font-size: 1.1rem;
+}
+}
+
+
+/* iPads/Tablets: 432px (27.1rem) to 820px (51.25rem) */
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
+
+  .button-container {
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    margin-top: 28px;
+  
+    
+  }
+
+  .button-container button{
+    font-size: 1.2rem;
+  
+    
+  }
+  .delivery-options {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px; 
+    width: 70%;
+    padding: 0;
+    margin: 0 auto;
+    
+  }
+  
+  .delivery-option-box {
+    display: block; 
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    background-color: #fff; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+
+  }
+  
+  .delivery-option-box.selected {
+    border-color: blue;
+  }
+.shipping-cost {
+  top:10px;
+    
+}
+
+.payment-options {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+
+}
+.payment-option-wrapper {
+  width: 70%;
+
+}
+
+.card-height {
+
+padding-top: 45px;
+height: 240px;
+}
+
+.card-height2 button{
+  max-width: 70%;
+  margin-top: 20px;
+  padding: 10px 14px;
+}
+.card-height2  {
+height: 270px;
+padding-top: 45px;
+
+}
+.card-height2 form {
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.drop-down {
+  /* font-size: 1.4rem; */
+  width: 70%;
+  margin: 0;
+  /* padding: ; */
+}
+
+.form {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.form input {
+  width: 70%;
+  margin: 0;
+  padding: 0;
+  margin-top: 40px;
+
+
+}
+
+.button-newcard  button, .button-newcard{
+  width: 150px;
+  padding: 15px 0;
+}
+.add-button {
+  padding: 22px 12px;
+  font-size: 1rem;
+}
+}
+
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+
+}
+
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+.shipping-name, .shipping-duration, .shipping-date, .shipping-cost {
+  font-size: 1.4rem;
+}
+.address-heading {
+  font-size: 1.6rem;
+}
+.button-container button, .update-card , .add-button, .button-newcard, .first, .second, .drop-down, .text {
+  font-size: 1.5rem;
+}
+
+.update-card button, .input-card input{
+  font-size: 1.5rem;
+}
+
+.card-height2 input {
+  font-size: 1.4rem;
+
+}
+
+.payment-option-box {
+  font-size: 1.4rem;
+  height: 270px;
+
+}
+
+.default-label {
+  font-size: 1.2rem;
+  top:25px;
+  right: 25px;
+}
+
+    }

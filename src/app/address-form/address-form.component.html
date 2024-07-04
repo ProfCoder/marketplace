@@ -1,5 +1,5 @@
 
-<div>
+<div class="address-container">
   <div class="address-heading">Select Delivery Address</div>
   <div *ngIf="savedAddresses.length > 0; else noAddresses">
     <div *ngFor="let address of savedAddresses; let i = index; trackBy: trackByIndex" 
@@ -80,7 +80,7 @@
             <button (click)="editAddress(i)">Edit</button>
             <button (click)="removeAddress(i)">Remove</button>
             <button *ngIf="!address.isDefault" (click)="makeDefault(i)">Make Default</button>
-            <button (click)="toggleInstructions(i)">Add Delivery Instructions <i class="pi pi-angle-down"></i></button>
+            <button class="add-note" (click)="toggleInstructions(i)">Add Delivery Instructions <i class="pi pi-angle-down"></i></button>
           </div>
           <div *ngIf="instructionsIndex === i" [@slideDown]="'open'">
             <textarea [(ngModel)]="deliveryInstructions" placeholder="Enter delivery instructions" maxlength="200"></textarea>

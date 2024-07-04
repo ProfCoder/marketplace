@@ -177,3 +177,124 @@ textarea:focus {
 .inside-button:hover {
   background-color: rgba(7, 79, 156, 0.724);
 }
+
+
+
+/* Small screens (mobile phones): 261px - 432px (27rem) */
+@media  (max-width: 27rem) {
+  .add-button {
+    margin-top: 20px;
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: left;
+    margin: 0;
+    padding: 0;
+  }
+  .address-container {
+    padding: 0;
+    margin: 0;
+  }
+  .inside-button {
+    padding: 8px 5px;
+  }
+
+  .address-heading {
+    font-size: 1rem;
+  }
+}
+
+
+/* iPads/Tablets: 432px (27.1rem) to 820px (51.25rem) */
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
+.add-button {
+  margin-top: 20px;
+  padding: 14px 10px;
+  font-size: 1rem;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.inside-button, .big-button button {
+  padding: 12px 12px;
+}
+
+
+}
+
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+
+}
+
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+  .add-button {
+    margin-top: 20px;
+    padding: 10px 8px;
+    font-size: 1.4rem;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: left;
+    margin: 0;
+    padding: 0;
+    
+    
+  }
+
+  .button-container button {
+    font-size: 1.4rem;
+    
+    
+  }
+  .address-container {
+    padding: 0;
+    margin: 0;
+    font-size: 1.3rem;
+    padding: 20px 100px;
+  }
+  .inside-button {
+    font-size: 1.5rem;
+  }
+
+  .address-heading {
+    font-size: 1.6rem;
+  }
+
+  .address-card {
+    font-size: 1.4rem;
+  }
+
+  .default-badge {
+    font-size: 1.2rem;
+    padding: 10px;
+    margin-right: 10px;
+    top:20px;
+  }
+  
+
+  .address-input {
+    font-size: 1.4rem;
+  }
+  ::ng-deep .p-dropdown-label {
+    font-size:  1.4rem !important; 
+}
+
+::ng-deep .p-dropdown-item {
+    font-size:  1.4rem !important; 
+}
+    }

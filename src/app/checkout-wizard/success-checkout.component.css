@@ -12,3 +12,47 @@ margin-top: 10px;
     cursor: pointer;
     background-color: #2a83a4d3;
     }
+
+/* Small screens (mobile phones): 261px - 432px (27rem) */
+@media  (max-width: 27rem) {
+.success-message {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.go-home-button {
+
+    margin-top: 40px;
+}
+}
+
+
+/* iPads/Tablets: 432px (27.1rem) to 820px (51.25rem) */
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
+
+
+}
+
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+
+}
+
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+
+.success-message {
+    padding-top: 50px;
+    width: 70%;
+    margin: 0 auto; 
+    font-size: 2rem;
+}
+
+.go-home-button {
+    font-size: 2rem;
+    padding: 10px 20px;
+    margin-top: 40px;
+}
+    }

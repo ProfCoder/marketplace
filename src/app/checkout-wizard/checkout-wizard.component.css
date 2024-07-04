@@ -251,3 +251,181 @@
 ::ng-deep .stepper .p-steps-item.p-steps-current .p-steps-number {
   background-color: blue;
 } */
+
+
+
+
+/* Small screens (mobile phones): 261px - 432px (27rem) */
+@media  (max-width: 27rem) {
+
+
+  .next-button,.back-button {
+    font-size: 1rem;
+    padding: 12px 22px;
+  }
+.wizard-container {
+  /* background-color: red; */
+  font-size: 0.9rem;
+}
+
+.order-information {
+  font-size: 1.5rem;
+}
+
+.checkout-item-image {
+  width: 90%;
+  padding: 15px 0 0 0;
+}
+
+.checkout-image {
+  width: 200px;
+}
+
+.checkout-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.checkout-info {
+  flex-direction: column;
+
+}
+
+.checkout-info-left, .checkout-info-right {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 20px;
+ 
+
+} 
+.confirm-button {
+  font-size: 1.2rem;
+ 
+  margin: 0;
+  margin-bottom: 45px;
+  font-weight: 550;
+
+}
+
+
+}
+
+
+/* iPads/Tablets: 432px (27.1rem) to 820px (51.25rem) */
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
+
+
+  .next-button,.back-button {
+    font-size: 1rem;
+    padding: 12px 22px;
+  }
+.wizard-container {
+  /* background-color: red; */
+  font-size: 0.9rem;
+}
+
+.order-information {
+  font-size: 1.5rem;
+}
+
+.checkout-item-image {
+  width: 90%;
+  padding: 15px 0 0 0;
+}
+
+.checkout-image {
+  width: 200px;
+}
+
+.checkout-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.checkout-info {
+  flex-direction: column;
+
+}
+
+.checkout-info-left, .checkout-info-right {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 20px;
+ 
+
+} 
+.confirm-button {
+  font-size: 1.2rem;
+ 
+  margin: 0;
+  margin-bottom: 45px;
+  font-weight: 550;
+
+}
+}
+
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+
+}
+
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+.wizard-container {
+  width: 70%;
+  padding: 20px 100px;
+  margin: 0 auto; 
+  /* text-align: center; */
+}
+.next-button,.back-button {
+  font-size: 1.7rem;
+}
+.confirm-button, .address-heading {
+  font-size: 1.7rem;
+}
+
+.checkout-item-details, .checkout-item-price, .checkout-item-quantity, 
+.checkout-item-name {
+  
+  font-size: 1.5rem;
+}  
+
+.checkout-info {
+  width: 60%;
+}
+.checkout-card-container {
+  width: 70%;
+  justify-content: space-between;
+}
+
+.checkout-item-image {
+  width: 20%;
+}
+
+.checkout-item-image img {
+  margin-left: 40px;
+}
+
+.checkout-item-details {
+  width: 70%;
+}
+
+.confirm-button {
+  margin-top: 50px;
+  font-size: 2.2rem;
+}
+
+.order-information {
+  font-size: 2.2rem;
+}
+  }
