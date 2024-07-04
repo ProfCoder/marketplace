@@ -21,9 +21,9 @@
             <div class="cart-urls-container">
               <div class="quantity-container">
                 <div class="quantity" *ngIf="!product.customQuantity">
-                  <select (change)="changeQuantity(product, $event)">
-                    <option *ngFor="let option of quantityOptions" [value]="option" [selected]="option === product.quantity">
-                      {{ option === 0 ? '0 (Delete)' : option === 10 ? '10+' : 'Qty: ' + option }}
+                  <select class="custom-select" (change)="changeQuantity(product, $event)">
+                    <option class="option-text" *ngFor="let option of quantityOptions" [value]="option" [selected]="option === product.quantity">
+                      {{ option === 0 ? '0 (Delete)' : option === 10 ? '10+' : 'Quantity: ' + option }}
                     </option>
                   </select>
                 </div>
@@ -31,9 +31,20 @@
                   <input type="number" class="custom-quantity custom-quantity-focus" [value]="product.quantity" (blur)="handleCustomQuantity(product, $event)" (keydown.enter)="handleCustomQuantity(product, $event)" placeholder="Enter quantity">
                 </div>
               </div>
-              <div><button class="delete-item-button" (click)="removeProduct(product)">Delete</button></div>
+              <!-- <div><button class="delete-item-button" (click)="removeProduct(product)">Delete</button></div> -->
+              <div class="container-delete">
+                <button class="delete-item-button" (click)="removeProduct(product)">
+                  <div>
+                    <img class='delete-icon' src="../../assets/icons/bin.png" alt="Delete Icon" />
+                  </div>
+                 <div> Delete</div>
+                </button>
+              </div>
+              
               <div><button class="save-item-button">Save for later</button></div>
             </div>
+
+            
           </div>
         </div>
       </div>
@@ -44,7 +55,7 @@
     </div>
 
     <div class="total-price-container">
-      <div><button *ngIf="products.length > 1" class="delete-item-button clear-button" (click)="clearCart()">Delete all items</button></div>
+      <div><button *ngIf="products.length > 1" class="delete-item-button clear-button delete-all-items" (click)="clearCart()">Delete all items</button></div>
       <div class="total-price">Total Price: <span class="total-price-text">€{{ getTotalPrice() }}</span></div>
     </div>
 
