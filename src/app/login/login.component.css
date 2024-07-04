@@ -38,3 +38,89 @@ input:hover {
 :host ::ng-deep .p-dropdown-label  {
   color: #555;
 }
+
+h2 {
+  margin-top: 60px;
+}
+
+/* Small screens (mobile phones): 261px - 432px (27rem) */
+@media  (max-width: 27rem) {
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+  
+  .input-container {
+    width: 70%;
+  }
+  
+  
+  input {
+    padding: 10px 12px;
+    width: 200px;
+    font-size: 1rem;
+  
+  }
+  .error-message {
+    margin-top: 5px;
+    font-size: 0.8rem;
+  }
+  
+  
+  
+  ::ng-deep #login-button .p-button-label {
+    font-size: 0.9rem;
+    /* height: 20px; */
+    
+    padding: 2px 5px;
+  }
+}
+
+
+/* iPads/Tablets: 432px (27.1rem) to 820px (51.25rem) */
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
+  h2 {
+    margin-top: 45px;
+  }
+
+}
+
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+
+}
+
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+
+h2 {
+  font-size: 2.5rem;
+}
+
+.input-container {
+  width: 90%;
+}
+
+
+input {
+  padding: 16px 18px;
+  width: 340px;
+  font-size: 1.4rem;
+
+}
+.error-message {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+
+
+::ng-deep #login-button .p-button-label {
+  font-size: 1.4rem;
+  padding: 1px 16px;
+}
+
+
+    }
