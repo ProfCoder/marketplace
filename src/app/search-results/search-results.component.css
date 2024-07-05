@@ -25,6 +25,7 @@
   height: 30px;
   display: flex;
   align-items: center;
+  font-size: 14px;
 }
 
 
@@ -206,21 +207,16 @@
 }
 
 
-
-
-
-
-
-
 ::ng-deep .search-results-product-list .grid-view .product-item {
-  height: 420px;
-  min-height: 350px;
-  max-height: 490px;
+  /* height: 920px; */
+  min-height: 490px;
+  max-height: 500px;
   padding: 10px;
 }
 
 ::ng-deep .search-results-product-list .grid-view {
   text-align: center;
+
 }
 
 ::ng-deep .search-results-product-list .grid-view .card-img {
@@ -232,13 +228,19 @@
 
 ::ng-deep .search-results-product-list .grid-view .card-brand {
   margin-bottom: 5px;
+  font-size: 10px;
+}
+
+::ng-deep .search-results-product-list .grid-view .card-name {
+  /* margin-bottom: 5px; */
+
 }
 
 ::ng-deep .search-results-product-list .grid-view .card-price {
-  font-size: 16px;
+
   width: 90px;
   font-weight: 600;
-  padding: 7px 0;
+  padding: 3px 0;
   margin: 15px 0;
 }
 
@@ -250,6 +252,7 @@
 
 ::ng-deep .search-results-product-list .grid-view .card-brand {
   font-size: 18px;
+ 
 }
 
 
@@ -271,15 +274,301 @@
 
 
 ::ng-deep .search-results-product-list .list-view .product-item{
-  height: 180px;
-  max-height: 180px;
-  min-height: 180px;
+
+  max-height: 680px;
+  min-height: 250px;
+  
 }
 
 
 ::ng-deep .search-results-product-list .list-view .card-img {
-  width: 170px;
+  width: 140px;
   margin-top: 5px;
+  
   padding: 0;
 }
 
+::ng-deep .search-results-product-list .list-view .card-brand {
+
+}
+
+.sort-label {
+  display: none; 
+}
+
+
+/* Small screens (mobile phones): 261px - 432px (27rem) */
+/* Hide the filter container on small screens */
+@media (max-width: 27rem) {
+
+  .sort-label {
+    display:inline-block; 
+width: 160px;
+
+
+    margin-right: 10px; 
+    margin-top: 5px;
+    font-size: 12px; 
+  }
+
+  .sorting {
+    flex-direction: row;
+  }
+
+  .filters-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(255, 255, 255, 0.9);  */
+    background-color: rgba(220, 235, 245, 0.9); 
+
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 0 20px;
+    
+  }
+  
+  .filters-container.show {
+    display: block;
+    opacity: 1;
+  }
+  
+  .show-filters-button {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .close-filters-button {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1002;
+  }
+  
+  .results-container {
+    width: 100%;
+  }
+
+
+  input[type="checkbox"] {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+  
+  }
+
+  .filter-title label,
+  .filter-title h4, 
+  .color-title
+   {
+    font-size: 20px;
+    
+  }
+
+  .filter-options div {
+    margin-bottom: 15px;
+  }
+
+
+  .price-filter {
+    width: 80%;
+    height: 95px;
+    margin: 80px auto;
+    margin-top: 10px;
+  }
+
+  .price-filter-title {
+    font-size: 18px;
+    margin-bottom: 40px;
+    margin-top: 90px;
+    text-align: center;
+  
+  }
+
+  .price-filter-values {
+    text-align: center;
+    margin-top: 15px;
+    color:#3131319e;
+    font-size: 17px;
+  }
+  .brand-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .brand-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; 
+    
+  }
+  
+  .brand-label input[type="checkbox"] {
+    margin-right: 20px; 
+  }
+
+
+  .gender-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .gender-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; 
+  }
+  
+  .gender-label input[type="checkbox"] {
+    margin-right: 20px;
+  }
+
+  :host ::ng-deep .p-slider-handle { 
+    border: 15px solid #007184;
+    width: 45px; 
+    height: 45px; 
+    transform: translateY(-10px); 
+  }
+
+  :host ::ng-deep .p-slider-range { 
+    background-color: #007184; 
+  }
+
+
+  .categories-filter-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+  }
+  
+  .dropdown-wrapper {
+    width: 100%; 
+    display: flex;
+    
+  }
+  .color-filter-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .reset-filters-button {
+    background-color: #007bff;
+    /* border: 1px solid #ccc; */
+    color: white;
+    padding: 10px 16px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.1s, color 0.1s, border-color 0.1s;
+;
+  }
+  
+  .reset-filters-button:hover {
+    background-color: #007bffaf;
+    border-color: none;
+    color: white;
+  }
+
+  .results-info {
+    display: none;
+  }
+
+  .result-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.1);
+    /* padding: 10px 10px; */
+
+
+  }
+
+  .sorting {
+    margin-left: 0;
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  :host ::ng-deep .custom-dropdown .p-dropdown {
+    padding: 2px 10px; 
+
+  
+  }
+
+}
+
+/* Hide the show-filters button on larger screens */
+@media (min-width: 27.1rem) {
+  .show-filters-button {
+    display: none;
+  }
+  
+  .close-filters-button {
+    display: none;
+  }
+
+
+
+
+
+
+
+
+  
+}
+
+
+
+/* iPads/Tablets: 432px (27.1rem) to 820px (51.25rem) */
+@media (min-width: 27.1rem) and (max-width: 51.25rem) {
+
+
+}
+
+
+/* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
+@media (min-width: 51.3125rem) and (max-width: 90rem) {
+
+}
+
+
+/* Extra-large screens (ultrawide monitors): 2561px (160.0625rem) and above */
+@media (min-width: 160.0625rem) {
+
+
+    }

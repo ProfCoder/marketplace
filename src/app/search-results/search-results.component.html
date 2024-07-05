@@ -1,4 +1,4 @@
-<div class="result-info-container">
+<!-- <div class="result-info-container">
   <div class="results-info" *ngIf="searchValue">Results for <span class="search-value">"{{ searchValue }}"</span></div>
   <div class="sorting">
     <p-dropdown
@@ -99,6 +99,326 @@
 
   </div>
 
+  <div class="results-container">
+    <app-product-list class="search-results-product-list"
+      [searchValue]="searchValue"
+      [selectedBrands]="selectedBrands"
+      [products]="filteredProducts"
+      [selectedColors]="selectedColors"
+    ></app-product-list>
+  </div>
+</div> -->
+
+<!-- 
+
+<div class="result-info-container">
+  <div class="results-info" *ngIf="searchValue">Results for <span class="search-value">"{{ searchValue }}"</span></div>
+  <div class="sorting">
+    <p-dropdown
+      [options]="sortOptions"
+      [(ngModel)]="selectedSortOption"
+      placeholder="Sort by"
+      (onChange)="onSortChange($event)"
+    ></p-dropdown>
+  </div>
+</div>
+
+
+<div class="search-container">
+  <div class="filters-container" [ngClass]="{'show': showFilters}">
+    <div class="filter-title">
+      <h4>Brands</h4>
+      <div *ngFor="let brand of brandList">
+        <input
+          type="checkbox"
+          [value]="brand"
+          [checked]="selectedBrands.includes(brand)"
+          (change)="onBrandFilterChange($event)"
+        />{{ brand }}
+      </div>
+    </div>
+    <div class="price-filter">
+      <h4 class="price-filter-title">Price Range</h4>
+      <p-slider 
+        [(ngModel)]="priceRange"
+        [min]="minPrice" 
+        [max]="maxPrice" 
+        [range]="true"
+        (onSlideEnd)="onPriceFilterChange()">
+      </p-slider>
+      <div class="price-filter-values">Min: {{ priceRange[0] }} -  {{ priceRange[1] }}</div>
+    </div>
+    
+    <div class="filter-title categories-filter-container">
+      <h4>Categories</h4>
+      <p-dropdown 
+        [options]="categoryList" 
+        [(ngModel)]="selectedCategory" 
+        (onChange)="onCategoryFilterChange($event)"
+        class="custom-dropdown"
+      ></p-dropdown>
+    </div>
+    
+    <div class="filter-title">
+      <h4>Gender</h4>
+      <div *ngFor="let gender of genderList">
+        <input
+          type="checkbox"
+          [value]="gender"
+          (change)="onGenderFilterChange($event)"
+          [checked]="selectedGenders.includes(gender)"
+        />{{ gender }}
+      </div>
+    </div>
+
+    <div class="filter-title">
+      <h4>Sizes</h4>
+      <div class="sizes-container custom-dropdown-wrapper">
+        <div class="select-all-checkbox">
+          <input type="checkbox" (change)="toggleSelectAllSizes($event)" [checked]="areAllSizesSelected()">
+        </div>
+        <p-multiSelect 
+          class="sizes-container" 
+          [options]="sizeListOptions" 
+          [(ngModel)]="selectedSizes" 
+          (onChange)="onSizeFilterChange($event)" 
+          [style]="{ 'width.px': 200 }" 
+          placeholder="All">
+          <ng-template pTemplate="header">
+          </ng-template>
+        </p-multiSelect>
+      </div>
+    </div>
+    
+    <div class="filter-title color-filter-container">
+      <div class="color-title">Colors</div>
+      <div *ngFor="let color of colorList" class="color-box-container">
+        <div 
+          [style.background-color]="color.color_hex" 
+          class="color-box" 
+          [class.selected]="selectedColors.includes(color.color_name)" 
+          (click)="onColorBoxClick(color.color_name)"
+        >
+          <span class="color-name" [class.dark-text]="isColorDark(color.color_name)">{{ color.color_name }}</span>
+          <i class="pi pi-check" *ngIf="selectedColors.includes(color.color_name)" [class.dark-text]="isColorDark(color.color_name)"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="reset-filter-container">
+      <button class="reset-filters-button" (click)="resetFilters()">Reset All Filters</button>
+    </div>
+    <button class="close-filters-button" (click)="toggleFilters()">&#10005;</button>
+  </div>
+
+  <div class="results-container">
+    <app-product-list class="search-results-product-list"
+      [searchValue]="searchValue"
+      [selectedBrands]="selectedBrands"
+      [products]="filteredProducts"
+      [selectedColors]="selectedColors"
+    ></app-product-list>
+  </div>
+</div> -->
+
+
+<!-- <div class="result-info-container">
+  <div class="results-info" *ngIf="searchValue">Results for <span class="search-value">"{{ searchValue }}"</span></div>
+  <div class="sorting">
+    <p-dropdown
+      [options]="sortOptions"
+      [(ngModel)]="selectedSortOption"
+      placeholder="Sort by"
+      (onChange)="onSortChange($event)"
+      class="custom-dropdown"
+    ></p-dropdown>
+  </div>
+</div> -->
+
+<div class="result-info-container">
+  <div class="results-info" *ngIf="searchValue">Results for <span class="search-value">"{{ searchValue }}"</span></div>
+  <div class="sorting">
+    <label for="sortDropdown" class="sort-label">Sort by</label>
+    <p-dropdown
+      id="sortDropdown"
+      [options]="sortOptions"
+      [(ngModel)]="selectedSortOption"
+      placeholder="Sort by"
+      (onChange)="onSortChange($event)"
+      class="custom-dropdown"
+    ></p-dropdown>
+  </div>
+</div>
+
+
+<div class="search-container">
+  <div class="filters-container" [ngClass]="{'show': showFilters}">
+    <!-- <div class="filter-title">
+      <h4>Brands</h4>
+      <div *ngFor="let brand of brandList">
+        <input
+          type="checkbox"
+          [value]="brand"
+          [checked]="selectedBrands.includes(brand)"
+          (change)="onBrandFilterChange($event)"
+        />{{ brand }}
+      </div>
+    </div> -->
+
+    <!-- <div class="filter-title brand-container">
+      <h4>Brands</h4>
+      <div *ngFor="let brand of brandList">
+        <label>
+          <input
+            type="checkbox"
+            [value]="brand"
+            [checked]="selectedBrands.includes(brand)"
+            (change)="onBrandFilterChange($event)"
+          />
+          {{ brand }}
+        </label>
+      </div>
+    </div> -->
+
+    <div class="filter-title brand-container">
+      <h4>Brands</h4>
+      <div *ngFor="let brand of brandList">
+        <label class="brand-label">
+          <input
+            type="checkbox"
+            [value]="brand"
+            [checked]="selectedBrands.includes(brand)"
+            (change)="onBrandFilterChange($event)"
+          />
+          {{ brand }}
+        </label>
+      </div>
+    </div>
+    
+    <!-- <div class="price-filter">
+      <h4 class="price-filter-title">Price Range</h4>
+      <p-slider 
+        [(ngModel)]="priceRange"
+        [min]="minPrice" 
+        [max]="maxPrice" 
+        [range]="true"
+        (onSlideEnd)="onPriceFilterChange()">
+      </p-slider>
+      <div class="price-filter-values">Min: {{ priceRange[0] }} -  {{ priceRange[1] }}</div>
+    </div> -->
+
+    <div class="price-filter">
+      <h4 class="price-filter-title">Price Range</h4>
+      <p-slider 
+        [(ngModel)]="priceRange"
+        [min]="minPrice" 
+        [max]="maxPrice" 
+        [range]="true"
+        (onSlideEnd)="onPriceFilterChange()">
+      </p-slider>
+      <div class="price-filter-values">Min: {{ priceRange[0] }} -  {{ priceRange[1] }}</div>
+    </div>
+    
+    
+    <!-- <div class="filter-title categories-filter-container">
+      <h4>Categories</h4>
+      <p-dropdown 
+        [options]="categoryList" 
+        [(ngModel)]="selectedCategory" 
+        (onChange)="onCategoryFilterChange($event)"
+        class="custom-dropdown"
+      ></p-dropdown>
+    </div> -->
+
+    <div class="filter-title categories-filter-container">
+      <h4>Categories</h4>
+      <div class="dropdown-wrapper">
+        <p-dropdown 
+          [options]="categoryList" 
+          [(ngModel)]="selectedCategory" 
+          (onChange)="onCategoryFilterChange($event)"
+          class="custom-dropdown"
+        ></p-dropdown>
+      </div>
+    </div>
+    
+    
+    <!-- <div class="filter-title">
+      <h4>Gender</h4>
+      <div *ngFor="let gender of genderList">
+        <input
+          type="checkbox"
+          [value]="gender"
+          (change)="onGenderFilterChange($event)"
+          [checked]="selectedGenders.includes(gender)"
+        />{{ gender }}
+      </div>
+    </div> -->
+
+    <div class="filter-title gender-container">
+      <h4>Gender</h4>
+      <div *ngFor="let gender of genderList">
+        <label class="gender-label">
+          <input
+            type="checkbox"
+            [value]="gender"
+            (change)="onGenderFilterChange($event)"
+            [checked]="selectedGenders.includes(gender)"
+          />
+          {{ gender }}
+        </label>
+      </div>
+    </div>
+    
+
+    <div class="filter-title">
+      <h4>Sizes</h4>
+      <div class="sizes-container custom-dropdown-wrapper">
+        <div class="select-all-checkbox">
+          <input type="checkbox" (change)="toggleSelectAllSizes($event)" [checked]="areAllSizesSelected()">
+        </div>
+        <p-multiSelect 
+          class="sizes-container" 
+          [options]="sizeListOptions" 
+          [(ngModel)]="selectedSizes" 
+          (onChange)="onSizeFilterChange($event)" 
+          [style]="{ 'width.px': 200 }" 
+          placeholder="All">
+          <ng-template pTemplate="header">
+          </ng-template>
+        </p-multiSelect>
+      </div>
+    </div>
+    
+    <div class="filter-title color-filter-container">
+      <div class="color-title">Colors</div>
+      <div *ngFor="let color of colorList" class="color-box-container">
+        <div 
+          [style.background-color]="color.color_hex" 
+          class="color-box" 
+          [class.selected]="selectedColors.includes(color.color_name)" 
+          (click)="onColorBoxClick(color.color_name)"
+        >
+          <span class="color-name" [class.dark-text]="isColorDark(color.color_name)">{{ color.color_name }}</span>
+          <i class="pi pi-check" *ngIf="selectedColors.includes(color.color_name)" [class.dark-text]="isColorDark(color.color_name)"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="reset-filter-container">
+      <button class="reset-filters-button" (click)="resetFilters()">Reset All Filters</button>
+    </div>
+    <button class="close-filters-button" (click)="toggleFilters()">&#10005;</button>
+  </div>
+
+  <!-- <div class="results-container">
+    <app-product-list class="search-results-product-list"
+      [searchValue]="searchValue"
+      [selectedBrands]="selectedBrands"
+      [products]="filteredProducts"
+      [selectedColors]="selectedColors"
+    ></app-product-list>
+  </div> -->
   <div class="results-container">
     <app-product-list class="search-results-product-list"
       [searchValue]="searchValue"

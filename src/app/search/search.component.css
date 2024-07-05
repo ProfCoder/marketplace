@@ -59,8 +59,9 @@
 
 /* Small screens (mobile phones): up to 432px (27rem) */
 @media (max-width: 27rem) {
+
   .search-input {
-    width: 80%;
+    width: 70%;
   }
 
   .search-title {
@@ -72,7 +73,7 @@
 
   .search-container  {
     height: 90px;
-    margin-top: 10px;
+    margin-top: 30px;
   
   }
 
@@ -82,7 +83,7 @@
 }
   
 .search-input input {
-height: 26px;
+height: 36px;
 
 
 }

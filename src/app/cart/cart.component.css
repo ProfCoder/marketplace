@@ -233,6 +233,7 @@
     border: none;
     border-radius: 150px;
     cursor: pointer;
+    color: black;
 }
 
 .checkout-button:hover {
@@ -254,6 +255,7 @@
     cursor: pointer;
     font-weight: 550;
     font-size: 16px;
+    color: black;
 }
 
 .main-page-button:hover {
@@ -434,6 +436,7 @@
 
 .quantity-container {
     height: 70px;
+    color: black;
 }
 
 
@@ -444,6 +447,8 @@
     text-align: center;
     margin-bottom: 20px;
     margin-top: 20px;
+    color: black;
+    font-weight: 600;
 }
 
 .quantity select.expanded {
@@ -461,6 +466,11 @@
 
 .custom-select {
     font-size: 1rem;
+  }
+
+  .custom-quantity-focus {
+    padding: 10px;
+    font-size: 18px;
   }
 
 .delete-item-button {

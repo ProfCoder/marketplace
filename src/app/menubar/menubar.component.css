@@ -203,20 +203,18 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 
 
     .view-button.list-button.user-icon .pi.pi-user {
-        font-size: 1rem;
+        font-size: 1.8rem;
         font-weight: 550;
 
     }
     
     .mylogo {
-        width: 150px;
+        width: 190px;
        
         
     }
     
-    .overlay {
-        /* transform: translateX(-90%); */
-    }
+  
 
     .overlay-close {
         display: none;
@@ -237,20 +235,20 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 
     }
     .cart-badge .pi.pi-shopping-cart {
-        font-size: 1.2rem; 
+        font-size: 1.8rem; 
         margin-left: 20px;
      
 
     }
     .cart-badge .badge {
   
-        top: -12px;
-        right: -15px;
+        top: -17px;
+        right: -10px;
      
     }
 
     ::ng-deep .p-badge {
-        font-size: 10px;
+        font-size: 15px;
         /* width: 12px; */
         /* height: 20px; */
         /* padding: 1px  ;  */

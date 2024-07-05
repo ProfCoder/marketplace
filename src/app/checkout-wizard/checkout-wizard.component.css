@@ -91,6 +91,7 @@
 
 .checkout-item-quantity {
   font-size: 20px;
+  color: black;
 }
 
 .checkout-item-price {
@@ -180,6 +181,7 @@
   border:none;
   margin-top: 45px;
   margin-bottom: 35px;
+  color: black;
 }
 
 .confirm-button:hover {
@@ -398,6 +400,7 @@
 .checkout-item-name {
   
   font-size: 1.5rem;
+  color: black;
 }  
 
 .checkout-info {
