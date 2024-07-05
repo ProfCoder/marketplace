@@ -238,10 +238,11 @@
 
 ::ng-deep .search-results-product-list .grid-view .card-price {
 
-  width: 90px;
+  width: 90px !important;
   font-weight: 600;
   padding: 3px 0;
   margin: 15px 0;
+  font-size: 16px !important;
 }
 
 ::ng-deep .search-results-product-list .grid-view .desc-container {
@@ -251,11 +252,16 @@
 }
 
 ::ng-deep .search-results-product-list .grid-view .card-brand {
-  font-size: 18px;
+
+  font-size: 18px !important;
  
 }
 
+::ng-deep .search-results-product-list .grid-view .card-name {
 
+  font-size: 18px !important;
+ 
+}
 
 
 ::ng-deep .search-results-product-list .list-view {
@@ -268,6 +274,7 @@
   align-items: flex-start;
   text-align: left;
   justify-content: flex-start;
+  padding-left: 30px !important;
 }
 
 
@@ -290,7 +297,20 @@
 
 ::ng-deep .search-results-product-list .list-view .card-brand {
 
+font-size: 18px !important;
 }
+
+
+::ng-deep .search-results-product-list .list-view .card-name {
+
+  font-size: 20px !important;
+  }
+
+  ::ng-deep .search-results-product-list .list-view .card-price {
+
+    font-size: 16px !important;
+    width: 90px !important;
+    }
 
 .sort-label {
   display: none; 

@@ -663,7 +663,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 import { CartService } from '../services/cart.service';
 import { RouterModule } from '@angular/router';
-import { FilterService } from '../services/filter.service'; // Import the FilterService
+import { FilterService } from '../services/filter.service'; 
 
 @Component({
   selector: 'app-product-list',
@@ -681,7 +681,7 @@ export class ProductListComponent implements OnChanges, OnInit {
   showScrollButton: boolean = false;
   onSearchResultsPage = false;
 
-  listViewMode = true; // Initially set to grid view
+  listViewMode = false; // Initially set to grid view
   isLoading = false;
   chunkSize = 9; // Default chunk size
   endOfList = false;
@@ -692,7 +692,7 @@ export class ProductListComponent implements OnChanges, OnInit {
     private productService: ProductService,
     private router: Router,
     private cartService: CartService,
-    private filterService: FilterService // Inject the FilterService
+    private filterService: FilterService 
   ) {
     this.setChunkSize();
     this.loadInitialProducts();
@@ -783,9 +783,9 @@ export class ProductListComponent implements OnChanges, OnInit {
 
     if (this.onSearchResultsPage) {
       if (isSmallScreen) {
-        this.filterService.toggleFilters(); // Use the service to toggle the filters
+        this.filterService.toggleFilters(); 
       } else {
-        this.router.navigate(['/']); // Redirect to home page on larger screens
+        this.router.navigate(['/']); 
       }
     } else {
       this.router.navigate(['/search-results']).then(() => {
