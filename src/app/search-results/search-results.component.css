@@ -559,6 +559,16 @@ width: 160px;
   }
 
 
+  ::ng-deep .search-results-product-list .list-view .product-item {
+    max-height: 300px;
+    min-height: 300px;
+    height: 300px;
+    padding: 15px 5px;
+  }
+
+  ::ng-deep .search-results-product-list .list-view .card-price {
+margin-top: 90px;
+  }
   
 
 
@@ -629,6 +639,19 @@ width: 160px;
     font-weight: 700;
     font-size: 9px;
     border-radius: 10px;
+  }
+
+
+
+  ::ng-deep .search-results-product-list .list-view .product-item {
+    max-height: 230px;
+    min-height: 230px;
+    height: 230px;
+    padding: 15px 5px;
+  }
+
+  ::ng-deep .search-results-product-list .list-view .card-price {
+margin-top: 90px;
   }
 
 }
