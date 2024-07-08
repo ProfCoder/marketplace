@@ -191,6 +191,8 @@ textarea:focus {
   .button-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
     justify-items: left;
     margin: 0;
     padding: 0;
@@ -206,6 +208,23 @@ textarea:focus {
   .address-heading {
     font-size: 1rem;
   }
+
+  .make-default button{
+    /* margin-top: 30px; */
+  }
+
+  .add-note {
+    margin-left: 1px;
+    /* margin-top: 30px; */
+    padding-left: 0;
+    /* font-size: 0.1rem; */
+
+  }
+
+
+
+
+
 }
 
 
@@ -220,6 +239,8 @@ textarea:focus {
 .button-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  gap:12px;
   margin: 0;
   padding: 0;
 }
@@ -227,6 +248,8 @@ textarea:focus {
 .inside-button, .big-button button {
   padding: 12px 12px;
 }
+
+
 
 
 }

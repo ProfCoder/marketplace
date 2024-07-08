@@ -539,6 +539,7 @@ width: 160px;
     height: 60px;
     border-bottom: 1px solid #ccc;
     box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.1);
+    /* background-color: aquamarine; */
 
   }
 
@@ -548,6 +549,7 @@ width: 160px;
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
+
   }
 
   :host ::ng-deep .custom-dropdown .p-dropdown {
@@ -555,6 +557,10 @@ width: 160px;
 
   
   }
+
+
+  
+
 
 }
 
@@ -714,6 +720,7 @@ font-size: 15px;
 
 :host ::ng-deep .custom-dropdown .p-dropdown-item {
   font-size: 26px; 
+
 }
 
 :host ::ng-deep .custom-dropdown .p-dropdown-label {
