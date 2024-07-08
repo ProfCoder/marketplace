@@ -2,7 +2,9 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.521);
   box-shadow: 1px 1px 3px 4px rgba(0, 0, 0, 0.041);
   padding: 35px 25px 30px 25px;
+ 
 }
+
 
 .stepper-hr {
   margin-bottom: 70px;
@@ -13,6 +15,8 @@
 
 
 }
+
+
 
 .next-back {
   display: flex;
@@ -260,6 +264,9 @@
 /* Small screens (mobile phones): 261px - 432px (27rem) */
 @media  (max-width: 27rem) {
 
+  :host ::ng-deep .p-steps .p-steps-item .p-steps-title {
+    font-size: 14px !important; 
+  }
 
   .next-button,.back-button {
     font-size: 1rem;
