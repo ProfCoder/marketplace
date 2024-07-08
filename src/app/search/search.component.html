@@ -1,4 +1,4 @@
-<div class="search-container">
+<!-- <div class="search-container">
     <div class="search-title">Search for Products</div>
     <div class="search-input">
       <input
@@ -8,6 +8,22 @@
         class="input-with-icon"
         [(ngModel)]="searchValue"
         (keydown.enter)="onSearchClick()"
+      />
+      <i class="pi pi-search search-icon" (click)="onSearchClick()"></i>
+    </div>
+  </div>
+   -->
+
+   <div class="search-container">
+    <div class="search-title">Search for Products</div>
+    <div class="search-input">
+      <input
+        type="text"
+        pInputText
+        class="input-with-icon"
+        [(ngModel)]="searchValue"
+        (keydown.enter)="onSearchClick()"
+        (input)="onInput($event)"
       />
       <i class="pi pi-search search-icon" (click)="onSearchClick()"></i>
     </div>

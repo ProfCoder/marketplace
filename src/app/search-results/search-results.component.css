@@ -569,10 +569,11 @@ width: 160px;
 
   ::ng-deep .search-results-product-list .grid-view .product-item {
 
-    height: 500px;
-    max-height: 500px;
-    min-height: 500px;
+    height: 540px;
+    max-height: 540px;
+    min-height: 540px;
     padding: 15px 5px;
+    
     
   }
 
@@ -588,7 +589,9 @@ width: 160px;
   
    
   }
-
+  ::ng-deep .search-results-product-list  .card-price {
+   
+      }
 
   ::ng-deep .search-results-product-list .list-view .card-price {
 margin-top: 90px;
@@ -621,6 +624,7 @@ margin-top: 90px;
     min-height: 420px;
     height: 420px;
     padding: 15px 20px;
+   
   }
   
 
