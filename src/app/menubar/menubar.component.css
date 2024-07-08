@@ -194,13 +194,27 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
 /* Small screens (mobile phones): up to 375px (23.4375rem) */
 @media (max-width: 27rem) {
     .menu {
-        width: 90%;
+        width: 92%;
         display: flex;
-        flex-direction: column; 
+        /* flex-direction: column;  */
+        flex-direction: row; 
+        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
+        /* background-color: yellow; */
+        margin: 0;
+        padding: 0;
+      
+        
     }
 
+  
 
+
+.menu-entries {
+    margin: 0;
+    padding: 0;
+}
 
     .view-button.list-button.user-icon .pi.pi-user {
         font-size: 1.8rem;
@@ -256,7 +270,11 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
       }
 
 
+      .overlay {
+        transform: translateX(-70%);
+        width: 135px;
 
+    }
 }
 
 /* iPads/Tablets: 376px (23.5rem) to 820px (51.25rem) */
