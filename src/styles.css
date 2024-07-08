@@ -28,14 +28,14 @@ main {
 /* Small screens (mobile phones): up to  432px */
 @media (max-width: 27rem) {
     main {
-        width: 90%; /* Adjust as needed */
+        width: 90%; 
     }
 }
 
 /* iPads/Tablets: 376px to 820px */
 @media (min-width: 27.1rem) and (max-width: 51.25rem) {
     main {
-        width: 90%; /* Adjust as needed */
+        width: 90%; 
     }
 }
 

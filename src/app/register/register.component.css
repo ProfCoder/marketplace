@@ -175,7 +175,7 @@ input:hover {
 
 
 :host ::ng-deep .p-dropdown {
-  width: 80%; /* Adjust the width as needed */
+  width: 80%; 
   margin-top: 15px;
 }
 

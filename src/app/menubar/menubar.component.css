@@ -3,12 +3,14 @@ nav {
     justify-content: center;
     align-items: center;
     height: 70px;
+
 }
 
 .menu {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    
 }
 
 #logo {
@@ -325,25 +327,22 @@ For more info, see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_qu
         /* margin-left: 10px; */
     }
 
-    /* Center the user icon and badge */
-    .menu-entries {
-
-    }
 }
 
 
 /* Small desktops/laptops: 821px (51.3125rem) to 1440px (90rem) */
 @media (min-width: 51.3125rem) and (max-width: 90rem) {
     .menu {
-        width: 85%; /* Adjust this width as needed */
+        width: 85%; 
     }
 
     .view-button.list-button.user-icon .pi.pi-user {
         font-size:  1.6rem;
     }
 
+
     .cart-badge .pi.pi-shopping-cart {
-        font-size: 1.8rem; /* Adjust the size as needed */
+        font-size: 1.8rem; 
     }
 
 
