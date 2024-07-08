@@ -225,10 +225,12 @@
   min-height: 420px;
   max-height: 420px;
   padding: 10px 5px;
+ 
 }
 
 ::ng-deep .search-results-product-list .grid-view {
   text-align: center;
+  
 
 }
 
@@ -254,7 +256,7 @@
   width: 90px !important;
   font-weight: 600;
   padding: 3px 0;
-  margin: 15px 0;
+  /* margin: 15px 0; */
   font-size: 16px !important;
 }
 
@@ -262,6 +264,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 ::ng-deep .search-results-product-list .grid-view .card-brand {
@@ -288,6 +291,7 @@
   text-align: left;
   justify-content: flex-start;
   padding-left: 30px !important;
+
 }
 
 
@@ -569,8 +573,11 @@ width: 160px;
     max-height: 500px;
     min-height: 500px;
     padding: 15px 5px;
-
+    
   }
+
+
+
 
 
 
@@ -578,8 +585,10 @@ width: 160px;
     max-height: 300px;
     min-height: 300px;
     height: 300px;
-    padding: 15px 5px;
+  
+   
   }
+
 
   ::ng-deep .search-results-product-list .list-view .card-price {
 margin-top: 90px;
@@ -701,6 +710,7 @@ margin-top: 90px;
 
     justify-content: center;
     align-items: center;
+   
 
   }
 
@@ -711,6 +721,7 @@ margin-top: 90px;
     padding: 10px 0;
     justify-content: space-between;
     align-items: center;
+    
    
   }
 
@@ -730,6 +741,7 @@ margin-top: 90px;
 width: 85px !important;
     margin: 0 !important;
     padding: 0 !important;
+    
    
   }
 
@@ -757,6 +769,7 @@ height: 70px;
   .filters-container {
     width: 30%;
     padding: 60px 10px 0 10px;
+    
 }
 
 .color-filter-container{
