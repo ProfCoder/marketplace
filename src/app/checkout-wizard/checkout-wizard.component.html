@@ -83,7 +83,9 @@
             <div class="order-price-sub total-price">
               <div class="order-price-final">Order Total:  <div class="vat">Order total include VAT. </div> </div>
             
-              <div class="order-total-price">{{ totalPrice }}€</div>
+              <!-- <div class="order-total-price">{{ totalPrice }}€</div> -->
+              <div class="order-total-price">{{ totalPrice | number:'1.2-2' }}€</div>
+
             </div>
           </div>
        
